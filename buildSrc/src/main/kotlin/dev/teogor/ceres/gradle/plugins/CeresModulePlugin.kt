@@ -20,7 +20,6 @@ class CeresModulePlugin : Plugin<Project> {
         val artifactIdPrefix = ceresModuleExtension.artifactIdPrefix!!
         val version = ceresModuleExtension.version!!
 
-        println("$artifactIdPrefix Modules (v$version)")
         // Access all subprojects within the current module
         subprojects {
           pluginManager.apply("ceres.library.publish")
@@ -32,7 +31,6 @@ class CeresModulePlugin : Plugin<Project> {
             this.artifactId = "$artifactIdPrefix-$moduleName"
             this.version = version
           }
-          println("$groupId:$artifactIdPrefix-$moduleName:$version")
         }
         val artifactIdPrefixTitlecase = artifactIdPrefix.replaceFirstChar { it.titlecase() }
         val taskName = "publish${artifactIdPrefixTitlecase}LibrariesToMavenCentral"
