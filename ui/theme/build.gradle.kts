@@ -12,6 +12,3 @@ android {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
-
-dependencies {
-}
