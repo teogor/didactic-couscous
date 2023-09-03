@@ -1,4 +1,4 @@
-name: Publish UI
+name: Publish Ui
 
 on:
   workflow_dispatch:

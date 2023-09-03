@@ -1,4 +1,4 @@
-name: Publish NAVIGATION
+name: Publish Navigation
 
 on:
   workflow_dispatch:

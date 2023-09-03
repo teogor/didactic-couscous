@@ -1,4 +1,4 @@
-name: Publish UTILITIES
+name: Publish Utilities
 
 on:
   workflow_dispatch:

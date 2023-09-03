@@ -43,7 +43,6 @@ class CeresModulePlugin : Plugin<Project> {
         prepareWorkflow(
           outputFile = rootProject.file(".github/workflows/publish-$name.yml"),
           path = name,
-          artifactIdPrefix = artifactIdPrefix,
           artifactIdPrefixTitlecase = artifactIdPrefixTitlecase,
         )
       }
@@ -53,12 +52,11 @@ class CeresModulePlugin : Plugin<Project> {
   private fun prepareWorkflow(
     outputFile: File,
     path: String,
-    artifactIdPrefix: String,
     artifactIdPrefixTitlecase: String,
   ) {
     val dollar = "$"
     val workflowContent = """
-        name: Publish ${artifactIdPrefix.uppercase()}
+        name: Publish $artifactIdPrefixTitlecase
 
         on:
           workflow_dispatch:

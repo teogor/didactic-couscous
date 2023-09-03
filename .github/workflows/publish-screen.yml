@@ -1,4 +1,4 @@
-name: Publish SCREEN
+name: Publish Screen
 
 on:
   workflow_dispatch:

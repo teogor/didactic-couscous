@@ -1,4 +1,4 @@
-name: Publish BACKUP
+name: Publish Backup
 
 on:
   workflow_dispatch:

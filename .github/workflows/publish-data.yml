@@ -1,4 +1,4 @@
-name: Publish DATA
+name: Publish Data
 
 on:
   workflow_dispatch:

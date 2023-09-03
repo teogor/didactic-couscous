@@ -1,4 +1,4 @@
-name: Publish FIREBASE
+name: Publish Firebase
 
 on:
   workflow_dispatch:

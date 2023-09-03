@@ -1,4 +1,4 @@
-name: Publish FRAMEWORK
+name: Publish Framework
 
 on:
   workflow_dispatch:
