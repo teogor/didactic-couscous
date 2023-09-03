@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/plugin" name="plugin">
+                <projects>
+                  <project path="$PROJECT_DIR$/plugin" />
+                  <project path="$PROJECT_DIR$/plugin/library-convention" />
+                  <project path="$PROJECT_DIR$/plugin/maven-publish" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/backup" />
+            <option value="$PROJECT_DIR$/backup/core" />
+            <option value="$PROJECT_DIR$/backup/ui" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/database" />
+            <option value="$PROJECT_DIR$/data/datastore" />
+            <option value="$PROJECT_DIR$/firebase" />
+            <option value="$PROJECT_DIR$/firebase/analytics" />
+            <option value="$PROJECT_DIR$/firebase/crashlytics" />
+            <option value="$PROJECT_DIR$/firebase/remote-config" />
+            <option value="$PROJECT_DIR$/framework" />
+            <option value="$PROJECT_DIR$/framework/core" />
+            <option value="$PROJECT_DIR$/framework/ui" />
+            <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/navigation/common" />
+            <option value="$PROJECT_DIR$/navigation/core" />
+            <option value="$PROJECT_DIR$/navigation/screen" />
+            <option value="$PROJECT_DIR$/navigation/ui" />
+            <option value="$PROJECT_DIR$/plugin" />
+            <option value="$PROJECT_DIR$/plugin/library-convention" />
+            <option value="$PROJECT_DIR$/plugin/maven-publish" />
+            <option value="$PROJECT_DIR$/screen" />
+            <option value="$PROJECT_DIR$/screen/builder" />
+            <option value="$PROJECT_DIR$/screen/configurator" />
+            <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/ui/colour-generator" />
+            <option value="$PROJECT_DIR$/ui/design-system" />
+            <option value="$PROJECT_DIR$/ui/foundation" />
+            <option value="$PROJECT_DIR$/ui/theme" />
+            <option value="$PROJECT_DIR$/ui/ui" />
+            <option value="$PROJECT_DIR$/utilities" />
+            <option value="$PROJECT_DIR$/utilities/network" />
+            <option value="$PROJECT_DIR$/utilities/notifications" />
+          </set>
+        </option>
+        <option name="resolveExternalAnnotations" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

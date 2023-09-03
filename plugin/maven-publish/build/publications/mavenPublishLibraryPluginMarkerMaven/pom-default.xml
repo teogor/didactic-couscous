@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ceres.maven.publish.library</groupId>
+  <artifactId>ceres.maven.publish.library.gradle.plugin</artifactId>
+  <version>unspecified</version>
+  <packaging>pom</packaging>
+  <name>Ceres</name>
+  <description>Modern Android development with Hilt, Coroutines, Flow, JetPack(ViewModel) based on MVVM architecture.</description>
+  <url>https://github.com/teogor/ceres/</url>
+  <inceptionYear>2022</inceptionYear>
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>http://www.apache.org/licenses/LICENSE-2.0.txt</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>teogor</id>
+      <name>Teodor Grigor</name>
+      <url>https://teogor.dev</url>
+      <organization>Teogor</organization>
+      <organizationUrl>https://github.com/teogor</organizationUrl>
+      <roles>
+        <role>Code Owner</role>
+        <role>Developer</role>
+        <role>Designer</role>
+        <role>Maintainer</role>
+      </roles>
+      <timezone>UTC+2</timezone>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/teogor/ceres.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/teogor/ceres.git</developerConnection>
+    <url>https://github.com/teogor/ceres/</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>dev.teogor.ceres.maven.publish</groupId>
+      <artifactId>maven-publish</artifactId>
+      <version>unspecified</version>
+    </dependency>
+  </dependencies>
+</project>
