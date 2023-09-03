@@ -40,8 +40,8 @@ include(":data:database")
 include(":data:datastore")
 
 // UI
-include(":ui:colour-generator")
-include(":ui:design-system")
+include(":ui:spectrum")
+include(":ui:designsystem")
 include(":ui:foundation")
 include(":ui:theme")
 include(":ui:ui")

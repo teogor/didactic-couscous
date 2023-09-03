@@ -28,4 +28,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "plugin"
 include(":library-convention")
-include(":maven-publish")

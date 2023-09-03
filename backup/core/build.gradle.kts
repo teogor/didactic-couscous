@@ -4,7 +4,6 @@ plugins {
   id("ceres.android.library.jacoco")
   id("ceres.android.hilt")
   id("kotlinx-serialization")
-  id("ceres.maven.publish.library")
 }
 
 android {
