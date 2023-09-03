@@ -1,8 +1,6 @@
-name: Publish
+name: Publish DATA
 
 on:
-  release:
-    types: [ released ]
   workflow_dispatch:
 
 jobs:
@@ -19,6 +17,7 @@ jobs:
       ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
       SONATYPE_CONNECT_TIMEOUT_SECONDS: 120
       SONATYPE_CLOSE_TIMEOUT_SECONDS: 1800
+
     steps:
       - name: Check out code
         uses: actions/checkout@v3.1.0
@@ -34,8 +33,4 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew publish
-
-      - name: Publish to MavenCentral
-        run: |
-          ./gradlew publishAllPublicationsToMavenCentral
+          ./gradlew :data:publishDataLibrariesToMavenCentral --no-configuration-cache

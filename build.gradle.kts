@@ -19,3 +19,4 @@ plugins {
   alias(libs.plugins.about.libraries) apply false
   alias(libs.plugins.vanniktech.maven) apply false
 }
+

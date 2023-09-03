@@ -1,4 +1,4 @@
-name: Publish UI
+name: Publish FIREBASE
 
 on:
   workflow_dispatch:
@@ -33,4 +33,4 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew :ui:publishUiLibrariesToMavenCentral --no-configuration-cache
+          ./gradlew :firebase:publishFirebaseLibrariesToMavenCentral --no-configuration-cache
