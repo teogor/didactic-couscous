@@ -74,7 +74,7 @@ import androidx.navigation.NavOptions
 import dev.teogor.ceres.core.network.NetworkMonitor
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
-import dev.teogor.ceres.navigation.core.lib.common.BottomSheetViewModel
+import dev.teogor.ceres.navigation.core.lib.common.BottomSheetState
 import dev.teogor.ceres.navigation.core.lib.common.LocalBottomSheetVM
 import dev.teogor.ceres.navigation.core.lib.common.rememberNavigationModules
 import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
@@ -136,7 +136,7 @@ fun CeresApp(
   )
 
   // todo VMs
-  val bottomSheetVM = viewModel<BottomSheetViewModel>()
+  val bottomSheetVM: BottomSheetState = viewModel()
   val toolbarState: ToolbarState = viewModel()
 
   CompositionLocalProvider(

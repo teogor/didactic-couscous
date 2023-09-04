@@ -76,7 +76,7 @@ fun OnScreenReady(
   }
 }
 
-val LocalBottomSheetVM = staticCompositionLocalOf<BottomSheetViewModel> {
+val LocalBottomSheetVM = staticCompositionLocalOf<BottomSheetState> {
   error("No LocalBottomSheetVM provided")
 }
 
@@ -110,7 +110,7 @@ fun HideBottomSheet() {
   bottomSheetVM().updateContent(newContent = emptyComposable)
 }
 
-class BottomSheetViewModel : ViewModel() {
+class BottomSheetState : ViewModel() {
   private val _content = mutableStateOf<@Composable (ColumnScope) -> Unit>(emptyComposable)
   val content: State<@Composable (ColumnScope) -> Unit> = _content
 
