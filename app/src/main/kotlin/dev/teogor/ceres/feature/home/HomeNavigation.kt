@@ -14,28 +14,23 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.navigation
+package dev.teogor.ceres.feature.home
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import dev.teogor.ceres.feature.home.homeNavigationRoute
-import dev.teogor.ceres.feature.home.homeScreen
+import androidx.navigation.NavGraphBuilder
 import dev.teogor.ceres.framework.core.app.BaseActions
-import dev.teogor.ceres.framework.core.app.CeresAppState
-import dev.teogor.ceres.navigation.core.NavHost
+import dev.teogor.ceres.navigation.core.ScreenRoute
+import dev.teogor.ceres.navigation.core.screenNav
 
-@Composable
-fun NavHost(
-  modifier: Modifier = Modifier,
-  startDestination: String = homeNavigationRoute,
-  appState: CeresAppState,
+const val homeNavigationRoute = "home_route"
+
+object HomeRoute : ScreenRoute {
+  override val route: String = homeNavigationRoute
+}
+
+fun NavGraphBuilder.homeScreen(
   baseActions: BaseActions,
-) {
-  NavHost(
-    navController = appState.navController,
-    modifier = modifier,
-    startDestination = startDestination,
-  ) {
-    homeScreen(baseActions)
-  }
+) = screenNav(homeNavigationRoute) {
+  HomeRoute(
+    baseActions = baseActions,
+  )
 }

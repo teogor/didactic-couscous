@@ -41,7 +41,7 @@ import dev.teogor.ceres.framework.core.depcreated.menu.menuItem
 import dev.teogor.ceres.framework.core.depcreated.menu.menuTop
 import dev.teogor.ceres.framework.core.depcreated.menu.menuUserData
 import dev.teogor.ceres.framework.core.depcreated.menu.menuUserId
-import dev.teogor.ceres.navigation.StatsNavHost
+import dev.teogor.ceres.navigation.NavHost
 import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
 
 @AndroidEntryPoint
@@ -55,11 +55,11 @@ class MainActivity : Activity() {
     windowSizeClass: WindowSizeClass,
     ceresAppState: CeresAppState,
     baseActions: BaseActions,
-    padding: PaddingValues
+    padding: PaddingValues,
   ) {
     super.Content(windowSizeClass, ceresAppState, baseActions, padding)
 
-    StatsNavHost(
+    NavHost(
       modifier = Modifier.padding(
         bottom = padding.calculateBottomPadding(),
         top = padding.calculateTopPadding(),
@@ -75,7 +75,7 @@ class MainActivity : Activity() {
   )
 
   override fun MenuSheet(
-    menuScope: MenuScope
+    menuScope: MenuScope,
   ) = menuScope.menu {
     menuTop {
       menuUserData(
