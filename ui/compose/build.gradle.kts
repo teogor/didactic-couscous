@@ -28,4 +28,7 @@ android {
 
 dependencies {
   api(libs.androidx.compose.foundation)
+
+  // Required for ViewModel
+  implementation(libs.androidx.lifecycle.viewModelCompose)
 }

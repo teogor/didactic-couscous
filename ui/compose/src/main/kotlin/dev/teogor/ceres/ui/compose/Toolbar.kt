@@ -34,8 +34,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun UpdateToolbarAlpha(
   value: Float,
-  toolbarState: ToolbarState = LocalToolbarState.current,
 ) {
+  val toolbarState = LocalToolbarState.current
   toolbarState.updateToolbarAlpha(value)
 }
 

@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
+import dev.teogor.ceres.ui.compose.UpdateToolbarAlpha
 
 @Composable
 fun <T : ScrollableState> T.attachScrollState(trigger: Int = 50): T {
@@ -41,12 +42,12 @@ fun <T : ScrollableState> T.attachScrollState(trigger: Int = 50): T {
       }
     }.collect { value ->
       val newAlpha = if (value < trigger) value / trigger.toFloat() else 1f
-      if (newAlpha != toolbarAlphaState.floatValue) {
-        toolbarAlphaState.floatValue = newAlpha
+      if (newAlpha != toolbarAlphaState.value) {
+        toolbarAlphaState.value = newAlpha
       }
     }
   }
 
-  // todo UpdateToolbarAlpha(toolbarAlphaState.floatValue)
+  UpdateToolbarAlpha(toolbarAlphaState.value)
   return this
 }

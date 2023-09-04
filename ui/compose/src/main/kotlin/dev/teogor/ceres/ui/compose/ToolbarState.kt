@@ -1,15 +1,15 @@
 package dev.teogor.ceres.ui.compose
 
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 
-class ToolbarState {
-  private val _toolbarAlpha = mutableFloatStateOf(0f)
+class ToolbarState : ViewModel() {
+  private val _toolbarAlpha = mutableStateOf(0f)
   val toolbarAlpha: State<Float> = _toolbarAlpha
   private val _elevation = mutableStateOf(0.dp)
   val elevation: State<Dp> = _elevation
@@ -25,7 +25,7 @@ class ToolbarState {
   }
 
   fun updateToolbarAlpha(value: Float) {
-    _toolbarAlpha.floatValue = value
+    _toolbarAlpha.value = value
   }
 }
 

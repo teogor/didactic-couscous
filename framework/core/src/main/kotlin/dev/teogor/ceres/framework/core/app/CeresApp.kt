@@ -48,6 +48,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -70,19 +71,15 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavOptions
-import dev.teogor.ceres.ui.designsystem.modalsheet.ModalBottomSheetLayout
-import dev.teogor.ceres.ui.designsystem.modalsheet.ModalBottomSheetValue.Hidden
-import dev.teogor.ceres.ui.designsystem.modalsheet.ModalMenuSheetLayout
-import dev.teogor.ceres.ui.designsystem.modalsheet.rememberModalBottomSheetState
-import dev.teogor.ceres.ui.designsystem.modalsheet.setVisibility
-import dev.teogor.ceres.ui.designsystem.modalsheet.toggleVisibility
 import dev.teogor.ceres.core.network.NetworkMonitor
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
-import dev.teogor.ceres.navigation.core.lib.common.BottomSheetViewModel
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
+import dev.teogor.ceres.navigation.core.lib.common.BottomSheetViewModel
 import dev.teogor.ceres.navigation.core.lib.common.LocalBottomSheetVM
-import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
 import dev.teogor.ceres.navigation.core.lib.common.rememberNavigationModules
+import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
+import dev.teogor.ceres.ui.compose.LocalToolbarState
+import dev.teogor.ceres.ui.compose.ToolbarState
 import dev.teogor.ceres.ui.designsystem.CeresBackground
 import dev.teogor.ceres.ui.designsystem.CeresNavigationBar
 import dev.teogor.ceres.ui.designsystem.CeresNavigationBarItem
@@ -91,6 +88,12 @@ import dev.teogor.ceres.ui.designsystem.CeresNavigationRail
 import dev.teogor.ceres.ui.designsystem.CeresNavigationRailItem
 import dev.teogor.ceres.ui.designsystem.SystemBarsBox
 import dev.teogor.ceres.ui.designsystem.Toolbar
+import dev.teogor.ceres.ui.designsystem.modalsheet.ModalBottomSheetLayout
+import dev.teogor.ceres.ui.designsystem.modalsheet.ModalBottomSheetValue.Hidden
+import dev.teogor.ceres.ui.designsystem.modalsheet.ModalMenuSheetLayout
+import dev.teogor.ceres.ui.designsystem.modalsheet.rememberModalBottomSheetState
+import dev.teogor.ceres.ui.designsystem.modalsheet.setVisibility
+import dev.teogor.ceres.ui.designsystem.modalsheet.toggleVisibility
 import dev.teogor.ceres.ui.designsystem.surface
 import dev.teogor.ceres.ui.designsystem.surfaceColorAtElevation
 import dev.teogor.ceres.ui.foundation.graphics.Icon
@@ -131,11 +134,14 @@ fun CeresApp(
     content = "",
     bottomNavSheetState = rememberModalBottomSheetState(Hidden),
   )
-  val ceresNavVM = viewModel<CeresNavVM>()
+
+  // todo VMs
   val bottomSheetVM = viewModel<BottomSheetViewModel>()
+  val toolbarState: ToolbarState = viewModel()
+
   CompositionLocalProvider(
-    LocalCeresNavVM provides ceresNavVM,
     LocalBottomSheetVM provides bottomSheetVM,
+    LocalToolbarState provides toolbarState,
   ) {
     CeresBackground(
       modifier = Modifier.fillMaxSize(),
@@ -171,9 +177,7 @@ fun CeresApp(
         modifier = Modifier
           .fillMaxSize(),
       ) {
-        val toolbarAlphaValue = ceresNavVM.toolbarAlpha.observeFrom(
-          default = 0f,
-        )
+        val toolbarAlpha by rememberUpdatedState(toolbarState.toolbarAlpha.value)
 
         // todo snackbar rememberScaffoldState()
         //  look into SnackbarHost
@@ -228,21 +232,21 @@ fun CeresApp(
                       )
                       elevation
                     } else {
-                      val elevation = if (toolbarAlphaValue == 0f) {
+                      val elevation = if (toolbarAlpha == 0f) {
                         ElevationTokens.Level1
                       } else {
                         val elevationRange =
                           CeresNavigationDefaults.Elevation - ElevationTokens.Level1
                         val elevationStep = elevationRange / 5
 
-                        val elevationLevel = (toolbarAlphaValue * 5).toInt()
+                        val elevationLevel = (toolbarAlpha * 5).toInt()
                         ElevationTokens.Level1 + (elevationStep * elevationLevel)
                       }
                       elevation
                     }
 
-                    ceresNavVM.updateElevation(elevation)
-                    ceresNavVM.updateToolbarColor(
+                    toolbarState.updateElevation(elevation)
+                    toolbarState.updateToolbarColor(
                       surfaceColorAtElevation(
                         elevation = elevation,
                         color = MaterialTheme.colorScheme.surface,
