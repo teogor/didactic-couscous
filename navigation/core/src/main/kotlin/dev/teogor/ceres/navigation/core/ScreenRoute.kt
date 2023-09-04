@@ -13,25 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-}
 
-android {
-  namespace = "dev.teogor.ceres.navigation.core"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres.navigation.core
 
-dependencies {
-  // Compose
-  implementation(libs.androidx.compose.foundation)
-  implementation(libs.androidx.compose.runtime)
-
-  // Navigation
-  implementation(libs.androidx.hilt.navigation.compose)
-  implementation(libs.androidx.navigation.compose)
+/**
+ * todo make this more like a story. binding to screen route
+ *  or taking the bus in the station
+ */
+interface ScreenRoute {
+  val route: String
 }
