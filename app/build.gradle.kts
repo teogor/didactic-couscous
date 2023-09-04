@@ -89,9 +89,14 @@ android {
 }
 
 dependencies {
+  // application configuration
   implementation(project(":framework:core"))
-  implementation(project(":screen:core")) //core
-  implementation(project(":ui:ui"))
+
+  // screen builder
+  implementation(project(":screen:core"))
+
+  // theme config
+  implementation(project(":ui:theme"))
 
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.serialization.protobuf)

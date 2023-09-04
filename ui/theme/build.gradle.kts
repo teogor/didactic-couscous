@@ -30,6 +30,9 @@ android {
 dependencies {
   api(project(":ui:spectrum"))
 
+  // needed for theme manager
+  implementation(libs.androidx.core.splashscreen)
+
   api(libs.androidx.compose.material3)
   api(libs.androidx.compose.ui.tooling.preview)
   api(libs.androidx.compose.ui.util)

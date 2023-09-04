@@ -29,5 +29,4 @@ android {
 }
 
 dependencies {
-  api(libs.androidx.core.splashscreen)
 }
