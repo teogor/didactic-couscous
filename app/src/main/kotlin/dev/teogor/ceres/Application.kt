@@ -18,8 +18,11 @@ package dev.teogor.ceres
 
 import dagger.hilt.android.HiltAndroidApp
 import dev.teogor.ceres.framework.core.Application
+import dev.teogor.ceres.theme.configureTheme
 
 @HiltAndroidApp
 class Application : Application() {
+
+  override val themeBuilder = configureTheme()
 
 }
