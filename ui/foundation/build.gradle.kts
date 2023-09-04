@@ -14,19 +14,27 @@
  * limitations under the License.
  */
 plugins {
-  id("ceres.android.feature")
+  id("ceres.android.library")
   id("ceres.android.library.compose")
   id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
   id("kotlinx-serialization")
 }
 
 android {
-  namespace = "dev.teogor.ceres"
+  namespace = "dev.teogor.ceres.ui.foundation"
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
 
 dependencies {
+  api(project(":core:startup"))
+
+  api(libs.androidx.compose.foundation)
+  api(libs.androidx.compose.material)
+  api(libs.androidx.compose.runtime)
+  api(libs.androidx.compose.ui.tooling.preview)
+  api(libs.androidx.compose.ui.util)
+
+  debugApi(libs.androidx.compose.ui.tooling)
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.ui.theme.tokens
+package dev.teogor.ceres.ui.designsystem.tokens
 
 import androidx.compose.ui.unit.dp
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.OnSecondaryContainer
@@ -23,6 +23,7 @@ import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.OnSurfaceVariant
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.SecondaryContainer
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.Surface
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.SurfaceTint
+import dev.teogor.ceres.ui.theme.tokens.ElevationTokens
 import dev.teogor.ceres.ui.theme.tokens.ShapeKeyTokens.CornerFull
 import dev.teogor.ceres.ui.theme.tokens.ShapeKeyTokens.CornerNone
 import dev.teogor.ceres.ui.theme.tokens.TypographyKeyTokens.LabelMedium

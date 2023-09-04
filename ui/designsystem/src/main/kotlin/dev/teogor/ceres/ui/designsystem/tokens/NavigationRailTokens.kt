@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.ui.theme.tokens
+package dev.teogor.ceres.ui.designsystem.tokens
 
 import androidx.compose.ui.unit.dp
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.OnSecondaryContainer
@@ -22,34 +22,28 @@ import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.OnSurface
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.OnSurfaceVariant
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.SecondaryContainer
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.Surface
-import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens.SurfaceTint
+import dev.teogor.ceres.ui.theme.tokens.ElevationTokens
 import dev.teogor.ceres.ui.theme.tokens.ShapeKeyTokens.CornerFull
-import dev.teogor.ceres.ui.theme.tokens.ShapeKeyTokens.CornerLargeEnd
-import dev.teogor.ceres.ui.theme.tokens.ShapeKeyTokens.CornerLargeTop
-import dev.teogor.ceres.ui.theme.tokens.TypographyKeyTokens.LabelLarge
-import dev.teogor.ceres.ui.theme.tokens.TypographyKeyTokens.TitleSmall
+import dev.teogor.ceres.ui.theme.tokens.ShapeKeyTokens.CornerNone
+import dev.teogor.ceres.ui.theme.tokens.TypographyKeyTokens.LabelMedium
 
-object NavigationDrawerTokens {
+object NavigationRailTokens {
   val ActiveFocusIconColor = OnSecondaryContainer
-  val ActiveFocusLabelTextColor = OnSecondaryContainer
+  val ActiveFocusLabelTextColor = OnSurface
   val ActiveHoverIconColor = OnSecondaryContainer
-  val ActiveHoverLabelTextColor = OnSecondaryContainer
+  val ActiveHoverLabelTextColor = OnSurface
   val ActiveIconColor = OnSecondaryContainer
   val ActiveIndicatorColor = SecondaryContainer
-  val ActiveIndicatorHeight = 56.0.dp
+  val ActiveIndicatorHeight = 32.0.dp
   val ActiveIndicatorShape = CornerFull
-  val ActiveIndicatorWidth = 336.0.dp
-  val ActiveLabelTextColor = OnSecondaryContainer
+  val ActiveIndicatorWidth = 56.0.dp
+  val ActiveLabelTextColor = OnSurface
   val ActivePressedIconColor = OnSecondaryContainer
-  val ActivePressedLabelTextColor = OnSecondaryContainer
-  val BottomContainerShape = CornerLargeTop
+  val ActivePressedLabelTextColor = OnSurface
   val ContainerColor = Surface
-  const val ContainerHeightPercent = 100.0f
-  val ContainerShape = CornerLargeEnd
-  val ContainerSurfaceTintLayerColor = SurfaceTint
-  val ContainerWidth = 360.0.dp
-  val HeadlineColor = OnSurfaceVariant
-  val HeadlineFont = TitleSmall
+  val ContainerElevation = ElevationTokens.Level0
+  val ContainerShape = CornerNone
+  val ContainerWidth = 80.0.dp
   val IconSize = 24.0.dp
   val InactiveFocusIconColor = OnSurface
   val InactiveFocusLabelTextColor = OnSurface
@@ -59,9 +53,12 @@ object NavigationDrawerTokens {
   val InactiveLabelTextColor = OnSurfaceVariant
   val InactivePressedIconColor = OnSurface
   val InactivePressedLabelTextColor = OnSurface
-  val LabelTextFont = LabelLarge
-  val LargeBadgeLabelColor = OnSurfaceVariant
-  val LargeBadgeLabelFont = LabelLarge
-  val ModalContainerElevation = ElevationTokens.Level1
-  val StandardContainerElevation = ElevationTokens.Level0
+  val LabelTextFont = LabelMedium
+  val MenuFocusIconColor = OnSurface
+  val MenuHoverIconColor = OnSurface
+  val MenuIconColor = OnSurfaceVariant
+  val MenuIconSize = 24.0.dp
+  val MenuPressedIconColor = OnSurface
+  val NoLabelActiveIndicatorHeight = 56.0.dp
+  val NoLabelActiveIndicatorShape = CornerFull
 }
