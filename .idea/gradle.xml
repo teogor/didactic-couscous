@@ -55,15 +55,15 @@
             <option value="$PROJECT_DIR$/plugin" />
             <option value="$PROJECT_DIR$/plugin/library-convention" />
             <option value="$PROJECT_DIR$/screen" />
-            <option value="$PROJECT_DIR$/screen/builder" />
             <option value="$PROJECT_DIR$/screen/configurator" />
+            <option value="$PROJECT_DIR$/screen/core" />
             <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/ui/compose" />
             <option value="$PROJECT_DIR$/ui/designsystem" />
             <option value="$PROJECT_DIR$/ui/foundation" />
             <option value="$PROJECT_DIR$/ui/icons" />
             <option value="$PROJECT_DIR$/ui/spectrum" />
             <option value="$PROJECT_DIR$/ui/theme" />
-            <option value="$PROJECT_DIR$/ui/ui" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
