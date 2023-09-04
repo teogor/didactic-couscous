@@ -41,9 +41,10 @@ include(":data:database")
 include(":data:datastore")
 
 // UI
-include(":ui:spectrum")
 include(":ui:designsystem")
 include(":ui:foundation")
+include(":ui:icons")
+include(":ui:spectrum")
 include(":ui:theme")
 include(":ui:ui")
 
