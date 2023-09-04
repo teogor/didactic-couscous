@@ -39,4 +39,7 @@ dependencies {
   api(libs.landscapist.glide)
   api(libs.landscapist.placeholder)
   api(libs.coil.kt.compose)
+
+  // Scrollbar
+  implementation(libs.androidx.constraintlayout.compose)
 }

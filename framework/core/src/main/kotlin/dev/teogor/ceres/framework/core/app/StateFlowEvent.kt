@@ -16,30 +16,21 @@
 
 package dev.teogor.ceres.framework.core.app
 
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -145,48 +136,6 @@ fun UpdateToolbarAlpha(
   ceresNavVM: CeresNavVM = LocalCeresNavVM.current,
 ) {
   ceresNavVM.updateToolbarAlpha(value)
-}
-
-@Composable
-fun <T : ScrollableState> T.attachScrollState(trigger: Int = 50): T {
-  val toolbarAlphaState = remember { mutableStateOf(0f) }
-
-  LaunchedEffect(this) {
-    snapshotFlow {
-      when (val scrollState = this@attachScrollState) {
-        is ScrollState -> scrollState.value
-        is LazyListState -> {
-          val firstVisibleItemScrollOffset = scrollState.firstVisibleItemScrollOffset
-          val firstVisibleItemIndex = scrollState.firstVisibleItemIndex
-          if (firstVisibleItemIndex == 0) {
-            firstVisibleItemScrollOffset
-          } else {
-            trigger
-          }
-        }
-
-        is LazyGridState -> {
-          val firstVisibleItemScrollOffset = scrollState.firstVisibleItemScrollOffset
-          val firstVisibleItemIndex = scrollState.firstVisibleItemIndex
-          if (firstVisibleItemIndex == 0) {
-            firstVisibleItemScrollOffset
-          } else {
-            trigger
-          }
-        }
-
-        else -> 0
-      }
-    }.collect { value ->
-      val newAlpha = if (value < trigger) value / trigger.toFloat() else 1f
-      if (newAlpha != toolbarAlphaState.value) {
-        toolbarAlphaState.value = newAlpha
-      }
-    }
-  }
-
-  UpdateToolbarAlpha(toolbarAlphaState.value)
-  return this
 }
 
 @Composable
