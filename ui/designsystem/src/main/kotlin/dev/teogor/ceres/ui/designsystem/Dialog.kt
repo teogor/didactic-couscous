@@ -43,9 +43,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
-import dev.teogor.ceres.ui.theme.core.SurfaceOverlay
-import dev.teogor.ceres.core.designsystem.ui.addSound
+import dev.teogor.ceres.ui.foundation.applyTouchFeedback
 import dev.teogor.ceres.ui.theme.MaterialTheme
+import dev.teogor.ceres.ui.theme.core.SurfaceOverlay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -105,7 +105,7 @@ fun Dialog(
                 .selectable(
                   selected = idx == selectedItem,
                   onClick = {
-                    addSound()
+                    applyTouchFeedback()
                     onSelectionChange(idx)
                     onDismissRequest()
                   },
@@ -116,7 +116,7 @@ fun Dialog(
               RadioButton(
                 selected = idx == selectedItem,
                 onClick = {
-                  addSound()
+                  applyTouchFeedback()
                   onSelectionChange(idx)
                   onDismissRequest()
                 },

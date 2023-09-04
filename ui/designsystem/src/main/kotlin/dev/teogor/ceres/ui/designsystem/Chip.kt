@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.core.designsystem.icon.CeresIcons
+import dev.teogor.ceres.ui.icons.CeresIcons
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
 /**

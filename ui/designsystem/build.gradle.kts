@@ -29,8 +29,14 @@ android {
 
 dependencies {
   api(project(":ui:foundation"))
+  api(project(":ui:icons"))
   api(project(":ui:spectrum"))
   api(project(":ui:theme"))
 
   api(libs.google.material)
+
+  // Image Loading
+  api(libs.landscapist.glide)
+  api(libs.landscapist.placeholder)
+  api(libs.coil.kt.compose)
 }

@@ -36,8 +36,8 @@ import com.skydoves.landscapist.glide.GlideImage
 import com.skydoves.landscapist.placeholder.thumbnail.ThumbnailPlugin
 import dev.teogor.ceres.ui.designsystem.DigitsImageContent.Image
 import dev.teogor.ceres.ui.designsystem.DigitsImageContent.Text
-import dev.teogor.ceres.core.designsystem.foundation.rippleClickable
-import dev.teogor.ceres.core.designsystem.ui.addSound
+import dev.teogor.ceres.ui.foundation.applyTouchFeedback
+import dev.teogor.ceres.ui.foundation.rippleClickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
 import dev.teogor.ceres.ui.theme.contentColorFor
 
@@ -55,7 +55,7 @@ internal fun DigitsImage(
       .rippleClickable(
         rippleColor = MaterialTheme.colorScheme.onPrimary,
       ) {
-        addSound()
+        applyTouchFeedback()
         onClick()
       },
   ) {

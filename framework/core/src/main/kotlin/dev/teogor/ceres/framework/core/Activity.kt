@@ -38,15 +38,17 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.metrics.performance.JankStats
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.teogor.ceres.core.data.util.NetworkMonitor
 import dev.teogor.ceres.core.framework.component.MenuScope
+import dev.teogor.ceres.core.network.NetworkMonitor
 import dev.teogor.ceres.data.compose.rememberPreference
 import dev.teogor.ceres.data.datastore.defaults.AppTheme
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
 import dev.teogor.ceres.firebase.analytics.AnalyticsHelper
 import dev.teogor.ceres.firebase.crashlytics.CrashInfo
 import dev.teogor.ceres.firebase.crashlytics.CrashlyticsHelper
+import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.CeresApp
+import dev.teogor.ceres.framework.core.app.CeresAppState
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.NavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
@@ -57,7 +59,7 @@ import dev.teogor.ceres.ui.theme.core.Theme
 import javax.inject.Inject
 import kotlin.system.exitProcess
 
-open class BaseActivity : ComponentActivity() {
+open class Activity : ComponentActivity() {
 
   private var navigationParameters by mutableStateOf(NavigationParameters())
 
@@ -88,7 +90,7 @@ open class BaseActivity : ComponentActivity() {
   @Composable
   open fun Content(
     windowSizeClass: WindowSizeClass,
-    navigationParameters: NavigationParameters,
+    ceresAppState: CeresAppState,
     baseActions: BaseActions,
     padding: PaddingValues,
   ) {
@@ -267,10 +269,10 @@ open class BaseActivity : ComponentActivity() {
             headerContent = {
               MenuHeader()
             },
-          ) { windowSizeClass, appState, baseActions, padding ->
+          ) { windowSizeClass, ceresAppState, baseActions, padding ->
             Content(
               windowSizeClass = windowSizeClass,
-              appState = appState,
+              ceresAppState = ceresAppState,
               baseActions = baseActions,
               padding = padding,
             )
