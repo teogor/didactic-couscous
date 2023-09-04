@@ -13,24 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-}
 
-android {
-  namespace = "dev.teogor.ceres.firebase.analytics"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres.firebase.crashlytics
 
-dependencies {
-  implementation(platform(libs.firebase.bom))
-  implementation(libs.firebase.analytics)
+import androidx.compose.runtime.Composable
 
-  implementation(libs.androidx.compose.runtime)
-  implementation(libs.startup.runtime)
+/**
+ * Implementation of AnalyticsHelper which does nothing. Useful for tests and previews.
+ */
+class NoOpCrashlyticsHelper : CrashlyticsHelper {
+  override var crashInfoLegacy: CrashInfoLegacy? = null
+
+  override fun logEvent(event: CrashlyticsEvent) = Unit
+
+  @Composable
+  override fun SetCrash(it: CrashInfoLegacy) = Unit
 }

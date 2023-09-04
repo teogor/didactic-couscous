@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-}
 
-android {
-  namespace = "dev.teogor.ceres.firebase.analytics"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres.firebase.crashlytics
 
-dependencies {
-  implementation(platform(libs.firebase.bom))
-  implementation(libs.firebase.analytics)
+import androidx.compose.runtime.staticCompositionLocalOf
 
-  implementation(libs.androidx.compose.runtime)
-  implementation(libs.startup.runtime)
+/**
+ * Global key used to obtain access to the AnalyticsHelper through a CompositionLocal.
+ */
+val LocalCrashlyticsHelper = staticCompositionLocalOf<CrashlyticsHelper> {
+  // Provide a default AnalyticsHelper which does nothing. This is so that tests and previews
+  // do not have to provide one. For real app builds provide a different implementation.
+  NoOpCrashlyticsHelper()
 }

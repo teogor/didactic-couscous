@@ -14,19 +14,23 @@
  * limitations under the License.
  */
 plugins {
-  id("ceres.android.feature")
+  id("ceres.android.library")
   id("ceres.android.library.compose")
   id("ceres.android.library.jacoco")
   id("ceres.android.hilt")
-  id("kotlinx-serialization")
 }
 
 android {
-  namespace = "dev.teogor.ceres"
+  namespace = "dev.teogor.ceres.firebase.crashlytics"
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
 
 dependencies {
+  implementation(libs.firebase.crashlytics)
+  implementation(platform(libs.firebase.bom))
+
+  implementation(libs.startup.runtime)
+  implementation(libs.androidx.compose.runtime)
 }

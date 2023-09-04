@@ -38,14 +38,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.metrics.performance.JankStats
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.teogor.ceres.core.framework.component.MenuScope
 import dev.teogor.ceres.core.network.NetworkMonitor
 import dev.teogor.ceres.data.compose.rememberPreference
 import dev.teogor.ceres.data.datastore.defaults.AppTheme
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
 import dev.teogor.ceres.firebase.analytics.AnalyticsHelper
-import dev.teogor.ceres.firebase.crashlytics.CrashInfo
+import dev.teogor.ceres.firebase.analytics.LocalAnalyticsHelper
+import dev.teogor.ceres.firebase.crashlytics.CrashInfoLegacy
 import dev.teogor.ceres.firebase.crashlytics.CrashlyticsHelper
+import dev.teogor.ceres.firebase.crashlytics.LocalCrashlyticsHelper
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.CeresApp
 import dev.teogor.ceres.framework.core.app.CeresAppState
@@ -142,14 +143,14 @@ open class Activity : ComponentActivity() {
 
     // todo EHF - Error Handler Feature
     var hasCrashed = intent.getBooleanExtra("hasCrashed", false)
-    val crashInfo = if (!hasCrashed) {
+    val crashInfoLegacy = if (!hasCrashed) {
       null
     } else {
       val threadName = intent.getStringExtra("threadName") ?: ""
       val threadId = intent.getLongExtra("threadId", 0L)
       val throwable = intent.getSerializableExtra("throwable") as Throwable
 
-      CrashInfo(threadName, threadId, throwable)
+      CrashInfoLegacy(threadName, threadId, throwable)
     }
 
     setContent {
@@ -232,17 +233,17 @@ open class Activity : ComponentActivity() {
       ) {
         CompositionLocalProvider(
           LocalNavigationParameters provides navigationParameters,
-          // todo firebase suit LocalAnalyticsHelper provides analyticsHelper,
-          // todo firebase suit LocalCrashlyticsHelper provides crashlyticsHelper,
+          LocalAnalyticsHelper provides analyticsHelper,
+          LocalCrashlyticsHelper provides crashlyticsHelper,
         ) {
           // todo EHF - Error Handler Feature
           val hasCrashedRem = remember(hasCrashed) {
             hasCrashed
           }
           // todo EHF - Error Handler Feature
-          if (hasCrashedRem && crashInfo != null) {
-            val crashInfo = remember(crashInfo) {
-              crashInfo
+          if (hasCrashedRem && crashInfoLegacy != null) {
+            val crashInfo = remember(crashInfoLegacy) {
+              crashInfoLegacy
             }
             crashInfo.let {
               // todo EHF - Error Handler Feature

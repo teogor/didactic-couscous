@@ -13,24 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-}
 
-android {
-  namespace = "dev.teogor.ceres.firebase.analytics"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres.firebase.analytics
 
-dependencies {
-  implementation(platform(libs.firebase.bom))
-  implementation(libs.firebase.analytics)
-
-  implementation(libs.androidx.compose.runtime)
-  implementation(libs.startup.runtime)
+/**
+ * Interface for logging analytics events. See `FirebaseAnalyticsHelper` and
+ * `StubAnalyticsHelper` for implementations.
+ */
+interface AnalyticsHelper {
+  fun logEvent(event: AnalyticsEvent)
 }

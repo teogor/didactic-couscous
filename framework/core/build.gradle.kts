@@ -41,6 +41,9 @@ dependencies {
   api(project(":ui:foundation"))
   api(project(":ui:theme"))
 
+  api(project(":firebase:analytics"))
+  api(project(":firebase:crashlytics"))
+
   implementation(libs.androidx.activity.compose)
 
   implementation(libs.androidx.core.splashscreen)
