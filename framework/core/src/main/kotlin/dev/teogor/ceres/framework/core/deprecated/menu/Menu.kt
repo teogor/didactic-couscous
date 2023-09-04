@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.framework.core.depcreated.menu
+package dev.teogor.ceres.framework.core.deprecated.menu
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

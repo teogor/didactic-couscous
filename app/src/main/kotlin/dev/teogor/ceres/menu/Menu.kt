@@ -10,16 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.teogor.ceres.framework.core.beta.MenuConfig
-import dev.teogor.ceres.framework.core.depcreated.menu.MenuScope
-import dev.teogor.ceres.framework.core.depcreated.menu.MenuTitle
-import dev.teogor.ceres.framework.core.depcreated.menu.menu
-import dev.teogor.ceres.framework.core.depcreated.menu.menuContent
-import dev.teogor.ceres.framework.core.depcreated.menu.menuDivider
-import dev.teogor.ceres.framework.core.depcreated.menu.menuFooter
-import dev.teogor.ceres.framework.core.depcreated.menu.menuItem
-import dev.teogor.ceres.framework.core.depcreated.menu.menuTop
-import dev.teogor.ceres.framework.core.depcreated.menu.menuUserData
-import dev.teogor.ceres.framework.core.depcreated.menu.menuUserId
+import dev.teogor.ceres.framework.core.deprecated.menu.MenuScope
+import dev.teogor.ceres.framework.core.deprecated.menu.MenuTitle
+import dev.teogor.ceres.framework.core.deprecated.menu.menu
+import dev.teogor.ceres.framework.core.deprecated.menu.menuContent
+import dev.teogor.ceres.framework.core.deprecated.menu.menuDivider
+import dev.teogor.ceres.framework.core.deprecated.menu.menuFooter
+import dev.teogor.ceres.framework.core.deprecated.menu.menuItem
+import dev.teogor.ceres.framework.core.deprecated.menu.menuTop
+import dev.teogor.ceres.framework.core.deprecated.menu.menuUserData
+import dev.teogor.ceres.framework.core.deprecated.menu.menuUserId
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
 
