@@ -23,7 +23,7 @@ import dev.teogor.ceres.navigation.core.screenNav
 
 const val homeNavigationRoute = "home_route"
 
-object HomeRoute : ScreenRoute {
+object HomeScreenConfig : ScreenRoute {
   override val route: String = homeNavigationRoute
 }
 

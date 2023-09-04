@@ -90,6 +90,7 @@ android {
 
 dependencies {
   implementation(project(":framework:core"))
+  implementation(project(":screen:builder")) //core
   implementation(project(":ui:ui"))
 
   implementation(libs.kotlinx.serialization.json)

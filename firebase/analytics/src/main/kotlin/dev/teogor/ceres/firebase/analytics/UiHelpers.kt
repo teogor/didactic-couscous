@@ -18,6 +18,10 @@ package dev.teogor.ceres.firebase.analytics
 
 import androidx.compose.runtime.staticCompositionLocalOf
 
+// todo move this somewhere in base
+//  like module firebase-base-helpers
+//   ... ceres modules include that
+//   analytics/crashlytics depends on that
 /**
  * Global key used to obtain access to the AnalyticsHelper through a CompositionLocal.
  */

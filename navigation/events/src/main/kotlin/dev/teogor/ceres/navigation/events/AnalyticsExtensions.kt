@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.firebase.analytics.extensions
+package dev.teogor.ceres.navigation.events
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect

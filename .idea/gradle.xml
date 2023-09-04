@@ -49,6 +49,7 @@
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/navigation/common" />
             <option value="$PROJECT_DIR$/navigation/core" />
+            <option value="$PROJECT_DIR$/navigation/events" />
             <option value="$PROJECT_DIR$/navigation/screen" />
             <option value="$PROJECT_DIR$/navigation/ui" />
             <option value="$PROJECT_DIR$/plugin" />

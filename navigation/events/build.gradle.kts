@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// todo refactor and place inside somewhere and make use of local composition
 plugins {
   id("ceres.android.library")
   id("ceres.android.library.compose")
@@ -20,16 +21,13 @@ plugins {
 }
 
 android {
-  namespace = "dev.teogor.ceres.screen.core"
+  namespace = "dev.teogor.ceres.navigation.events"
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
 
 dependencies {
-  api(project(":ui:designsystem"))
-  api(project(":ui:theme"))
-  api(project(":navigation:events"))
-
-  api(libs.androidx.compose.foundation)
+  api(project(":navigation:core"))
+  api(project(":firebase:analytics"))
 }

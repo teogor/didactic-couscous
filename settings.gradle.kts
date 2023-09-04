@@ -23,6 +23,7 @@ include(":app")
 // Navigation
 include(":navigation:common")
 include(":navigation:core")
+include(":navigation:events")
 include(":navigation:screen")
 include(":navigation:ui")
 
