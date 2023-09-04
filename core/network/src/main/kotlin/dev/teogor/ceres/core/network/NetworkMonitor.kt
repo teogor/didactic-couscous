@@ -13,20 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-}
 
-android {
-  namespace = "dev.teogor.ceres.core.network"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres.core.network
 
-dependencies {
-  implementation(libs.kotlinx.coroutines.android)
+import kotlinx.coroutines.flow.Flow
+
+/**
+ * Utility for reporting app connectivity status
+ */
+interface NetworkMonitor {
+  val isOnline: Flow<Boolean>
 }

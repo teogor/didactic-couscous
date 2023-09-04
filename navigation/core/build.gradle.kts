@@ -27,11 +27,16 @@ android {
 }
 
 dependencies {
+  api(project(":ui:foundation"))
+
   // Compose
-  implementation(libs.androidx.compose.foundation)
-  implementation(libs.androidx.compose.runtime)
+  api(libs.androidx.compose.foundation)
+  api(libs.androidx.compose.runtime)
 
   // Navigation
-  implementation(libs.androidx.hilt.navigation.compose)
-  implementation(libs.androidx.navigation.compose)
+  api(libs.androidx.hilt.navigation.compose)
+  api(libs.androidx.navigation.compose)
+
+  // ** navigation-handler
+  api(project(":ui:designsystem"))
 }

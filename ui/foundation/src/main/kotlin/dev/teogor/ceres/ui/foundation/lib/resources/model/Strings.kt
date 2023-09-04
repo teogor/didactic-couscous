@@ -13,20 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-}
 
-android {
-  namespace = "dev.teogor.ceres.core.network"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
+package dev.teogor.ceres.ui.foundation.lib.resources.model
+
+import androidx.compose.runtime.Immutable
+
+@Immutable
+@JvmInline
+value class Strings private constructor(@Suppress("unused") private val value: Int) {
+  companion object {
+    val NavigationMenu = Strings(0)
+    val CloseDrawer = Strings(1)
+    val CloseSheet = Strings(2)
+    val DefaultErrorMessage = Strings(3)
+    val ExposedDropdownMenu = Strings(4)
+    val SliderRangeStart = Strings(5)
+    val SliderRangeEnd = Strings(6)
   }
-}
-
-dependencies {
-  implementation(libs.kotlinx.coroutines.android)
 }

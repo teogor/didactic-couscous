@@ -29,6 +29,8 @@ android {
 }
 
 dependencies {
+  api(project(":core:network"))
+
   api(project(":data:compose"))
   // required for theme config only
   api(project(":data:datastore"))
@@ -42,4 +44,12 @@ dependencies {
   implementation(libs.androidx.activity.compose)
 
   implementation(libs.androidx.core.splashscreen)
+
+  implementation(libs.accompanist.systemuicontroller)
+
+  // in this module required for *WindowSizeClass
+  implementation(libs.androidx.compose.material3.windowSizeClass)
+
+  // required for JankStats
+  implementation(libs.androidx.metrics)
 }

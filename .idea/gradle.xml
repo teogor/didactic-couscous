@@ -7,11 +7,15 @@
         <compositeConfiguration>
           <compositeBuild compositeDefinitionSource="SCRIPT">
             <builds>
+              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
+                <projects>
+                  <project path="$PROJECT_DIR$/buildSrc" />
+                </projects>
+              </build>
               <build path="$PROJECT_DIR$/plugin" name="plugin">
                 <projects>
                   <project path="$PROJECT_DIR$/plugin" />
                   <project path="$PROJECT_DIR$/plugin/library-convention" />
-                  <project path="$PROJECT_DIR$/plugin/maven-publish" />
                 </projects>
               </build>
             </builds>
@@ -26,7 +30,13 @@
             <option value="$PROJECT_DIR$/backup" />
             <option value="$PROJECT_DIR$/backup/core" />
             <option value="$PROJECT_DIR$/backup/ui" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/network" />
+            <option value="$PROJECT_DIR$/core/notifications" />
+            <option value="$PROJECT_DIR$/core/startup" />
             <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/compose" />
             <option value="$PROJECT_DIR$/data/database" />
             <option value="$PROJECT_DIR$/data/datastore" />
             <option value="$PROJECT_DIR$/firebase" />
@@ -43,19 +53,15 @@
             <option value="$PROJECT_DIR$/navigation/ui" />
             <option value="$PROJECT_DIR$/plugin" />
             <option value="$PROJECT_DIR$/plugin/library-convention" />
-            <option value="$PROJECT_DIR$/plugin/maven-publish" />
             <option value="$PROJECT_DIR$/screen" />
             <option value="$PROJECT_DIR$/screen/builder" />
             <option value="$PROJECT_DIR$/screen/configurator" />
             <option value="$PROJECT_DIR$/ui" />
-            <option value="$PROJECT_DIR$/ui/colour-generator" />
-            <option value="$PROJECT_DIR$/ui/design-system" />
+            <option value="$PROJECT_DIR$/ui/designsystem" />
             <option value="$PROJECT_DIR$/ui/foundation" />
+            <option value="$PROJECT_DIR$/ui/spectrum" />
             <option value="$PROJECT_DIR$/ui/theme" />
             <option value="$PROJECT_DIR$/ui/ui" />
-            <option value="$PROJECT_DIR$/utilities" />
-            <option value="$PROJECT_DIR$/utilities/network" />
-            <option value="$PROJECT_DIR$/utilities/notifications" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

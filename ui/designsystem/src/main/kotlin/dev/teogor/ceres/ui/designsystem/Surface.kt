@@ -46,15 +46,15 @@ import androidx.compose.ui.semantics.isContainer
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.core.designsystem.foundation.clickable
-import dev.teogor.ceres.ui.theme.ColorInfo
+import dev.teogor.ceres.ui.foundation.clickable
+import dev.teogor.ceres.ui.spectrum.hct.Hct
+import dev.teogor.ceres.ui.spectrum.model.ColorInfo
 import dev.teogor.ceres.ui.theme.LocalContentColor
 import dev.teogor.ceres.ui.theme.MaterialTheme
 import dev.teogor.ceres.ui.theme.contentColorFor
 import dev.teogor.ceres.ui.theme.toColor
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 import dev.teogor.ceres.ui.theme.tokens.ElevationTokens
-import dev.teogor.ceres.ui.theme.utilities.hct.Hct
 import kotlin.math.ln
 
 // TODO(b/197880751): Add url to spec on Material.io.

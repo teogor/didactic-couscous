@@ -90,3 +90,16 @@ private fun isNavigating(
   }
   return navigating
 }
+
+fun NavController.isRouteInBackStack(route: String): Boolean {
+  // todo graph.route ??
+  val backStackEntries = this.currentBackStack.value
+
+  for (entry in backStackEntries) {
+    if (entry.destination.route == route) {
+      return true
+    }
+  }
+
+  return false
+}

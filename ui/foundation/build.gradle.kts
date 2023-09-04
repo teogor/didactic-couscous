@@ -40,5 +40,9 @@ dependencies {
   api(libs.androidx.core.ktx)
   api(libs.google.material)
 
+  // *.lib
+  // *.tools
+  api(libs.androidx.metrics)
+
   debugApi(libs.androidx.compose.ui.tooling)
 }
