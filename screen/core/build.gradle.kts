@@ -29,6 +29,7 @@ android {
 dependencies {
   api(project(":ui:designsystem"))
   api(project(":ui:theme"))
+  api(project(":ui:compose"))
   api(project(":navigation:events"))
 
   api(libs.androidx.compose.foundation)

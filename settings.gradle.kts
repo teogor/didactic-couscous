@@ -42,12 +42,12 @@ include(":data:database")
 include(":data:datastore")
 
 // UI
+include(":ui:compose")
 include(":ui:designsystem")
 include(":ui:foundation")
 include(":ui:icons")
 include(":ui:spectrum")
 include(":ui:theme")
-include(":ui:compose")
 
 // Core
 include(":core:network")

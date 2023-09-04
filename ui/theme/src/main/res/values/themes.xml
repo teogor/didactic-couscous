@@ -40,9 +40,4 @@
     <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
   </style>
 
-<!--  <style name="Theme.Ceres.Splash" parent="NightAdjusted.Theme.Splash">-->
-<!--    <item name="windowSplashScreenAnimatedIcon">@drawable/ceres_logo</item>-->
-<!--    <item name="windowSplashScreenBackground">@color/splash_background</item>-->
-<!--    <item name="postSplashScreenTheme">@style/Theme.Ceres</item>-->
-<!--  </style>-->
 </resources>

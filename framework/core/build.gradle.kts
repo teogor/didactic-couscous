@@ -40,6 +40,7 @@ dependencies {
   api(project(":ui:designsystem"))
   api(project(":ui:foundation"))
   api(project(":ui:theme"))
+  api(project(":ui:compose"))
 
   api(project(":firebase:analytics"))
   api(project(":firebase:crashlytics"))
