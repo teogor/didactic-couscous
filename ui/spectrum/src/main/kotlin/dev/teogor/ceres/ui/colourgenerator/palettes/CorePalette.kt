@@ -17,8 +17,8 @@
 package dev.teogor.ceres.ui.colourgenerator.palettes
 
 import androidx.compose.ui.graphics.Color
-import dev.teogor.ceres.ui.colourgenerator.hct.Hct
 import dev.teogor.ceres.extensions.invertColor
+import dev.teogor.ceres.ui.colourgenerator.hct.Hct
 import dev.teogor.ceres.ui.colourgenerator.model.ColorInfo
 
 /**

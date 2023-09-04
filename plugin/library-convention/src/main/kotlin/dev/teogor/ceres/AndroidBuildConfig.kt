@@ -34,14 +34,22 @@ abstract class GitHashValueSource : ValueSource<String, ValueSourceParameters.No
   @get:Inject
   abstract val execOperations: ExecOperations
 
+  // Define a variable to store the Git hash
+  private var gitHash: String? = null
+
   override fun obtain(): String {
+    // If gitHash is already calculated, return it
+    gitHash?.let { return it }
+
     val output = ByteArrayOutputStream()
     return try {
       execOperations.exec {
         commandLine("git", "rev-parse", "HEAD")
         standardOutput = output
       }
-      String(output.toByteArray(), Charset.defaultCharset()).trim()
+      // Calculate and store the Git hash
+      gitHash = String(output.toByteArray(), Charset.defaultCharset()).trim()
+      gitHash ?: "N/A"
     } catch (e: RuntimeException) {
       "N/A"
     }
@@ -62,7 +70,6 @@ internal fun Project.configureAndroidBuildConfig(
   val buildDateTime = LocalDateTime.of(buildDate, buildTime)
 
   val gitHashProvider = providers.of(GitHashValueSource::class) {}
-  val gitHash = gitHashProvider.get()
 
   // Enable BuildConfig generation
   commonExtension.apply {
@@ -82,7 +89,7 @@ internal fun Project.configureAndroidBuildConfig(
       buildConfigField(
         type = "String",
         name = "GIT_HASH",
-        value = "\"$gitHash\"",
+        value = "\"${gitHashProvider.get()}\"",
       )
 
       // Add a field for BUILD_HASH in BuildConfig

@@ -21,15 +21,15 @@ import dev.teogor.ceres.ui.colourgenerator.hct.Hct
 import dev.teogor.ceres.ui.colourgenerator.utilities.asIntColor
 
 data class ColorInfo(
-    val hct: Hct,
-    val hue: Double = hct.hue,
-    val chroma: Double = hct.chroma,
+  val hct: Hct,
+  val hue: Double = hct.hue,
+  val chroma: Double = hct.chroma,
 ) {
-    val colorInt = hct.toInt()
+  val colorInt = hct.toInt()
 
-    companion object {
-        fun from(color: Color): ColorInfo {
-            return ColorInfo(hct = Hct.fromInt(color.asIntColor()))
-        }
+  companion object {
+    fun from(color: Color): ColorInfo {
+      return ColorInfo(hct = Hct.fromInt(color.asIntColor()))
     }
+  }
 }
