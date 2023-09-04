@@ -46,9 +46,10 @@ include(":ui:foundation")
 include(":ui:theme")
 include(":ui:ui")
 
-// Utilities
-include(":utilities:network")
-include(":utilities:notifications")
+// Core
+include(":core:network")
+include(":core:notifications")
+include(":core:startup")
 
 // Framework
 include(":framework:core")

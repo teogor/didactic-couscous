@@ -14,19 +14,48 @@
  * limitations under the License.
  */
 plugins {
-  id("ceres.android.feature")
+  id("ceres.android.library")
   id("ceres.android.library.compose")
   id("ceres.android.library.jacoco")
   id("ceres.android.hilt")
   id("kotlinx-serialization")
+  alias(libs.plugins.protobuf)
 }
 
 android {
-  namespace = "dev.teogor.ceres"
+  namespace = "dev.teogor.ceres.data.datastore"
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
 
+// Setup protobuf configuration, generating lite Java and Kotlin classes
+protobuf {
+  protoc {
+    artifact = libs.protobuf.protoc.get().toString()
+  }
+  generateProtoTasks {
+    all().forEach { task ->
+      task.builtins {
+        register("java") {
+          option("lite")
+        }
+        register("kotlin") {
+          option("lite")
+        }
+      }
+    }
+  }
+}
+
 dependencies {
+  api(project(":core:startup"))
+
+  api(libs.androidx.dataStore.preferences)
+  api(libs.androidx.dataStore.core)
+  api(libs.androidx.lifecycle.livedata.ktx)
+  api(libs.protobuf.kotlin.lite)
+
+  implementation(libs.kotlinx.coroutines.android)
+  implementation(libs.gson)
 }
