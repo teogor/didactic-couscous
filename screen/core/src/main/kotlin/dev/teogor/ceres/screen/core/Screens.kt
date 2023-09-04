@@ -228,7 +228,7 @@ fun ColumnScreen(
         ),
       ) {
         Column(
-          modifier = Modifier
+          modifier = modifier
             .verticalScroll(state)
             .fillMaxWidth(),
           verticalArrangement = verticalArrangement,
