@@ -47,7 +47,7 @@ include(":ui:foundation")
 include(":ui:icons")
 include(":ui:spectrum")
 include(":ui:theme")
-include(":ui:ui")
+include(":ui:compose")
 
 // Core
 include(":core:network")
