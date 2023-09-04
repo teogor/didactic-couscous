@@ -18,6 +18,8 @@ plugins {
   id("ceres.android.library.compose")
   id("ceres.android.library.jacoco")
   id("kotlinx-serialization")
+  // required by *.lib.tools
+  id("ceres.android.hilt")
 }
 
 android {
