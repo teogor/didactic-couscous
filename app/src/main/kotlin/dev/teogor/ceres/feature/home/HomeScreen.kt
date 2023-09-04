@@ -30,8 +30,13 @@ import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
+import dev.teogor.ceres.screen.builder.Layout
+import dev.teogor.ceres.screen.builder.header
+import dev.teogor.ceres.screen.builder.item
+import dev.teogor.ceres.screen.builder.segmentedButtons
 import dev.teogor.ceres.screen.core.ColumnScreen
 import dev.teogor.ceres.ui.designsystem.Text
+import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
 // todo better way to configure this. perhaps use kotlin builder syntax
 @Composable
@@ -68,7 +73,8 @@ internal fun HomeRoute(
     }
   }
 
-  HomeScreen()
+  ClockConfigScreen()
+  // HomeScreen()
 }
 
 @Composable
@@ -85,4 +91,32 @@ fun HomeScreen() = ColumnScreen(
       text = "here we go as $it",
     )
   }
+}
+
+@Composable
+private fun ClockConfigScreen(
+) = Layout(
+  screenName = HomeScreenConfig,
+) {
+  header {
+    "Time Interval Options"
+  }
+
+  item(
+    title = "Timer Duration",
+    subtitle = "Adjust the duration of the timer",
+    subtitleColor = ColorSchemeKeyTokens.Error,
+  ) {
+    segmentedButtons(
+      options = listOf(
+        "2 MIN",
+        "5 MIN",
+        "10 MIN",
+        "20 MIN",
+        "30 MIN",
+      ),
+      selectedOption = 1,
+    )
+  }
+
 }

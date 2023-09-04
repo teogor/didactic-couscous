@@ -20,6 +20,7 @@ import dev.teogor.ceres.framework.core.deprecated.menu.menuItem
 import dev.teogor.ceres.framework.core.deprecated.menu.menuTop
 import dev.teogor.ceres.framework.core.deprecated.menu.menuUserData
 import dev.teogor.ceres.framework.core.deprecated.menu.menuUserId
+import dev.teogor.ceres.lib.settings.SettingsScreenRoute
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
 
@@ -79,7 +80,7 @@ private fun MenuScope.menuSheet(
       content = "Settings",
       icon = Icons.Outlined.Settings,
       clickable = {
-        // onNavigation(SettingsRoute)
+        onNavigation(SettingsScreenRoute)
       },
     )
 

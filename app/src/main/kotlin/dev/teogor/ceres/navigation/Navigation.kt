@@ -24,6 +24,7 @@ import dev.teogor.ceres.feature.home.homeScreenNav
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.CeresAppState
 import dev.teogor.ceres.framework.core.beta.NavGraphOptions
+import dev.teogor.ceres.lib.settings.settingsScreenNav
 import dev.teogor.ceres.navigation.core.NavHost
 
 @Composable
@@ -49,5 +50,7 @@ private fun NavHost(
     startDestination = startDestination,
   ) {
     homeScreenNav(baseActions)
+
+    settingsScreenNav(baseActions)
   }
 }

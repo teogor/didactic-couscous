@@ -93,6 +93,7 @@ dependencies {
   implementation(project(":framework:core"))
 
   // screen builder
+  implementation(project(":screen:builder"))
   implementation(project(":screen:core"))
 
   // theme config

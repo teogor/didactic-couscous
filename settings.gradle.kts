@@ -61,4 +61,4 @@ include(":framework:ui")
 
 // Screen
 include(":screen:core")
-include(":screen:configurator")
+include(":screen:builder")
