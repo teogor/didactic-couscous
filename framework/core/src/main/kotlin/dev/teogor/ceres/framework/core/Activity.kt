@@ -23,7 +23,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -51,6 +50,7 @@ import dev.teogor.ceres.firebase.crashlytics.LocalCrashlyticsHelper
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.CeresApp
 import dev.teogor.ceres.framework.core.app.CeresAppState
+import dev.teogor.ceres.framework.core.depcreated.menu.MenuScope
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.NavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
@@ -60,8 +60,6 @@ import dev.teogor.ceres.ui.foundation.window.WindowPreferencesManager
 import dev.teogor.ceres.ui.theme.core.Theme
 import javax.inject.Inject
 import kotlin.system.exitProcess
-
-typealias MenuScope = LazyListScope
 
 open class Activity : ComponentActivity() {
 

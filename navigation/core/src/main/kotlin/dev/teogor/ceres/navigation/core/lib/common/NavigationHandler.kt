@@ -33,8 +33,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import dev.teogor.ceres.ui.designsystem.modalsheet.ModalBottomSheetState
-
-val emptyComposable: @Composable (ColumnScope) -> Unit = {}
+import dev.teogor.ceres.ui.foundation.lib.common.emptyComposable
 
 data class NavigationData(
   val sheetState: ModalBottomSheetState,
