@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 teogor (Teodor Grigor)
+ * Copyright 2021 teogor (Teodor Grigor)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.feature")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-  id("kotlinx-serialization")
-}
 
-android {
-  namespace = "dev.teogor.ceres.ui.theme"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres.ui.theme.tokens
 
-dependencies {
-  api(project(":ui:spectrum"))
+import androidx.compose.ui.unit.dp
 
-  api(libs.androidx.compose.material3)
-  api(libs.androidx.compose.ui.tooling.preview)
-  api(libs.androidx.compose.ui.util)
+object ElevationTokens {
+  val Level0 = 0.0.dp
+  val Level1 = 1.0.dp
+  val Level2 = 3.0.dp
+  val Level3 = 6.0.dp
+  val Level4 = 8.0.dp
+  val Level5 = 12.0.dp
+  val Level6 = 18.dp
+  val Level7 = 24.dp
+  val Level8 = 32.dp
+  val Level9 = 40.dp
+  val Level10 = 50.dp
 }

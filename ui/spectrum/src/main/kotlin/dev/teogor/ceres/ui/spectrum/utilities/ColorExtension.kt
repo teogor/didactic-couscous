@@ -13,25 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.feature")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-  id("kotlinx-serialization")
+
+package dev.teogor.ceres.ui.spectrum.utilities
+
+import androidx.annotation.ColorInt
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+
+
+@ColorInt
+fun Color.asIntColor(): Int {
+  return this.toArgb()
 }
 
-android {
-  namespace = "dev.teogor.ceres.ui.theme"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
+@ColorInt
+fun String.asIntColor(): Int {
+  return android.graphics.Color.parseColor(this)
 }
 
-dependencies {
-  api(project(":ui:spectrum"))
+fun String.asColor(): Color {
+  return Color(android.graphics.Color.parseColor(this))
+}
 
-  api(libs.androidx.compose.material3)
-  api(libs.androidx.compose.ui.tooling.preview)
-  api(libs.androidx.compose.ui.util)
+fun Color.asHexColor(): String {
+  val argb = this.toArgb()
+  return String.format("#%08X", argb)
 }

@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.feature")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-  id("kotlinx-serialization")
-}
 
-android {
-  namespace = "dev.teogor.ceres.ui.theme"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
+package dev.teogor.ceres.ui.spectrum.model
+
+import androidx.compose.ui.graphics.Color
+import dev.teogor.ceres.ui.spectrum.hct.Hct
+import dev.teogor.ceres.ui.spectrum.utilities.asIntColor
+
+data class ColorInfo(
+  val hct: Hct,
+  val hue: Double = hct.hue,
+  val chroma: Double = hct.chroma,
+) {
+  val colorInt = hct.toInt()
+
+  companion object {
+    fun from(color: Color): ColorInfo {
+      return ColorInfo(hct = Hct.fromInt(color.asIntColor()))
+    }
   }
-}
-
-dependencies {
-  api(project(":ui:spectrum"))
-
-  api(libs.androidx.compose.material3)
-  api(libs.androidx.compose.ui.tooling.preview)
-  api(libs.androidx.compose.ui.util)
 }

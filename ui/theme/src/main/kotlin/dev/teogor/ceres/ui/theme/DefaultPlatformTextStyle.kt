@@ -13,25 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.feature")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-  id("kotlinx-serialization")
-}
 
-android {
-  namespace = "dev.teogor.ceres.ui.theme"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres.ui.theme
 
-dependencies {
-  api(project(":ui:spectrum"))
+import androidx.compose.ui.text.PlatformTextStyle
 
-  api(libs.androidx.compose.material3)
-  api(libs.androidx.compose.ui.tooling.preview)
-  api(libs.androidx.compose.ui.util)
-}
+/**
+ * Returns Default [PlatformTextStyle].
+ */
+private const val DefaultIncludeFontPadding = true
+
+@Suppress("DEPRECATION")
+private val DefaultPlatformTextStyle = PlatformTextStyle(
+  includeFontPadding = DefaultIncludeFontPadding,
+)
+
+internal fun defaultPlatformTextStyle(): PlatformTextStyle = DefaultPlatformTextStyle
