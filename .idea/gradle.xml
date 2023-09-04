@@ -34,6 +34,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/core/notifications" />
+            <option value="$PROJECT_DIR$/core/runtime" />
             <option value="$PROJECT_DIR$/core/startup" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/compose" />
@@ -55,7 +56,7 @@
             <option value="$PROJECT_DIR$/plugin" />
             <option value="$PROJECT_DIR$/plugin/library-convention" />
             <option value="$PROJECT_DIR$/screen" />
-            <option value="$PROJECT_DIR$/screen/configurator" />
+            <option value="$PROJECT_DIR$/screen/builder" />
             <option value="$PROJECT_DIR$/screen/core" />
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui/compose" />
