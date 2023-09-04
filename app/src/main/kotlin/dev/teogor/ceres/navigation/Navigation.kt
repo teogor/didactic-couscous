@@ -16,16 +16,28 @@
 
 package dev.teogor.ceres.navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import dev.teogor.ceres.feature.home.homeNavigationRoute
 import dev.teogor.ceres.feature.home.homeScreen
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.CeresAppState
+import dev.teogor.ceres.framework.core.beta.NavGraphOptions
 import dev.teogor.ceres.navigation.core.NavHost
 
 @Composable
-fun NavHost(
+fun NavGraphOptions.ApplyNavHost() = NavHost(
+  modifier = Modifier.padding(
+    bottom = padding.calculateBottomPadding(),
+    top = padding.calculateTopPadding(),
+  ),
+  appState = ceresAppState,
+  baseActions = baseActions,
+)
+
+@Composable
+private fun NavHost(
   modifier: Modifier = Modifier,
   startDestination: String = homeNavigationRoute,
   appState: CeresAppState,

@@ -22,9 +22,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -47,9 +45,8 @@ import dev.teogor.ceres.firebase.analytics.LocalAnalyticsHelper
 import dev.teogor.ceres.firebase.crashlytics.CrashInfoLegacy
 import dev.teogor.ceres.firebase.crashlytics.CrashlyticsHelper
 import dev.teogor.ceres.firebase.crashlytics.LocalCrashlyticsHelper
-import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.CeresApp
-import dev.teogor.ceres.framework.core.app.CeresAppState
+import dev.teogor.ceres.framework.core.beta.NavGraphOptions
 import dev.teogor.ceres.framework.core.depcreated.menu.MenuScope
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.NavigationParameters
@@ -87,17 +84,6 @@ open class Activity : ComponentActivity() {
 
   open fun handleUriVariants(uri: Uri): ScreenRoute? {
     return null
-  }
-
-  @Composable
-  open fun Content(
-    windowSizeClass: WindowSizeClass,
-    ceresAppState: CeresAppState,
-    baseActions: BaseActions,
-    padding: PaddingValues,
-  ) {
-    // This method is implemented in a subclass or another file
-    // Please refer to the specific implementation for details
   }
 
   @Composable
@@ -272,12 +258,12 @@ open class Activity : ComponentActivity() {
               MenuHeader()
             },
           ) { windowSizeClass, ceresAppState, baseActions, padding ->
-            Content(
+            NavGraphOptions(
               windowSizeClass = windowSizeClass,
               ceresAppState = ceresAppState,
               baseActions = baseActions,
               padding = padding,
-            )
+            ).BuildNavGraph()
           }
         }
       }
@@ -285,6 +271,11 @@ open class Activity : ComponentActivity() {
 
     handleIntent(intent)
   }
+
+  // todo beta
+  @Composable
+  open fun NavGraphOptions.BuildNavGraph() = Unit
+
 
   private fun handleSplashScreen(splashScreen: SplashScreen) {
     // Keep the splash screen on-screen until the UI state is loaded. This condition is

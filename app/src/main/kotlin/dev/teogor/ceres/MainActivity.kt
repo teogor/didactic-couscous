@@ -16,21 +16,18 @@
 
 package dev.teogor.ceres
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Details
 import androidx.compose.material.icons.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
 import dev.teogor.ceres.framework.core.Activity
-import dev.teogor.ceres.framework.core.app.BaseActions
-import dev.teogor.ceres.framework.core.app.CeresAppState
+import dev.teogor.ceres.framework.core.beta.NavGraphOptions
 import dev.teogor.ceres.framework.core.depcreated.menu.MenuScope
 import dev.teogor.ceres.framework.core.depcreated.menu.MenuTitle
 import dev.teogor.ceres.framework.core.depcreated.menu.menu
@@ -41,7 +38,7 @@ import dev.teogor.ceres.framework.core.depcreated.menu.menuItem
 import dev.teogor.ceres.framework.core.depcreated.menu.menuTop
 import dev.teogor.ceres.framework.core.depcreated.menu.menuUserData
 import dev.teogor.ceres.framework.core.depcreated.menu.menuUserId
-import dev.teogor.ceres.navigation.NavHost
+import dev.teogor.ceres.navigation.ApplyNavHost
 import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
 
 @AndroidEntryPoint
@@ -51,23 +48,7 @@ class MainActivity : Activity() {
     get() = super.topLevelDestinations
 
   @Composable
-  override fun Content(
-    windowSizeClass: WindowSizeClass,
-    ceresAppState: CeresAppState,
-    baseActions: BaseActions,
-    padding: PaddingValues,
-  ) {
-    super.Content(windowSizeClass, ceresAppState, baseActions, padding)
-
-    NavHost(
-      modifier = Modifier.padding(
-        bottom = padding.calculateBottomPadding(),
-        top = padding.calculateTopPadding(),
-      ),
-      appState = ceresAppState,
-      baseActions = baseActions,
-    )
-  }
+  override fun NavGraphOptions.BuildNavGraph() = ApplyNavHost()
 
   @Composable
   override fun MenuHeader() = MenuTitle(
