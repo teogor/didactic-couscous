@@ -30,6 +30,7 @@ android {
 
 dependencies {
   api(project(":core:network"))
+  api(project(":core:runtime"))
 
   api(project(":data:compose"))
   // required for theme config only

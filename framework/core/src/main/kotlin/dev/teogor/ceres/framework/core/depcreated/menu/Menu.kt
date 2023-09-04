@@ -48,6 +48,7 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.components.rememberImageComponent
 import com.skydoves.landscapist.glide.GlideImage
 import com.skydoves.landscapist.placeholder.thumbnail.ThumbnailPlugin
+import dev.teogor.ceres.core.runtime.AppMetadataManager
 import dev.teogor.ceres.data.compose.rememberPreference
 import dev.teogor.ceres.data.datastore.common.getPrivacyFormattedValue
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
@@ -57,6 +58,7 @@ import dev.teogor.ceres.ui.designsystem.Surface
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.foundation.clickableSingle
+import dev.teogor.ceres.ui.foundation.lib.resources.Symbols
 import dev.teogor.ceres.ui.foundation.withTouchFeedback
 import dev.teogor.ceres.ui.theme.MaterialTheme
 import dev.teogor.ceres.ui.theme.surfaceColorAtElevation
@@ -423,23 +425,23 @@ private fun MenuFooterItem(
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-    // Text(
-    //   modifier = Modifier.padding(vertical = 0.dp),
-    //   text = "${Symbols.COPYRIGHT} $currentYear $licenseHolder. All rights reserved.",
-    //   fontSize = 10.sp,
-    //   color = MaterialTheme.colorScheme.onSurface,
-    // )
-    // val versionContent = if (AppUtils.isDebuggable) {
-    //   "v${AppUtils.versionName} [debug]"
-    // } else {
-    //   "v${AppUtils.versionName}"
-    // }
-    // Text(
-    //   modifier = Modifier.padding(vertical = 0.dp),
-    //   text = versionContent,
-    //   fontSize = 10.sp,
-    //   color = MaterialTheme.colorScheme.onSurface,
-    // )
+    Text(
+      modifier = Modifier.padding(vertical = 0.dp),
+      text = "${Symbols.COPYRIGHT} $currentYear $licenseHolder. All rights reserved.",
+      fontSize = 10.sp,
+      color = MaterialTheme.colorScheme.onSurface,
+    )
+    val versionContent = if (AppMetadataManager.isDebuggable) {
+      "v${AppMetadataManager.versionName} [debug]"
+    } else {
+      "v${AppMetadataManager.versionName}"
+    }
+    Text(
+      modifier = Modifier.padding(vertical = 0.dp),
+      text = versionContent,
+      fontSize = 10.sp,
+      color = MaterialTheme.colorScheme.onSurface,
+    )
   }
 }
 
