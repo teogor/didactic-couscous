@@ -13,17 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.jacoco")
-}
 
-android {
-  namespace = "dev.teogor.ceres.data.database"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
+package dev.teogor.ceres.framework.core
+
+import android.app.Application
+import dev.teogor.ceres.data.datastore.defaults.ThemeConfig
+import dev.teogor.ceres.framework.core.model.ThemeBuilder
+
+open class Application : Application() {
+
+  open val themeBuilder: ThemeBuilder = ThemeBuilder(
+    themeSeed = "#0B57D0",
+  )
+
+  override fun onCreate() {
+    super.onCreate()
+
+    configureTheme()
   }
-}
 
-dependencies {
+  private fun configureTheme() {
+    with(ThemeConfig) {
+      seedHex = themeBuilder.themeSeed
+    }
+  }
 }

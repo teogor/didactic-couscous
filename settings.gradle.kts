@@ -36,6 +36,7 @@ include(":backup:core")
 include(":backup:ui")
 
 // Data
+include(":data:compose")
 include(":data:database")
 include(":data:datastore")
 

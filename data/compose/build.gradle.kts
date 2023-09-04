@@ -15,15 +15,20 @@
  */
 plugins {
   id("ceres.android.library")
+  id("ceres.android.library.compose")
   id("ceres.android.library.jacoco")
 }
 
 android {
-  namespace = "dev.teogor.ceres.data.database"
+  namespace = "dev.teogor.ceres.data.compose"
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
 
 dependencies {
+  api(project(":data:database"))
+  api(project(":data:datastore"))
+
+  implementation(libs.androidx.compose.foundation)
 }

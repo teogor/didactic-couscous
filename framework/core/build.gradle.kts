@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 plugins {
-  id("ceres.android.feature")
+  id("ceres.android.library")
   id("ceres.android.library.compose")
   id("ceres.android.library.jacoco")
   id("ceres.android.hilt")
@@ -22,11 +22,18 @@ plugins {
 }
 
 android {
-  namespace = "dev.teogor.ceres"
+  namespace = "dev.teogor.ceres.framework.core"
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
 
 dependencies {
+  api(project(":data:compose"))
+  // required for theme config only
+  api(project(":data:datastore"))
+
+  api(project(":navigation:core"))
+
+  implementation(libs.androidx.activity.compose)
 }
