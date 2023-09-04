@@ -45,7 +45,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.ui.theme.core.CeresTheme
+import dev.teogor.ceres.ui.theme.core.Theme
 import dev.teogor.ceres.ui.theme.MaterialTheme
 import kotlinx.coroutines.launch
 
@@ -148,7 +148,7 @@ fun CeresOverlayLoadingWheel(
 @ThemePreviews
 @Composable
 fun CeresLoadingWheelPreview() {
-  CeresTheme {
+  Theme {
     Surface {
       CeresLoadingWheel(contentDesc = "LoadingWheel")
     }
@@ -158,7 +158,7 @@ fun CeresLoadingWheelPreview() {
 @ThemePreviews
 @Composable
 fun CeresOverlayLoadingWheelPreview() {
-  CeresTheme {
+  Theme {
     Surface {
       CeresOverlayLoadingWheel(contentDesc = "LoadingWheel")
     }

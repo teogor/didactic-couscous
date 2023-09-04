@@ -32,7 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.ui.theme.core.CeresTheme
+import dev.teogor.ceres.ui.theme.core.Theme
 import dev.teogor.ceres.ui.theme.core.GradientColors
 import dev.teogor.ceres.ui.theme.core.LocalBackgroundTheme
 import dev.teogor.ceres.ui.theme.core.LocalGradientColors
@@ -173,7 +173,7 @@ annotation class ThemePreviews
 @ThemePreviews
 @Composable
 fun BackgroundDefault() {
-  CeresTheme(disableDynamicTheming = true) {
+  Theme(disableDynamicTheming = true) {
     CeresBackground(Modifier.size(100.dp), content = {})
   }
 }
@@ -181,7 +181,7 @@ fun BackgroundDefault() {
 @ThemePreviews
 @Composable
 fun BackgroundDynamic() {
-  CeresTheme(disableDynamicTheming = false) {
+  Theme(disableDynamicTheming = false) {
     CeresBackground(Modifier.size(100.dp), content = {})
   }
 }
@@ -189,7 +189,7 @@ fun BackgroundDynamic() {
 @ThemePreviews
 @Composable
 fun BackgroundAndroid() {
-  CeresTheme(androidTheme = true) {
+  Theme(androidTheme = true) {
     CeresBackground(Modifier.size(100.dp), content = {})
   }
 }
@@ -197,7 +197,7 @@ fun BackgroundAndroid() {
 @ThemePreviews
 @Composable
 fun GradientBackgroundDefault() {
-  CeresTheme(disableDynamicTheming = true) {
+  Theme(disableDynamicTheming = true) {
     CeresGradientBackground(Modifier.size(100.dp), content = {})
   }
 }
@@ -205,7 +205,7 @@ fun GradientBackgroundDefault() {
 @ThemePreviews
 @Composable
 fun GradientBackgroundDynamic() {
-  CeresTheme(disableDynamicTheming = false) {
+  Theme(disableDynamicTheming = false) {
     CeresGradientBackground(Modifier.size(100.dp), content = {})
   }
 }
@@ -213,7 +213,7 @@ fun GradientBackgroundDynamic() {
 @ThemePreviews
 @Composable
 fun GradientBackgroundAndroid() {
-  CeresTheme(androidTheme = true) {
+  Theme(androidTheme = true) {
     CeresGradientBackground(Modifier.size(100.dp), content = {})
   }
 }

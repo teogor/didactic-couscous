@@ -36,5 +36,9 @@ dependencies {
   api(libs.androidx.compose.ui.tooling.preview)
   api(libs.androidx.compose.ui.util)
 
+  // *.window
+  api(libs.androidx.core.ktx)
+  api(libs.google.material)
+
   debugApi(libs.androidx.compose.ui.tooling)
 }

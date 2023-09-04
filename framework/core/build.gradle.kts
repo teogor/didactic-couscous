@@ -35,5 +35,11 @@ dependencies {
 
   api(project(":navigation:core"))
 
+  api(project(":ui:designsystem"))
+  api(project(":ui:foundation"))
+  api(project(":ui:theme"))
+
   implementation(libs.androidx.activity.compose)
+
+  implementation(libs.androidx.core.splashscreen)
 }

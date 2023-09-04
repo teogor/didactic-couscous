@@ -58,7 +58,7 @@ val DarkAndroidBackgroundTheme = BackgroundTheme(color = Color.Black)
  *        supported. This parameter has no effect if [androidTheme] is `true`.
  */
 @Composable
-fun CeresTheme(
+fun Theme(
   darkTheme: Boolean = isSystemInDarkTheme(),
   androidTheme: Boolean = false,
   disableDynamicTheming: Boolean = false,
