@@ -51,7 +51,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
-import dev.teogor.ceres.core.designsystem.ui.withSound
+import dev.teogor.ceres.ui.foundation.withTouchFeedback
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
 // todo refactor toolbar file structure
@@ -124,7 +124,7 @@ fun Toolbar(
       ) {
         if (showBackButton) {
           IconButton(
-            onClick = onBackClicked.withSound(LocalContext.current),
+            onClick = onBackClicked.withTouchFeedback(LocalContext.current),
             modifier = Modifier
               .align(Alignment.CenterStart)
               .padding(start = 4.dp)
@@ -155,7 +155,7 @@ fun Toolbar(
         ) {
           buttons.forEach {
             IconButton(
-              onClick = it.onClick.withSound(LocalContext.current),
+              onClick = it.onClick.withTouchFeedback(LocalContext.current),
               modifier = Modifier.size(48.dp),
             ) {
               if (it.icon.image2 == null) {
@@ -183,7 +183,7 @@ fun Toolbar(
           }
           if (showEditButton) {
             IconButton(
-              onClick = onEditClicked.withSound(LocalContext.current),
+              onClick = onEditClicked.withTouchFeedback(LocalContext.current),
               modifier = Modifier.size(48.dp),
             ) {
               Icon(
@@ -208,7 +208,7 @@ fun Toolbar(
           if (showDropDownMenu && dropDownItems.isNotEmpty()) {
             var expanded by remember { mutableStateOf(false) }
             IconButton(
-              onClick = { expanded = true }.withSound(LocalContext.current),
+              onClick = { expanded = true }.withTouchFeedback(LocalContext.current),
               modifier = Modifier.size(48.dp),
             ) {
               Icon(
@@ -233,7 +233,7 @@ fun Toolbar(
                   onClick = {
                     expanded = false
                     it.onClick()
-                  }.withSound(LocalContext.current),
+                  }.withTouchFeedback(LocalContext.current),
                   text = {
                     Text(
                       text = it.label,

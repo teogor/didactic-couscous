@@ -21,7 +21,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple.rememberRipple
@@ -31,15 +30,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.ui.designsystem.color.ColorBar
-import dev.teogor.ceres.ui.designsystem.color.ColorBarStyle
-import dev.teogor.ceres.core.designsystem.foundation.clickable
-import dev.teogor.ceres.ui.theme.core.SurfaceOverlay
-import dev.teogor.ceres.core.designsystem.ui.addSound
+import dev.teogor.ceres.ui.foundation.applyTouchFeedback
+import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
+import dev.teogor.ceres.ui.theme.core.SurfaceOverlay
 
 @Composable
 fun ElementView(
@@ -69,7 +65,7 @@ fun ElementView(
       .clickable(
         enabled = enabled,
         onClick = {
-          addSound()
+          applyTouchFeedback()
           if (showSwitch) {
             onCheckedChange(!isChecked)
           } else {
@@ -110,51 +106,11 @@ fun ElementView(
         Switch(
           checked = isChecked,
           onCheckedChange = {
-            addSound()
+            applyTouchFeedback()
             onCheckedChange(it)
           },
         )
       }
-    }
-  }
-}
-
-@Composable
-fun ElementViewWithColorBar(
-  title: String = "",
-  subtitle: String = "",
-  onClick: () -> Unit = {},
-  colorBarEnabled: Boolean = true,
-  enabled: Boolean = true,
-  colorBarStyle: ColorBarStyle = ColorBarStyle(),
-  colors: List<Color> = listOf(Color.Blue, Color.Yellow, Color.Red),
-  onHsvColorChanged: (Float) -> Unit = {},
-  onColorChanged: (String) -> Unit = {},
-  initialColor: Color = colors.first(),
-  modifier: Modifier = Modifier,
-) {
-  ElementView(
-    title = title,
-    subtitle = subtitle,
-    onClick = onClick,
-    showSwitch = false,
-    modifier = modifier,
-    enabled = enabled,
-  ) {
-    if (colorBarEnabled) {
-      ColorBar(
-        modifier = Modifier
-          .fillMaxWidth()
-          .padding(top = 14.dp)
-          .padding(horizontal = 8.dp)
-          .height(10.dp),
-        style = colorBarStyle,
-        colors = colors,
-        onHsvColorChanged = onHsvColorChanged,
-        onColorChanged = onColorChanged,
-        initialColor = initialColor,
-        enabled = enabled,
-      )
     }
   }
 }

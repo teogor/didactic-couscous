@@ -16,6 +16,41 @@
 
 package dev.teogor.ceres
 
-import android.app.Activity
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import dagger.hilt.android.AndroidEntryPoint
+import dev.teogor.ceres.framework.core.Activity
+import dev.teogor.ceres.framework.core.app.BaseActions
+import dev.teogor.ceres.framework.core.app.CeresAppState
+import dev.teogor.ceres.navigation.StatsNavHost
+import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
 
-class MainActivity : Activity()
+@AndroidEntryPoint
+class MainActivity : Activity() {
+
+  override val topLevelDestinations: List<TopLevelDestination>
+    get() = super.topLevelDestinations
+
+  @Composable
+  override fun Content(
+    windowSizeClass: WindowSizeClass,
+    ceresAppState: CeresAppState,
+    baseActions: BaseActions,
+    padding: PaddingValues
+  ) {
+    super.Content(windowSizeClass, ceresAppState, baseActions, padding)
+
+    StatsNavHost(
+      modifier = Modifier.padding(
+        bottom = padding.calculateBottomPadding(),
+        top = padding.calculateTopPadding(),
+      ),
+      appState = ceresAppState,
+      baseActions = baseActions,
+    )
+  }
+
+}

@@ -58,7 +58,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import dev.teogor.ceres.ui.designsystem.tokens.SwitchTokens
-import dev.teogor.ceres.core.designsystem.ui.addSound
+import dev.teogor.ceres.ui.foundation.applyTouchFeedback
 import dev.teogor.ceres.ui.theme.toColor
 import dev.teogor.ceres.ui.theme.toShape
 import kotlinx.coroutines.launch
@@ -112,9 +112,8 @@ fun Switch(
     Modifier.toggleable(
       value = checked,
       onValueChange = {
-        // todo audio sound
+        applyTouchFeedback()
         onCheckedChange(it)
-        addSound()
       },
       enabled = enabled,
       role = Role.Switch,

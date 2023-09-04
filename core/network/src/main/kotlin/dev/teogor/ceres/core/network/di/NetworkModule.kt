@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-}
 
-android {
-  namespace = "dev.teogor.ceres.core.network"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres.core.network.di
 
-dependencies {
-  implementation(libs.kotlinx.coroutines.android)
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dev.teogor.ceres.core.network.ConnectivityManagerNetworkMonitor
+import dev.teogor.ceres.core.network.NetworkMonitor
+
+@Module
+@InstallIn(SingletonComponent::class)
+interface NetworkModule {
+  @Binds
+  fun bindsNetworkMonitor(
+    networkMonitor: ConnectivityManagerNetworkMonitor,
+  ): NetworkMonitor
 }

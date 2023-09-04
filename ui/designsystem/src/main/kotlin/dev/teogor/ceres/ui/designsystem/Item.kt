@@ -39,9 +39,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.teogor.ceres.core.designsystem.foundation.clickable
-import dev.teogor.ceres.ui.theme.core.SurfaceOverlay
+import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
+import dev.teogor.ceres.ui.theme.core.SurfaceOverlay
 
 /**
  * Composable item with an icon and text.

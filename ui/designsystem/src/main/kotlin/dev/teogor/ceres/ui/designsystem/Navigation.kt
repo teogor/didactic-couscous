@@ -29,9 +29,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import dev.teogor.ceres.ui.designsystem.tokens.NavigationBarTokens
 import dev.teogor.ceres.ui.theme.MaterialTheme
 import dev.teogor.ceres.ui.theme.toColor
-import dev.teogor.ceres.ui.theme.tokens.NavigationBarTokens
 
 /**
  * Ceres navigation bar item with icon and label content slots. Wraps Material 3

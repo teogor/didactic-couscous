@@ -13,19 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-}
 
-android {
-  namespace = "dev.teogor.ceres.core.network"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres
 
-dependencies {
-  implementation(libs.kotlinx.coroutines.android)
+import dagger.hilt.android.HiltAndroidApp
+import dev.teogor.ceres.framework.core.Application
+
+@HiltAndroidApp
+class Application : Application() {
+
 }

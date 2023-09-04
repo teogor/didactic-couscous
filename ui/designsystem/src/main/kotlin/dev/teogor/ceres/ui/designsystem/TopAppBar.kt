@@ -33,7 +33,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import dev.teogor.ceres.core.designsystem.icon.CeresIcons
+import dev.teogor.ceres.ui.icons.CeresIcons
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
