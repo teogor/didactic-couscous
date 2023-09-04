@@ -13,19 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-  id("kotlinx-serialization")
-}
 
-android {
-  namespace = "dev.teogor.ceres.data.database"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
+package dev.teogor.ceres.backup.core.model
+
+data class BackupArchive(
+  val backupBytes: ByteArray,
+) {
+  override fun equals(other: Any?): Boolean {
+    if (this === other) return true
+    if (javaClass != other?.javaClass) return false
+
+    other as BackupArchive
+
+    return backupBytes.contentEquals(other.backupBytes)
   }
-}
 
-dependencies {
+  override fun hashCode(): Int {
+    return backupBytes.contentHashCode()
+  }
 }

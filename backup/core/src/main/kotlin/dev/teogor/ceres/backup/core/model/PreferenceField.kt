@@ -13,19 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.jacoco")
-  id("ceres.android.hilt")
-  id("kotlinx-serialization")
-}
 
-android {
-  namespace = "dev.teogor.ceres.data.database"
-  defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
-  }
-}
+package dev.teogor.ceres.backup.core.model
 
-dependencies {
-}
+import androidx.annotation.Keep
+
+@Keep
+data class PreferenceField(
+  val key: String,
+  val value: Any,
+  val type: String,
+)

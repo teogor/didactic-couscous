@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 plugins {
-  id("ceres.android.feature")
-  id("ceres.android.library.compose")
-  id("ceres.android.library.jacoco")
+  id("ceres.android.library")
   id("ceres.android.hilt")
   id("kotlinx-serialization")
 }
 
 android {
-  namespace = "dev.teogor.ceres"
+  namespace = "dev.teogor.ceres.backup.core"
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
 
 dependencies {
+  api(project(":data:database"))
+  api(project(":data:datastore"))
+
+  implementation(libs.kotlinx.datetime)
+  implementation(libs.kotlinx.serialization.json)
+  implementation(libs.kotlinx.serialization.protobuf)
+  implementation(libs.gson)
 }
