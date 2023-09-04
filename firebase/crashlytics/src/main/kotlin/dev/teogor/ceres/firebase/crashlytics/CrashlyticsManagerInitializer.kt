@@ -19,15 +19,13 @@ package dev.teogor.ceres.firebase.crashlytics
 import android.content.Context
 import androidx.startup.Initializer
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.ktx.Firebase
 
 /**
  * Initializes [FirebaseCrashlytics] using `androidx.startup`.
  */
 class CrashlyticsManagerInitializer : Initializer<Unit> {
   override fun create(context: Context) {
-    val firebaseCrashlytics = Firebase.crashlytics
+    // val firebaseCrashlytics = Firebase.crashlytics
     // val ceresPreferences = ceresPreferences(context)
     // // Get the user ID value
     // ceresPreferences.launch {
@@ -35,7 +33,7 @@ class CrashlyticsManagerInitializer : Initializer<Unit> {
     //   firebaseCrashlytics.setUserId(userId.value)
     //   firebaseCrashlytics.setCrashlyticsCollectionEnabled(true)
     //
-    //   CrashlyticsManager(context)
+      CrashlyticsManager(context)
     // }
   }
 

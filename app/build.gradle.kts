@@ -21,6 +21,7 @@ plugins {
   id("ceres.android.application.compose")
   id("ceres.android.application.flavors")
   id("ceres.android.application.jacoco")
+  id("ceres.android.application.firebase")
   id("ceres.android.hilt")
   id("kotlinx-serialization")
   id("jacoco")
