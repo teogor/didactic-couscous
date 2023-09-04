@@ -46,8 +46,8 @@ import dev.teogor.ceres.firebase.crashlytics.CrashInfoLegacy
 import dev.teogor.ceres.firebase.crashlytics.CrashlyticsHelper
 import dev.teogor.ceres.firebase.crashlytics.LocalCrashlyticsHelper
 import dev.teogor.ceres.framework.core.app.CeresApp
+import dev.teogor.ceres.framework.core.beta.MenuConfig
 import dev.teogor.ceres.framework.core.beta.NavGraphOptions
-import dev.teogor.ceres.framework.core.depcreated.menu.MenuScope
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.NavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
@@ -82,16 +82,13 @@ open class Activity : ComponentActivity() {
 
   open val topLevelDestinations: List<TopLevelDestination> = emptyList()
 
-  open fun handleUriVariants(uri: Uri): ScreenRoute? {
-    return null
-  }
+  open fun handleUriVariants(uri: Uri): ScreenRoute? = null
 
   @Composable
-  open fun MenuHeader() = Unit
+  open fun NavGraphOptions.BuildNavGraph() = Unit
 
-  // keep the same structure as Menu Header
-  @Suppress("FunctionName")
-  open fun MenuSheet(menuScope: MenuScope) = Unit
+  @Composable
+  open fun MenuConfig.buildMenu() = this
 
   /**
    *
@@ -247,15 +244,17 @@ open class Activity : ComponentActivity() {
             hasCrashed = false
           }
 
+          val menuConfig = MenuConfig().apply { buildMenu() }
+
           CeresApp(
             windowSizeClass = calculateWindowSizeClass(this),
             networkMonitor = networkMonitor,
             topLevelDestinations = topLevelDestinations,
             menuSheetContent = {
-              MenuSheet(this)
+              menuConfig.menuSheet?.invoke(this)
             },
             headerContent = {
-              MenuHeader()
+              menuConfig.header?.invoke()
             },
           ) { windowSizeClass, ceresAppState, baseActions, padding ->
             NavGraphOptions(
@@ -271,11 +270,6 @@ open class Activity : ComponentActivity() {
 
     handleIntent(intent)
   }
-
-  // todo beta
-  @Composable
-  open fun NavGraphOptions.BuildNavGraph() = Unit
-
 
   private fun handleSplashScreen(splashScreen: SplashScreen) {
     // Keep the splash screen on-screen until the UI state is loaded. This condition is
