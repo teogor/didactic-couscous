@@ -28,6 +28,7 @@ import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
 @AndroidEntryPoint
 class MainActivity : Activity() {
 
+  // todo based on the screen we may have different top level destinations
   override val topLevelDestinations: List<TopLevelDestination>
     get() = super.topLevelDestinations
 

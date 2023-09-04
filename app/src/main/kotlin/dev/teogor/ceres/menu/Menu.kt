@@ -20,14 +20,23 @@ import dev.teogor.ceres.framework.core.depcreated.menu.menuItem
 import dev.teogor.ceres.framework.core.depcreated.menu.menuTop
 import dev.teogor.ceres.framework.core.depcreated.menu.menuUserData
 import dev.teogor.ceres.framework.core.depcreated.menu.menuUserId
+import dev.teogor.ceres.navigation.core.LocalNavigationParameters
+import dev.teogor.ceres.navigation.core.ScreenRoute
 
 @Composable
 fun MenuConfig.applyMenuConfig() = apply {
+  val navigationParameters = LocalNavigationParameters.current
+
   header = {
     MenuHeader()
   }
+
   menuSheet = {
-    MenuSheet(this)
+    this.menuSheet(
+      onNavigation = {
+        navigationParameters.screenRoute = it
+      }
+    )
   }
 }
 
@@ -37,13 +46,13 @@ private fun MenuHeader() = MenuTitle(
   title = "Ceres",
 )
 
-private fun MenuSheet(
-  menuScope: MenuScope,
-) = menuScope.menu {
+private fun MenuScope.menuSheet(
+  onNavigation: (ScreenRoute) -> Unit,
+) = menu {
   menuTop {
     menuUserData(
       clickable = {
-        // navigateTo(UserPrefRoute)
+        //  onNavigation(UserPrefRoute)
       },
     )
 
@@ -70,7 +79,7 @@ private fun MenuSheet(
       content = "Settings",
       icon = Icons.Outlined.Settings,
       clickable = {
-        // navigateTo(SettingsRoute)
+        // onNavigation(SettingsRoute)
       },
     )
 
@@ -93,7 +102,7 @@ private fun MenuSheet(
       content = "About",
       icon = Icons.Outlined.Details,
       clickable = {
-        // navigateTo(AboutScreenRoute)
+        // onNavigation(AboutScreenRoute)
       },
     )
 
