@@ -16,7 +16,6 @@ class CeresModulePlugin : Plugin<Project> {
 
       // Configure the "ceresModule" block based on the extension properties
       project.afterEvaluate {
-        val groupId = ceresModuleExtension.groupId
         val artifactIdPrefix = ceresModuleExtension.artifactIdPrefix!!
         val version = ceresModuleExtension.version!!
 
