@@ -27,7 +27,7 @@ object HomeScreenConfig : ScreenRoute {
   override val route: String = homeNavigationRoute
 }
 
-fun NavGraphBuilder.homeScreen(
+fun NavGraphBuilder.homeScreenNav(
   baseActions: BaseActions,
 ) = screenNav(homeNavigationRoute) {
   HomeRoute(
