@@ -32,7 +32,7 @@ import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
 import dev.teogor.ceres.screen.builder.compose.ColumnLayout
 import dev.teogor.ceres.screen.builder.header
-import dev.teogor.ceres.screen.builder.item
+import dev.teogor.ceres.screen.builder.advancedView
 import dev.teogor.ceres.screen.builder.segmentedButtons
 import dev.teogor.ceres.screen.core.ColumnScreen
 import dev.teogor.ceres.ui.designsystem.Text
@@ -103,7 +103,7 @@ private fun ClockConfigScreen() = ColumnLayout(
   }
 
   repeat(20) {
-    item(
+    advancedView(
       title = "Timer Duration",
       subtitle = "Adjust the duration of the timer",
       subtitleColor = ColorSchemeKeyTokens.Error,

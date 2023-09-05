@@ -19,7 +19,7 @@ package dev.teogor.ceres.screen.builder.model
 import androidx.compose.ui.graphics.vector.ImageVector
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
-class ItemConfigView(
+class AdvancedViewBuilder(
   val title: String,
   val subtitle: String?,
   val subtitleColor: ColorSchemeKeyTokens?,

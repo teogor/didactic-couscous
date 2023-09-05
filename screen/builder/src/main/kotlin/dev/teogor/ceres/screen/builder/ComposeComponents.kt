@@ -24,19 +24,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import dev.teogor.ceres.screen.builder.compose.SegmentedButton
-import dev.teogor.ceres.screen.builder.compose.View
-import dev.teogor.ceres.screen.builder.model.ConfigScreenDefaultView
-import dev.teogor.ceres.screen.builder.model.CustomConfigView
+import dev.teogor.ceres.screen.builder.compose.SimpleView
+import dev.teogor.ceres.screen.builder.model.CustomViewBuilder
+import dev.teogor.ceres.screen.builder.model.SimpleViewBuilder
 import dev.teogor.ceres.ui.designsystem.Switch
 
-internal fun BuilderListScope.aboutItem(
-  item: ConfigScreenDefaultView,
+internal fun BuilderListScope.simpleView(
+  item: SimpleViewBuilder,
 ) = item {
-  View(item)
+  SimpleView(item)
 }
 
-internal fun BuilderListScope.customItem(
-  item: CustomConfigView,
+internal fun BuilderListScope.customView(
+  item: CustomViewBuilder,
 ) = item {
   item.content()
 }

@@ -16,8 +16,11 @@
 
 package dev.teogor.ceres.screen.builder.model
 
-import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
 
-class CustomConfigView(
-  val content: @Composable () -> Unit,
+class SimpleViewBuilder(
+  internal val title: String,
+  internal val description: String?,
+  internal val icon: ImageVector?,
+  internal val clickable: (() -> Unit)?,
 ) : ConfigScreenView()

@@ -15,7 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.teogor.ceres.screen.builder.model.ItemConfigView
+import dev.teogor.ceres.screen.builder.endPadding
+import dev.teogor.ceres.screen.builder.horizontalNoIconPadding
+import dev.teogor.ceres.screen.builder.horizontalPadding
+import dev.teogor.ceres.screen.builder.iconSize
+import dev.teogor.ceres.screen.builder.model.AdvancedViewBuilder
+import dev.teogor.ceres.screen.builder.verticalPadding
 import dev.teogor.ceres.ui.designsystem.Switch
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
@@ -23,8 +28,8 @@ import dev.teogor.ceres.ui.theme.MaterialTheme
 import dev.teogor.ceres.ui.theme.toColor
 
 @Composable
-fun StandardView(
-  config: ItemConfigView,
+fun AdvancedView(
+  config: AdvancedViewBuilder,
 ) {
   Row(
     modifier = Modifier

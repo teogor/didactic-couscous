@@ -19,16 +19,14 @@ package dev.teogor.ceres.screen.builder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import dev.teogor.ceres.screen.builder.compose.AdvancedView
 import dev.teogor.ceres.screen.builder.compose.HeaderView
-import dev.teogor.ceres.screen.builder.compose.StandardView
-import dev.teogor.ceres.screen.builder.compose.View
-import dev.teogor.ceres.screen.builder.compose.headerItem
-import dev.teogor.ceres.screen.builder.compose.standardItem
-import dev.teogor.ceres.screen.builder.model.ConfigScreenDefaultView
+import dev.teogor.ceres.screen.builder.compose.SimpleView
+import dev.teogor.ceres.screen.builder.model.AdvancedViewBuilder
 import dev.teogor.ceres.screen.builder.model.ConfigScreenView
-import dev.teogor.ceres.screen.builder.model.CustomConfigView
-import dev.teogor.ceres.screen.builder.model.HeaderConfigView
-import dev.teogor.ceres.screen.builder.model.ItemConfigView
+import dev.teogor.ceres.screen.builder.model.CustomViewBuilder
+import dev.teogor.ceres.screen.builder.model.HeaderViewBuilder
+import dev.teogor.ceres.screen.builder.model.SimpleViewBuilder
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
@@ -60,10 +58,10 @@ fun BuilderListScope.screenItems(block: MutableList<ConfigScreenView>.() -> Unit
   }.let { about ->
     about.items.forEach { item ->
       when (item) {
-        is ConfigScreenDefaultView -> aboutItem(item)
-        is CustomConfigView -> customItem(item)
-        is HeaderConfigView -> headerItem(item)
-        is ItemConfigView -> standardItem(item)
+        is HeaderViewBuilder -> headerItem(item)
+        is SimpleViewBuilder -> simpleView(item)
+        is AdvancedViewBuilder -> advancedView(item)
+        is CustomViewBuilder -> customView(item)
       }
     }
   }
@@ -78,20 +76,20 @@ fun BuilderColumnScope.ScreenItems(block: MutableList<ConfigScreenView>.() -> Un
   }.let { about ->
     about.items.forEach { item ->
       when (item) {
-        is ConfigScreenDefaultView -> View(item)
-        is CustomConfigView -> item.content()
-        is HeaderConfigView -> HeaderView(item)
-        is ItemConfigView -> StandardView(item)
+        is HeaderViewBuilder -> HeaderView(item)
+        is SimpleViewBuilder -> SimpleView(item)
+        is AdvancedViewBuilder -> AdvancedView(item)
+        is CustomViewBuilder -> item.content()
       }
     }
   }
 }
 
-fun MutableList<ConfigScreenView>.customItem(
+fun MutableList<ConfigScreenView>.customView(
   content: @Composable () -> Unit,
 ) {
   add(
-    CustomConfigView(content = content),
+    CustomViewBuilder(content = content),
   )
 }
 
@@ -99,20 +97,20 @@ inline fun MutableList<ConfigScreenView>.header(
   crossinline title: () -> String,
 ) {
   add(
-    HeaderConfigView(title = title()),
+    HeaderViewBuilder(title = title()),
   )
 }
 
-inline fun MutableList<ConfigScreenView>.item(
+inline fun MutableList<ConfigScreenView>.advancedView(
   title: String,
   subtitle: String? = null,
   subtitleColor: ColorSchemeKeyTokens? = null,
   imageVector: ImageVector? = null,
   noinline clickable: (() -> Unit)? = null,
-  crossinline block: ItemConfigView.() -> Unit = {},
+  crossinline block: AdvancedViewBuilder.() -> Unit = {},
 ) {
   add(
-    ItemConfigView(
+    AdvancedViewBuilder(
       title = title,
       subtitle = subtitle,
       subtitleColor = subtitleColor,
@@ -122,7 +120,7 @@ inline fun MutableList<ConfigScreenView>.item(
   )
 }
 
-fun ItemConfigView.segmentedButtons(
+fun AdvancedViewBuilder.segmentedButtons(
   options: List<String>,
   selectedOption: Int? = null,
   onOptionSelected: ((Int) -> Unit)? = null,
@@ -140,17 +138,17 @@ inline fun CategoryConfig.title(
   titleModifier = modifier
 }
 
-fun CategoryConfig.customItem(
+fun CategoryConfig.customView(
   content: @Composable () -> Unit,
 ) {
   elements.add(
-    CustomConfigView(
+    CustomViewBuilder(
       content = content,
     ),
   )
 }
 
-inline fun CategoryConfig.item(
+inline fun CategoryConfig.advancedView(
   noinline predicate: (() -> Boolean)? = null,
   modifier: Modifier = Modifier.clickable {},
   crossinline block: SubcategoryConfig.() -> Unit,
@@ -183,14 +181,14 @@ inline fun SubcategoryConfig.singleLine(crossinline block: () -> Boolean) {
   singleLine = block()
 }
 
-fun MutableList<ConfigScreenView>.aboutItem(
+fun MutableList<ConfigScreenView>.simpleView(
   title: String,
   description: String? = null,
   icon: ImageVector? = null,
   clickable: (() -> Unit)? = null,
 ) {
   add(
-    ConfigScreenDefaultView(
+    SimpleViewBuilder(
       title = title,
       description = description,
       icon = icon,

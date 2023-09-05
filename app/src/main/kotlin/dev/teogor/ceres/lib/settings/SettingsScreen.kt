@@ -24,6 +24,7 @@ import androidx.compose.material.icons.filled.Style
 import androidx.compose.runtime.Composable
 import dev.teogor.ceres.feature.home.HomeScreenConfig
 import dev.teogor.ceres.framework.core.app.BaseActions
+import dev.teogor.ceres.framework.core.app.navigateTo
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.screen.floatingButton
 import dev.teogor.ceres.framework.core.screen.isStatusBarVisible
@@ -35,9 +36,10 @@ import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
+import dev.teogor.ceres.screen.builder.advancedView
 import dev.teogor.ceres.screen.builder.compose.LazyColumnLayout
 import dev.teogor.ceres.screen.builder.header
-import dev.teogor.ceres.screen.builder.item
+import dev.teogor.ceres.screen.builder.simpleView
 import dev.teogor.ceres.screen.core.LazyColumnScreen
 
 @Composable
@@ -70,24 +72,26 @@ internal fun SettingsRoute(
     }
   }
 
-  SettingsLayout()
-  // SettingsScreen(
-  //   clickable = { destination ->
-  //     baseActions.navigateTo(destination)
-  //   },
-  //   developerModeEnabled = false, // developerModePreferences().enabled,
-  // )
+  SettingsLayout(
+    navigateTo = { destination ->
+      baseActions.navigateTo(destination)
+    },
+    developerModeEnabled = true,
+  )
 }
 
 @Composable
-private fun SettingsLayout() = LazyColumnLayout(
+private fun SettingsLayout(
+  navigateTo: (ScreenRoute) -> Unit,
+  developerModeEnabled: Boolean,
+) = LazyColumnLayout(
   screenName = HomeScreenConfig,
 ) {
   header {
     "UI"
   }
 
-  item(
+  advancedView(
     title = "Look & Feel",
     subtitle = "Design & color options",
     imageVector = Icons.Default.Style,
@@ -99,7 +103,7 @@ private fun SettingsLayout() = LazyColumnLayout(
     "System"
   }
 
-  item(
+  advancedView(
     title = "Notification",
     subtitle = "Customize the notification style",
     imageVector = Icons.Default.Notifications,
@@ -107,7 +111,7 @@ private fun SettingsLayout() = LazyColumnLayout(
     },
   )
 
-  item(
+  advancedView(
     title = "Backup & Restore",
     subtitle = "Full backup of your app",
     imageVector = Icons.Default.SettingsBackupRestore,
@@ -115,20 +119,21 @@ private fun SettingsLayout() = LazyColumnLayout(
     },
   )
 
-  item(
+  advancedView(
     title = "Backup & Restore",
     subtitle = "Full backup of your app",
     clickable = {
     },
   )
 
-  item(
-    title = "Backup & Restore",
-    subtitle = "Full backup of your app",
-    imageVector = Icons.Default.SettingsBackupRestore,
-    clickable = {
-    },
-  )
+  if (developerModeEnabled) {
+    simpleView(
+      title = "Developer options",
+      icon = Icons.Default.DeveloperMode,
+      clickable = {
+      },
+    )
+  }
 }
 
 @Composable

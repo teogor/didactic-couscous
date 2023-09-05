@@ -14,15 +14,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.teogor.ceres.screen.builder.model.ConfigScreenDefaultView
+import dev.teogor.ceres.screen.builder.model.SimpleViewBuilder
 import dev.teogor.ceres.screen.builder.utilities.perform
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
 @Composable
-fun View(
-  item: ConfigScreenDefaultView,
+fun SimpleView(
+  item: SimpleViewBuilder,
 ) {
   Row(
     modifier = Modifier

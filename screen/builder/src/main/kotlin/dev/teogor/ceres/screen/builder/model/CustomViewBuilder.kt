@@ -16,6 +16,8 @@
 
 package dev.teogor.ceres.screen.builder.model
 
-class HeaderConfigView(
-  val title: String,
+import androidx.compose.runtime.Composable
+
+class CustomViewBuilder(
+  val content: @Composable () -> Unit,
 ) : ConfigScreenView()

@@ -7,13 +7,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import dev.teogor.ceres.screen.builder.model.HeaderConfigView
+import dev.teogor.ceres.screen.builder.horizontalNoIconPadding
+import dev.teogor.ceres.screen.builder.horizontalPadding
+import dev.teogor.ceres.screen.builder.model.HeaderViewBuilder
+import dev.teogor.ceres.screen.builder.topPadding
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
 @Composable
 fun HeaderView(
-  config: HeaderConfigView,
+  config: HeaderViewBuilder,
 ) {
   Column(
     modifier = Modifier

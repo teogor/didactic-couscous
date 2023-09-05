@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.screen.builder.compose
+package dev.teogor.ceres.screen.builder
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.screen.builder.BuilderListScope
-import dev.teogor.ceres.screen.builder.model.HeaderConfigView
-import dev.teogor.ceres.screen.builder.model.ItemConfigView
+import dev.teogor.ceres.screen.builder.compose.AdvancedView
+import dev.teogor.ceres.screen.builder.compose.HeaderView
+import dev.teogor.ceres.screen.builder.model.HeaderViewBuilder
+import dev.teogor.ceres.screen.builder.model.AdvancedViewBuilder
 
 internal val topPadding: Dp = 16.dp
 internal val endPadding: Dp = 20.dp
@@ -30,14 +31,13 @@ internal val horizontalNoIconPadding: Dp = iconSize + horizontalPadding
 internal val verticalPadding: Dp = 8.dp
 
 internal fun BuilderListScope.headerItem(
-  config: HeaderConfigView,
+  config: HeaderViewBuilder,
 ) = item {
   HeaderView(config)
 }
 
-// todo rename
-internal fun BuilderListScope.standardItem(
-  config: ItemConfigView,
+internal fun BuilderListScope.advancedView(
+  config: AdvancedViewBuilder,
 ) = item {
-  StandardView(config)
+  AdvancedView(config)
 }
