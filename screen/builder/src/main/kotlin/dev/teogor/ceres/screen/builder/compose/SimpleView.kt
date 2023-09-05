@@ -1,3 +1,19 @@
+/*
+ * Copyright 2023 teogor (Teodor Grigor)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dev.teogor.ceres.screen.builder.compose
 
 import androidx.compose.foundation.background
@@ -28,13 +44,13 @@ import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
 import dev.teogor.ceres.ui.theme.toColor
 
-fun addExtraPadding(enabled: Boolean) = if(enabled) 0.dp else 0.dp//9.dp
+fun addExtraPadding(enabled: Boolean) = if (enabled) 0.dp else 0.dp // 9.dp
 
 @Composable
 fun SimpleView(
   item: SimpleViewBuilder,
 ) = with(item) {
-  val hasFilledIconUI = false//Random.nextBoolean()
+  val hasFilledIconUI = false // Random.nextBoolean()
   Row(
     modifier = Modifier
       .fillMaxWidth()
@@ -54,7 +70,7 @@ fun SimpleView(
     },
   ) {
     icon.perform {
-      if(hasFilledIconUI) {
+      if (hasFilledIconUI) {
         Icon(
           imageVector = it,
           contentDescription = title,

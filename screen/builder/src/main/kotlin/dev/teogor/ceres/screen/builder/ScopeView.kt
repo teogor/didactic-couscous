@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.teogor.ceres.screen.builder.compose.AdvancedView
 import dev.teogor.ceres.screen.builder.compose.HeaderView
-import dev.teogor.ceres.screen.builder.model.HeaderViewBuilder
 import dev.teogor.ceres.screen.builder.model.AdvancedViewBuilder
+import dev.teogor.ceres.screen.builder.model.HeaderViewBuilder
 
 internal val topPadding: Dp = 16.dp
 internal val endPadding: Dp = 20.dp
