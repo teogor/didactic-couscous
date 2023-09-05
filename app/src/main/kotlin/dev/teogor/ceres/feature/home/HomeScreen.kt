@@ -17,6 +17,10 @@
 package dev.teogor.ceres.feature.home
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.SettingsBackupRestore
+import androidx.compose.material.icons.filled.Style
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -73,7 +77,8 @@ internal fun HomeRoute(
     }
   }
 
-  ClockConfigScreen()
+  SettingsLayout()
+  // ClockConfigScreen()
   // HomeScreen()
 }
 
@@ -118,5 +123,65 @@ private fun ClockConfigScreen(
       selectedOption = 1,
     )
   }
+
+}
+
+@Composable
+private fun SettingsLayout(
+) = Layout(
+  screenName = HomeScreenConfig,
+) {
+
+  header {
+    "UI"
+  }
+
+  item(
+    title = "Look & Feel",
+    subtitle = "Design & color options",
+    imageVector = Icons.Default.Style,
+    clickable = {
+
+    },
+  )
+
+  header {
+    "System"
+  }
+
+  item(
+    title = "Notification",
+    subtitle = "Customize the notification style",
+    imageVector = Icons.Default.Notifications,
+    clickable = {
+
+    },
+  )
+
+  item(
+    title = "Backup & Restore",
+    subtitle = "Full backup of your app",
+    imageVector = Icons.Default.SettingsBackupRestore,
+    clickable = {
+
+    },
+  )
+
+  item(
+    title = "Backup & Restore",
+    subtitle = "Full backup of your app",
+    clickable = {
+
+    },
+  )
+
+  item(
+    title = "Backup & Restore",
+    subtitle = "Full backup of your app",
+    imageVector = Icons.Default.SettingsBackupRestore,
+    clickable = {
+
+    },
+  )
 
 }

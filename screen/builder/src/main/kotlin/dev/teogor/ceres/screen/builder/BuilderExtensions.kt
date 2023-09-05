@@ -19,6 +19,8 @@ package dev.teogor.ceres.screen.builder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import dev.teogor.ceres.screen.builder.compose.headerItem
+import dev.teogor.ceres.screen.builder.compose.standardItem
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
@@ -37,6 +39,7 @@ class ItemConfigItem(
   val subtitle: String?,
   val subtitleColor: ColorSchemeKeyTokens?,
   val imageVector: ImageVector?,
+  val clickable: (() -> Unit)? = null,
   internal var segmentedOptions: List<String>? = null,
   internal var segmentedSelectedOption: Int? = null,
   internal var segmentedOnOptionSelected: ((Int) -> Unit)? = null,
@@ -78,7 +81,6 @@ fun BuilderListScope.screenItems(block: MutableList<ConfigScreenItem>.() -> Unit
   }.let { about ->
     about.items.forEach { item ->
       when (item) {
-        is CategoryConfig -> categoryItem(item)
         is ConfigScreenDefaultItem -> aboutItem(item)
         is CustomConfigItem -> customItem(item)
         is HeaderConfigItem -> headerItem(item)
@@ -109,6 +111,7 @@ inline fun MutableList<ConfigScreenItem>.item(
     subtitle: String? = null,
     subtitleColor: ColorSchemeKeyTokens? = null,
     imageVector: ImageVector? = null,
+    noinline clickable: (() -> Unit)? = null,
     crossinline block: ItemConfigItem.() -> Unit = {},
 ) {
   add(
@@ -117,6 +120,7 @@ inline fun MutableList<ConfigScreenItem>.item(
       subtitle = subtitle,
       subtitleColor = subtitleColor,
       imageVector = imageVector,
+      clickable = clickable,
     ).apply(block),
   )
 }
