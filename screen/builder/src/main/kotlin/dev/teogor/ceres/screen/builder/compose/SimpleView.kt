@@ -27,15 +27,14 @@ import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
 import dev.teogor.ceres.ui.theme.toColor
-import kotlin.random.Random
 
-fun addExtraPadding(enabled: Boolean) = if(enabled) 0.dp else 9.dp
+fun addExtraPadding(enabled: Boolean) = if(enabled) 0.dp else 0.dp//9.dp
 
 @Composable
 fun SimpleView(
   item: SimpleViewBuilder,
 ) = with(item) {
-  val hasFilledIconUI = Random.nextBoolean()
+  val hasFilledIconUI = false//Random.nextBoolean()
   Row(
     modifier = Modifier
       .fillMaxWidth()
