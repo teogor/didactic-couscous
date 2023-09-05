@@ -16,19 +16,10 @@
 
 package dev.teogor.ceres.screen.builder
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.tooling.preview.Preview
 import dev.teogor.ceres.screen.builder.compose.CustomView
-import dev.teogor.ceres.screen.builder.compose.SegmentedButton
 import dev.teogor.ceres.screen.builder.compose.SimpleView
 import dev.teogor.ceres.screen.builder.model.CustomViewBuilder
 import dev.teogor.ceres.screen.builder.model.SimpleViewBuilder
-import dev.teogor.ceres.ui.designsystem.Switch
 
 internal fun BuilderListScope.simpleView(
   item: SimpleViewBuilder,
@@ -40,29 +31,4 @@ internal fun BuilderListScope.customView(
   item: CustomViewBuilder,
 ) = item {
   CustomView(item)
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SegmentedButtonPreview() {
-  var selectedOption by remember { mutableIntStateOf(0) }
-  Column {
-    SegmentedButton(
-      options = listOf("Auto", "On", "Off"),
-      selectedOption = selectedOption,
-      onOptionSelected = { option -> selectedOption = option },
-    )
-
-    Switch(
-      checked = true,
-      onCheckedChange = {
-      },
-    )
-
-    Switch(
-      checked = false,
-      onCheckedChange = {
-      },
-    )
-  }
 }
