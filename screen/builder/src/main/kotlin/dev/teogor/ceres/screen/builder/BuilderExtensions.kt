@@ -131,6 +131,14 @@ fun AdvancedViewBuilder.segmentedButtons(
   this.segmentedOnOptionSelected = onOptionSelected
 }
 
+fun AdvancedViewBuilder.switchButton(
+  switchToggled: Boolean,
+  onSwitchToggled: ((Boolean) -> Unit)? = null,
+) {
+  this.switchToggled = switchToggled
+  this.onSwitchToggled = onSwitchToggled
+}
+
 inline fun CategoryConfig.title(
   modifier: Modifier = Modifier,
   crossinline content: () -> String,

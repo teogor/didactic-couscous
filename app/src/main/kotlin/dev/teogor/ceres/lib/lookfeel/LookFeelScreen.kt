@@ -17,10 +17,18 @@
 package dev.teogor.ceres.lib.lookfeel
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.SettingsBackupRestore
+import androidx.compose.material.icons.filled.Audiotrack
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.ColorLens
+import androidx.compose.material.icons.filled.InvertColors
 import androidx.compose.material.icons.filled.Style
+import androidx.compose.material.icons.filled.Vibration
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import dev.teogor.ceres.data.datastore.defaults.AppTheme
+import dev.teogor.ceres.data.datastore.defaults.CeresPreferences
+import dev.teogor.ceres.data.datastore.defaults.JustBlackTheme
+import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
 import dev.teogor.ceres.feature.home.HomeScreenConfig
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.navigateTo
@@ -38,9 +46,8 @@ import dev.teogor.ceres.screen.builder.advancedView
 import dev.teogor.ceres.screen.builder.compose.LazyColumnLayout
 import dev.teogor.ceres.screen.builder.header
 import dev.teogor.ceres.screen.builder.segmentedButtons
-import dev.teogor.ceres.screen.builder.simpleView
+import dev.teogor.ceres.screen.builder.switchButton
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
-import kotlin.random.Random
 
 @Composable
 internal fun LookAndFeelRoute(
@@ -72,37 +79,82 @@ internal fun LookAndFeelRoute(
     }
   }
 
+  val ceresPreferences = remember {
+    ceresPreferences()
+  }
+
   LookAndFeelLayout(
     navigateTo = { destination ->
       baseActions.navigateTo(destination)
     },
+    ceresPreferences = ceresPreferences,
   )
 }
 
 @Composable
 private fun LookAndFeelLayout(
   navigateTo: (ScreenRoute) -> Unit,
+  ceresPreferences: CeresPreferences,
 ) = LazyColumnLayout(
   screenName = HomeScreenConfig,
 ) {
+
   header {
     "Appearance"
   }
 
   advancedView(
-    title = "App Theme",
-    subtitle = "Change app theme colour",
+    title = "App theme",
+    subtitle = "Try another look",
     icon = Icons.Default.Style,
-    clickable = {
-    },
   ) {
-    val options = listOf("Auto", "White", "Dark")
+    val options = listOf("Auto", "Light", "Dark")
     segmentedButtons(
       options = options,
-      selectedOption = Random.nextInt(options.size),
+      selectedOption = when (ceresPreferences.appTheme) {
+        AppTheme.FollowSystem -> 0
+        AppTheme.ClearlyWhite -> 1
+        AppTheme.KindaDark -> 2
+      },
       onOptionSelected = { option ->
+        val appTheme = when (option) {
+          1 -> AppTheme.ClearlyWhite
+          2 -> AppTheme.KindaDark
+          0 -> AppTheme.FollowSystem
+          else -> AppTheme.FollowSystem
+        }
+        ceresPreferences.appTheme = appTheme
+      },
+    )
+  }
 
-      }
+  if (ceresPreferences.disableDynamicTheming) {
+    advancedView(
+      title = "App color theme",
+      subtitle = "Try another color",
+      icon = Icons.Default.ColorLens,
+    ) {
+      val options = listOf("Blue", "Red", "Green")
+      segmentedButtons(
+        options = options,
+        selectedOption = 0,
+        onOptionSelected = { option ->
+
+        },
+      )
+    }
+  }
+
+  advancedView(
+    title = "Dynamic Theming",
+    subtitle = "Use Android's color style",
+    icon = Icons.Default.AutoAwesome,
+  ) {
+    switchButton(
+      switchToggled = !ceresPreferences.disableDynamicTheming,
+      onSwitchToggled = { isToggled ->
+        ceresPreferences.disableDynamicTheming = !isToggled
+      },
     )
   }
 
@@ -110,61 +162,61 @@ private fun LookAndFeelLayout(
     title = "Just Black",
     subtitle = "If set on something else then `Off` it will override the App Theme value.",
     subtitleColor = ColorSchemeKeyTokens.Error,
-    icon = Icons.Default.Style,
+    icon = Icons.Default.InvertColors,
     clickable = {
     },
   ) {
-    val options = listOf("Auto", "On", "Off")
+    val options = listOf("On", "Off", "Auto")
     segmentedButtons(
       options = options,
-      selectedOption = 2,
+      selectedOption = when (ceresPreferences.justBlack) {
+        JustBlackTheme.Off -> 1
+        JustBlackTheme.AlwaysOn -> 0
+        JustBlackTheme.FollowSystem -> 2
+      },
       onOptionSelected = { option ->
-
-      }
-    )
-  }
-
-  advancedView(
-    title = "Dynamic Theming",
-    icon = Icons.Default.Style,
-    clickable = {
-    },
-  ) {
-    
-    val options = listOf("Auto", "On", "Off")
-    segmentedButtons(
-      options = options,
-      selectedOption = 2,
-      onOptionSelected = { option ->
-
-      }
+        val justBlackTheme = when (option) {
+          0 -> JustBlackTheme.AlwaysOn
+          1 -> JustBlackTheme.Off
+          2 -> JustBlackTheme.FollowSystem
+          else -> JustBlackTheme.FollowSystem
+        }
+        ceresPreferences.justBlack = justBlackTheme
+      },
     )
   }
 
   header {
-    "System"
+    "Feedback"
   }
 
-  simpleView(
-    title = "Notification",
-    subtitle = "Customize the notification style",
-    icon = Icons.Default.Notifications,
+  advancedView(
+    title = "Audio Feedback",
+    subtitle = "Use Android's color style",
+    icon = Icons.Default.Audiotrack,
     clickable = {
-    },
-  )
 
-  simpleView(
-    title = "Backup & Restore",
-    subtitle = "Full backup of your app",
-    icon = Icons.Default.SettingsBackupRestore,
-    clickable = {
     },
-  )
+  ) {
+    switchButton(
+      switchToggled = !ceresPreferences.disableAudioFeedback,
+      onSwitchToggled = { isToggled ->
+        ceresPreferences.disableAudioFeedback = !isToggled
+      },
+    )
+  }
 
-  simpleView(
-    title = "Backup & Restore",
-    subtitle = "Full backup of your app",
+  advancedView(
+    title = "Vibration Feedback",
+    icon = Icons.Default.Vibration,
     clickable = {
     },
-  )
+  ) {
+    switchButton(
+      switchToggled = !ceresPreferences.disableVibrationFeedback,
+      onSwitchToggled = { isToggled ->
+        ceresPreferences.disableVibrationFeedback = !isToggled
+      },
+    )
+  }
 }

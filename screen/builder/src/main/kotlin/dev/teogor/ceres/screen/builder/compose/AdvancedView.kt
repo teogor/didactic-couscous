@@ -23,8 +23,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -47,13 +49,33 @@ import dev.teogor.ceres.ui.theme.toColor
 fun AdvancedView(
   item: AdvancedViewBuilder,
 ) = with(item) {
+  val hasSwitch = switchToggled != null
+  var isSwitchToggled by remember(switchToggled) {
+    if (hasSwitch) {
+      mutableStateOf(switchToggled!!)
+    } else {
+      mutableStateOf(false)
+    }
+  }
+  LaunchedEffect(switchToggled, isSwitchToggled) {
+    if(hasSwitch) {
+      if(isSwitchToggled != switchToggled!!) {
+        onSwitchToggled?.invoke(isSwitchToggled)
+      }
+    }
+  }
   Row(
     modifier = Modifier
       .fillMaxWidth()
       .clickable(
-        enabled = clickable != null,
+        enabled = clickable != null || hasSwitch,
       ) {
-        clickable?.invoke()
+        // todo add vertical divider like Samsung switch option
+        if (hasSwitch) {
+          isSwitchToggled = !isSwitchToggled
+        } else {
+          clickable?.invoke()
+        }
       }
       .padding(
         top = verticalPadding,
@@ -81,26 +103,44 @@ fun AdvancedView(
         },
       ),
     ) {
-      Text(
-        text = title,
-        fontSize = 15.sp,
-        textAlign = TextAlign.Start,
-        color = MaterialTheme.colorScheme.onSurface,
-      )
-      subtitle?.let { subtitle ->
-        val subtitleTextColor = subtitleColor?.toColor() ?: MaterialTheme.colorScheme.onSurface
-        Text(
-          modifier = Modifier.padding(
-            top = 1.dp,
-            end = endPadding,
-          ),
-          text = subtitle,
-          fontSize = 13.sp,
-          lineHeight = 16.sp,
-          textAlign = TextAlign.Start,
-          color = subtitleTextColor,
-        )
+      Row(
+        modifier = Modifier.fillMaxWidth(),
+      ) {
+        Column(
+          modifier = Modifier.weight(1f),
+        ) {
+          Text(
+            text = title,
+            fontSize = 15.sp,
+            textAlign = TextAlign.Start,
+            color = MaterialTheme.colorScheme.onSurface,
+          )
+          subtitle?.let { subtitle ->
+            val subtitleTextColor = subtitleColor?.toColor() ?: MaterialTheme.colorScheme.onSurface
+            Text(
+              modifier = Modifier.padding(
+                top = 1.dp,
+                end = endPadding,
+              ),
+              text = subtitle,
+              fontSize = 13.sp,
+              lineHeight = 16.sp,
+              textAlign = TextAlign.Start,
+              color = subtitleTextColor,
+            )
+          }
+        }
+
+        if (hasSwitch) {
+          Switch(
+            checked = isSwitchToggled,
+            onCheckedChange = {
+              isSwitchToggled = !isSwitchToggled
+            },
+          )
+        }
       }
+
       segmentedOptions?.let { segmentedOptions ->
         var selectedOption by remember { mutableIntStateOf(segmentedSelectedOption ?: -1) }
 
@@ -111,14 +151,6 @@ fun AdvancedView(
           onOptionSelected = { option ->
             selectedOption = option
             segmentedOnOptionSelected?.invoke(option)
-          },
-        )
-      }
-
-      if (hasSwitch) {
-        Switch(
-          checked = true,
-          onCheckedChange = {
           },
         )
       }

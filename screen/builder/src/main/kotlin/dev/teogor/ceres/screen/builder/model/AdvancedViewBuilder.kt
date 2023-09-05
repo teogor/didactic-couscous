@@ -28,7 +28,8 @@ class AdvancedViewBuilder(
   internal var segmentedOptions: List<String>? = null,
   internal var segmentedSelectedOption: Int? = null,
   internal var segmentedOnOptionSelected: ((Int) -> Unit)? = null,
-  internal var hasSwitch: Boolean = false,
+  internal var switchToggled: Boolean? = null,
+  internal var onSwitchToggled: ((Boolean) -> Unit)? = null,
 ) : SimpleViewBuilder(
   title = title,
   subtitle = subtitle,
