@@ -1,8 +1,9 @@
 package dev.teogor.ceres.screen.builder.compose
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -19,6 +20,7 @@ import dev.teogor.ceres.screen.builder.horizontalPadding
 import dev.teogor.ceres.screen.builder.iconSize
 import dev.teogor.ceres.screen.builder.model.SimpleViewBuilder
 import dev.teogor.ceres.screen.builder.utilities.perform
+import dev.teogor.ceres.screen.builder.verticalPadding
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
@@ -34,21 +36,19 @@ fun SimpleView(
       .clickable {
         clickable?.invoke()
       }
-      .padding(vertical = 12.dp, horizontal = 20.dp),
+      .padding(
+        top = verticalPadding,
+        bottom = verticalPadding,
+        start = horizontalPadding,
+        end = horizontalPadding,
+      ),
     verticalAlignment = if (subtitle != null) {
       Alignment.Top
     } else {
       Alignment.CenterVertically
     },
   ) {
-    icon.perform(
-      onNull = {
-        Spacer(
-          modifier = Modifier
-            .size(iconSize),
-        )
-      },
-    ) {
+    icon.perform {
       Icon(
         imageVector = it,
         contentDescription = title,
@@ -59,13 +59,16 @@ fun SimpleView(
       )
     }
     Column(
-      modifier = Modifier.padding(
-        start = if (icon != null) {
-          horizontalPadding
-        } else {
-          horizontalNoIconPadding
-        },
-      ),
+      modifier = Modifier
+        .padding(
+          start = if (icon != null) {
+            horizontalPadding
+          } else {
+            horizontalNoIconPadding
+          },
+        )
+        .defaultMinSize(minHeight = 50.dp),
+      verticalArrangement = Arrangement.Center,
     ) {
       Text(
         text = title,
