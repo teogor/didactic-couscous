@@ -36,7 +36,6 @@ import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
-import dev.teogor.ceres.screen.builder.advancedView
 import dev.teogor.ceres.screen.builder.compose.LazyColumnLayout
 import dev.teogor.ceres.screen.builder.header
 import dev.teogor.ceres.screen.builder.simpleView
@@ -91,10 +90,10 @@ private fun SettingsLayout(
     "UI"
   }
 
-  advancedView(
+  simpleView(
     title = "Look & Feel",
     subtitle = "Design & color options",
-    imageVector = Icons.Default.Style,
+    icon = Icons.Default.Style,
     clickable = {
     },
   )
@@ -103,23 +102,23 @@ private fun SettingsLayout(
     "System"
   }
 
-  advancedView(
+  simpleView(
     title = "Notification",
     subtitle = "Customize the notification style",
-    imageVector = Icons.Default.Notifications,
+    icon = Icons.Default.Notifications,
     clickable = {
     },
   )
 
-  advancedView(
+  simpleView(
     title = "Backup & Restore",
     subtitle = "Full backup of your app",
-    imageVector = Icons.Default.SettingsBackupRestore,
+    icon = Icons.Default.SettingsBackupRestore,
     clickable = {
     },
   )
 
-  advancedView(
+  simpleView(
     title = "Backup & Restore",
     subtitle = "Full backup of your app",
     clickable = {

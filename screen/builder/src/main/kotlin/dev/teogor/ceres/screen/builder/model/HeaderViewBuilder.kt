@@ -18,4 +18,4 @@ package dev.teogor.ceres.screen.builder.model
 
 class HeaderViewBuilder(
   val title: String,
-) : ConfigScreenView()
+) : ViewBuilder()

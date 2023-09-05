@@ -20,38 +20,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import dev.teogor.ceres.screen.builder.compose.AdvancedView
+import dev.teogor.ceres.screen.builder.compose.CustomView
 import dev.teogor.ceres.screen.builder.compose.HeaderView
 import dev.teogor.ceres.screen.builder.compose.SimpleView
 import dev.teogor.ceres.screen.builder.model.AdvancedViewBuilder
-import dev.teogor.ceres.screen.builder.model.ConfigScreenView
 import dev.teogor.ceres.screen.builder.model.CustomViewBuilder
 import dev.teogor.ceres.screen.builder.model.HeaderViewBuilder
 import dev.teogor.ceres.screen.builder.model.SimpleViewBuilder
+import dev.teogor.ceres.screen.builder.model.ViewBuilder
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
 class AboutScreenConfig {
-  internal var items: List<ConfigScreenView> = emptyList()
+  internal var items: List<ViewBuilder> = emptyList()
 }
 
 data class CategoryConfig(
   var modifier: Modifier = Modifier,
   var title: String,
   var titleModifier: Modifier = Modifier,
-  var elements: MutableList<ConfigScreenView>,
-) : ConfigScreenView()
+  var elements: MutableList<ViewBuilder>,
+) : ViewBuilder()
 
 data class SubcategoryConfig(
   var title: String?,
   var content: String,
   var singleLine: Boolean = false,
   var modifier: Modifier = Modifier,
-) : ConfigScreenView()
+) : ViewBuilder()
 
 // endregion
 
-fun BuilderListScope.screenItems(block: MutableList<ConfigScreenView>.() -> Unit) {
-  val list = mutableListOf<ConfigScreenView>()
+fun BuilderListScope.screenItems(block: MutableList<ViewBuilder>.() -> Unit) {
+  val list = mutableListOf<ViewBuilder>()
   list.block()
   AboutScreenConfig().apply {
     this.items = list
@@ -59,8 +60,8 @@ fun BuilderListScope.screenItems(block: MutableList<ConfigScreenView>.() -> Unit
     about.items.forEach { item ->
       when (item) {
         is HeaderViewBuilder -> headerItem(item)
-        is SimpleViewBuilder -> simpleView(item)
         is AdvancedViewBuilder -> advancedView(item)
+        is SimpleViewBuilder -> simpleView(item)
         is CustomViewBuilder -> customView(item)
       }
     }
@@ -68,8 +69,8 @@ fun BuilderListScope.screenItems(block: MutableList<ConfigScreenView>.() -> Unit
 }
 
 @Composable
-fun BuilderColumnScope.ScreenItems(block: MutableList<ConfigScreenView>.() -> Unit) {
-  val list = mutableListOf<ConfigScreenView>()
+fun BuilderColumnScope.ScreenItems(block: MutableList<ViewBuilder>.() -> Unit) {
+  val list = mutableListOf<ViewBuilder>()
   list.block()
   AboutScreenConfig().apply {
     this.items = list
@@ -77,15 +78,15 @@ fun BuilderColumnScope.ScreenItems(block: MutableList<ConfigScreenView>.() -> Un
     about.items.forEach { item ->
       when (item) {
         is HeaderViewBuilder -> HeaderView(item)
-        is SimpleViewBuilder -> SimpleView(item)
         is AdvancedViewBuilder -> AdvancedView(item)
-        is CustomViewBuilder -> item.content()
+        is SimpleViewBuilder -> SimpleView(item)
+        is CustomViewBuilder -> CustomView(item)
       }
     }
   }
 }
 
-fun MutableList<ConfigScreenView>.customView(
+fun MutableList<ViewBuilder>.customView(
   content: @Composable () -> Unit,
 ) {
   add(
@@ -93,7 +94,7 @@ fun MutableList<ConfigScreenView>.customView(
   )
 }
 
-inline fun MutableList<ConfigScreenView>.header(
+inline fun MutableList<ViewBuilder>.header(
   crossinline title: () -> String,
 ) {
   add(
@@ -101,11 +102,11 @@ inline fun MutableList<ConfigScreenView>.header(
   )
 }
 
-inline fun MutableList<ConfigScreenView>.advancedView(
+inline fun MutableList<ViewBuilder>.advancedView(
   title: String,
   subtitle: String? = null,
   subtitleColor: ColorSchemeKeyTokens? = null,
-  imageVector: ImageVector? = null,
+  icon: ImageVector? = null,
   noinline clickable: (() -> Unit)? = null,
   crossinline block: AdvancedViewBuilder.() -> Unit = {},
 ) {
@@ -114,7 +115,7 @@ inline fun MutableList<ConfigScreenView>.advancedView(
       title = title,
       subtitle = subtitle,
       subtitleColor = subtitleColor,
-      imageVector = imageVector,
+      icon = icon,
       clickable = clickable,
     ).apply(block),
   )
@@ -138,12 +139,20 @@ inline fun CategoryConfig.title(
   titleModifier = modifier
 }
 
-fun CategoryConfig.customView(
-  content: @Composable () -> Unit,
+fun MutableList<ViewBuilder>.simpleView(
+  title: String,
+  subtitle: String? = null,
+  subtitleColor: ColorSchemeKeyTokens? = null,
+  icon: ImageVector? = null,
+  clickable: (() -> Unit)? = null,
 ) {
-  elements.add(
-    CustomViewBuilder(
-      content = content,
+  add(
+    SimpleViewBuilder(
+      title = title,
+      subtitle = subtitle,
+      subtitleColor = subtitleColor,
+      icon = icon,
+      clickable = clickable,
     ),
   )
 }
@@ -169,6 +178,16 @@ inline fun CategoryConfig.advancedView(
   }
 }
 
+fun CategoryConfig.customView(
+  content: @Composable () -> Unit,
+) {
+  elements.add(
+    CustomViewBuilder(
+      content = content,
+    ),
+  )
+}
+
 inline fun SubcategoryConfig.title(crossinline block: () -> String) {
   title = block()
 }
@@ -179,20 +198,4 @@ inline fun SubcategoryConfig.content(crossinline block: () -> String) {
 
 inline fun SubcategoryConfig.singleLine(crossinline block: () -> Boolean) {
   singleLine = block()
-}
-
-fun MutableList<ConfigScreenView>.simpleView(
-  title: String,
-  description: String? = null,
-  icon: ImageVector? = null,
-  clickable: (() -> Unit)? = null,
-) {
-  add(
-    SimpleViewBuilder(
-      title = title,
-      description = description,
-      icon = icon,
-      clickable = clickable,
-    ),
-  )
 }

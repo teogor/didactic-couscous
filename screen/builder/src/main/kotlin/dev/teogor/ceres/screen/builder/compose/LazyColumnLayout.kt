@@ -19,7 +19,7 @@ package dev.teogor.ceres.screen.builder.compose
 import androidx.compose.runtime.Composable
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
-import dev.teogor.ceres.screen.builder.model.ConfigScreenView
+import dev.teogor.ceres.screen.builder.model.ViewBuilder
 import dev.teogor.ceres.screen.builder.screenItems
 import dev.teogor.ceres.screen.core.LazyColumnScreen
 
@@ -28,7 +28,7 @@ inline fun LazyColumnLayout(
   screenName: ScreenRoute,
   hasScrollbar: Boolean = true,
   noinline bottomContent: (@Composable () -> Unit)? = null,
-  crossinline block: MutableList<ConfigScreenView>.() -> Unit,
+  crossinline block: MutableList<ViewBuilder>.() -> Unit,
 ) = LazyColumnScreen(
   screenName = screenName.toScreenName(),
   hasScrollbarBackground = false,

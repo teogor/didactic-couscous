@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import dev.teogor.ceres.screen.builder.compose.CustomView
 import dev.teogor.ceres.screen.builder.compose.SegmentedButton
 import dev.teogor.ceres.screen.builder.compose.SimpleView
 import dev.teogor.ceres.screen.builder.model.CustomViewBuilder
@@ -38,7 +39,7 @@ internal fun BuilderListScope.simpleView(
 internal fun BuilderListScope.customView(
   item: CustomViewBuilder,
 ) = item {
-  item.content()
+  CustomView(item)
 }
 
 @Preview(showBackground = true)

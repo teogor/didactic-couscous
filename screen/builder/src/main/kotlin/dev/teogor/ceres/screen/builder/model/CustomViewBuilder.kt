@@ -20,4 +20,4 @@ import androidx.compose.runtime.Composable
 
 class CustomViewBuilder(
   val content: @Composable () -> Unit,
-) : ConfigScreenView()
+) : ViewBuilder()

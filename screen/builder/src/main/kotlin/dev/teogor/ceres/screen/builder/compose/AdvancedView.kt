@@ -29,15 +29,15 @@ import dev.teogor.ceres.ui.theme.toColor
 
 @Composable
 fun AdvancedView(
-  config: AdvancedViewBuilder,
-) {
+  item: AdvancedViewBuilder,
+) = with(item) {
   Row(
     modifier = Modifier
       .fillMaxWidth()
       .clickable(
-        enabled = config.clickable != null,
+        enabled = clickable != null,
       ) {
-        config.clickable?.invoke()
+        clickable?.invoke()
       }
       .padding(
         top = verticalPadding,
@@ -46,10 +46,10 @@ fun AdvancedView(
         end = horizontalPadding,
       ),
   ) {
-    config.imageVector?.let {
+    icon?.let {
       Icon(
         imageVector = it,
-        contentDescription = config.title,
+        contentDescription = title,
         modifier = Modifier
           .padding(top = 10.dp)
           .size(iconSize),
@@ -58,7 +58,7 @@ fun AdvancedView(
     }
     Column(
       modifier = Modifier.padding(
-        start = if (config.imageVector != null) {
+        start = if (icon != null) {
           horizontalPadding
         } else {
           horizontalNoIconPadding
@@ -66,17 +66,13 @@ fun AdvancedView(
       ),
     ) {
       Text(
-        text = config.title,
+        text = title,
         fontSize = 15.sp,
         textAlign = TextAlign.Start,
         color = MaterialTheme.colorScheme.onSurface,
       )
-      config.subtitle?.let { subtitle ->
-        val subtitleTextColor = if (config.subtitleColor != null) {
-          config.subtitleColor.toColor()
-        } else {
-          MaterialTheme.colorScheme.onSurface
-        }
+      subtitle?.let { subtitle ->
+        val subtitleTextColor = subtitleColor?.toColor() ?: MaterialTheme.colorScheme.onSurface
         Text(
           modifier = Modifier.padding(
             top = 1.dp,
@@ -89,8 +85,8 @@ fun AdvancedView(
           color = subtitleTextColor,
         )
       }
-      config.segmentedOptions?.let { segmentedOptions ->
-        var selectedOption by remember { mutableIntStateOf(config.segmentedSelectedOption ?: -1) }
+      segmentedOptions?.let { segmentedOptions ->
+        var selectedOption by remember { mutableIntStateOf(segmentedSelectedOption ?: -1) }
 
         SegmentedButton(
           modifier = Modifier.padding(top = 10.dp),
@@ -98,12 +94,12 @@ fun AdvancedView(
           selectedOption = selectedOption,
           onOptionSelected = { option ->
             selectedOption = option
-            config.segmentedOnOptionSelected?.invoke(option)
+            segmentedOnOptionSelected?.invoke(option)
           },
         )
       }
 
-      if (config.hasSwitch) {
+      if (hasSwitch) {
         Switch(
           checked = true,
           onCheckedChange = {

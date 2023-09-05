@@ -1,87 +1,90 @@
 package dev.teogor.ceres.screen.builder.compose
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.teogor.ceres.screen.builder.endPadding
+import dev.teogor.ceres.screen.builder.horizontalNoIconPadding
+import dev.teogor.ceres.screen.builder.horizontalPadding
+import dev.teogor.ceres.screen.builder.iconSize
 import dev.teogor.ceres.screen.builder.model.SimpleViewBuilder
 import dev.teogor.ceres.screen.builder.utilities.perform
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
+import dev.teogor.ceres.ui.theme.toColor
 
 @Composable
 fun SimpleView(
   item: SimpleViewBuilder,
-) {
+) = with(item) {
   Row(
     modifier = Modifier
       .fillMaxWidth()
       .clickable {
-        item.clickable?.invoke()
+        clickable?.invoke()
       }
       .padding(vertical = 12.dp, horizontal = 20.dp),
-    verticalAlignment = if (item.description != null) {
+    verticalAlignment = if (subtitle != null) {
       Alignment.Top
     } else {
       Alignment.CenterVertically
     },
   ) {
-    item.icon.perform(
+    icon.perform(
       onNull = {
         Spacer(
           modifier = Modifier
-            .padding(end = 12.dp)
-            .size(44.dp),
+            .size(iconSize),
         )
       },
     ) {
       Icon(
         imageVector = it,
-        contentDescription = item.title,
-        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+        contentDescription = title,
         modifier = Modifier
-          .padding(end = 12.dp, top = 4.dp)
-          .size(44.dp)
-          .background(
-            color = MaterialTheme.colorScheme.primaryContainer,
-            shape = CircleShape,
-          )
-          .padding(10.dp),
+          .size(iconSize)
+          .align(Alignment.CenterVertically),
+        tint = MaterialTheme.colorScheme.secondary,
       )
     }
-    Column {
+    Column(
+      modifier = Modifier.padding(
+        start = if (icon != null) {
+          horizontalPadding
+        } else {
+          horizontalNoIconPadding
+        },
+      ),
+    ) {
       Text(
-        modifier = Modifier.padding(
-          top = 6.dp,
-          bottom = if (item.description != null) {
-            2.dp
-          } else {
-            6.dp
-          },
-        ),
-        text = item.title,
-        fontSize = 14.sp,
-        lineHeight = 14.sp,
+        text = title,
+        fontSize = 15.sp,
+        textAlign = TextAlign.Start,
         color = MaterialTheme.colorScheme.onSurface,
       )
-      item.description?.let { description ->
+      subtitle?.let { subtitle ->
+        val subtitleTextColor = subtitleColor?.toColor() ?: MaterialTheme.colorScheme.onSurface
         Text(
-          modifier = Modifier.padding(bottom = 6.dp),
-          text = description,
-          fontSize = 12.sp,
-          lineHeight = 12.sp,
-          color = MaterialTheme.colorScheme.onSurface,
+          modifier = Modifier.padding(
+            top = 1.dp,
+            end = endPadding,
+          ),
+          text = subtitle,
+          fontSize = 13.sp,
+          lineHeight = 16.sp,
+          textAlign = TextAlign.Start,
+          color = subtitleTextColor,
         )
       }
     }

@@ -16,8 +16,8 @@ import dev.teogor.ceres.ui.theme.MaterialTheme
 
 @Composable
 fun HeaderView(
-  config: HeaderViewBuilder,
-) {
+  item: HeaderViewBuilder,
+) = with(item) {
   Column(
     modifier = Modifier
       .padding(
@@ -31,7 +31,7 @@ fun HeaderView(
       ),
   ) {
     Text(
-      text = config.title,
+      text = title,
       fontSize = 13.sp,
       fontWeight = FontWeight.Medium,
       textAlign = TextAlign.Start,

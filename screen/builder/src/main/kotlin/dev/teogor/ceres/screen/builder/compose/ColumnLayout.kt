@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
 import dev.teogor.ceres.screen.builder.ScreenItems
-import dev.teogor.ceres.screen.builder.model.ConfigScreenView
+import dev.teogor.ceres.screen.builder.model.ViewBuilder
 import dev.teogor.ceres.screen.core.ColumnScreen
 
 @Composable
@@ -29,7 +29,7 @@ inline fun ColumnLayout(
   hasScrollbar: Boolean = true,
   hasScrollbarBackground: Boolean = true,
   noinline bottomContent: (@Composable () -> Unit)? = null,
-  crossinline block: MutableList<ConfigScreenView>.() -> Unit,
+  crossinline block: MutableList<ViewBuilder>.() -> Unit,
 ) = ColumnScreen(
   screenName = screenName.toScreenName(),
   hasScrollbarBackground = hasScrollbarBackground,

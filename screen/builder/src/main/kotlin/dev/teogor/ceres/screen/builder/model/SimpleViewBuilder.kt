@@ -17,10 +17,12 @@
 package dev.teogor.ceres.screen.builder.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
+import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
-class SimpleViewBuilder(
+open class SimpleViewBuilder(
   internal val title: String,
-  internal val description: String?,
+  internal val subtitle: String?,
+  internal val subtitleColor: ColorSchemeKeyTokens?,
   internal val icon: ImageVector?,
   internal val clickable: (() -> Unit)?,
-) : ConfigScreenView()
+) : ViewBuilder()
