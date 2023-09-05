@@ -34,7 +34,7 @@ import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
-import dev.teogor.ceres.screen.builder.Layout
+import dev.teogor.ceres.screen.builder.compose.Layout
 import dev.teogor.ceres.screen.builder.header
 import dev.teogor.ceres.screen.builder.item
 import dev.teogor.ceres.screen.builder.segmentedButtons

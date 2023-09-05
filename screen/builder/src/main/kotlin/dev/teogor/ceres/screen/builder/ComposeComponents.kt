@@ -38,6 +38,9 @@ import androidx.compose.ui.unit.sp
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
 import dev.teogor.ceres.screen.builder.compose.SegmentedButton
+import dev.teogor.ceres.screen.builder.model.ConfigScreenDefaultView
+import dev.teogor.ceres.screen.builder.model.ConfigScreenView
+import dev.teogor.ceres.screen.builder.model.CustomConfigView
 import dev.teogor.ceres.screen.builder.utilities.perform
 import dev.teogor.ceres.screen.core.LazyColumnScreen
 import dev.teogor.ceres.ui.designsystem.Switch
@@ -45,25 +48,8 @@ import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
-@Composable
-inline fun Layout(
-  screenName: ScreenRoute,
-  hasScrollbar: Boolean = true,
-  noinline bottomContent: (@Composable () -> Unit)? = null,
-  crossinline block: MutableList<ConfigScreenItem>.() -> Unit,
-) = LazyColumnScreen(
-  screenName = screenName.toScreenName(),
-  hasScrollbarBackground = false,
-  hasScrollbar = hasScrollbar,
-  bottomContent = bottomContent,
-) {
-  screenItems {
-    block()
-  }
-}
-
 internal fun BuilderListScope.aboutItem(
-  item: ConfigScreenDefaultItem,
+  item: ConfigScreenDefaultView,
 ) = item {
   Row(
     modifier = Modifier
@@ -130,7 +116,7 @@ internal fun BuilderListScope.aboutItem(
 }
 
 internal fun BuilderListScope.customItem(
-  item: CustomConfigItem,
+  item: CustomConfigView,
 ) = item {
   item.content()
 }

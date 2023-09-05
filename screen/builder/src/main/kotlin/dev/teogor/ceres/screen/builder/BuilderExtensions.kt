@@ -21,101 +21,77 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import dev.teogor.ceres.screen.builder.compose.headerItem
 import dev.teogor.ceres.screen.builder.compose.standardItem
+import dev.teogor.ceres.screen.builder.model.ConfigScreenDefaultView
+import dev.teogor.ceres.screen.builder.model.ConfigScreenView
+import dev.teogor.ceres.screen.builder.model.CustomConfigView
+import dev.teogor.ceres.screen.builder.model.HeaderConfigView
+import dev.teogor.ceres.screen.builder.model.ItemConfigView
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
-open class ConfigScreenItem
-
-class CustomConfigItem(
-  val content: @Composable () -> Unit,
-) : ConfigScreenItem()
-
-class HeaderConfigItem(
-  val title: String,
-) : ConfigScreenItem()
-
-class ItemConfigItem(
-  val title: String,
-  val subtitle: String?,
-  val subtitleColor: ColorSchemeKeyTokens?,
-  val imageVector: ImageVector?,
-  val clickable: (() -> Unit)? = null,
-  internal var segmentedOptions: List<String>? = null,
-  internal var segmentedSelectedOption: Int? = null,
-  internal var segmentedOnOptionSelected: ((Int) -> Unit)? = null,
-  internal var hasSwitch: Boolean = false,
-) : ConfigScreenItem()
-
-class ConfigScreenDefaultItem(
-  internal val title: String,
-  internal val description: String?,
-  internal val icon: ImageVector?,
-  internal val clickable: (() -> Unit)?,
-) : ConfigScreenItem()
-
 class AboutScreenConfig {
-  internal var items: List<ConfigScreenItem> = emptyList()
+  internal var items: List<ConfigScreenView> = emptyList()
 }
 
 data class CategoryConfig(
-    var modifier: Modifier = Modifier,
-    var title: String,
-    var titleModifier: Modifier = Modifier,
-    var elements: MutableList<ConfigScreenItem>,
-) : ConfigScreenItem()
+  var modifier: Modifier = Modifier,
+  var title: String,
+  var titleModifier: Modifier = Modifier,
+  var elements: MutableList<ConfigScreenView>,
+) : ConfigScreenView()
 
 data class SubcategoryConfig(
   var title: String?,
   var content: String,
   var singleLine: Boolean = false,
   var modifier: Modifier = Modifier,
-) : ConfigScreenItem()
+) : ConfigScreenView()
 
 // endregion
 
-fun BuilderListScope.screenItems(block: MutableList<ConfigScreenItem>.() -> Unit) {
-  val list = mutableListOf<ConfigScreenItem>()
+fun BuilderListScope.screenItems(block: MutableList<ConfigScreenView>.() -> Unit) {
+  val list = mutableListOf<ConfigScreenView>()
   list.block()
   AboutScreenConfig().apply {
     this.items = list
   }.let { about ->
     about.items.forEach { item ->
       when (item) {
-        is ConfigScreenDefaultItem -> aboutItem(item)
-        is CustomConfigItem -> customItem(item)
-        is HeaderConfigItem -> headerItem(item)
-        is ItemConfigItem -> standardItem(item)
+        is ConfigScreenDefaultView -> aboutItem(item)
+        is CustomConfigView -> customItem(item)
+        is HeaderConfigView -> headerItem(item)
+        is ItemConfigView -> standardItem(item)
       }
     }
   }
 }
 
-fun MutableList<ConfigScreenItem>.customItem(
+fun MutableList<ConfigScreenView>.customItem(
   content: @Composable () -> Unit,
 ) {
   add(
-    CustomConfigItem(content = content),
+    CustomConfigView(content = content),
   )
 }
 
-inline fun MutableList<ConfigScreenItem>.header(
+inline fun MutableList<ConfigScreenView>.header(
   crossinline title: () -> String,
 ) {
   add(
-    HeaderConfigItem(title = title()),
+    HeaderConfigView(title = title()),
   )
 }
 
-inline fun MutableList<ConfigScreenItem>.item(
-    title: String,
-    subtitle: String? = null,
-    subtitleColor: ColorSchemeKeyTokens? = null,
-    imageVector: ImageVector? = null,
-    noinline clickable: (() -> Unit)? = null,
-    crossinline block: ItemConfigItem.() -> Unit = {},
+inline fun MutableList<ConfigScreenView>.item(
+  title: String,
+  subtitle: String? = null,
+  subtitleColor: ColorSchemeKeyTokens? = null,
+  imageVector: ImageVector? = null,
+  noinline clickable: (() -> Unit)? = null,
+  crossinline block: ItemConfigView.() -> Unit = {},
 ) {
   add(
-    ItemConfigItem(
+    ItemConfigView(
       title = title,
       subtitle = subtitle,
       subtitleColor = subtitleColor,
@@ -125,7 +101,7 @@ inline fun MutableList<ConfigScreenItem>.item(
   )
 }
 
-fun ItemConfigItem.segmentedButtons(
+fun ItemConfigView.segmentedButtons(
   options: List<String>,
   selectedOption: Int? = null,
   onOptionSelected: ((Int) -> Unit)? = null,
@@ -147,16 +123,16 @@ fun CategoryConfig.customItem(
   content: @Composable () -> Unit,
 ) {
   elements.add(
-    CustomConfigItem(
+    CustomConfigView(
       content = content,
     ),
   )
 }
 
 inline fun CategoryConfig.item(
-    noinline predicate: (() -> Boolean)? = null,
-    modifier: Modifier = Modifier.clickable {},
-    crossinline block: SubcategoryConfig.() -> Unit,
+  noinline predicate: (() -> Boolean)? = null,
+  modifier: Modifier = Modifier.clickable {},
+  crossinline block: SubcategoryConfig.() -> Unit,
 ) {
   val isVisible = if (predicate != null) {
     predicate()
@@ -186,14 +162,14 @@ inline fun SubcategoryConfig.singleLine(crossinline block: () -> Boolean) {
   singleLine = block()
 }
 
-fun MutableList<ConfigScreenItem>.aboutItem(
+fun MutableList<ConfigScreenView>.aboutItem(
   title: String,
   description: String? = null,
   icon: ImageVector? = null,
   clickable: (() -> Unit)? = null,
 ) {
   add(
-    ConfigScreenDefaultItem(
+    ConfigScreenDefaultView(
       title = title,
       description = description,
       icon = icon,
