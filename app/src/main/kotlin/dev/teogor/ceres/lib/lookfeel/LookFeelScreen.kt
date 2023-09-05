@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.lib.settings
+package dev.teogor.ceres.lib.lookfeel
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DeveloperMode
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.SettingsBackupRestore
 import androidx.compose.material.icons.filled.Style
@@ -34,14 +33,17 @@ import dev.teogor.ceres.framework.core.screen.showNavBar
 import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
-import dev.teogor.ceres.lib.lookfeel.LookAndFeelScreenRoute
 import dev.teogor.ceres.navigation.core.ScreenRoute
+import dev.teogor.ceres.screen.builder.advancedView
 import dev.teogor.ceres.screen.builder.compose.LazyColumnLayout
 import dev.teogor.ceres.screen.builder.header
+import dev.teogor.ceres.screen.builder.segmentedButtons
 import dev.teogor.ceres.screen.builder.simpleView
+import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
+import kotlin.random.Random
 
 @Composable
-internal fun SettingsRoute(
+internal fun LookAndFeelRoute(
   baseActions: BaseActions,
 ) {
   baseActions.setScreenInfo {
@@ -53,7 +55,7 @@ internal fun SettingsRoute(
     }
     toolbarTokens {
       toolbarTitle {
-        "Settings"
+        "Look & Feel"
       }
       showSettingsButton {
         false
@@ -70,33 +72,74 @@ internal fun SettingsRoute(
     }
   }
 
-  SettingsLayout(
+  LookAndFeelLayout(
     navigateTo = { destination ->
       baseActions.navigateTo(destination)
     },
-    developerModeEnabled = true,
   )
 }
 
 @Composable
-private fun SettingsLayout(
+private fun LookAndFeelLayout(
   navigateTo: (ScreenRoute) -> Unit,
-  developerModeEnabled: Boolean,
 ) = LazyColumnLayout(
   screenName = HomeScreenConfig,
 ) {
   header {
-    "UI"
+    "Appearance"
   }
 
-  simpleView(
-    title = "Look & Feel",
-    subtitle = "Design & color options",
+  advancedView(
+    title = "App Theme",
+    subtitle = "Change app theme colour",
     icon = Icons.Default.Style,
     clickable = {
-      navigateTo(LookAndFeelScreenRoute)
     },
-  )
+  ) {
+    val options = listOf("Auto", "White", "Dark")
+    segmentedButtons(
+      options = options,
+      selectedOption = Random.nextInt(options.size),
+      onOptionSelected = { option ->
+
+      }
+    )
+  }
+
+  advancedView(
+    title = "Just Black",
+    subtitle = "If set on something else then `Off` it will override the App Theme value.",
+    subtitleColor = ColorSchemeKeyTokens.Error,
+    icon = Icons.Default.Style,
+    clickable = {
+    },
+  ) {
+    val options = listOf("Auto", "On", "Off")
+    segmentedButtons(
+      options = options,
+      selectedOption = 2,
+      onOptionSelected = { option ->
+
+      }
+    )
+  }
+
+  advancedView(
+    title = "Dynamic Theming",
+    icon = Icons.Default.Style,
+    clickable = {
+    },
+  ) {
+    
+    val options = listOf("Auto", "On", "Off")
+    segmentedButtons(
+      options = options,
+      selectedOption = 2,
+      onOptionSelected = { option ->
+
+      }
+    )
+  }
 
   header {
     "System"
@@ -124,13 +167,4 @@ private fun SettingsLayout(
     clickable = {
     },
   )
-
-  if (developerModeEnabled) {
-    simpleView(
-      title = "Developer options",
-      icon = Icons.Default.DeveloperMode,
-      clickable = {
-      },
-    )
-  }
 }

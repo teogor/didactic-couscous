@@ -24,6 +24,7 @@ import dev.teogor.ceres.feature.home.homeScreenNav
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.CeresAppState
 import dev.teogor.ceres.framework.core.beta.NavGraphOptions
+import dev.teogor.ceres.lib.lookfeel.lookAndFeelScreenNav
 import dev.teogor.ceres.lib.settings.settingsScreenNav
 import dev.teogor.ceres.navigation.core.NavHost
 
@@ -52,5 +53,7 @@ private fun NavHost(
     homeScreenNav(baseActions)
 
     settingsScreenNav(baseActions)
+
+    lookAndFeelScreenNav(baseActions)
   }
 }
