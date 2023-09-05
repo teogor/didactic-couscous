@@ -16,10 +16,7 @@
 
 package dev.teogor.ceres.feature.home
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.screen.floatingButton
@@ -29,13 +26,10 @@ import dev.teogor.ceres.framework.core.screen.showNavBar
 import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
-import dev.teogor.ceres.navigation.core.utilities.toScreenName
+import dev.teogor.ceres.screen.builder.advancedView
 import dev.teogor.ceres.screen.builder.compose.ColumnLayout
 import dev.teogor.ceres.screen.builder.header
-import dev.teogor.ceres.screen.builder.advancedView
 import dev.teogor.ceres.screen.builder.segmentedButtons
-import dev.teogor.ceres.screen.core.ColumnScreen
-import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
 // todo better way to configure this. perhaps use kotlin builder syntax
@@ -73,28 +67,11 @@ internal fun HomeRoute(
     }
   }
 
-  ClockConfigScreen()
-  // HomeScreen()
+  HomeScreen()
 }
 
 @Composable
-fun HomeScreen() = ColumnScreen(
-  hasScrollbarBackground = false,
-  screenName = HomeScreenConfig.toScreenName(),
-) {
-  repeat(100) {
-    Text(
-      modifier = Modifier.padding(
-        horizontal = 16.dp,
-        vertical = 14.dp,
-      ),
-      text = "here we go as $it",
-    )
-  }
-}
-
-@Composable
-private fun ClockConfigScreen() = ColumnLayout(
+private fun HomeScreen() = ColumnLayout(
   hasScrollbarBackground = false,
   screenName = HomeScreenConfig,
 ) {

@@ -21,7 +21,7 @@ import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
 import dev.teogor.ceres.screen.builder.ScreenItems
 import dev.teogor.ceres.screen.builder.model.ViewBuilder
-import dev.teogor.ceres.screen.core.ColumnScreen
+import dev.teogor.ceres.screen.core.layout.ColumnLayoutBase
 
 @Composable
 inline fun ColumnLayout(
@@ -30,7 +30,7 @@ inline fun ColumnLayout(
   hasScrollbarBackground: Boolean = true,
   noinline bottomContent: (@Composable () -> Unit)? = null,
   crossinline block: MutableList<ViewBuilder>.() -> Unit,
-) = ColumnScreen(
+) = ColumnLayoutBase(
   screenName = screenName.toScreenName(),
   hasScrollbarBackground = hasScrollbarBackground,
   hasScrollbar = hasScrollbar,

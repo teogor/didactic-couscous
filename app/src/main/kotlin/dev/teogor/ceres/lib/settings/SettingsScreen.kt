@@ -35,11 +35,9 @@ import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.ScreenRoute
-import dev.teogor.ceres.navigation.core.utilities.toScreenName
 import dev.teogor.ceres.screen.builder.compose.LazyColumnLayout
 import dev.teogor.ceres.screen.builder.header
 import dev.teogor.ceres.screen.builder.simpleView
-import dev.teogor.ceres.screen.core.LazyColumnScreen
 
 @Composable
 internal fun SettingsRoute(
@@ -133,58 +131,4 @@ private fun SettingsLayout(
       },
     )
   }
-}
-
-@Composable
-fun SettingsScreen(
-  clickable: (ScreenRoute) -> Unit,
-  developerModeEnabled: Boolean,
-) = SettingsScreenConfig {
-  settingsItem(
-    title = "Look & Feel",
-    description = "Design & color options",
-    icon = Icons.Default.Style,
-    clickable = {
-      // clickable(LookRoute)
-    },
-  )
-  settingsItem(
-    title = "Notification",
-    description = "Customize the notification style",
-    icon = Icons.Default.Notifications,
-    clickable = {
-      // clickable(NotificationsRoute)
-    },
-  )
-  settingsItem(
-    title = "Other",
-    description = "Advanced testing features",
-  )
-  settingsItem(
-    title = "Backup & Restore",
-    description = "Backup and restore your settings, contributors, artists",
-    icon = Icons.Default.SettingsBackupRestore,
-    clickable = {
-      // clickable(BackupRoute)
-    },
-  )
-  if (developerModeEnabled) {
-    settingsItem(
-      title = "Developer options",
-      icon = Icons.Default.DeveloperMode,
-      clickable = {
-        // clickable(DeveloperOptionsRoute)
-      },
-    )
-  }
-}
-
-@Composable
-fun SettingsScreenConfig(
-  block: MutableList<SettingsScreenItem>.() -> Unit,
-) = LazyColumnScreen(
-  screenName = SettingsScreenRoute.toScreenName(),
-  hasScrollbarBackground = false,
-) {
-  settingsItems(block)
 }

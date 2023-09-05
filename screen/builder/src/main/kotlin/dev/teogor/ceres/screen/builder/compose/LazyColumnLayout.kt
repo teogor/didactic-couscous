@@ -21,7 +21,7 @@ import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
 import dev.teogor.ceres.screen.builder.model.ViewBuilder
 import dev.teogor.ceres.screen.builder.screenItems
-import dev.teogor.ceres.screen.core.LazyColumnScreen
+import dev.teogor.ceres.screen.core.layout.LazyColumnLayoutBase
 
 @Composable
 inline fun LazyColumnLayout(
@@ -29,7 +29,7 @@ inline fun LazyColumnLayout(
   hasScrollbar: Boolean = true,
   noinline bottomContent: (@Composable () -> Unit)? = null,
   crossinline block: MutableList<ViewBuilder>.() -> Unit,
-) = LazyColumnScreen(
+) = LazyColumnLayoutBase(
   screenName = screenName.toScreenName(),
   hasScrollbarBackground = false,
   hasScrollbar = hasScrollbar,
