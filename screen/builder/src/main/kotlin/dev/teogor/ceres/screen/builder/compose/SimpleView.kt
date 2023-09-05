@@ -1,5 +1,6 @@
 package dev.teogor.ceres.screen.builder.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,11 +27,15 @@ import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
 import dev.teogor.ceres.ui.theme.toColor
+import kotlin.random.Random
+
+fun addExtraPadding(enabled: Boolean) = if(enabled) 0.dp else 9.dp
 
 @Composable
 fun SimpleView(
   item: SimpleViewBuilder,
 ) = with(item) {
+  val hasFilledIconUI = Random.nextBoolean()
   Row(
     modifier = Modifier
       .fillMaxWidth()
@@ -39,7 +45,7 @@ fun SimpleView(
       .padding(
         top = verticalPadding,
         bottom = verticalPadding,
-        start = horizontalPadding,
+        start = horizontalPadding + addExtraPadding(hasFilledIconUI && icon != null),
         end = horizontalPadding,
       ),
     verticalAlignment = if (subtitle != null) {
@@ -49,22 +55,38 @@ fun SimpleView(
     },
   ) {
     icon.perform {
-      Icon(
-        imageVector = it,
-        contentDescription = title,
-        modifier = Modifier
-          .size(iconSize)
-          .align(Alignment.CenterVertically),
-        tint = MaterialTheme.colorScheme.secondary,
-      )
+      if(hasFilledIconUI) {
+        Icon(
+          imageVector = it,
+          contentDescription = title,
+          tint = MaterialTheme.colorScheme.onPrimaryContainer,
+          modifier = Modifier
+            .size(44.dp)
+            .background(
+              color = MaterialTheme.colorScheme.primaryContainer,
+              shape = CircleShape,
+            )
+            .padding(10.dp)
+            .align(Alignment.CenterVertically),
+        )
+      } else {
+        Icon(
+          imageVector = it,
+          contentDescription = title,
+          modifier = Modifier
+            .size(iconSize)
+            .align(Alignment.CenterVertically),
+          tint = MaterialTheme.colorScheme.secondary,
+        )
+      }
     }
     Column(
       modifier = Modifier
         .padding(
           start = if (icon != null) {
-            horizontalPadding
+            horizontalPadding + addExtraPadding(hasFilledIconUI)
           } else {
-            horizontalNoIconPadding
+            horizontalNoIconPadding + addExtraPadding(false)
           },
         )
         .defaultMinSize(minHeight = 50.dp),
