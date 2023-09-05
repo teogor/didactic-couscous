@@ -19,6 +19,9 @@ package dev.teogor.ceres.screen.builder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import dev.teogor.ceres.screen.builder.compose.HeaderView
+import dev.teogor.ceres.screen.builder.compose.StandardView
+import dev.teogor.ceres.screen.builder.compose.View
 import dev.teogor.ceres.screen.builder.compose.headerItem
 import dev.teogor.ceres.screen.builder.compose.standardItem
 import dev.teogor.ceres.screen.builder.model.ConfigScreenDefaultView
@@ -61,6 +64,24 @@ fun BuilderListScope.screenItems(block: MutableList<ConfigScreenView>.() -> Unit
         is CustomConfigView -> customItem(item)
         is HeaderConfigView -> headerItem(item)
         is ItemConfigView -> standardItem(item)
+      }
+    }
+  }
+}
+
+@Composable
+fun BuilderColumnScope.ScreenItems(block: MutableList<ConfigScreenView>.() -> Unit) {
+  val list = mutableListOf<ConfigScreenView>()
+  list.block()
+  AboutScreenConfig().apply {
+    this.items = list
+  }.let { about ->
+    about.items.forEach { item ->
+      when (item) {
+        is ConfigScreenDefaultView -> View(item)
+        is CustomConfigView -> item.content()
+        is HeaderConfigView -> HeaderView(item)
+        is ItemConfigView -> StandardView(item)
       }
     }
   }

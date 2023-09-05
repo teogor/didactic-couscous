@@ -48,6 +48,8 @@ import dev.teogor.ceres.ui.designsystem.scrollbar.ScrollbarCustomization
 import dev.teogor.ceres.ui.designsystem.scrollbar.ScrollbarIndicator
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
+// todo rename like LazyColumnLayoutBase as in :screen:builder
+//  have their own files
 @Composable
 fun LazyColumnScreen(
   contentPadding: PaddingValues = PaddingValues(0.dp),

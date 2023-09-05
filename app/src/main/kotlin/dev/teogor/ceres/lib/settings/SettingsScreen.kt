@@ -22,8 +22,8 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.SettingsBackupRestore
 import androidx.compose.material.icons.filled.Style
 import androidx.compose.runtime.Composable
+import dev.teogor.ceres.feature.home.HomeScreenConfig
 import dev.teogor.ceres.framework.core.app.BaseActions
-import dev.teogor.ceres.framework.core.app.navigateTo
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.screen.floatingButton
 import dev.teogor.ceres.framework.core.screen.isStatusBarVisible
@@ -35,6 +35,9 @@ import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
+import dev.teogor.ceres.screen.builder.compose.LazyColumnLayout
+import dev.teogor.ceres.screen.builder.header
+import dev.teogor.ceres.screen.builder.item
 import dev.teogor.ceres.screen.core.LazyColumnScreen
 
 @Composable
@@ -67,11 +70,64 @@ internal fun SettingsRoute(
     }
   }
 
-  SettingsScreen(
-    clickable = { destination ->
-      baseActions.navigateTo(destination)
+  SettingsLayout()
+  // SettingsScreen(
+  //   clickable = { destination ->
+  //     baseActions.navigateTo(destination)
+  //   },
+  //   developerModeEnabled = false, // developerModePreferences().enabled,
+  // )
+}
+
+@Composable
+private fun SettingsLayout() = LazyColumnLayout(
+  screenName = HomeScreenConfig,
+) {
+  header {
+    "UI"
+  }
+
+  item(
+    title = "Look & Feel",
+    subtitle = "Design & color options",
+    imageVector = Icons.Default.Style,
+    clickable = {
     },
-    developerModeEnabled = false, // developerModePreferences().enabled,
+  )
+
+  header {
+    "System"
+  }
+
+  item(
+    title = "Notification",
+    subtitle = "Customize the notification style",
+    imageVector = Icons.Default.Notifications,
+    clickable = {
+    },
+  )
+
+  item(
+    title = "Backup & Restore",
+    subtitle = "Full backup of your app",
+    imageVector = Icons.Default.SettingsBackupRestore,
+    clickable = {
+    },
+  )
+
+  item(
+    title = "Backup & Restore",
+    subtitle = "Full backup of your app",
+    clickable = {
+    },
+  )
+
+  item(
+    title = "Backup & Restore",
+    subtitle = "Full backup of your app",
+    imageVector = Icons.Default.SettingsBackupRestore,
+    clickable = {
+    },
   )
 }
 

@@ -17,10 +17,6 @@
 package dev.teogor.ceres.feature.home
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.SettingsBackupRestore
-import androidx.compose.material.icons.filled.Style
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -34,7 +30,7 @@ import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
-import dev.teogor.ceres.screen.builder.compose.Layout
+import dev.teogor.ceres.screen.builder.compose.ColumnLayout
 import dev.teogor.ceres.screen.builder.header
 import dev.teogor.ceres.screen.builder.item
 import dev.teogor.ceres.screen.builder.segmentedButtons
@@ -77,8 +73,7 @@ internal fun HomeRoute(
     }
   }
 
-  SettingsLayout()
-  // ClockConfigScreen()
+  ClockConfigScreen()
   // HomeScreen()
 }
 
@@ -99,79 +94,30 @@ fun HomeScreen() = ColumnScreen(
 }
 
 @Composable
-private fun ClockConfigScreen() = Layout(
+private fun ClockConfigScreen() = ColumnLayout(
+  hasScrollbarBackground = false,
   screenName = HomeScreenConfig,
 ) {
   header {
     "Time Interval Options"
   }
 
-  item(
-    title = "Timer Duration",
-    subtitle = "Adjust the duration of the timer",
-    subtitleColor = ColorSchemeKeyTokens.Error,
-  ) {
-    segmentedButtons(
-      options = listOf(
-        "2 MIN",
-        "5 MIN",
-        "10 MIN",
-        "20 MIN",
-        "30 MIN",
-      ),
-      selectedOption = 1,
-    )
+  repeat(20) {
+    item(
+      title = "Timer Duration",
+      subtitle = "Adjust the duration of the timer",
+      subtitleColor = ColorSchemeKeyTokens.Error,
+    ) {
+      segmentedButtons(
+        options = listOf(
+          "2 MIN",
+          "5 MIN",
+          "10 MIN",
+          "20 MIN",
+          "30 MIN",
+        ),
+        selectedOption = 1,
+      )
+    }
   }
-}
-
-@Composable
-private fun SettingsLayout() = Layout(
-  screenName = HomeScreenConfig,
-) {
-  header {
-    "UI"
-  }
-
-  item(
-    title = "Look & Feel",
-    subtitle = "Design & color options",
-    imageVector = Icons.Default.Style,
-    clickable = {
-    },
-  )
-
-  header {
-    "System"
-  }
-
-  item(
-    title = "Notification",
-    subtitle = "Customize the notification style",
-    imageVector = Icons.Default.Notifications,
-    clickable = {
-    },
-  )
-
-  item(
-    title = "Backup & Restore",
-    subtitle = "Full backup of your app",
-    imageVector = Icons.Default.SettingsBackupRestore,
-    clickable = {
-    },
-  )
-
-  item(
-    title = "Backup & Restore",
-    subtitle = "Full backup of your app",
-    clickable = {
-    },
-  )
-
-  item(
-    title = "Backup & Restore",
-    subtitle = "Full backup of your app",
-    imageVector = Icons.Default.SettingsBackupRestore,
-    clickable = {
-    },
-  )
 }
