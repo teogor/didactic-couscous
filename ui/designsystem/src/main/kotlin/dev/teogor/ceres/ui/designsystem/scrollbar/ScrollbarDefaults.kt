@@ -53,10 +53,10 @@ data class ScrollbarCustomization(
   val selectionMode: ScrollbarSelectionMode = Thumb,
   val hasScrollbarBackground: Boolean = true,
   val indicatorContent: (
-  @Composable (
-    normalizedOffset: Int,
-    isThumbSelected: Boolean,
-  ) -> Unit
+    @Composable (
+      normalizedOffset: Int,
+      isThumbSelected: Boolean,
+    ) -> Unit
   )? = null,
 )
 

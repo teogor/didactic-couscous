@@ -17,9 +17,9 @@
 package dev.teogor.ceres.ui.spectrum.palettes
 
 import androidx.compose.ui.graphics.Color
-import dev.teogor.ceres.ui.spectrum.util.invertColor
 import dev.teogor.ceres.ui.spectrum.hct.Hct
 import dev.teogor.ceres.ui.spectrum.model.ColorInfo
+import dev.teogor.ceres.ui.spectrum.util.invertColor
 
 /**
  * An intermediate concept between the key color for a UI theme, and a full color scheme. 5 sets of

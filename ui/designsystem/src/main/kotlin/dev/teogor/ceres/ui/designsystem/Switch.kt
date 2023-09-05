@@ -84,7 +84,8 @@ fun Switch(
   val minBound = with(LocalDensity.current) { thumbPaddingStart.toPx() }
   val maxBound = with(LocalDensity.current) { ThumbPathLength.toPx() }
   val valueToOffset = remember<(Boolean) -> Float>(minBound, maxBound) {
-    { value ->
+    {
+        value ->
       if (value) maxBound else minBound
     }
   }

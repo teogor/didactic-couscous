@@ -71,7 +71,7 @@ internal fun SettingsRoute(
     clickable = { destination ->
       baseActions.navigateTo(destination)
     },
-    developerModeEnabled = false,//developerModePreferences().enabled,
+    developerModeEnabled = false, // developerModePreferences().enabled,
   )
 }
 
@@ -85,7 +85,7 @@ fun SettingsScreen(
     description = "Design & color options",
     icon = Icons.Default.Style,
     clickable = {
-      //clickable(LookRoute)
+      // clickable(LookRoute)
     },
   )
   settingsItem(
@@ -93,7 +93,7 @@ fun SettingsScreen(
     description = "Customize the notification style",
     icon = Icons.Default.Notifications,
     clickable = {
-      //clickable(NotificationsRoute)
+      // clickable(NotificationsRoute)
     },
   )
   settingsItem(
@@ -105,7 +105,7 @@ fun SettingsScreen(
     description = "Backup and restore your settings, contributors, artists",
     icon = Icons.Default.SettingsBackupRestore,
     clickable = {
-      //clickable(BackupRoute)
+      // clickable(BackupRoute)
     },
   )
   if (developerModeEnabled) {
@@ -113,7 +113,7 @@ fun SettingsScreen(
       title = "Developer options",
       icon = Icons.Default.DeveloperMode,
       clickable = {
-        //clickable(DeveloperOptionsRoute)
+        // clickable(DeveloperOptionsRoute)
       },
     )
   }

@@ -1180,7 +1180,7 @@ private fun ModalBottomSheetAnchorChangeCallback(
 
 @OptIn(ExperimentalMaterialApi::class)
 fun ModalBottomSheetState.toggleVisibility(
-  coroutineScope: CoroutineScope
+  coroutineScope: CoroutineScope,
 ) {
   coroutineScope.launch {
     if (this@toggleVisibility.currentValue == Hidden) {

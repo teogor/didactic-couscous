@@ -60,4 +60,3 @@ fun Context.getIdentifier(
   defType,
   defPackage,
 )
-

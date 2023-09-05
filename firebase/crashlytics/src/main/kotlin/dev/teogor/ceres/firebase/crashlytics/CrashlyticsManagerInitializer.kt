@@ -33,7 +33,7 @@ class CrashlyticsManagerInitializer : Initializer<Unit> {
     //   firebaseCrashlytics.setUserId(userId.value)
     //   firebaseCrashlytics.setCrashlyticsCollectionEnabled(true)
     //
-      CrashlyticsManager(context)
+    CrashlyticsManager(context)
     // }
   }
 

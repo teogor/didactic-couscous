@@ -99,8 +99,7 @@ fun HomeScreen() = ColumnScreen(
 }
 
 @Composable
-private fun ClockConfigScreen(
-) = Layout(
+private fun ClockConfigScreen() = Layout(
   screenName = HomeScreenConfig,
 ) {
   header {
@@ -123,15 +122,12 @@ private fun ClockConfigScreen(
       selectedOption = 1,
     )
   }
-
 }
 
 @Composable
-private fun SettingsLayout(
-) = Layout(
+private fun SettingsLayout() = Layout(
   screenName = HomeScreenConfig,
 ) {
-
   header {
     "UI"
   }
@@ -141,7 +137,6 @@ private fun SettingsLayout(
     subtitle = "Design & color options",
     imageVector = Icons.Default.Style,
     clickable = {
-
     },
   )
 
@@ -154,7 +149,6 @@ private fun SettingsLayout(
     subtitle = "Customize the notification style",
     imageVector = Icons.Default.Notifications,
     clickable = {
-
     },
   )
 
@@ -163,7 +157,6 @@ private fun SettingsLayout(
     subtitle = "Full backup of your app",
     imageVector = Icons.Default.SettingsBackupRestore,
     clickable = {
-
     },
   )
 
@@ -171,7 +164,6 @@ private fun SettingsLayout(
     title = "Backup & Restore",
     subtitle = "Full backup of your app",
     clickable = {
-
     },
   )
 
@@ -180,8 +172,6 @@ private fun SettingsLayout(
     subtitle = "Full backup of your app",
     imageVector = Icons.Default.SettingsBackupRestore,
     clickable = {
-
     },
   )
-
 }

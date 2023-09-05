@@ -24,5 +24,4 @@ import dev.teogor.ceres.theme.configureTheme
 class Application : Application() {
 
   override val themeBuilder = configureTheme()
-
 }

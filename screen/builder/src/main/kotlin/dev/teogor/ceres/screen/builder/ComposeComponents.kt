@@ -35,14 +35,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.teogor.ceres.navigation.core.ScreenRoute
-import dev.teogor.ceres.navigation.core.utilities.toScreenName
 import dev.teogor.ceres.screen.builder.compose.SegmentedButton
 import dev.teogor.ceres.screen.builder.model.ConfigScreenDefaultView
-import dev.teogor.ceres.screen.builder.model.ConfigScreenView
 import dev.teogor.ceres.screen.builder.model.CustomConfigView
 import dev.teogor.ceres.screen.builder.utilities.perform
-import dev.teogor.ceres.screen.core.LazyColumnScreen
 import dev.teogor.ceres.ui.designsystem.Switch
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
@@ -121,7 +117,6 @@ internal fun BuilderListScope.customItem(
   item.content()
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun SegmentedButtonPreview() {
@@ -136,14 +131,12 @@ fun SegmentedButtonPreview() {
     Switch(
       checked = true,
       onCheckedChange = {
-
       },
     )
 
     Switch(
       checked = false,
       onCheckedChange = {
-
       },
     )
   }

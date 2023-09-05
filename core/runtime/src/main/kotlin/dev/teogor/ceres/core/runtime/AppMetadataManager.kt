@@ -118,7 +118,7 @@ object AppMetadataManager {
     ): PackageInfo = if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
       getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
     } else {
-      //@Suppress("DEPRECATION")
+      // @Suppress("DEPRECATION")
       getPackageInfo(packageName, flags)
     }
   }

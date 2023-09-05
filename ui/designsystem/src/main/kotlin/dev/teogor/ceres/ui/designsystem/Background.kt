@@ -32,11 +32,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.ui.theme.core.Theme
+import dev.teogor.ceres.ui.theme.MaterialTheme
 import dev.teogor.ceres.ui.theme.core.GradientColors
 import dev.teogor.ceres.ui.theme.core.LocalBackgroundTheme
 import dev.teogor.ceres.ui.theme.core.LocalGradientColors
-import dev.teogor.ceres.ui.theme.MaterialTheme
+import dev.teogor.ceres.ui.theme.core.Theme
 import kotlin.math.tan
 
 /**

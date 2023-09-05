@@ -20,7 +20,6 @@ import androidx.annotation.ColorInt
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 
-
 @ColorInt
 fun Color.asIntColor(): Int {
   return this.toArgb()

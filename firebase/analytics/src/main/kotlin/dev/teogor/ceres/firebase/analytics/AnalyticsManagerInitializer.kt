@@ -26,7 +26,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 class AnalyticsManagerInitializer : Initializer<Unit> {
   override fun create(context: Context) {
     val firebaseAnalytics = FirebaseAnalytics.getInstance(context)
-    //todo handle this into base activity
+    // todo handle this into base activity
     // val ceresPreferences = ceresPreferences(context)
     // // Get the user ID value
     // ceresPreferences.launch {

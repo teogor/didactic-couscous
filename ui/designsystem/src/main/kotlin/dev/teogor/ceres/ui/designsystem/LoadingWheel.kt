@@ -45,8 +45,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.ui.theme.core.Theme
 import dev.teogor.ceres.ui.theme.MaterialTheme
+import dev.teogor.ceres.ui.theme.core.Theme
 import kotlinx.coroutines.launch
 
 @Composable
