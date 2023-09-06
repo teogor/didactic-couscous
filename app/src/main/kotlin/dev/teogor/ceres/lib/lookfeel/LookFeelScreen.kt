@@ -246,6 +246,8 @@ private fun LookAndFeelLayout(
             Color(0xFF4CAF50),
             Color(0xFF8BC34A),
             Color(0xFFCDDC39),
+            Color(0xFFFF9800),
+            Color(0xFF795548),
           )
 
           val materialColorsThemeAware = materialColors.map {
