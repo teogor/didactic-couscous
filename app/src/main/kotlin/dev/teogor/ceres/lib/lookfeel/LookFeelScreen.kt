@@ -308,8 +308,6 @@ private fun LookAndFeelLayout(
     subtitle = "Changing it from 'Off' will prioritize this over the App theme.",
     subtitleColor = ColorSchemeKeyTokens.Error,
     icon = Icons.Default.InvertColors,
-    clickable = {
-    },
   ) {
     val options = listOf("On", "Off", "Auto")
     segmentedButtons(
