@@ -179,6 +179,11 @@ private fun LookAndFeelLayout(
       icon = Icons.Default.ColorLens,
     ) {
       customView {
+        // AnimatedVisibility(
+        //   visible = ceresPreferences.disableDynamicTheming,
+        //   enter = slideInVertically(initialOffsetY = { it }),
+        //   exit = slideOutVertically(targetOffsetY = { it })
+        // ) {
         val alphaDisabled = ContentAlpha.disabled
         Row(
           modifier = Modifier
@@ -293,6 +298,7 @@ private fun LookAndFeelLayout(
             }
           }
         }
+        // }
       }
     }
   }
