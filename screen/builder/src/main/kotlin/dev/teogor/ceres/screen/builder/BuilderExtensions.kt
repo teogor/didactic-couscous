@@ -139,6 +139,12 @@ fun AdvancedViewBuilder.switchButton(
   this.onSwitchToggled = onSwitchToggled
 }
 
+fun AdvancedViewBuilder.customView(
+  view: @Composable () -> Unit,
+) {
+  this.customView = view
+}
+
 inline fun CategoryConfig.title(
   modifier: Modifier = Modifier,
   crossinline content: () -> String,

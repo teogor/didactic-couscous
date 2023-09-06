@@ -154,6 +154,8 @@ fun AdvancedView(
           },
         )
       }
+
+      customView?.invoke()
     }
   }
 }

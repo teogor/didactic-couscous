@@ -16,6 +16,7 @@
 
 package dev.teogor.ceres.screen.builder.model
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
@@ -30,6 +31,7 @@ class AdvancedViewBuilder(
   internal var segmentedOnOptionSelected: ((Int) -> Unit)? = null,
   internal var switchToggled: Boolean? = null,
   internal var onSwitchToggled: ((Boolean) -> Unit)? = null,
+  internal var customView: (@Composable () -> Unit)? = null,
 ) : SimpleViewBuilder(
   title = title,
   subtitle = subtitle,

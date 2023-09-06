@@ -17,6 +17,7 @@
 package dev.teogor.ceres.ui.theme
 
 import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.ripple.LocalRippleTheme
@@ -57,6 +58,7 @@ import dev.teogor.ceres.ui.theme.tokens.StateTokens
  */
 @Composable
 fun MaterialTheme(
+  darkTheme: Boolean = isSystemInDarkTheme(),
   colorScheme: ColorScheme = MaterialTheme.colorScheme,
   shapes: Shapes = MaterialTheme.shapes,
   typography: Typography = MaterialTheme.typography,
@@ -69,6 +71,10 @@ fun MaterialTheme(
   }.apply {
     updateColorSchemeFrom(colorScheme)
   }
+  // todo better handling for dark theme and theme config
+  val rememberDarkTheme = remember(darkTheme) {
+    darkTheme
+  }
   val rippleIndication = rememberRipple()
   val selectionColors = rememberTextSelectionColors(rememberedColorScheme)
   CompositionLocalProvider(
@@ -78,6 +84,7 @@ fun MaterialTheme(
     LocalShapes provides shapes,
     LocalTextSelectionColors provides selectionColors,
     LocalTypography provides typography,
+    LocalIsDarkMode provides rememberDarkTheme,
   ) {
     ProvideTextStyle(value = typography.bodyLarge, content = content)
   }
@@ -95,6 +102,16 @@ object MaterialTheme {
     @Composable
     @ReadOnlyComposable
     get() = LocalColorScheme.current
+
+  /**
+   * Retrieves the current isDarkMode value at the call site's position in the hierarchy.
+   *
+   * @return `true` if the current theme is in dark mode, `false` otherwise.
+   */
+  val isDarkMode: Boolean
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalIsDarkMode.current
 
   /**
    * Retrieves the current [Typography] at the call site's position in the hierarchy.

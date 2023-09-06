@@ -76,7 +76,7 @@ class CeresPreferences(context: Context, name: String) : PreferenceDatastore(
     val disableDesaturatedColor = booleanPreferencesKey("disable_desaturated_color")
 
     // feedback
-    val disableAudioFeedback = booleanPreferencesKey("disable_audio_feedback")
+    val disableSoundFeedback = booleanPreferencesKey("disable_sound_feedback")
     val disableVibrationFeedback = booleanPreferencesKey("disable_vibration_feedback")
   }
 
@@ -313,22 +313,22 @@ class CeresPreferences(context: Context, name: String) : PreferenceDatastore(
   fun getJustBlackThemeFlow() = dataStore.data
     .map { preferences -> getAppThemeFromInt(preferences[Keys.justBlack] ?: 0) }
 
-  var disableAudioFeedback: Boolean
+  var disableSoundFeedback: Boolean
     get() = runBlocking {
       getter(
-        key = Keys.disableAudioFeedback,
+        key = Keys.disableSoundFeedback,
         default = false,
       )
     }
     set(value) = runBlocking {
       setter(
-        key = Keys.disableAudioFeedback,
+        key = Keys.disableSoundFeedback,
         value = value,
       )
     }
 
-  fun getDisableAudioFeedbackFlow() = getFlow(
-    key = Keys.disableAudioFeedback,
+  fun getDisableSoundFeedbackFlow() = getFlow(
+    key = Keys.disableSoundFeedback,
     default = false,
   )
 

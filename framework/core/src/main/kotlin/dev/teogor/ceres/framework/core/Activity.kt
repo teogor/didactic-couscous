@@ -172,8 +172,8 @@ open class Activity : ComponentActivity() {
       )
 
       val disableAudioFeedback = rememberPreference(
-        ceresPreferences.getDisableAudioFeedbackFlow(),
-        ceresPreferences.disableAudioFeedback,
+        ceresPreferences.getDisableSoundFeedbackFlow(),
+        ceresPreferences.disableSoundFeedback,
       )
 
       val disableVibrationFeedback = rememberPreference(

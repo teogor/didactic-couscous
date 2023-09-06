@@ -842,6 +842,8 @@ fun ColorScheme.surfaceColorAtElevation(
  */
 internal val LocalColorScheme = staticCompositionLocalOf { lightColorScheme() }
 
+internal val LocalIsDarkMode = staticCompositionLocalOf { false }
+
 /**
  * A low level of alpha used to represent disabled components, such as text in a disabled Button.
  */

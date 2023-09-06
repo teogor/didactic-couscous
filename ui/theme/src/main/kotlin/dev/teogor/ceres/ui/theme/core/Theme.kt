@@ -114,6 +114,7 @@ fun Theme(
     LocalTintTheme provides tintTheme,
   ) {
     MaterialTheme(
+      darkTheme = darkTheme,
       colorScheme = colorScheme,
       typography = CeresTypography,
       content = content,
