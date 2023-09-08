@@ -61,6 +61,11 @@ class BuildDocsPlugin : Plugin<Project> {
       markdownBuilder.appendLine("- **Description:** This module provides `${module.name}` functionality.")
       markdownBuilder.appendLine("- **Source Code:** [View Source](..${module.path.replace(":", "/")})")
       markdownBuilder.appendLine("")
+      markdownBuilder.appendLine("### Implementation")
+      markdownBuilder.appendLine("```kotlin")
+      markdownBuilder.appendLine("implementation(\"dev.teogor.ceres:${rootModuleName.lowercase()}-${module.name}:1.0.0-alpha01\")")
+      markdownBuilder.appendLine("```")
+      markdownBuilder.appendLine("")
     }
     return markdownBuilder.toString()
   }
