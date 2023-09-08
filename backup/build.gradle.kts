@@ -15,14 +15,17 @@
  */
 import com.vanniktech.maven.publish.SonatypeHost
 import dev.teogor.ceres.gradle.plugins.CeresLibraryExtension
+import dev.teogor.ceres.gradle.plugins.setModuleCoordinates
 
 plugins {
   id("ceres.module")
 }
 
 ceresModule {
-  artifactIdPrefix = "backup"
-  version = "1.2.0"
+  setModuleCoordinates(
+    artifactIdPrefix = "backup",
+    version = "1.0.0-alpha01",
+  )
 }
 
 subprojects {
