@@ -1,4 +1,4 @@
-name: Publish Utilities
+name: Publish Core
 
 on:
   workflow_dispatch:
@@ -33,4 +33,4 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew :core:publishUtilitiesLibrariesToMavenCentral --no-configuration-cache
+          ./gradlew :core:publishCoreLibrariesToMavenCentral --no-configuration-cache

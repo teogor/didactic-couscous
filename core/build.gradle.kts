@@ -21,7 +21,7 @@ plugins {
 }
 
 ceresModule {
-  artifactIdPrefix = "utilities"
+  artifactIdPrefix = "core"
   version = "1.0.0-alpha01"
 }
 
