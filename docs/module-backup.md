@@ -1,4 +1,10 @@
 # Backup Modules
 
-- Core Module - [View Source](../backup/core)
-- Ui Module - [View Source](../backup/ui)
+## Core Module
+- **Description:** This module provides core functionality.
+- **Source Code:** [View Source](../backup/core)
+
+## Ui Module
+- **Description:** This module provides ui functionality.
+- **Source Code:** [View Source](../backup/ui)
+

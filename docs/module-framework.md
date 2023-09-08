@@ -1,4 +1,10 @@
 # Framework Modules
 
-- Core Module - [View Source](../framework/core)
-- Ui Module - [View Source](../framework/ui)
+## Core Module
+- **Description:** This module provides core functionality.
+- **Source Code:** [View Source](../framework/core)
+
+## Ui Module
+- **Description:** This module provides ui functionality.
+- **Source Code:** [View Source](../framework/ui)
+

@@ -32,19 +32,21 @@ class BuildDocsPlugin : Plugin<Project> {
         modulesByComponent[component] = componentModules
       }
     }
-    project.tasks.create("createCeresDocs") {
-      modulesByComponent.forEach { (component, componentModules) ->
-        val rootModuleName = component.replaceFirstChar { it.titlecase() }
+    project.tasks.create("generateCeresDocs") {
+      doLast {
+        modulesByComponent.forEach { (component, componentModules) ->
+          val rootModuleName = component.replaceFirstChar { it.titlecase() }
 
-        // Create and save a file in the root project directory
-        val fileName = "module-$component.md" // Replace with your desired file name
+          // Create and save a file in the root project directory
+          val fileName = "module-$component.md" // Replace with your desired file name
 
-        val rootProjectDir = project.rootDir
-        val docsDir = File(rootProjectDir, "docs")
-        docsDir.mkdirs()
+          val rootProjectDir = project.rootDir
+          val docsDir = File(rootProjectDir, "docs")
+          docsDir.mkdirs()
 
-        val outputFile = File(docsDir, fileName)
-        outputFile.writeText(generateMarkdownContent(componentModules, rootModuleName))
+          val outputFile = File(docsDir, fileName)
+          outputFile.writeText(generateMarkdownContent(componentModules, rootModuleName))
+        }
       }
     }
   }
@@ -55,11 +57,10 @@ class BuildDocsPlugin : Plugin<Project> {
     markdownBuilder.appendLine("")
     componentModules.forEach { module ->
       val moduleNameCapitalized = capitalizeAndReplace(module.name)
-      if (module.name.contains("test")) {
-        markdownBuilder.appendLine("- $moduleNameCapitalized Module (:rotating_light:) - [View Source](..${module.path.replace(":", "/")})")
-      } else {
-        markdownBuilder.appendLine("- $moduleNameCapitalized Module - [View Source](..${module.path.replace(":", "/")})")
-      }
+      markdownBuilder.appendLine("## $moduleNameCapitalized Module")
+      markdownBuilder.appendLine("- **Description:** This module provides `${module.name}` functionality.")
+      markdownBuilder.appendLine("- **Source Code:** [View Source](..${module.path.replace(":", "/")})")
+      markdownBuilder.appendLine("")
     }
     return markdownBuilder.toString()
   }

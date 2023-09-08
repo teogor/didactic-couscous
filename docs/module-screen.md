@@ -1,4 +1,10 @@
 # Screen Modules
 
-- Builder Module - [View Source](../screen/builder)
-- Core Module - [View Source](../screen/core)
+## Builder Module
+- **Description:** This module provides builder functionality.
+- **Source Code:** [View Source](../screen/builder)
+
+## Core Module
+- **Description:** This module provides core functionality.
+- **Source Code:** [View Source](../screen/core)
+
