@@ -20,6 +20,9 @@ rootProject.name = "Didactic Couscous"
 // App
 include(":app")
 
+// BOM
+include(":bom")
+
 // Navigation
 include(":navigation:common")
 include(":navigation:core")
