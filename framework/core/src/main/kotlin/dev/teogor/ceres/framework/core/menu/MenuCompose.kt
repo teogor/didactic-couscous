@@ -46,7 +46,7 @@ private val roundedShapeBottom = RoundedCornerShape(
 )
 
 @Composable
-internal fun MenuTitle(
+fun MenuTitle(
   title: String,
   hasCloseButton: Boolean = true,
   onClose: () -> Unit = {},
