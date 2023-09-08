@@ -10,7 +10,7 @@ class CeresModulePlugin : Plugin<Project> {
     with(target) {
       // Create an extension to allow users to configure the "ceresModule" block
       val ceresModuleExtension = project.extensions.create(
-        "ceresModule", CeresModuleExtension::class.java
+        "ceresModule", CeresModuleExtension::class.java,
       )
       pluginManager.apply("com.vanniktech.maven.publish")
 
@@ -20,7 +20,7 @@ class CeresModulePlugin : Plugin<Project> {
         val version = ceresModuleExtension.version!!
         val isBomModule = ceresModuleExtension.isBomModule
 
-        if(!isBomModule) {
+        if (!isBomModule) {
           subprojects {
             pluginManager.apply("ceres.library.publish")
             val libraryPublish = project.extensions.getByType(CeresLibraryExtension::class.java)
@@ -44,18 +44,16 @@ class CeresModulePlugin : Plugin<Project> {
         val artifactIdPrefixTitlecase = artifactIdPrefix.replaceFirstChar { it.titlecase() }
         val taskName = "publish${artifactIdPrefixTitlecase}LibrariesToMavenCentral"
         project.tasks.create(taskName) {
-          if(isBomModule) {
+          if (isBomModule) {
             dependsOn("${this@with.path}:publish")
           }
-          doLast {
-            if(!isBomModule) {
-              subprojects {
-                dependsOn("$path:publish")
-              }
+          if (!isBomModule) {
+            subprojects {
+              dependsOn("$path:publish")
             }
           }
         }
-        if(!isBomModule) {
+        if (!isBomModule) {
           val rootProjectDir = project.rootDir
           project.tasks.create("generateCeresDocs") {
             doLast {
@@ -65,12 +63,14 @@ class CeresModulePlugin : Plugin<Project> {
               docsDir.mkdirs()
 
               val outputFile = File(docsDir, fileName)
-              outputFile.writeText(generateMarkdownContent(
-                subprojects.toList(),
-                group = "dev.teogor.ceres",
-                artifactIdPrefix = artifactIdPrefix,
-                version = ceresModuleExtension.version!!,
-              ))
+              outputFile.writeText(
+                generateMarkdownContent(
+                  subprojects.toList(),
+                  group = "dev.teogor.ceres",
+                  artifactIdPrefix = artifactIdPrefix,
+                  version = ceresModuleExtension.version!!,
+                ),
+              )
             }
           }
         }
@@ -145,7 +145,14 @@ class CeresModulePlugin : Plugin<Project> {
       val moduleNameCapitalized = capitalizeAndReplace(module.name)
       markdownBuilder.appendLine("## $moduleNameCapitalized Module")
       markdownBuilder.appendLine("- **Description:** This module provides `${module.name}` functionality.")
-      markdownBuilder.appendLine("- **Source Code:** [View Source](..${module.path.replace(":", "/")})")
+      markdownBuilder.appendLine(
+        "- **Source Code:** [View Source](..${
+          module.path.replace(
+            ":",
+            "/",
+          )
+        })",
+      )
       markdownBuilder.appendLine("")
       markdownBuilder.appendLine("### Implementation")
       markdownBuilder.appendLine("```kotlin")
