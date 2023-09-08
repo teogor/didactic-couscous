@@ -18,9 +18,21 @@ class CeresModulePlugin : Plugin<Project> {
       project.afterEvaluate {
         val artifactIdPrefix = ceresModuleExtension.artifactIdPrefix!!
         val version = ceresModuleExtension.version!!
+        val isModulesParent = ceresModuleExtension.isModulesParent
 
-        // Access all subprojects within the current module
-        subprojects {
+        if(isModulesParent) {
+          subprojects {
+            pluginManager.apply("ceres.library.publish")
+            val libraryPublish = project.extensions.getByType(CeresLibraryExtension::class.java)
+
+            val moduleName = this.name
+
+            libraryPublish.apply {
+              this.artifactId = "$artifactIdPrefix-$moduleName"
+              this.version = version
+            }
+          }
+        } else {
           pluginManager.apply("ceres.library.publish")
           val libraryPublish = project.extensions.getByType(CeresLibraryExtension::class.java)
 
@@ -35,7 +47,11 @@ class CeresModulePlugin : Plugin<Project> {
         val taskName = "publish${artifactIdPrefixTitlecase}LibrariesToMavenCentral"
         project.tasks.create(taskName) {
           doLast {
-            subprojects {
+            if(isModulesParent) {
+              subprojects {
+                dependsOn("$path:publish")
+              }
+            } else {
               dependsOn("$path:publish")
             }
           }

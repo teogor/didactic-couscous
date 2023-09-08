@@ -2,17 +2,20 @@ import com.vanniktech.maven.publish.SonatypeHost
 import dev.teogor.ceres.gradle.plugins.CeresLibraryExtension
 
 plugins {
-  id("com.vanniktech.maven.publish")
   id("java-platform")
+  id("ceres.module")
+}
+
+ceresModule {
+  artifactIdPrefix = "bom"
+  version = "1.0.0-alpha01"
+  isModulesParent = false
 }
 
 afterEvaluate {
   collectBomConstraints()
 
-  val ceresLibrary = CeresLibraryExtension().apply {
-    artifactId = "bom"
-    version = "2023.09.08"
-  }
+  val ceresLibrary = project.extensions.getByType(CeresLibraryExtension::class.java)
   mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01)
     signAllPublications()

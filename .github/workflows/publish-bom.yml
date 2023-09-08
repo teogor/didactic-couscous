@@ -1,4 +1,4 @@
-name: Publish BoM
+name: Publish Bom
 
 on:
   workflow_dispatch:
@@ -33,4 +33,4 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew :bom:publish --no-configuration-cache
+          ./gradlew :bom:publishBomLibrariesToMavenCentral --no-configuration-cache

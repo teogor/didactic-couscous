@@ -22,7 +22,7 @@ plugins {
 
 ceresModule {
   artifactIdPrefix = "core"
-  version = "1.0.0-alpha01"
+  version = "2.5.1"
 }
 
 subprojects {
