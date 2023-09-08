@@ -14,15 +14,22 @@ fun Project.collectBomConstraints() {
   rootProject.subprojects {
     val subproject = this
 
-    subproject.plugins.withId("com.vanniktech.maven.publish.base") {
-      bomConstraints.api(subproject)
-    }
+    subproject.plugins.withId("ceres.library.publish") {
+      println("plguinId::ceres.library.publish name=${subproject.name}")
+      subproject.plugins.withId("com.vanniktech.maven.publish.base") {
+        bomConstraints.api(subproject)
+      }
 
-    subproject.plugins.withId("com.vanniktech.maven.publish") {
-      bomConstraints.api(subproject)
+      subproject.plugins.withId("com.vanniktech.maven.publish") {
+        bomConstraints.api(subproject)
+      }
     }
   }
 }
 
-private fun DependencyConstraintHandler.api(constraintNotation: Any) =
+private fun DependencyConstraintHandler.api(
+  constraintNotation: Any
+) {
+  println("constraintNotation -- $constraintNotation")
   add("api", constraintNotation)
+}

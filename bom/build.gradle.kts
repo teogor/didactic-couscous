@@ -6,9 +6,9 @@ plugins {
   id("java-platform")
 }
 
-collectBomConstraints()
-
 afterEvaluate {
+  collectBomConstraints()
+
   val ceresLibrary = CeresLibraryExtension().apply {
     artifactId = "bom"
     version = "2023.09.08"
