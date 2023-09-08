@@ -46,13 +46,14 @@ class CeresModulePlugin : Plugin<Project> {
         val artifactIdPrefixTitlecase = artifactIdPrefix.replaceFirstChar { it.titlecase() }
         val taskName = "publish${artifactIdPrefixTitlecase}LibrariesToMavenCentral"
         project.tasks.create(taskName) {
+          if(!isModulesParent) {
+            dependsOn("${this@with.name}:publish")
+          }
           doLast {
             if(isModulesParent) {
               subprojects {
                 dependsOn("$path:publish")
               }
-            } else {
-              dependsOn("$path:publish")
             }
           }
         }

@@ -3,7 +3,7 @@ package dev.teogor.ceres.gradle.plugins
 import org.gradle.api.publish.maven.MavenPom
 
 open class CeresLibraryExtension {
-    val groupId: String = "dev.teogor.ceres"
+    val groupId: String = "dev.teogor.ceres.beta.launch.test"
     var artifactId: String? = null
     var version: String? = null
 
