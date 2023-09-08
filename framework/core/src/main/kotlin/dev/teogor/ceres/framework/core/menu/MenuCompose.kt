@@ -45,6 +45,7 @@ private val roundedShapeBottom = RoundedCornerShape(
   bottomEnd = cornerSize,
 )
 
+// todo is public due to use in Menu
 @Composable
 fun MenuTitle(
   title: String,
