@@ -18,10 +18,6 @@ fun Project.collectBomConstraints() {
         subproject.plugins.withId("com.vanniktech.maven.publish.base") {
           bomConstraints.api(subproject)
         }
-
-        subproject.plugins.withId("com.vanniktech.maven.publish") {
-          bomConstraints.api(subproject)
-        }
       }
     }
   }
