@@ -1,5 +1,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import dev.teogor.ceres.gradle.plugins.CeresLibraryExtension
+import dev.teogor.ceres.gradle.plugins.setIsBomModule
+import dev.teogor.ceres.gradle.plugins.setModuleCoordinates
 
 plugins {
   id("java-platform")
@@ -7,9 +9,12 @@ plugins {
 }
 
 ceresModule {
-  artifactIdPrefix = "bom"
-  version = "1.0.0-alpha01"
-  isBomModule = true
+  setModuleCoordinates(
+    artifactIdPrefix = "bom",
+    version = "1.0.0-alpha01",
+  )
+
+  setIsBomModule()
 }
 
 afterEvaluate {
