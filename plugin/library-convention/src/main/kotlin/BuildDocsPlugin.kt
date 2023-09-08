@@ -15,7 +15,6 @@
  */
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import java.io.File
 
 class BuildDocsPlugin : Plugin<Project> {
   override fun apply(project: Project) {
@@ -35,17 +34,18 @@ class BuildDocsPlugin : Plugin<Project> {
     project.tasks.create("generateCeresDocs") {
       doLast {
         modulesByComponent.forEach { (component, componentModules) ->
-          val rootModuleName = component.replaceFirstChar { it.titlecase() }
-
-          // Create and save a file in the root project directory
-          val fileName = "module-$component.md" // Replace with your desired file name
-
-          val rootProjectDir = project.rootDir
-          val docsDir = File(rootProjectDir, "docs")
-          docsDir.mkdirs()
-
-          val outputFile = File(docsDir, fileName)
-          outputFile.writeText(generateMarkdownContent(componentModules, rootModuleName))
+          // val rootModuleName = component.replaceFirstChar { it.titlecase() }
+          //
+          // // Create and save a file in the root project directory
+          // val fileName = "module-$component.md" // Replace with your desired file name
+          //
+          // val rootProjectDir = project.rootDir
+          // val docsDir = File(rootProjectDir, "docs")
+          // docsDir.mkdirs()
+          //
+          // val outputFile = File(docsDir, fileName)
+          // outputFile.writeText(generateMarkdownContent(componentModules, rootModuleName))
+          dependsOn(":$component:generateCeresDocs")
         }
       }
     }
