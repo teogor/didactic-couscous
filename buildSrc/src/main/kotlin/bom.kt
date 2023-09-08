@@ -1,4 +1,3 @@
-
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.DependencyConstraintHandler
 
@@ -14,9 +13,8 @@ fun Project.collectBomConstraints() {
   rootProject.subprojects {
     val subproject = this
 
-    if(subproject.name != "bom") {
+    if (subproject.name != "bom") {
       subproject.plugins.withId("ceres.library.publish") {
-        println("plguinId::ceres.library.publish name=${subproject.name}")
         subproject.plugins.withId("com.vanniktech.maven.publish.base") {
           bomConstraints.api(subproject)
         }
@@ -30,8 +28,5 @@ fun Project.collectBomConstraints() {
 }
 
 private fun DependencyConstraintHandler.api(
-  constraintNotation: Any
-) {
-  println("constraintNotation -- $constraintNotation")
-  add("api", constraintNotation)
-}
+  constraintNotation: Any,
+) = add("api", constraintNotation)
