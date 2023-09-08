@@ -45,7 +45,7 @@ class CeresModulePlugin : Plugin<Project> {
           doLast {
             val fileName = "module-$artifactIdPrefix.md"
 
-            val docsDir = File(rootProjectDir, "docs-v2")
+            val docsDir = File(rootProjectDir, "docs")
             docsDir.mkdirs()
 
             val outputFile = File(docsDir, fileName)

@@ -33,47 +33,10 @@ class BuildDocsPlugin : Plugin<Project> {
     }
     project.tasks.create("generateCeresDocs") {
       doLast {
-        modulesByComponent.forEach { (component, componentModules) ->
-          // val rootModuleName = component.replaceFirstChar { it.titlecase() }
-          //
-          // // Create and save a file in the root project directory
-          // val fileName = "module-$component.md" // Replace with your desired file name
-          //
-          // val rootProjectDir = project.rootDir
-          // val docsDir = File(rootProjectDir, "docs")
-          // docsDir.mkdirs()
-          //
-          // val outputFile = File(docsDir, fileName)
-          // outputFile.writeText(generateMarkdownContent(componentModules, rootModuleName))
+        modulesByComponent.forEach { (component, _) ->
           dependsOn(":$component:generateCeresDocs")
         }
       }
     }
   }
-
-  private fun generateMarkdownContent(componentModules: List<Project>, rootModuleName: String): String {
-    val markdownBuilder = StringBuilder()
-    markdownBuilder.appendLine("# $rootModuleName Modules")
-    markdownBuilder.appendLine("")
-    componentModules.forEach { module ->
-      val moduleNameCapitalized = capitalizeAndReplace(module.name)
-      markdownBuilder.appendLine("## $moduleNameCapitalized Module")
-      markdownBuilder.appendLine("- **Description:** This module provides `${module.name}` functionality.")
-      markdownBuilder.appendLine("- **Source Code:** [View Source](..${module.path.replace(":", "/")})")
-      markdownBuilder.appendLine("")
-      markdownBuilder.appendLine("### Implementation")
-      markdownBuilder.appendLine("```kotlin")
-      markdownBuilder.appendLine("implementation(\"dev.teogor.ceres:${rootModuleName.lowercase()}-${module.name}:1.0.0-alpha01\")")
-      markdownBuilder.appendLine("```")
-      markdownBuilder.appendLine("")
-    }
-    return markdownBuilder.toString()
-  }
-
-  private fun capitalizeAndReplace(input: String): String {
-    val words = input.split("-")
-    val capitalizedWords = words.map { it.replaceFirstChar { char -> char.titlecase() } }
-    return capitalizedWords.joinToString(" ")
-  }
-
 }
