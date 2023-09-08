@@ -122,7 +122,7 @@ class CeresModulePlugin : Plugin<Project> {
     version: String,
   ): String {
     val markdownBuilder = StringBuilder()
-    markdownBuilder.appendLine("# $artifactIdPrefix Modules")
+    markdownBuilder.appendLine("# ${capitalizeAndReplace(artifactIdPrefix)} Modules")
     markdownBuilder.appendLine("")
     componentModules.forEach { module ->
       val moduleNameCapitalized = capitalizeAndReplace(module.name)
