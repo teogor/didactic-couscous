@@ -21,12 +21,12 @@ class BuildDocsPlugin : Plugin<Project> {
   override fun apply(project: Project) {
     val modulesByComponent = mutableMapOf<String, MutableList<Project>>()
     val modulesCeres = project.allprojects.filter {
-      it.path.count { char -> char == ':' } == 3
+      it.path.count { char -> char == ':' } == 2
     }
     modulesCeres.forEach { module ->
       val pathComponents = module.path.split(":")
-      if (pathComponents.size >= 3) {
-        val component = pathComponents[2]
+      if (pathComponents.size >= 2) {
+        val component = pathComponents[1]
         val componentModules = modulesByComponent.getOrDefault(component, mutableListOf())
         componentModules.add(module)
         modulesByComponent[component] = componentModules
