@@ -18,9 +18,9 @@ class CeresModulePlugin : Plugin<Project> {
       project.afterEvaluate {
         val artifactIdPrefix = ceresModuleExtension.artifactIdPrefix!!
         val version = ceresModuleExtension.version!!
-        val isModulesParent = ceresModuleExtension.isModulesParent
+        val isBomModule = ceresModuleExtension.isBomModule
 
-        if(isModulesParent) {
+        if(!isBomModule) {
           subprojects {
             pluginManager.apply("ceres.library.publish")
             val libraryPublish = project.extensions.getByType(CeresLibraryExtension::class.java)
@@ -36,42 +36,42 @@ class CeresModulePlugin : Plugin<Project> {
           pluginManager.apply("ceres.library.publish")
           val libraryPublish = project.extensions.getByType(CeresLibraryExtension::class.java)
 
-          val moduleName = this.name
-
           libraryPublish.apply {
-            this.artifactId = "$artifactIdPrefix-$moduleName"
+            this.artifactId = artifactIdPrefix
             this.version = version
           }
         }
         val artifactIdPrefixTitlecase = artifactIdPrefix.replaceFirstChar { it.titlecase() }
         val taskName = "publish${artifactIdPrefixTitlecase}LibrariesToMavenCentral"
         project.tasks.create(taskName) {
-          if(!isModulesParent) {
+          if(isBomModule) {
             dependsOn("${this@with.path}:publish")
           }
           doLast {
-            if(isModulesParent) {
+            if(!isBomModule) {
               subprojects {
                 dependsOn("$path:publish")
               }
             }
           }
         }
-        val rootProjectDir = project.rootDir
-        project.tasks.create("generateCeresDocs") {
-          doLast {
-            val fileName = "module-$artifactIdPrefix.md"
+        if(!isBomModule) {
+          val rootProjectDir = project.rootDir
+          project.tasks.create("generateCeresDocs") {
+            doLast {
+              val fileName = "module-$artifactIdPrefix.md"
 
-            val docsDir = File(rootProjectDir, "docs")
-            docsDir.mkdirs()
+              val docsDir = File(rootProjectDir, "docs")
+              docsDir.mkdirs()
 
-            val outputFile = File(docsDir, fileName)
-            outputFile.writeText(generateMarkdownContent(
-              subprojects.toList(),
-              group = "dev.teogor.ceres",
-              artifactIdPrefix = artifactIdPrefix,
-              version = ceresModuleExtension.version!!,
-            ))
+              val outputFile = File(docsDir, fileName)
+              outputFile.writeText(generateMarkdownContent(
+                subprojects.toList(),
+                group = "dev.teogor.ceres",
+                artifactIdPrefix = artifactIdPrefix,
+                version = ceresModuleExtension.version!!,
+              ))
+            }
           }
         }
 

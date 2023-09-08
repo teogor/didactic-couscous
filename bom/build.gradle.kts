@@ -9,7 +9,7 @@ plugins {
 ceresModule {
   artifactIdPrefix = "bom"
   version = "1.0.0-alpha01"
-  isModulesParent = false
+  isBomModule = false
 }
 
 afterEvaluate {
