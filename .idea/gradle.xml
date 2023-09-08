@@ -30,6 +30,7 @@
             <option value="$PROJECT_DIR$/backup" />
             <option value="$PROJECT_DIR$/backup/core" />
             <option value="$PROJECT_DIR$/backup/ui" />
+            <option value="$PROJECT_DIR$/bom" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/network" />
