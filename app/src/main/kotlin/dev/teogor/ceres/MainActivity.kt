@@ -19,8 +19,8 @@ package dev.teogor.ceres
 import androidx.compose.runtime.Composable
 import dagger.hilt.android.AndroidEntryPoint
 import dev.teogor.ceres.framework.core.Activity
-import dev.teogor.ceres.framework.core.beta.MenuConfig
-import dev.teogor.ceres.framework.core.beta.NavGraphOptions
+import dev.teogor.ceres.framework.core.model.MenuConfig
+import dev.teogor.ceres.framework.core.model.NavGraphOptions
 import dev.teogor.ceres.menu.applyMenuConfig
 import dev.teogor.ceres.navigation.ApplyNavHost
 import dev.teogor.ceres.navigation.core.menu.TopLevelDestination

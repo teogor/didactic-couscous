@@ -46,8 +46,8 @@ import dev.teogor.ceres.firebase.crashlytics.CrashInfoLegacy
 import dev.teogor.ceres.firebase.crashlytics.CrashlyticsHelper
 import dev.teogor.ceres.firebase.crashlytics.LocalCrashlyticsHelper
 import dev.teogor.ceres.framework.core.app.CeresApp
-import dev.teogor.ceres.framework.core.beta.MenuConfig
-import dev.teogor.ceres.framework.core.beta.NavGraphOptions
+import dev.teogor.ceres.framework.core.model.MenuConfig
+import dev.teogor.ceres.framework.core.model.NavGraphOptions
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.NavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute

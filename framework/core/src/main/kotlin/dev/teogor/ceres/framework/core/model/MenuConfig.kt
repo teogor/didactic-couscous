@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.framework.core.beta
+package dev.teogor.ceres.framework.core.model
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import dev.teogor.ceres.framework.core.app.BaseActions
-import dev.teogor.ceres.framework.core.app.CeresAppState
+import androidx.compose.runtime.Composable
+import dev.teogor.ceres.framework.core.menu.MenuScope
 
-data class NavGraphOptions(
-  val windowSizeClass: WindowSizeClass,
-  val ceresAppState: CeresAppState,
-  val baseActions: BaseActions,
-  val padding: PaddingValues,
-)
+class MenuConfig {
+  var header: (@Composable () -> Unit)? = null
+  var menuSheet: (MenuScope.() -> Unit)? = null
+}
