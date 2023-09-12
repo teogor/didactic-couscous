@@ -44,30 +44,23 @@ fun MenuConfig.applyMenuConfig() = apply {
   }
 
   menuContent = {
+    // menu configurator
     menu {
+      // menu header
       menuTop {
-        menuUserData(
-          clickable = {
-            //  onNavigation(UserPrefRoute)
-          },
-        )
+        // ceres built-in user details
+        menuUserData()
 
+        // use menu divider to add a divider
         menuDivider()
 
-        menuItem(
-          content = "D:: Top Header Item",
-          icon = Icons.Outlined.Settings,
-        )
-
-        menuItem(
-          content = "D:: Middle Header Item",
-          icon = Icons.Outlined.Settings,
-        )
-
-        menuItem(
-          content = "D:: Bottom Header Item",
-          icon = Icons.Outlined.Settings,
-        )
+        // demo showcase of menu top header elements
+        repeat(3) {
+          menuItem(
+            content = "Element $it",
+            icon = Icons.Outlined.Settings,
+          )
+        }
       }
 
       // menuContent {
