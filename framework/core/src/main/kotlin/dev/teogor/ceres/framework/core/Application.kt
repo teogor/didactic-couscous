@@ -19,18 +19,38 @@ package dev.teogor.ceres.framework.core
 import dev.teogor.ceres.data.datastore.defaults.ThemeConfig
 import dev.teogor.ceres.framework.core.model.ThemeBuilder
 
+/**
+ * Base Android Application class for the Ceres application.
+ *
+ * This class extends the Android [android.app.Application] class and provides the foundation
+ * for initializing the application's theme and other configurations.
+ */
 open class Application : android.app.Application() {
 
+  /**
+   * The [ThemeBuilder] instance used to configure the theme for the Ceres application.
+   *
+   * This property initializes the theme configuration using [configureTheme].
+   */
   open val themeBuilder: ThemeBuilder = ThemeBuilder(
     themeSeed = "#0B57D0",
   )
 
+  /**
+   * Called when the application is starting.
+   */
   override fun onCreate() {
     super.onCreate()
 
+    // Configure the application's theme
     configureTheme()
   }
 
+  /**
+   * Configures the theme for the application using the provided [themeBuilder].
+   *
+   * This function initializes the theme configuration for the Ceres application.
+   */
   private fun configureTheme() {
     with(ThemeConfig) {
       seedHex = themeBuilder.themeSeed

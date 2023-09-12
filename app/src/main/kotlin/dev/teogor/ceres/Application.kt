@@ -18,10 +18,21 @@ package dev.teogor.ceres
 
 import dagger.hilt.android.HiltAndroidApp
 import dev.teogor.ceres.framework.core.Application
+import dev.teogor.ceres.framework.core.model.ThemeBuilder
 import dev.teogor.ceres.theme.configureTheme
 
+/**
+ * Android Application class for Ceres application.
+ *
+ * This class extends the Android [Application] class.
+ */
 @HiltAndroidApp
 class Application : Application() {
 
+  /**
+   * The [ThemeBuilder] instance used to configure the theme for the Ceres application.
+   *
+   * This property initializes the theme configuration using [configureTheme].
+   */
   override val themeBuilder = configureTheme()
 }
