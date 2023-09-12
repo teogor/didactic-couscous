@@ -28,6 +28,12 @@ import dev.teogor.ceres.lib.lookfeel.lookAndFeelScreenNav
 import dev.teogor.ceres.lib.settings.settingsScreenNav
 import dev.teogor.ceres.navigation.core.NavHost
 
+/**
+ * Composable function that applies a [NavHost] to the UI with specified
+ * modifiers and parameters.
+ *
+ * @return The [NavHost] composable.
+ */
 @Composable
 fun NavGraphOptions.ApplyNavHost() = NavHost(
   modifier = Modifier.padding(
@@ -38,6 +44,14 @@ fun NavGraphOptions.ApplyNavHost() = NavHost(
   baseActions = baseActions,
 )
 
+/**
+ * Composable function for defining a [NavHost] with customizable parameters.
+ *
+ * @param modifier The modifier for the [NavHost].
+ * @param startDestination The start destination route.
+ * @param appState The Ceres app state.
+ * @param baseActions The base actions for navigation.
+ */
 @Composable
 private fun NavHost(
   modifier: Modifier = Modifier,
