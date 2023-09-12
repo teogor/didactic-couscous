@@ -47,14 +47,14 @@ fun MenuConfig.applyMenuConfig() = apply {
     navigationParameters.screenRoute = this
   }
 
-  header = {
+  headerContent = {
     MenuTitle(
       title = "Ceres",
     )
   }
 
   // todo rename
-  menuSheet = {
+  menuContent = {
     menu {
       menuTop {
         menuUserData(

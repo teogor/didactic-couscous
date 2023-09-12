@@ -16,10 +16,11 @@
 
 package dev.teogor.ceres.framework.core.model
 
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import dev.teogor.ceres.framework.core.menu.MenuScope
 
 class MenuConfig {
-  var header: (@Composable () -> Unit)? = null
-  var menuSheet: (MenuScope.() -> Unit)? = null
+  var headerContent: (@Composable BoxScope.() -> Unit)? = null
+  var menuContent: (MenuScope.() -> Unit)? = null
 }
