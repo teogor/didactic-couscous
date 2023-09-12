@@ -20,8 +20,16 @@ import androidx.compose.ui.graphics.Color
 import dev.teogor.ceres.framework.core.model.ThemeBuilder
 import dev.teogor.ceres.ui.spectrum.utilities.asHexColor
 
+/**
+ * Default color used for configuring the Ceres theme.
+ */
 private val color = Color(39, 158, 31, 255)
 
+/**
+ * Configures the Ceres theme using a predefined color.
+ *
+ * @return A [ThemeBuilder] instance representing the configured theme.
+ */
 fun configureTheme() = ThemeBuilder(
   themeSeed = color.asHexColor(),
 )
