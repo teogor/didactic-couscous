@@ -18,13 +18,14 @@ plugins {
   id("ceres.android.library.jacoco")
   id("ceres.android.hilt")
   id("kotlinx-serialization")
+
   alias(libs.plugins.protobuf)
 }
 
 android {
   namespace = "dev.teogor.ceres.data.datastore"
   defaultConfig {
-    consumerProguardFiles("consumer-proguard-rules.pro")
+    consumerProguardFiles("proguard-rules.pro")
   }
 }
 

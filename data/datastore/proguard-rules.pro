@@ -11,4 +11,4 @@
 -keep class dev.teogor.ceres.data.datastore.common.PreferenceDatastore { *; }
 
 # Ceres Preferences
--keep class dev.teogor.ceres.core.datastore.defaults.CeresPreferencesTypes*$* { *; }
+-keep class dev.teogor.ceres.data.datastore.defaults.CeresPreferencesTypes*$* { *; }
