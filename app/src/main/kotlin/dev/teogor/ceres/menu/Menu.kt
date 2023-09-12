@@ -26,39 +26,51 @@ import dev.teogor.ceres.framework.core.menu.menuItem
 import dev.teogor.ceres.framework.core.menu.menuTop
 import dev.teogor.ceres.framework.core.menu.menuUserData
 import dev.teogor.ceres.framework.core.model.MenuConfig
+import dev.teogor.ceres.lib.settings.SettingsScreenRoute
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
 
+/**
+ * Applies the menu configuration to this [MenuConfig].
+ *
+ * This function sets the header content and menu content based on the provided configuration.
+ */
 @Composable
 fun MenuConfig.applyMenuConfig() = apply {
   val navigationParameters = LocalNavigationParameters.current
 
+  // Extension function to navigate to a screen route
   fun ScreenRoute.navigateTo() {
     navigationParameters.screenRoute = this
   }
 
+  // Set the header content
   headerContent = {
     MenuTitle(
       title = "Ceres",
     )
   }
 
+  // Set the menu content
   menuContent = {
-    // menu configurator
+    // Menu configurator
     menu {
-      // menu header
+      // Menu header
       menuTop {
-        // ceres built-in user details
+        // Ceres built-in user details
         menuUserData()
 
-        // use menu divider to add a divider
+        // Use menu divider to add a divider
         menuDivider()
 
-        // demo showcase of menu top header elements
+        // Demo showcase of menu top header elements
         repeat(3) {
           menuItem(
             content = "Element $it",
             icon = Icons.Outlined.Settings,
+            clickable = {
+              SettingsScreenRoute.navigateTo()
+            },
           )
         }
       }
@@ -107,6 +119,8 @@ fun MenuConfig.applyMenuConfig() = apply {
       //       .padding(top = 2.dp),
       //   )
       // }
+
+      // More menu content can be added here
     }
   }
 }

@@ -16,11 +16,16 @@
 
 package dev.teogor.ceres.framework.core.model
 
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import dev.teogor.ceres.framework.core.menu.MenuScope
 
+/**
+ * Configuration class for defining the content of the menu.
+ */
 class MenuConfig {
-  var headerContent: (@Composable BoxScope.() -> Unit)? = null
+  // Header content for the menu
+  var headerContent: (@Composable () -> Unit)? = null
+
+  // Content for the main menu sheet
   var menuContent: (MenuScope.() -> Unit)? = null
 }
