@@ -25,7 +25,6 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.framework.core.model.MenuConfig
 import dev.teogor.ceres.framework.core.menu.MenuScope
 import dev.teogor.ceres.framework.core.menu.MenuTitle
 import dev.teogor.ceres.framework.core.menu.menu
@@ -36,6 +35,7 @@ import dev.teogor.ceres.framework.core.menu.menuItem
 import dev.teogor.ceres.framework.core.menu.menuTop
 import dev.teogor.ceres.framework.core.menu.menuUserData
 import dev.teogor.ceres.framework.core.menu.menuUserId
+import dev.teogor.ceres.framework.core.model.MenuConfig
 import dev.teogor.ceres.lib.settings.SettingsScreenRoute
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
@@ -48,6 +48,7 @@ fun MenuConfig.applyMenuConfig() = apply {
     MenuHeader()
   }
 
+  // todo rename
   menuSheet = {
     this.menuSheet(
       onNavigation = {
