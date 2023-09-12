@@ -16,26 +16,16 @@
 
 package dev.teogor.ceres.menu
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Details
-import androidx.compose.material.icons.outlined.HelpOutline
-import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import dev.teogor.ceres.framework.core.menu.MenuTitle
 import dev.teogor.ceres.framework.core.menu.menu
-import dev.teogor.ceres.framework.core.menu.menuContent
 import dev.teogor.ceres.framework.core.menu.menuDivider
-import dev.teogor.ceres.framework.core.menu.menuFooter
 import dev.teogor.ceres.framework.core.menu.menuItem
 import dev.teogor.ceres.framework.core.menu.menuTop
 import dev.teogor.ceres.framework.core.menu.menuUserData
-import dev.teogor.ceres.framework.core.menu.menuUserId
 import dev.teogor.ceres.framework.core.model.MenuConfig
-import dev.teogor.ceres.lib.settings.SettingsScreenRoute
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
 
@@ -53,7 +43,6 @@ fun MenuConfig.applyMenuConfig() = apply {
     )
   }
 
-  // todo rename
   menuContent = {
     menu {
       menuTop {
@@ -81,53 +70,50 @@ fun MenuConfig.applyMenuConfig() = apply {
         )
       }
 
-      menuContent {
-        menuItem(
-          content = "Settings",
-          icon = Icons.Outlined.Settings,
-          clickable = {
-            SettingsScreenRoute.navigateTo()
-          },
-        )
-
-        menuItem(
-          content = "Help and feedback",
-          icon = Icons.Outlined.HelpOutline,
-        )
-
-        menuItem(
-          content = "Privacy Policy",
-          icon = Icons.Outlined.Link,
-        )
-
-        menuItem(
-          content = "Terms of service",
-          icon = Icons.Outlined.Link,
-        )
-
-        menuItem(
-          content = "About",
-          icon = Icons.Outlined.Details,
-          clickable = {
-            // onNavigation(AboutScreenRoute)
-          },
-        )
-
-        menuDivider()
-
-        menuFooter(
-          licenseHolder = "teogor (Teodor G.)",
-          modifier = Modifier
-            .padding(horizontal = 6.dp)
-            .padding(top = 10.dp, bottom = 4.dp),
-        )
-
-        menuUserId(
-          modifier = Modifier
-            .padding(horizontal = 6.dp)
-            .padding(top = 2.dp),
-        )
-      }
+      // menuContent {
+      //   menuItem(
+      //     content = "Settings",
+      //     icon = Icons.Outlined.Settings,
+      //     clickable = {
+      //       SettingsScreenRoute.navigateTo()
+      //     },
+      //   )
+      //
+      //   menuItem(
+      //     content = "Help and feedback",
+      //     icon = Icons.Outlined.HelpOutline,
+      //   )
+      //
+      //   menuItem(
+      //     content = "Privacy Policy",
+      //     icon = Icons.Outlined.Link,
+      //   )
+      //
+      //   menuItem(
+      //     content = "Terms of service",
+      //     icon = Icons.Outlined.Link,
+      //   )
+      //
+      //   menuItem(
+      //     content = "About",
+      //     icon = Icons.Outlined.Details,
+      //   )
+      //
+      //   menuDivider()
+      //
+      //   menuFooter(
+      //     licenseHolder = "teogor (Teodor G.)",
+      //     modifier = Modifier
+      //       .padding(horizontal = 6.dp)
+      //       .padding(top = 10.dp, bottom = 4.dp),
+      //   )
+      //
+      //   menuUserId(
+      //     modifier = Modifier
+      //       .padding(horizontal = 6.dp)
+      //       .padding(top = 2.dp),
+      //   )
+      // }
     }
   }
 }
