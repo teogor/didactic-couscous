@@ -25,7 +25,6 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.framework.core.menu.MenuScope
 import dev.teogor.ceres.framework.core.menu.MenuTitle
 import dev.teogor.ceres.framework.core.menu.menu
 import dev.teogor.ceres.framework.core.menu.menuContent
@@ -44,98 +43,91 @@ import dev.teogor.ceres.navigation.core.ScreenRoute
 fun MenuConfig.applyMenuConfig() = apply {
   val navigationParameters = LocalNavigationParameters.current
 
+  fun ScreenRoute.navigateTo() {
+    navigationParameters.screenRoute = this
+  }
+
   header = {
-    MenuHeader()
+    MenuTitle(
+      title = "Ceres",
+    )
   }
 
   // todo rename
   menuSheet = {
-    this.menuSheet(
-      onNavigation = {
-        navigationParameters.screenRoute = it
-      },
-    )
-  }
-}
+    menu {
+      menuTop {
+        menuUserData(
+          clickable = {
+            //  onNavigation(UserPrefRoute)
+          },
+        )
 
-@Composable
-private fun MenuHeader() = MenuTitle(
-  title = "Ceres",
-)
+        menuDivider()
 
-private fun MenuScope.menuSheet(
-  onNavigation: (ScreenRoute) -> Unit,
-) = menu {
-  menuTop {
-    menuUserData(
-      clickable = {
-        //  onNavigation(UserPrefRoute)
-      },
-    )
+        menuItem(
+          content = "D:: Top Header Item",
+          icon = Icons.Outlined.Settings,
+        )
 
-    menuDivider()
+        menuItem(
+          content = "D:: Middle Header Item",
+          icon = Icons.Outlined.Settings,
+        )
 
-    menuItem(
-      content = "D:: Top Header Item",
-      icon = Icons.Outlined.Settings,
-    )
+        menuItem(
+          content = "D:: Bottom Header Item",
+          icon = Icons.Outlined.Settings,
+        )
+      }
 
-    menuItem(
-      content = "D:: Middle Header Item",
-      icon = Icons.Outlined.Settings,
-    )
+      menuContent {
+        menuItem(
+          content = "Settings",
+          icon = Icons.Outlined.Settings,
+          clickable = {
+            SettingsScreenRoute.navigateTo()
+          },
+        )
 
-    menuItem(
-      content = "D:: Bottom Header Item",
-      icon = Icons.Outlined.Settings,
-    )
-  }
+        menuItem(
+          content = "Help and feedback",
+          icon = Icons.Outlined.HelpOutline,
+        )
 
-  menuContent {
-    menuItem(
-      content = "Settings",
-      icon = Icons.Outlined.Settings,
-      clickable = {
-        onNavigation(SettingsScreenRoute)
-      },
-    )
+        menuItem(
+          content = "Privacy Policy",
+          icon = Icons.Outlined.Link,
+        )
 
-    menuItem(
-      content = "Help and feedback",
-      icon = Icons.Outlined.HelpOutline,
-    )
+        menuItem(
+          content = "Terms of service",
+          icon = Icons.Outlined.Link,
+        )
 
-    menuItem(
-      content = "Privacy Policy",
-      icon = Icons.Outlined.Link,
-    )
+        menuItem(
+          content = "About",
+          icon = Icons.Outlined.Details,
+          clickable = {
+            // onNavigation(AboutScreenRoute)
+          },
+        )
 
-    menuItem(
-      content = "Terms of service",
-      icon = Icons.Outlined.Link,
-    )
+        menuDivider()
 
-    menuItem(
-      content = "About",
-      icon = Icons.Outlined.Details,
-      clickable = {
-        // onNavigation(AboutScreenRoute)
-      },
-    )
+        menuFooter(
+          licenseHolder = "teogor (Teodor G.)",
+          modifier = Modifier
+            .padding(horizontal = 6.dp)
+            .padding(top = 10.dp, bottom = 4.dp),
+        )
 
-    menuDivider()
-
-    menuFooter(
-      licenseHolder = "teogor (Teodor G.)",
-      modifier = Modifier
-        .padding(horizontal = 6.dp)
-        .padding(top = 10.dp, bottom = 4.dp),
-    )
-
-    menuUserId(
-      modifier = Modifier
-        .padding(horizontal = 6.dp)
-        .padding(top = 2.dp),
-    )
+        menuUserId(
+          modifier = Modifier
+            .padding(horizontal = 6.dp)
+            .padding(top = 2.dp),
+        )
+      }
+    }
   }
 }

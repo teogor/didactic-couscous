@@ -42,7 +42,6 @@ import dev.teogor.ceres.data.datastore.defaults.AppTheme
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
 import dev.teogor.ceres.firebase.analytics.AnalyticsHelper
 import dev.teogor.ceres.firebase.analytics.LocalAnalyticsHelper
-import dev.teogor.ceres.firebase.crashlytics.CrashInfoLegacy
 import dev.teogor.ceres.firebase.crashlytics.CrashlyticsHelper
 import dev.teogor.ceres.firebase.crashlytics.LocalCrashlyticsHelper
 import dev.teogor.ceres.framework.core.app.CeresApp
@@ -56,7 +55,6 @@ import dev.teogor.ceres.ui.foundation.config.FeedbackConfig
 import dev.teogor.ceres.ui.foundation.window.WindowPreferencesManager
 import dev.teogor.ceres.ui.theme.core.Theme
 import javax.inject.Inject
-import kotlin.system.exitProcess
 
 open class Activity : ComponentActivity() {
 
@@ -104,38 +102,6 @@ open class Activity : ComponentActivity() {
     WindowCompat.setDecorFitsSystemWindows(window, false)
 
     handleSplashScreen(splashScreen)
-
-    // todo EHF - Error Handler Feature
-    Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
-      val threadName = thread.name
-      val threadId = thread.id
-
-      // todo
-      val intent = Intent(this, this::class.java).apply {
-        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        putExtra("hasCrashed", true)
-        putExtra("threadName", threadName)
-        putExtra("threadId", threadId)
-        putExtra("throwable", throwable)
-      }
-      startActivity(intent)
-
-      // Terminate the current process to ensure the app restarts
-      android.os.Process.killProcess(android.os.Process.myPid())
-      exitProcess(10)
-    }
-
-    // todo EHF - Error Handler Feature
-    var hasCrashed = intent.getBooleanExtra("hasCrashed", false)
-    val crashInfoLegacy = if (!hasCrashed) {
-      null
-    } else {
-      val threadName = intent.getStringExtra("threadName") ?: ""
-      val threadId = intent.getLongExtra("threadId", 0L)
-      val throwable = intent.getSerializableExtra("throwable") as Throwable
-
-      CrashInfoLegacy(threadName, threadId, throwable)
-    }
 
     setContent {
       // todo systemUiController
@@ -220,42 +186,18 @@ open class Activity : ComponentActivity() {
           LocalAnalyticsHelper provides analyticsHelper,
           LocalCrashlyticsHelper provides crashlyticsHelper,
         ) {
-          // todo EHF - Error Handler Feature
-          val hasCrashedRem = remember(hasCrashed) {
-            hasCrashed
-          }
-          // todo EHF - Error Handler Feature
-          if (hasCrashedRem && crashInfoLegacy != null) {
-            val crashInfo = remember(crashInfoLegacy) {
-              crashInfoLegacy
-            }
-            crashInfo.let {
-              // todo EHF - Error Handler Feature
-              crashlyticsHelper.SetCrash(it)
-              navigateTo(
-                object : ScreenRoute {
-                  override val route: String = "error_route"
-                },
-              )
-            }
-            hasCrashed = false
-          } else if (hasCrashedRem) {
-            // todo EHF - Error Handler Feature
-            hasCrashed = false
-          }
-
           val menuConfig = MenuConfig().apply { buildMenu() }
+          val menuConfigHeader = remember(menuConfig.header ?: {}) { menuConfig.header!! }
+          val menuConfigContent = remember(menuConfig.menuSheet ?: {}) { menuConfig.menuSheet!! }
 
           CeresApp(
             windowSizeClass = calculateWindowSizeClass(this),
             networkMonitor = networkMonitor,
             topLevelDestinations = topLevelDestinations,
             menuSheetContent = {
-              menuConfig.menuSheet?.invoke(this)
+              menuConfigContent.invoke(this)
             },
-            headerContent = {
-              menuConfig.header?.invoke()
-            },
+            headerContent = { menuConfigHeader() },
           ) { windowSizeClass, ceresAppState, baseActions, padding ->
             NavGraphOptions(
               windowSizeClass = windowSizeClass,
