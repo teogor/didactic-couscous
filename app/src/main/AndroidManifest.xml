@@ -63,7 +63,7 @@
         <category android:name="android.intent.category.BROWSABLE" />
         <category android:name="android.intent.category.OPENABLE" />
 
-        <data android:pathPattern=".*\\.stats\\.gtv" />
+        <data android:pathPattern=".*\\.ceres\\.gtv" />
         <data
           android:host="*"
           android:mimeType="*/*"
