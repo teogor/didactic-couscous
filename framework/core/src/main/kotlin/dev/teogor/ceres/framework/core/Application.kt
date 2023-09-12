@@ -16,11 +16,10 @@
 
 package dev.teogor.ceres.framework.core
 
-import android.app.Application
 import dev.teogor.ceres.data.datastore.defaults.ThemeConfig
 import dev.teogor.ceres.framework.core.model.ThemeBuilder
 
-open class Application : Application() {
+open class Application : android.app.Application() {
 
   open val themeBuilder: ThemeBuilder = ThemeBuilder(
     themeSeed = "#0B57D0",
