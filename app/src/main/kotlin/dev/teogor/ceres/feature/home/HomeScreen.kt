@@ -30,11 +30,9 @@ import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.monetisation.messaging.ConsentManager
 import dev.teogor.ceres.monetisation.messaging.ConsentResult
-import dev.teogor.ceres.screen.builder.advancedView
 import dev.teogor.ceres.screen.builder.compose.ColumnLayout
 import dev.teogor.ceres.screen.builder.header
-import dev.teogor.ceres.screen.builder.segmentedButtons
-import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
+import dev.teogor.ceres.screen.builder.simpleView
 
 // todo better way to configure this. perhaps use kotlin builder syntax
 @Composable
@@ -93,32 +91,14 @@ private fun HomeScreen() = ColumnLayout(
   screenName = HomeScreenConfig,
 ) {
   header {
-    "Time Interval Options"
+    "Ad Settings"
   }
 
-  repeat(20) {
-    advancedView(
-      title = "Timer Duration",
-      subtitle = "Adjust the duration of the timer",
-      subtitleColor = ColorSchemeKeyTokens.Error,
-      clickable = {
-        if (it == 0) {
-          ConsentManager.loadAndShowConsentFormIfRequired()
-        } else if (it == 1) {
-          ConsentManager.resetConsent()
-        }
-      },
-    ) {
-      segmentedButtons(
-        options = listOf(
-          "2 MIN",
-          "5 MIN",
-          "10 MIN",
-          "20 MIN",
-          "30 MIN",
-        ),
-        selectedOption = 1,
-      )
-    }
-  }
+  simpleView(
+    title = "Reset Advertising Choices",
+    subtitle = "Reset your advertising choices to manage your options.",
+    clickable = {
+      ConsentManager.resetConsent()
+    },
+  )
 }
