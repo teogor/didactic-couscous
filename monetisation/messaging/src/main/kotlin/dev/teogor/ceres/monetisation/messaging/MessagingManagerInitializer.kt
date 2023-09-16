@@ -24,6 +24,7 @@ import androidx.startup.Initializer
  */
 class MessagingManagerInitializer : Initializer<Unit> {
   override fun create(context: Context) {
+    MessagingManager.initialize(context)
   }
 
   override fun dependencies() = emptyList<Class<out Initializer<*>?>>()

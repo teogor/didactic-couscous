@@ -17,15 +17,24 @@
 package dev.teogor.ceres.monetisation.admob
 
 import android.content.Context
+import android.content.pm.PackageManager
 import androidx.startup.Initializer
-import com.google.android.gms.ads.MobileAds
 
 /**
  * Initializes [AdmobManagerInitializer] using `androidx.startup`.
  */
 class AdmobManagerInitializer : Initializer<Unit> {
   override fun create(context: Context) {
-    MobileAds.initialize(context) {}
+    val packageManager = context.packageManager
+    val applicationInfo = packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
+    val manualAdsSetup = applicationInfo.metaData?.getBoolean(
+      "dev.teogor.ceres.monetisation.admob.flag.MANUAL_ADS_SETUP",
+      false
+    ) ?: false
+
+    if(!manualAdsSetup) {
+      AdMobInitializer.initialize(context)
+    }
   }
 
   override fun dependencies() = emptyList<Class<out Initializer<*>?>>()

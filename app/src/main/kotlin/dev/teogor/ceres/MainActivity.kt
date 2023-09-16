@@ -16,12 +16,7 @@
 
 package dev.teogor.ceres
 
-import android.os.Bundle
-import android.util.Log
 import androidx.compose.runtime.Composable
-import com.google.android.ump.ConsentInformation
-import com.google.android.ump.ConsentRequestParameters
-import com.google.android.ump.UserMessagingPlatform
 import dagger.hilt.android.AndroidEntryPoint
 import dev.teogor.ceres.framework.core.Activity
 import dev.teogor.ceres.framework.core.model.MenuConfig
@@ -29,7 +24,6 @@ import dev.teogor.ceres.framework.core.model.NavGraphOptions
 import dev.teogor.ceres.menu.applyMenuConfig
 import dev.teogor.ceres.navigation.ApplyNavHost
 import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
-import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * The main activity of the Ceres application.
@@ -66,77 +60,4 @@ class MainActivity : Activity() {
   @Composable
   override fun MenuConfig.buildMenu() = applyMenuConfig()
 
-  private lateinit var consentInformation: ConsentInformation
-
-  // Use an atomic boolean to initialize the Google Mobile Ads SDK and load ads once.
-  private var isMobileAdsInitializeCalled = AtomicBoolean(false)
-
-  private val TAG = "MonetisationMessaging"
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-
-    // Set tag for under age of consent. false means users are not under age
-    // of consent.
-    val params = ConsentRequestParameters
-      .Builder()
-      .setTagForUnderAgeOfConsent(false)
-      .build()
-
-    consentInformation = UserMessagingPlatform.getConsentInformation(this)
-    consentInformation.requestConsentInfoUpdate(
-      this,
-      params,
-      {
-        UserMessagingPlatform.loadAndShowConsentFormIfRequired(
-          this@MainActivity,
-        ) { loadAndShowError ->
-          // Consent gathering failed.
-          loadAndShowError?.let { value ->
-            Log.w(
-              TAG,
-              String.format(
-                "%s: %s",
-                value.errorCode,
-                value.message,
-              ),
-            )
-          }
-
-          // Consent has been gathered.
-          if (consentInformation.canRequestAds()) {
-            initializeMobileAdsSdk()
-          }
-        }
-      },
-      { requestConsentError ->
-        // Consent gathering failed.
-        Log.w(
-          TAG,
-          String.format(
-            "%s: %s",
-            requestConsentError.errorCode,
-            requestConsentError.message,
-          ),
-        )
-      },
-    )
-
-    // Check if you can initialize the Google Mobile Ads SDK in parallel
-    // while checking for new consent information. Consent obtained in
-    // the previous session can be used to request ads.
-    if (consentInformation.canRequestAds()) {
-      initializeMobileAdsSdk()
-    }
-  }
-
-  private fun initializeMobileAdsSdk() {
-    if (isMobileAdsInitializeCalled.get()) {
-      return
-    }
-    isMobileAdsInitializeCalled.set(true)
-
-    // Initialize the Google Mobile Ads SDK.
-    // MobileAds.initialize(this)
-  }
 }
