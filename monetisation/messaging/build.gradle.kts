@@ -30,9 +30,9 @@ android {
 dependencies {
   api("com.google.android.ump:user-messaging-platform:2.1.0")
 
+  api(project(":core:runtime"))
+  api(project(":core:startup"))
   api(project(":monetisation:admob"))
-
-  implementation("androidx.annotation:annotation:1.7.0")
 
   implementation(libs.androidx.compose.runtime)
   implementation(libs.startup.runtime)

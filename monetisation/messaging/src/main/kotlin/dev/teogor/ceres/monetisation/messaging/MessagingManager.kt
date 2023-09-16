@@ -15,8 +15,9 @@ class MessagingManager {
         context.registerActivityLifecycleCallbacks(
           object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+              ConsentManager.activity = activity
               if(!isMobileAdsInitializeCalled.get()) {
-                ConsentManager(
+                ConsentManager.initialiseConsentForm(
                   activity = activity,
                 )
                 isMobileAdsInitializeCalled.set(true)
@@ -25,10 +26,12 @@ class MessagingManager {
 
             override fun onActivityStarted(activity: Activity) {
               // Your initialization code when an activity is started
+              ConsentManager.activity = activity
             }
 
             override fun onActivityResumed(activity: Activity) {
               // Your initialization code when an activity is resumed
+              ConsentManager.activity = activity
             }
 
             override fun onActivityPaused(activity: Activity) {

@@ -17,6 +17,8 @@
 package dev.teogor.ceres.feature.home
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.screen.floatingButton
@@ -26,6 +28,7 @@ import dev.teogor.ceres.framework.core.screen.showNavBar
 import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
+import dev.teogor.ceres.monetisation.messaging.ConsentManager
 import dev.teogor.ceres.screen.builder.advancedView
 import dev.teogor.ceres.screen.builder.compose.ColumnLayout
 import dev.teogor.ceres.screen.builder.header
@@ -67,6 +70,10 @@ internal fun HomeRoute(
     }
   }
 
+
+  val state by remember { ConsentManager.state }
+  println("loadAndShowConsentFormIfRequired .. $state")
+
   HomeScreen()
 }
 
@@ -84,6 +91,13 @@ private fun HomeScreen() = ColumnLayout(
       title = "Timer Duration",
       subtitle = "Adjust the duration of the timer",
       subtitleColor = ColorSchemeKeyTokens.Error,
+      clickable = {
+        if (it == 0) {
+          ConsentManager.loadAndShowConsentFormIfRequired()
+        } else if (it == 1) {
+          ConsentManager.resetConsent()
+        }
+      },
     ) {
       segmentedButtons(
         options = listOf(
