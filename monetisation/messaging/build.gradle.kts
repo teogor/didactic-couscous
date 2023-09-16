@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
-  implementation(libs.startup.runtime)
   implementation("com.google.android.ump:user-messaging-platform:2.1.0")
+
+  implementation(libs.androidx.compose.runtime)
+  implementation(libs.startup.runtime)
 }

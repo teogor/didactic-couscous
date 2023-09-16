@@ -29,5 +29,7 @@ android {
 
 dependencies {
   implementation("com.google.android.gms:play-services-ads:22.4.0")
+
+  implementation(libs.androidx.compose.runtime)
   implementation(libs.startup.runtime)
 }
