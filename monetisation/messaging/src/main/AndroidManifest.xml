@@ -23,7 +23,7 @@
       android:authorities="${applicationId}.androidx-startup"
       android:exported="false"
       tools:node="merge">
-      <meta-data android:name="dev.teogor.ceres.monetisation.messaging.AdmobManagerInitializer"
+      <meta-data android:name="dev.teogor.ceres.monetisation.messaging.MessagingManagerInitializer"
         android:value="androidx.startup" />
     </provider>
   </application>

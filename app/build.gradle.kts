@@ -99,6 +99,10 @@ dependencies {
   // theme config
   implementation(project(":ui:theme"))
 
+  // monetisation
+  implementation(project(":monetisation:admob"))
+  implementation(project(":monetisation:messaging"))
+
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.serialization.protobuf)
 
