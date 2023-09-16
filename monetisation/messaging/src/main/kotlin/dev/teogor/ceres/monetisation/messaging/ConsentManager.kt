@@ -136,14 +136,16 @@ object ConsentManager {
         initializeMobileAdsSdk(activity)
       }
 
-      state.value = ConsentResult.ConsentFormUnavailable(
+      state.value = ConsentResult.ConsentFormAcquired(
         canRequestAds = consentInformation.canRequestAds(),
         requirementStatus = consentInformation.privacyOptionsRequirementStatus,
+        formAvailable = false,
       )
     } else {
-      state.value = ConsentResult.ConsentFormAvailable(
+      state.value = ConsentResult.ConsentFormAcquired(
         canRequestAds = consentInformation.canRequestAds(),
         requirementStatus = consentInformation.privacyOptionsRequirementStatus,
+        formAvailable = true,
       )
     }
   }

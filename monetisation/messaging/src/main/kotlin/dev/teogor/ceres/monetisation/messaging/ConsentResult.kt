@@ -6,14 +6,10 @@ import com.google.android.ump.FormError
 sealed class ConsentResult {
   data object Undefined : ConsentResult()
 
-  data class ConsentFormAvailable(
+  data class ConsentFormAcquired(
     val canRequestAds: Boolean,
     val requirementStatus: PrivacyOptionsRequirementStatus,
-  ) : ConsentResult()
-
-  data class ConsentFormUnavailable(
-    val canRequestAds: Boolean,
-    val requirementStatus: PrivacyOptionsRequirementStatus,
+    val formAvailable: Boolean,
   ) : ConsentResult()
 
   data class ConsentFormDismissed(
