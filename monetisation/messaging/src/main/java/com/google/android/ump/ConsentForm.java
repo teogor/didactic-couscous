@@ -5,9 +5,23 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 
 public interface ConsentForm {
-    void show(@NonNull Activity var1, @NonNull OnConsentFormDismissedListener var2);
+  /**
+   * Show the consent form.
+   *
+   * @param activity The activity in which to show the consent form.
+   * @param listener A listener to handle form dismissal events.
+   */
+  void show(@NonNull Activity activity, @NonNull OnConsentFormDismissedListener listener);
 
-    public interface OnConsentFormDismissedListener {
-        void onConsentFormDismissed(@Nullable FormError var1);
-    }
+  /**
+   * Listener interface to handle consent form dismissal events.
+   */
+  public interface OnConsentFormDismissedListener {
+    /**
+     * Called when the consent form is dismissed.
+     *
+     * @param error An optional error associated with form dismissal.
+     */
+    void onConsentFormDismissed(@Nullable FormError error);
+  }
 }

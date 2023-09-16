@@ -10,69 +10,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsentDebugSettings {
-  private final boolean zza;
-  private final int zzb;
+  private final boolean isTestDevice;
+  private final int debugGeography;
 
   public int getDebugGeography() {
-    return this.zzb;
+    return this.debugGeography;
   }
 
   public boolean isTestDevice() {
-    return this.zza;
+    return this.isTestDevice;
   }
 
-  public ConsentDebugSettings(boolean zza, int zzb) {
-    this.zza = zza;
-    this.zzb = zzb;
+  public ConsentDebugSettings(boolean isTestDevice, int debugGeography) {
+    this.isTestDevice = isTestDevice;
+    this.debugGeography = debugGeography;
   }
 
   public static class Builder {
-    private final List<String> zza = new ArrayList<>();
-    private final Context zzb;
-    private int zzc = 0;
-    private boolean zzd;
+    private final List<String> testDeviceHashedIds = new ArrayList<>();
+    private final Context context;
+    private int debugGeography = 0;
+    private boolean forceTesting;
 
     @NonNull
     public Builder addTestDeviceHashedId(@NonNull String hashedId) {
-      this.zza.add(hashedId);
+      this.testDeviceHashedIds.add(hashedId);
       return this;
     }
 
     @NonNull
     public Builder setDebugGeography(int debugGeography) {
-      this.zzc = debugGeography;
+      this.debugGeography = debugGeography;
       return this;
     }
 
     @KeepForSdk
     @NonNull
     public Builder setForceTesting(boolean forceTesting) {
-      this.zzd = forceTesting;
+      this.forceTesting = forceTesting;
       return this;
     }
 
     @NonNull
     public ConsentDebugSettings build() {
-      Context var1 = this.zzb;
-      List<String> var2 = this.zza;
-      boolean var3;
+      Context context = this.context;
+      List<String> testDeviceHashedIds = this.testDeviceHashedIds;
+      boolean isTestDevice;
       if (!zzcn.zzb()) {
-        if (var2.contains(zzcn.zza(var1))) {
-          var3 = true;
-        } else if (this.zzd) {
-          var3 = true;
+        if (testDeviceHashedIds.contains(zzcn.zza(context))) {
+          isTestDevice = true;
+        } else if (this.forceTesting) {
+          isTestDevice = true;
         } else {
-          var3 = false;
+          isTestDevice = false;
         }
       } else {
-        var3 = true;
+        isTestDevice = true;
       }
 
-      return new ConsentDebugSettings(var3, this.zzc);
+      return new ConsentDebugSettings(isTestDevice, this.debugGeography);
     }
 
     public Builder(@NonNull Context context) {
-      this.zzb = context.getApplicationContext();
+      this.context = context.getApplicationContext();
     }
   }
 

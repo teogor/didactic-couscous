@@ -5,16 +5,32 @@ import android.app.Activity;
 import com.google.android.ump.ConsentForm;
 import com.google.android.ump.UserMessagingPlatform;
 
+/**
+ * Implementation of the {@link UserMessagingPlatform.OnConsentFormLoadSuccessListener} interface.
+ * This class is responsible for handling the success callback when a consent form is loaded.
+ */
 public final class zzbg implements UserMessagingPlatform.OnConsentFormLoadSuccessListener {
-    private final Activity zza;
-    private final ConsentForm.OnConsentFormDismissedListener zzb;
+  private final Activity activity;
+  private final ConsentForm.OnConsentFormDismissedListener dismissedListener;
 
-    public zzbg(Activity var1, ConsentForm.OnConsentFormDismissedListener var2) {
-        this.zza = var1;
-        this.zzb = var2;
-    }
+  /**
+   * Constructs a new instance of zzbg.
+   *
+   * @param activity          The activity in which to show the consent form.
+   * @param dismissedListener A listener to handle form dismissal events.
+   */
+  public zzbg(Activity activity, ConsentForm.OnConsentFormDismissedListener dismissedListener) {
+    this.activity = activity;
+    this.dismissedListener = dismissedListener;
+  }
 
-    public final void onConsentFormLoadSuccess(ConsentForm var1) {
-        var1.show(this.zza, this.zzb);
-    }
+  /**
+   * Called when the consent form is successfully loaded.
+   *
+   * @param consentForm The loaded consent form.
+   */
+  public final void onConsentFormLoadSuccess(ConsentForm consentForm) {
+    // Show the consent form in the specified activity with the provided dismissal listener.
+    consentForm.show(this.activity, this.dismissedListener);
+  }
 }
