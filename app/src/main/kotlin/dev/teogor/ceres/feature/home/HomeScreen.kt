@@ -16,9 +16,13 @@
 
 package dev.teogor.ceres.feature.home
 
+import android.app.Activity
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.screen.floatingButton
@@ -28,9 +32,12 @@ import dev.teogor.ceres.framework.core.screen.showNavBar
 import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
+import dev.teogor.ceres.monetisation.admob.AdmobBanner
+import dev.teogor.ceres.monetisation.admob.showInterstitialAd
 import dev.teogor.ceres.monetisation.messaging.ConsentManager
 import dev.teogor.ceres.monetisation.messaging.ConsentResult
 import dev.teogor.ceres.screen.builder.compose.ColumnLayout
+import dev.teogor.ceres.screen.builder.customView
 import dev.teogor.ceres.screen.builder.header
 import dev.teogor.ceres.screen.builder.simpleView
 
@@ -78,15 +85,26 @@ internal fun HomeRoute(
     }
   }
 
+  val context = LocalContext.current
+
+  // You can also get the current Activity, if needed
+  val activity = remember(context) {
+    context as? Activity
+  }
+
   if (canRequestAds) {
-    HomeScreen()
+    HomeScreen(
+      activity,
+    )
   } else {
     ConsentManager.loadAndShowConsentFormIfRequired()
   }
 }
 
 @Composable
-private fun HomeScreen() = ColumnLayout(
+private fun HomeScreen(
+  activity: Activity?
+) = ColumnLayout(
   hasScrollbarBackground = false,
   screenName = HomeScreenConfig,
 ) {
@@ -101,4 +119,21 @@ private fun HomeScreen() = ColumnLayout(
       ConsentManager.resetConsent()
     },
   )
+
+  header {
+    "Ads Demo"
+  }
+
+  customView {
+    AdmobBanner(modifier = Modifier.fillMaxWidth())
+  }
+
+  simpleView(
+    title = "Show Interstitial",
+    clickable = {
+      showInterstitialAd(activity)
+    },
+  )
 }
+
+
