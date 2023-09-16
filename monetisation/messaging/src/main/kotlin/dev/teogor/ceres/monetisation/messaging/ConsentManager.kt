@@ -102,31 +102,6 @@ object ConsentManager {
     }
   }
 
-  private fun MD5(md5: String): String? {
-    try {
-      val md = MessageDigest.getInstance("MD5")
-      val array = md.digest(md5.toByteArray(charset("UTF-8")))
-      val sb = StringBuffer()
-      for (i in array.indices) {
-        sb.append(Integer.toHexString(array[i].toInt() and 0xFF or 0x100).substring(1, 3))
-      }
-      return sb.toString()
-    } catch (_: NoSuchAlgorithmException) {
-    } catch (_: UnsupportedEncodingException) {
-    }
-    return null
-  }
-
-  @SuppressLint("HardwareIds")
-  private fun getHashedAdvertisingId(
-    context: Context,
-  ): String {
-    val androidId: String = Settings.Secure.getString(
-      context.contentResolver, Settings.Secure.ANDROID_ID,
-    )
-    return MD5(androidId)?.uppercase() ?: ""
-  }
-
   private fun onConsentInfoUpdateSuccess(
     activity: Activity,
   ) {
@@ -158,5 +133,30 @@ object ConsentManager {
 
     // Initialize the Google Mobile Ads SDK.
     AdMobInitializer.initialize(context)
+  }
+
+  private fun MD5(md5: String): String? {
+    try {
+      val md = MessageDigest.getInstance("MD5")
+      val array = md.digest(md5.toByteArray(charset("UTF-8")))
+      val sb = StringBuffer()
+      for (i in array.indices) {
+        sb.append(Integer.toHexString(array[i].toInt() and 0xFF or 0x100).substring(1, 3))
+      }
+      return sb.toString()
+    } catch (_: NoSuchAlgorithmException) {
+    } catch (_: UnsupportedEncodingException) {
+    }
+    return null
+  }
+
+  @SuppressLint("HardwareIds")
+  private fun getHashedAdvertisingId(
+    context: Context,
+  ): String {
+    val androidId: String = Settings.Secure.getString(
+      context.contentResolver, Settings.Secure.ANDROID_ID,
+    )
+    return MD5(androidId)?.uppercase() ?: ""
   }
 }
