@@ -68,3 +68,4 @@ include(":screen:builder")
 
 // Monetisation
 include(":monetisation:admob")
+include(":monetisation:messaging")
