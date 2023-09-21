@@ -58,7 +58,7 @@ object AdMobInitializer {
     MobileAds.initialize(context) {
       val configuration = RequestConfiguration.Builder().apply {
         if (AppMetadataManager.isDebuggable) {
-         setTestDeviceIds(listOf(getHashedAdvertisingId(context)))
+          setTestDeviceIds(listOf(getHashedAdvertisingId(context)))
         }
       }.build()
       MobileAds.setRequestConfiguration(configuration)

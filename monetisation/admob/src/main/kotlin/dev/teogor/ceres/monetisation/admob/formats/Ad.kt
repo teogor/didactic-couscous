@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 teogor (Teodor Grigor) All Rights Reserved.
+ * Copyright 2022 teogor (Teodor Grigor)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,8 +47,12 @@ abstract class Ad(
     if (isLoading) {
       return false
     }
-    if(loadedAdCount >= concurrentAdLoadLimit) {
-      log("Can not load more ads (loaded ads $loadedAdCount/${AdCache.getAdCount(id)}). The limit of loaded ads is set to $concurrentAdLoadLimit.")
+    if (loadedAdCount >= concurrentAdLoadLimit) {
+      log(
+        "Can not load more ads (loaded ads $loadedAdCount/${AdCache.getAdCount(
+          id,
+        )}). The limit of loaded ads is set to $concurrentAdLoadLimit.",
+      )
       return false
     }
     isLoading = true
