@@ -38,6 +38,7 @@ class AdmobManagerInitializer : Initializer<Unit> {
     if (!manualAdsSetup) {
       AdMobInitializer.initialize(context)
     }
+    CurrentActivityManager(context)
   }
 
   override fun dependencies() = emptyList<Class<out Initializer<*>?>>()

@@ -14,18 +14,27 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.monetisation.admob.nativead
+package dev.teogor.ceres.monetisation.admob
 
-import com.google.android.gms.ads.LoadAdError
+import android.app.Activity
+import com.google.android.gms.ads.AdActivity
+import java.lang.ref.WeakReference
 
-sealed class AdEvent {
-  object AdClicked : AdEvent()
-  object AdClosed : AdEvent()
-  data class AdFailedToLoad(val error: LoadAdError) : AdEvent()
-  object AdImpression : AdEvent()
-  object AdLoaded : AdEvent()
-  object AdOpened : AdEvent()
-  object AdSwipeGestureClicked : AdEvent()
+internal object CurrentActivityHolder {
+  private var weakActivity: WeakReference<Activity>? = null
 
-  val name = this.javaClass.simpleName
+  var activity: Activity?
+    get() = weakActivity?.get()
+    set(value) {
+      weakActivity = if (value != null) {
+        WeakReference(value)
+      } else {
+        null
+      }
+    }
+
+  var previousActivityWasAd = false
+
+  val canShowFullScreenAd: Boolean
+    get() = activity !is AdActivity
 }

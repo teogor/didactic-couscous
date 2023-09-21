@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.monetisation.admob.nativead
+package dev.teogor.ceres.monetisation.admob.formats.nativead
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

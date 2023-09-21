@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.monetisation.admob.nativead
+package dev.teogor.ceres.monetisation.admob.formats.nativead
 
 import com.google.android.gms.ads.MediaContent
 import com.google.android.gms.ads.nativead.NativeAd

@@ -16,12 +16,52 @@
 
 package dev.teogor.ceres.monetisation.admob
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.provider.Settings
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
+import dev.teogor.ceres.core.runtime.AppMetadataManager
+import java.io.UnsupportedEncodingException
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 object AdMobInitializer {
 
+  private fun MD5(md5: String): String? {
+    try {
+      val md = MessageDigest.getInstance("MD5")
+      val array = md.digest(md5.toByteArray(charset("UTF-8")))
+      val sb = StringBuffer()
+      for (i in array.indices) {
+        sb.append(Integer.toHexString(array[i].toInt() and 0xFF or 0x100).substring(1, 3))
+      }
+      return sb.toString()
+    } catch (_: NoSuchAlgorithmException) {
+    } catch (_: UnsupportedEncodingException) {
+    }
+    return null
+  }
+
+  @SuppressLint("HardwareIds")
+  fun getHashedAdvertisingId(
+    context: Context,
+  ): String {
+    val androidId: String = Settings.Secure.getString(
+      context.contentResolver,
+      Settings.Secure.ANDROID_ID,
+    )
+    return MD5(androidId)?.uppercase() ?: ""
+  }
+
   fun initialize(context: Context) {
-    MobileAds.initialize(context) {}
+    MobileAds.initialize(context) {
+      val configuration = RequestConfiguration.Builder().apply {
+        if (AppMetadataManager.isDebuggable) {
+         setTestDeviceIds(listOf(getHashedAdvertisingId(context)))
+        }
+      }.build()
+      MobileAds.setRequestConfiguration(configuration)
+    }
   }
 }

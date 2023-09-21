@@ -18,7 +18,6 @@ package dev.teogor.ceres.feature.home
 
 import android.app.Activity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -30,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.ads.nativead.NativeAd
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.setScreenInfo
@@ -40,19 +40,18 @@ import dev.teogor.ceres.framework.core.screen.showNavBar
 import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
-import dev.teogor.ceres.monetisation.admob.AdmobBanner
-import dev.teogor.ceres.monetisation.admob.nativead.AdEvent
-import dev.teogor.ceres.monetisation.admob.nativead.AdLoaderConfig
-import dev.teogor.ceres.monetisation.admob.nativead.NativeAd
-import dev.teogor.ceres.monetisation.admob.nativead.NativeAdConfig
-import dev.teogor.ceres.monetisation.admob.nativead.NativeAdUi
-import dev.teogor.ceres.monetisation.admob.nativead.RefreshableNativeAd
-import dev.teogor.ceres.monetisation.admob.nativead.createBodyView
-import dev.teogor.ceres.monetisation.admob.nativead.createCallToActionView
-import dev.teogor.ceres.monetisation.admob.nativead.createHeadlineView
-import dev.teogor.ceres.monetisation.admob.nativead.createIconView
-import dev.teogor.ceres.monetisation.admob.nativead.rememberAdLoader
-import dev.teogor.ceres.monetisation.admob.showInterstitialAd
+import dev.teogor.ceres.monetisation.admob.DemoAdUnitIds
+import dev.teogor.ceres.monetisation.admob.formats.AdEvent
+import dev.teogor.ceres.monetisation.admob.formats.nativead.AdLoaderConfig
+import dev.teogor.ceres.monetisation.admob.formats.nativead.NativeAd
+import dev.teogor.ceres.monetisation.admob.formats.nativead.NativeAdConfig
+import dev.teogor.ceres.monetisation.admob.formats.nativead.NativeAdUi
+import dev.teogor.ceres.monetisation.admob.formats.nativead.RefreshableNativeAd
+import dev.teogor.ceres.monetisation.admob.formats.nativead.createBodyView
+import dev.teogor.ceres.monetisation.admob.formats.nativead.createCallToActionView
+import dev.teogor.ceres.monetisation.admob.formats.nativead.createHeadlineView
+import dev.teogor.ceres.monetisation.admob.formats.nativead.createIconView
+import dev.teogor.ceres.monetisation.admob.formats.nativead.rememberAdLoader
 import dev.teogor.ceres.monetisation.messaging.ConsentManager
 import dev.teogor.ceres.monetisation.messaging.ConsentResult
 import dev.teogor.ceres.screen.builder.compose.ColumnLayout
@@ -66,6 +65,7 @@ import dev.teogor.ceres.ui.theme.MaterialTheme
 @Composable
 internal fun HomeRoute(
   baseActions: BaseActions,
+  homeVM: HomeViewModel = hiltViewModel(),
 ) {
   val state by remember { ConsentManager.state }
   val canRequestAds: Boolean = remember(state) {
@@ -116,6 +116,7 @@ internal fun HomeRoute(
   if (canRequestAds) {
     HomeScreen(
       activity,
+      homeVM,
     )
   } else {
     ConsentManager.loadAndShowConsentFormIfRequired()
@@ -125,6 +126,7 @@ internal fun HomeRoute(
 @Composable
 private fun HomeScreen(
   activity: Activity?,
+  homeVM: HomeViewModel,
 ) = ColumnLayout(
   hasScrollbarBackground = false,
   screenName = HomeScreenConfig,
@@ -145,19 +147,36 @@ private fun HomeScreen(
     "Ads Demo"
   }
 
-  customView {
-    AdmobBanner(modifier = Modifier.fillMaxWidth())
-  }
+  // customView {
+  //   dev.teogor.ceres.monetisation.admob.beta.formats.ui.AdmobBanner(
+  //     modifier = Modifier.fillMaxWidth(),
+  //     bannerAd = homeVM.homeBannerAd,
+  //   )
+  // }
 
   simpleView(
     title = "Show Interstitial",
     clickable = {
-      showInterstitialAd(activity)
+      homeVM.homeInterstitialAd.show()
+    },
+  )
+
+  simpleView(
+    title = "Show Rewarded Interstitial",
+    clickable = {
+      homeVM.homeRewardedInterstitialAd.show()
+    },
+  )
+
+  simpleView(
+    title = "Show Rewarded",
+    clickable = {
+      homeVM.homeRewardedAd.show()
     },
   )
 
   customView {
-    val adId = "ca-app-pub-3940256099942544/2247696110"
+    val adId = DemoAdUnitIds.NATIVE
 
     var nativeAd by remember {
       mutableStateOf<NativeAd?>(null)

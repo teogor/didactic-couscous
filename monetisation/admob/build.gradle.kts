@@ -35,6 +35,7 @@ dependencies {
 
   implementation("io.github.farimarwat:admobnative-compose:1.2")
 
+  implementation(project(":core:runtime"))
   implementation(project(":ui:designsystem"))
 
   implementation(libs.androidx.compose.foundation)

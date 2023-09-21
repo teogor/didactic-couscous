@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.monetisation.admob.nativead
+package dev.teogor.ceres.monetisation.admob.formats.nativead
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -23,6 +23,7 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.nativead.NativeAd
+import dev.teogor.ceres.monetisation.admob.formats.AdEvent
 
 @Composable
 fun rememberAdLoader(

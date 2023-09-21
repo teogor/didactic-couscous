@@ -17,9 +17,12 @@
 package dev.teogor.ceres
 
 import dagger.hilt.android.HiltAndroidApp
+import dev.teogor.ceres.ads.ApplicationOpenAd
 import dev.teogor.ceres.framework.core.Application
 import dev.teogor.ceres.framework.core.model.ThemeBuilder
+import dev.teogor.ceres.monetisation.admob.AdMob
 import dev.teogor.ceres.theme.configureTheme
+import javax.inject.Inject
 
 /**
  * Android Application class for Ceres application.
@@ -29,10 +32,19 @@ import dev.teogor.ceres.theme.configureTheme
 @HiltAndroidApp
 class Application : Application() {
 
+  @Inject
+  lateinit var applicationOpenAd: ApplicationOpenAd
+
   /**
    * The [ThemeBuilder] instance used to configure the theme for the Ceres application.
    *
    * This property initializes the theme configuration using [configureTheme].
    */
   override val themeBuilder = configureTheme()
+
+  override fun onCreate() {
+    super.onCreate()
+
+    AdMob.setApplicationOpenAd(applicationOpenAd)
+  }
 }

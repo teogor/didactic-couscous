@@ -16,10 +16,8 @@
 
 package dev.teogor.ceres.monetisation.messaging
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.provider.Settings
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -29,10 +27,8 @@ import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
 import dev.teogor.ceres.core.runtime.AppMetadataManager
 import dev.teogor.ceres.monetisation.admob.AdMobInitializer
-import java.io.UnsupportedEncodingException
+import dev.teogor.ceres.monetisation.admob.AdMobInitializer.getHashedAdvertisingId
 import java.lang.ref.WeakReference
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 import java.util.concurrent.atomic.AtomicBoolean
 
 object ConsentManager {
@@ -81,7 +77,6 @@ object ConsentManager {
   fun initialiseConsentForm(
     activity: Activity,
   ) {
-    getHashedAdvertisingId(activity)
     consentInformation = UserMessagingPlatform.getConsentInformation(activity)
 
     val debugSettings = ConsentDebugSettings.Builder(activity).apply {
@@ -148,31 +143,5 @@ object ConsentManager {
 
     // Initialize the Google Mobile Ads SDK.
     AdMobInitializer.initialize(context)
-  }
-
-  private fun MD5(md5: String): String? {
-    try {
-      val md = MessageDigest.getInstance("MD5")
-      val array = md.digest(md5.toByteArray(charset("UTF-8")))
-      val sb = StringBuffer()
-      for (i in array.indices) {
-        sb.append(Integer.toHexString(array[i].toInt() and 0xFF or 0x100).substring(1, 3))
-      }
-      return sb.toString()
-    } catch (_: NoSuchAlgorithmException) {
-    } catch (_: UnsupportedEncodingException) {
-    }
-    return null
-  }
-
-  @SuppressLint("HardwareIds")
-  private fun getHashedAdvertisingId(
-    context: Context,
-  ): String {
-    val androidId: String = Settings.Secure.getString(
-      context.contentResolver,
-      Settings.Secure.ANDROID_ID,
-    )
-    return MD5(androidId)?.uppercase() ?: ""
   }
 }
