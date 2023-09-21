@@ -36,44 +36,42 @@ fun rememberAdLoader(
       .forNativeAd { nativeAd ->
         onNativeAd(nativeAd)
       }
-      .withAdListener(
-        object : AdListener() {
-          override fun onAdClicked() {
-            // Handle ad clicked
-            onAdEvent(AdEvent.AdClicked)
-          }
+      .withAdListener(object : AdListener() {
+        override fun onAdClicked() {
+          // Handle ad clicked
+          onAdEvent(AdEvent.AdClicked)
+        }
 
-          override fun onAdClosed() {
-            // Handle ad closed
-            onAdEvent(AdEvent.AdClosed)
-          }
+        override fun onAdClosed() {
+          // Handle ad closed
+          onAdEvent(AdEvent.AdClosed)
+        }
 
-          override fun onAdFailedToLoad(error: LoadAdError) {
-            // Handle ad failed to load
-            onAdEvent(AdEvent.AdFailedToLoad(error))
-          }
+        override fun onAdFailedToLoad(error: LoadAdError) {
+          // Handle ad failed to load
+          onAdEvent(AdEvent.AdFailedToLoad(error))
+        }
 
-          override fun onAdImpression() {
-            // Handle ad impression
-            onAdEvent(AdEvent.AdImpression)
-          }
+        override fun onAdImpression() {
+          // Handle ad impression
+          onAdEvent(AdEvent.AdImpression)
+        }
 
-          override fun onAdLoaded() {
-            // Handle ad loaded
-            onAdEvent(AdEvent.AdLoaded)
-          }
+        override fun onAdLoaded() {
+          // Handle ad loaded
+          onAdEvent(AdEvent.AdLoaded)
+        }
 
-          override fun onAdOpened() {
-            // Handle ad opened
-            onAdEvent(AdEvent.AdOpened)
-          }
+        override fun onAdOpened() {
+          // Handle ad opened
+          onAdEvent(AdEvent.AdOpened)
+        }
 
-          override fun onAdSwipeGestureClicked() {
-            // Handle swipe gesture clicked
-            onAdEvent(AdEvent.AdSwipeGestureClicked)
-          }
-        },
-      )
+        override fun onAdSwipeGestureClicked() {
+          // Handle swipe gesture clicked
+          onAdEvent(AdEvent.AdSwipeGestureClicked)
+        }
+      })
       .withNativeAdOptions(config.toNativeAdOptions())
       .build()
 

@@ -22,17 +22,134 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import com.google.android.gms.ads.MediaContent
+import com.google.android.gms.ads.nativead.NativeAd
+
+data class AdComponent<T>(
+  val content: MutableState<T>,
+  val composeView: ComposeView,
+) {
+  fun setValue(value: T) {
+    content.value = value
+  }
+}
 
 @Composable
 fun <T> createAdComponent(
   initialValue: T,
-  content: @Composable (T) -> Unit,
-): Pair<MutableState<T>, ComposeView> {
+  ui: @Composable (T) -> Unit,
+): AdComponent<T> {
   val adComponent = remember { mutableStateOf(initialValue) }
   val adComponentView = ComposeView(LocalContext.current).apply {
     setContent {
-      content(adComponent.value)
+      ui(adComponent.value)
     }
   }
-  return adComponent to adComponentView
+  return AdComponent(
+    adComponent,
+    adComponentView,
+  )
 }
+
+@Composable
+fun <T> createNullAdComponent(
+  ui: @Composable (T) -> Unit,
+): AdComponent<T?> {
+  val adComponent = remember { mutableStateOf<T?>(null) }
+  val adComponentView = ComposeView(LocalContext.current).apply {
+    setContent {
+      adComponent.value?.let { ui(it) }
+    }
+  }
+  return AdComponent(
+    adComponent,
+    adComponentView,
+  )
+}
+
+@Composable
+fun createAdvertiserView(
+  ui: @Composable (String) -> Unit,
+) = createAdComponent(
+  initialValue = "",
+  ui = ui,
+)
+
+@Composable
+fun createAdChoicesView(
+  ui: @Composable (String) -> Unit,
+) = createAdComponent(
+  initialValue = "",
+  ui = ui,
+)
+
+@Composable
+fun createHeadlineView(
+  ui: @Composable (String) -> Unit,
+) = createAdComponent(
+  initialValue = "",
+  ui = ui,
+)
+
+@Composable
+fun createBodyView(
+  ui: @Composable (String) -> Unit,
+) = createAdComponent(
+  initialValue = "",
+  ui = ui,
+)
+
+@Composable
+fun createCallToActionView(
+  ui: @Composable (String) -> Unit,
+) = createAdComponent(
+  initialValue = "",
+  ui = ui,
+)
+
+@Composable
+fun createIconView(
+  ui: @Composable (NativeAd.Image) -> Unit,
+) = createNullAdComponent(
+  ui = ui,
+)
+
+@Composable
+fun createImageView(
+  ui: @Composable (String) -> Unit,
+) = createAdComponent(
+  initialValue = "",
+  ui = ui,
+)
+
+@Composable
+fun createMediaView(
+  ui: @Composable (MediaContent) -> Unit,
+) = createAdComponent(
+  initialValue = MediaContentImpl(),
+  ui = ui,
+)
+
+@Composable
+fun createPriceView(
+  ui: @Composable (String) -> Unit,
+) = createAdComponent(
+  initialValue = "",
+  ui = ui,
+)
+
+@Composable
+fun createStarRatingView(
+  ui: @Composable (Double) -> Unit,
+) = createAdComponent(
+  initialValue = 0.0,
+  ui = ui,
+)
+
+@Composable
+fun createStoreView(
+  ui: @Composable (String) -> Unit,
+) = createAdComponent(
+  initialValue = "",
+  ui = ui,
+)

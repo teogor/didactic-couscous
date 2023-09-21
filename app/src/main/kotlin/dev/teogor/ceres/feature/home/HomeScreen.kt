@@ -18,15 +18,10 @@ package dev.teogor.ceres.feature.home
 
 import android.app.Activity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,7 +44,13 @@ import dev.teogor.ceres.monetisation.admob.AdmobBanner
 import dev.teogor.ceres.monetisation.admob.nativead.AdEvent
 import dev.teogor.ceres.monetisation.admob.nativead.AdLoaderConfig
 import dev.teogor.ceres.monetisation.admob.nativead.NativeAd
+import dev.teogor.ceres.monetisation.admob.nativead.NativeAdConfig
+import dev.teogor.ceres.monetisation.admob.nativead.NativeAdUi
 import dev.teogor.ceres.monetisation.admob.nativead.RefreshableNativeAd
+import dev.teogor.ceres.monetisation.admob.nativead.createBodyView
+import dev.teogor.ceres.monetisation.admob.nativead.createCallToActionView
+import dev.teogor.ceres.monetisation.admob.nativead.createHeadlineView
+import dev.teogor.ceres.monetisation.admob.nativead.createIconView
 import dev.teogor.ceres.monetisation.admob.nativead.rememberAdLoader
 import dev.teogor.ceres.monetisation.admob.showInterstitialAd
 import dev.teogor.ceres.monetisation.messaging.ConsentManager
@@ -60,7 +61,6 @@ import dev.teogor.ceres.screen.builder.header
 import dev.teogor.ceres.screen.builder.simpleView
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.theme.MaterialTheme
-import dev.teogor.ceres.ui.theme.contentColorFor
 
 // todo better way to configure this. perhaps use kotlin builder syntax
 @Composable
@@ -181,6 +181,7 @@ private fun HomeScreen(
         adLoader = adLoader,
         refreshIntervalMillis = 30000L,
       )
+      val nativeAdConfig = nativeAdConfig()
       NativeAd(
         modifier = Modifier
           .padding(horizontal = 10.dp)
@@ -189,50 +190,48 @@ private fun HomeScreen(
             shape = RoundedCornerShape(20.dp),
           )
           .padding(horizontal = 6.dp, vertical = 10.dp),
-        adHeadlineView = {
-          Text(
-            text = it,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
-            fontSize = 18.sp,
-          )
-        },
-        adBodyView = {
-          Text(
-            text = it,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
-            fontSize = 12.sp,
-          )
-        },
-        callToActionView = {
-          // AdActionButton {
-          val backgroundColor = MaterialTheme.colorScheme.primary
-          Box(
-            modifier = Modifier
-              .background(
-                color = backgroundColor,
-                shape = ButtonDefaults.shape,
-              )
-              .padding(horizontal = 16.dp, vertical = 4.dp),
-          ) {
-            CompositionLocalProvider(
-              LocalContentColor provides contentColorFor(backgroundColor = backgroundColor),
-            ) {
-              ProvideTextStyle(value = MaterialTheme.typography.labelLarge) {
-                Text(
-                  text = it,
-                  color = MaterialTheme.colorScheme.onPrimary,
-                  fontSize = 12.sp,
-                )
-              }
-            }
-          }
-          // }
+        nativeAdConfig = nativeAdConfig,
+        adContent = {
+          NativeAdUi(nativeAdConfig)
         },
         nativeAd = nativeAd,
-        adContent = {
-          
-        }
       )
     }
   }
 }
+
+@Composable
+fun nativeAdConfig() = NativeAdConfig.Builder()
+  .headlineView(
+    createHeadlineView {
+      Text(
+        text = it,
+        color = MaterialTheme.colorScheme.onPrimaryContainer,
+        fontSize = 18.sp,
+      )
+    },
+  )
+  .bodyView(
+    createBodyView {
+      Text(
+        text = it,
+        color = MaterialTheme.colorScheme.onPrimaryContainer,
+        fontSize = 10.sp,
+        maxLines = 1,
+      )
+    },
+  )
+  .callToActionView(
+    createCallToActionView {
+      Text(
+        text = it,
+        color = MaterialTheme.colorScheme.onPrimaryContainer,
+        fontSize = 12.sp,
+      )
+    },
+  )
+  .iconView(
+    createIconView {
+    },
+  )
+  .build()
