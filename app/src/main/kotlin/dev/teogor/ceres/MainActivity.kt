@@ -59,5 +59,4 @@ class MainActivity : Activity() {
    */
   @Composable
   override fun MenuConfig.buildMenu() = applyMenuConfig()
-
 }

@@ -25,14 +25,20 @@ android {
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
+  buildFeatures {
+    viewBinding = true
+  }
 }
 
 dependencies {
-  implementation("com.google.android.gms:play-services-ads:22.4.0")
+  api("com.google.android.gms:play-services-ads:22.4.0")
 
   implementation("io.github.farimarwat:admobnative-compose:1.2")
 
+  implementation(project(":ui:designsystem"))
+
   implementation(libs.androidx.compose.foundation)
   implementation(libs.androidx.compose.runtime)
+  implementation(libs.androidx.compose.ui.viewbinding)
   implementation(libs.startup.runtime)
 }

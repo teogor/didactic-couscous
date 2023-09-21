@@ -58,8 +58,8 @@ fun AdvancedView(
     }
   }
   LaunchedEffect(switchToggled, isSwitchToggled) {
-    if(hasSwitch) {
-      if(isSwitchToggled != switchToggled!!) {
+    if (hasSwitch) {
+      if (isSwitchToggled != switchToggled!!) {
         onSwitchToggled?.invoke(isSwitchToggled)
       }
     }

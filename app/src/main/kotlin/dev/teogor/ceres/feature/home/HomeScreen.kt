@@ -17,12 +17,25 @@
 package dev.teogor.ceres.feature.home
 
 import android.app.Activity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.google.android.gms.ads.nativead.NativeAd
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.screen.floatingButton
@@ -33,6 +46,11 @@ import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.monetisation.admob.AdmobBanner
+import dev.teogor.ceres.monetisation.admob.nativead.AdEvent
+import dev.teogor.ceres.monetisation.admob.nativead.AdLoaderConfig
+import dev.teogor.ceres.monetisation.admob.nativead.NativeAd
+import dev.teogor.ceres.monetisation.admob.nativead.RefreshableNativeAd
+import dev.teogor.ceres.monetisation.admob.nativead.rememberAdLoader
 import dev.teogor.ceres.monetisation.admob.showInterstitialAd
 import dev.teogor.ceres.monetisation.messaging.ConsentManager
 import dev.teogor.ceres.monetisation.messaging.ConsentResult
@@ -40,6 +58,9 @@ import dev.teogor.ceres.screen.builder.compose.ColumnLayout
 import dev.teogor.ceres.screen.builder.customView
 import dev.teogor.ceres.screen.builder.header
 import dev.teogor.ceres.screen.builder.simpleView
+import dev.teogor.ceres.ui.designsystem.Text
+import dev.teogor.ceres.ui.theme.MaterialTheme
+import dev.teogor.ceres.ui.theme.contentColorFor
 
 // todo better way to configure this. perhaps use kotlin builder syntax
 @Composable
@@ -103,7 +124,7 @@ internal fun HomeRoute(
 
 @Composable
 private fun HomeScreen(
-  activity: Activity?
+  activity: Activity?,
 ) = ColumnLayout(
   hasScrollbarBackground = false,
   screenName = HomeScreenConfig,
@@ -134,6 +155,84 @@ private fun HomeScreen(
       showInterstitialAd(activity)
     },
   )
+
+  customView {
+    val adId = "ca-app-pub-3940256099942544/2247696110"
+
+    var nativeAd by remember {
+      mutableStateOf<NativeAd?>(null)
+    }
+    var adClicked by remember {
+      mutableStateOf(false)
+    }
+    val adLoader = rememberAdLoader(
+      config = AdLoaderConfig(adId),
+      onAdEvent = { event ->
+        if (event == AdEvent.AdClicked) {
+          adClicked = true
+        }
+      },
+    ) {
+      nativeAd = it
+    }
+    if (!adClicked) {
+      RefreshableNativeAd(
+        adId = adId,
+        adLoader = adLoader,
+        refreshIntervalMillis = 30000L,
+      )
+      NativeAd(
+        modifier = Modifier
+          .padding(horizontal = 10.dp)
+          .background(
+            color = MaterialTheme.colorScheme.primaryContainer,
+            shape = RoundedCornerShape(20.dp),
+          )
+          .padding(horizontal = 6.dp, vertical = 10.dp),
+        adHeadlineView = {
+          Text(
+            text = it,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            fontSize = 18.sp,
+          )
+        },
+        adBodyView = {
+          Text(
+            text = it,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            fontSize = 12.sp,
+          )
+        },
+        callToActionView = {
+          // AdActionButton {
+          val backgroundColor = MaterialTheme.colorScheme.primary
+          Box(
+            modifier = Modifier
+              .background(
+                color = backgroundColor,
+                shape = ButtonDefaults.shape,
+              )
+              .padding(horizontal = 16.dp, vertical = 4.dp),
+          ) {
+            CompositionLocalProvider(
+              LocalContentColor provides contentColorFor(backgroundColor = backgroundColor),
+            ) {
+              ProvideTextStyle(value = MaterialTheme.typography.labelLarge) {
+                Text(
+                  text = it,
+                  color = MaterialTheme.colorScheme.onPrimary,
+                  fontSize = 12.sp,
+                )
+              }
+            }
+          }
+          // }
+        },
+        nativeAd = nativeAd,
+        adContent = {
+          
+        }
+      )
+    }
+  }
 }
-
-

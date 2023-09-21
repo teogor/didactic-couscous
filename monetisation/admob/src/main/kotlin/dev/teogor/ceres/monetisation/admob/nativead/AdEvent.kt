@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.monetisation.messaging
+package dev.teogor.ceres.monetisation.admob.nativead
 
-import com.google.android.ump.ConsentInformation.PrivacyOptionsRequirementStatus
-import com.google.android.ump.FormError
+import com.google.android.gms.ads.LoadAdError
 
-sealed class ConsentResult {
-  data object Undefined : ConsentResult()
+sealed class AdEvent {
+  object AdClicked : AdEvent()
+  object AdClosed : AdEvent()
+  data class AdFailedToLoad(val error: LoadAdError) : AdEvent()
+  object AdImpression : AdEvent()
+  object AdLoaded : AdEvent()
+  object AdOpened : AdEvent()
+  object AdSwipeGestureClicked : AdEvent()
 
-  data class ConsentFormAcquired(
-    val canRequestAds: Boolean,
-    val requirementStatus: PrivacyOptionsRequirementStatus,
-    val formAvailable: Boolean,
-  ) : ConsentResult()
-
-  data class ConsentFormDismissed(
-    val canRequestAds: Boolean,
-    val requirementStatus: PrivacyOptionsRequirementStatus,
-    val formError: FormError?,
-  ) : ConsentResult()
+  val name = this.javaClass.simpleName
 }

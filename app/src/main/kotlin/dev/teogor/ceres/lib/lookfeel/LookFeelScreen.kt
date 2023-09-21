@@ -129,7 +129,6 @@ private fun LookAndFeelLayout(
 ) = LazyColumnLayout(
   screenName = HomeScreenConfig,
 ) {
-
   header {
     "Appearance"
   }

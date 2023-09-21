@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import dev.teogor.ceres.ui.designsystem.HorizontalDivider
 
-
 typealias MenuScope = LazyListScope
 
 open class MenuItem

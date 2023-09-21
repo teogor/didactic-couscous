@@ -14,21 +14,17 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools">
+<com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_native"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
 
-  <application>
-    <meta-data
-      android:name="dev.teogor.ceres.monetisation.admob.flag.MANUAL_ADS_SETUP"
-      android:value="false" />
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <provider
-      android:name="androidx.startup.InitializationProvider"
-      android:authorities="${applicationId}.androidx-startup"
-      android:exported="false"
-      tools:node="merge">
-      <meta-data android:name="dev.teogor.ceres.monetisation.messaging.MessagingManagerInitializer"
-        android:value="androidx.startup" />
-    </provider>
-  </application>
-</manifest>
+</com.google.android.gms.ads.nativead.NativeAdView>

@@ -187,8 +187,10 @@ open class Activity : ComponentActivity() {
           LocalCrashlyticsHelper provides crashlyticsHelper,
         ) {
           val menuConfig = MenuConfig().apply { buildMenu() }
-          val menuConfigHeader = remember(menuConfig.headerContent ?: {}) { menuConfig.headerContent!! }
-          val menuConfigContent = remember(menuConfig.menuContent ?: {}) { menuConfig.menuContent!! }
+          val menuConfigHeader =
+            remember(menuConfig.headerContent ?: {}) { menuConfig.headerContent!! }
+          val menuConfigContent =
+            remember(menuConfig.menuContent ?: {}) { menuConfig.menuContent!! }
 
           CeresApp(
             windowSizeClass = calculateWindowSizeClass(this),

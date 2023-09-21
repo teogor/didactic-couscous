@@ -26,13 +26,16 @@ import androidx.startup.Initializer
 class AdmobManagerInitializer : Initializer<Unit> {
   override fun create(context: Context) {
     val packageManager = context.packageManager
-    val applicationInfo = packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
+    val applicationInfo = packageManager.getApplicationInfo(
+      context.packageName,
+      PackageManager.GET_META_DATA,
+    )
     val manualAdsSetup = applicationInfo.metaData?.getBoolean(
       "dev.teogor.ceres.monetisation.admob.flag.MANUAL_ADS_SETUP",
-      false
+      false,
     ) ?: false
 
-    if(!manualAdsSetup) {
+    if (!manualAdsSetup) {
       AdMobInitializer.initialize(context)
     }
   }
