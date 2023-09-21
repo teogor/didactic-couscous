@@ -16,12 +16,17 @@
 
 package dev.teogor.ceres.monetisation.admob.nativead
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import dev.teogor.ceres.ui.theme.MaterialTheme
 
 @Composable
 fun NativeAdUi(
@@ -61,49 +66,12 @@ fun NativeAdUi(
         factory = {
           callToActionView.composeView
         },
-        modifier = Modifier.align(Alignment.CenterHorizontally),
-      )
-    }
-  }
-}
-
-@Composable
-fun NativeAdUi(
-  advertiserView: AdComponent<String>? = null,
-  adChoicesView: AdComponent<String>? = null,
-  headlineView: AdComponent<String>? = null,
-  bodyView: AdComponent<String>? = null,
-  callToActionView: AdComponent<String>? = null,
-  iconView: AdComponent<String>? = null,
-  imageView: AdComponent<String>? = null,
-  mediaView: AdComponent<String>? = null,
-  priceView: AdComponent<String>? = null,
-  starRatingView: AdComponent<String>? = null,
-  storeView: AdComponent<String>? = null,
-) {
-  Column(
-    modifier = Modifier.fillMaxWidth(),
-  ) {
-    headlineView?.let { headlineView ->
-      AndroidView(
-        factory = {
-          headlineView.composeView
-        },
-      )
-    }
-    bodyView?.let { bodyView ->
-      AndroidView(
-        factory = {
-          bodyView.composeView
-        },
-      )
-    }
-    callToActionView?.let { callToActionView ->
-      AndroidView(
-        factory = {
-          callToActionView.composeView
-        },
-        modifier = Modifier.align(Alignment.CenterHorizontally),
+        modifier = Modifier.align(Alignment.CenterHorizontally)
+          .background(
+            color = MaterialTheme.colorScheme.primary,
+            shape = ButtonDefaults.shape,
+          )
+          .padding(horizontal = 10.dp, vertical = 6.dp),
       )
     }
   }

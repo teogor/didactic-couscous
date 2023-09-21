@@ -225,7 +225,7 @@ fun nativeAdConfig() = NativeAdConfig.Builder()
     createCallToActionView {
       Text(
         text = it,
-        color = MaterialTheme.colorScheme.onPrimaryContainer,
+        color = MaterialTheme.colorScheme.onPrimary,
         fontSize = 12.sp,
       )
     },
