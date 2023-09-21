@@ -19,18 +19,24 @@ package dev.teogor.ceres.feature.home
 import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.ads.nativead.NativeAd
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.glide.GlideImage
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.screen.floatingButton
@@ -41,7 +47,6 @@ import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.monetisation.admob.DemoAdUnitIds
-import dev.teogor.ceres.monetisation.admob.formats.AdEvent
 import dev.teogor.ceres.monetisation.admob.formats.nativead.AdLoaderConfig
 import dev.teogor.ceres.monetisation.admob.formats.nativead.NativeAd
 import dev.teogor.ceres.monetisation.admob.formats.nativead.NativeAdConfig
@@ -181,41 +186,33 @@ private fun HomeScreen(
     var nativeAd by remember {
       mutableStateOf<NativeAd?>(null)
     }
-    var adClicked by remember {
-      mutableStateOf(false)
-    }
     val adLoader = rememberAdLoader(
       config = AdLoaderConfig(adId),
       onAdEvent = { event ->
-        if (event == AdEvent.AdClicked) {
-          adClicked = true
-        }
       },
     ) {
       nativeAd = it
     }
-    if (!adClicked) {
-      RefreshableNativeAd(
-        adId = adId,
-        adLoader = adLoader,
-        refreshIntervalMillis = 30000L,
-      )
-      val nativeAdConfig = nativeAdConfig()
-      NativeAd(
-        modifier = Modifier
-          .padding(horizontal = 10.dp)
-          .background(
-            color = MaterialTheme.colorScheme.primaryContainer,
-            shape = RoundedCornerShape(20.dp),
-          )
-          .padding(horizontal = 6.dp, vertical = 10.dp),
-        nativeAdConfig = nativeAdConfig,
-        adContent = {
-          NativeAdUi(nativeAdConfig)
-        },
-        nativeAd = nativeAd,
-      )
-    }
+    RefreshableNativeAd(
+      adId = adId,
+      adLoader = adLoader,
+      refreshIntervalMillis = 30000L,
+    )
+    val nativeAdConfig = nativeAdConfig()
+    NativeAd(
+      modifier = Modifier
+        .padding(horizontal = 10.dp)
+        .background(
+          color = MaterialTheme.colorScheme.primaryContainer,
+          shape = RoundedCornerShape(20.dp),
+        )
+        .padding(horizontal = 6.dp, vertical = 10.dp),
+      nativeAdConfig = nativeAdConfig,
+      adContent = {
+        NativeAdUi(nativeAdConfig)
+      },
+      nativeAd = nativeAd,
+    )
   }
 }
 
@@ -251,6 +248,21 @@ fun nativeAdConfig() = NativeAdConfig.Builder()
   )
   .iconView(
     createIconView {
+      GlideImage(
+        modifier = Modifier
+          .size(50.dp)
+          .background(
+            color = MaterialTheme.colorScheme.background.copy(alpha = .2f),
+            shape = RoundedCornerShape(10.dp),
+          )
+          .clip(RoundedCornerShape(10.dp))
+          .padding(6.dp),
+        imageModel = { it.uri }, // loading a network image using an URL.
+        imageOptions = ImageOptions(
+          contentScale = ContentScale.Crop,
+          alignment = Alignment.Center,
+        ),
+      )
     },
   )
   .build()

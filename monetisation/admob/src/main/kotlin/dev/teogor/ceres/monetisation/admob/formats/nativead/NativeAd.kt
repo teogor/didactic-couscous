@@ -56,6 +56,8 @@ fun NativeAd(
         adview.priceView = nativeAdConfig.priceView?.composeView
         adview.starRatingView = nativeAdConfig.starRatingView?.composeView
         adview.storeView = nativeAdConfig.storeView?.composeView
+
+        adview.adChoicesView
       }
       composeView.setContent(adContent)
     }
@@ -96,7 +98,6 @@ fun NativeAd(
       nativeAd.store?.let { store ->
         nativeAdConfig.storeView?.setValue(store)
       }
-
       adView?.setNativeAd(nativeAd)
     }
   }

@@ -18,6 +18,7 @@ package dev.teogor.ceres.monetisation.admob.formats.nativead
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ButtonDefaults
@@ -47,26 +48,42 @@ fun NativeAdUi(
   Column(
     modifier = Modifier.fillMaxWidth(),
   ) {
-    headlineView?.let { headlineView ->
-      AndroidView(
-        factory = {
-          headlineView.composeView
-        },
-      )
-    }
-    bodyView?.let { bodyView ->
-      AndroidView(
-        factory = {
-          bodyView.composeView
-        },
-      )
+    Row(
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      iconView?.let { iconView ->
+        AndroidView(
+          factory = {
+            iconView.composeView
+          },
+        )
+      }
+      Column(
+        modifier = Modifier.padding(start = 6.dp),
+      ) {
+        headlineView?.let { headlineView ->
+          AndroidView(
+            factory = {
+              headlineView.composeView
+            },
+          )
+        }
+        bodyView?.let { bodyView ->
+          AndroidView(
+            factory = {
+              bodyView.composeView
+            },
+          )
+        }
+      }
     }
     callToActionView?.let { callToActionView ->
       AndroidView(
         factory = {
           callToActionView.composeView
         },
-        modifier = Modifier.align(Alignment.CenterHorizontally)
+        modifier = Modifier
+          .align(Alignment.CenterHorizontally)
           .background(
             color = MaterialTheme.colorScheme.primary,
             shape = ButtonDefaults.shape,

@@ -44,7 +44,7 @@ fun RefreshableNativeAd(
       override fun onFinish() {
         // Refresh the ad when the timer finishes
         adLoader.loadAd(AdRequest.Builder().build())
-        start() // Restart the timer
+        start()
       }
     }
 
