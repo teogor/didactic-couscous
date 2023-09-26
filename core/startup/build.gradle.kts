@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 plugins {
-  id("ceres.android.library")
-  id("ceres.android.library.jacoco")
+  id("dev.teogor.ceres.android.library")
+  id("dev.teogor.ceres.android.library.jacoco")
 }
 
 android {

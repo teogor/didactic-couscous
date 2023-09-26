@@ -46,59 +46,59 @@ dependencies {
 gradlePlugin {
   plugins {
     register("androidApplicationCompose") {
-      id = "ceres.android.application.compose"
+      id = "dev.teogor.ceres.android.application.compose"
       implementationClass = "AndroidApplicationComposeConventionPlugin"
     }
     register("androidApplication") {
-      id = "ceres.android.application"
+      id = "dev.teogor.ceres.android.application"
       implementationClass = "AndroidApplicationConventionPlugin"
     }
     register("androidApplicationJacoco") {
-      id = "ceres.android.application.jacoco"
+      id = "dev.teogor.ceres.android.application.jacoco"
       implementationClass = "AndroidApplicationJacocoConventionPlugin"
     }
     register("androidLibraryCompose") {
-      id = "ceres.android.library.compose"
+      id = "dev.teogor.ceres.android.library.compose"
       implementationClass = "AndroidLibraryComposeConventionPlugin"
     }
     register("androidLibrary") {
-      id = "ceres.android.library"
+      id = "dev.teogor.ceres.android.library"
       implementationClass = "AndroidLibraryConventionPlugin"
     }
     register("androidFeature") {
-      id = "ceres.android.feature"
+      id = "dev.teogor.ceres.android.feature"
       implementationClass = "AndroidFeatureConventionPlugin"
     }
     register("androidLibraryJacoco") {
-      id = "ceres.android.library.jacoco"
+      id = "dev.teogor.ceres.android.library.jacoco"
       implementationClass = "AndroidLibraryJacocoConventionPlugin"
     }
     register("androidLibraryConfig") {
-      id = "ceres.android.library.config"
+      id = "dev.teogor.ceres.android.library.config"
       implementationClass = "AndroidLibraryConfigConventionPlugin"
     }
     register("androidTest") {
-      id = "ceres.android.test"
+      id = "dev.teogor.ceres.android.test"
       implementationClass = "AndroidTestConventionPlugin"
     }
     register("androidHilt") {
-      id = "ceres.android.hilt"
+      id = "dev.teogor.ceres.android.hilt"
       implementationClass = "AndroidHiltConventionPlugin"
     }
     register("androidRoom") {
-      id = "ceres.android.room"
+      id = "dev.teogor.ceres.android.room"
       implementationClass = "AndroidRoomConventionPlugin"
     }
     register("androidFirebase") {
-      id = "ceres.android.application.firebase"
+      id = "dev.teogor.ceres.android.application.firebase"
       implementationClass = "AndroidApplicationFirebaseConventionPlugin"
     }
     register("androidFlavors") {
-      id = "ceres.android.application.flavors"
+      id = "dev.teogor.ceres.android.application.flavors"
       implementationClass = "AndroidApplicationFlavorsConventionPlugin"
     }
     register("buildDocs") {
-      id = "ceres.docs"
+      id = "dev.teogor.ceres.docs"
       implementationClass = "BuildDocsPlugin"
     }
   }

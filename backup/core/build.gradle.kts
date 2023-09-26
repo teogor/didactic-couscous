@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 plugins {
-  id("ceres.android.library")
-  id("ceres.android.hilt")
+  id("dev.teogor.ceres.android.library")
+  id("dev.teogor.ceres.android.hilt")
   id("kotlinx-serialization")
 }
 

@@ -52,11 +52,11 @@ dependencies {
 gradlePlugin {
   plugins {
     register("ceresModulePlugin") {
-      id = "ceres.module"
+      id = "dev.teogor.ceres.module"
       implementationClass = "dev.teogor.ceres.gradle.plugins.CeresModulePlugin"
     }
     register("ceresLibraryPublishPlugin") {
-      id = "ceres.library.publish"
+      id = "dev.teogor.ceres.library.publish"
       implementationClass = "dev.teogor.ceres.gradle.plugins.CeresLibraryPublishPlugin"
     }
   }

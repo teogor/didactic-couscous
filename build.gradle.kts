@@ -21,7 +21,7 @@ plugins {
   alias(libs.plugins.dokka)
   alias(libs.plugins.spotless)
 
-  id("ceres.docs")
+  id("dev.teogor.ceres.docs")
 }
 
 val ktlintVersion = "0.50.0"

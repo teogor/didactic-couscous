@@ -14,7 +14,7 @@ fun Project.collectBomConstraints() {
     val subproject = this
 
     if (subproject.name != "bom") {
-      subproject.plugins.withId("ceres.library.publish") {
+      subproject.plugins.withId("dev.teogor.ceres.library.publish") {
         subproject.plugins.withId("com.vanniktech.maven.publish.base") {
           bomConstraints.api(subproject)
         }

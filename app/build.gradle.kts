@@ -17,12 +17,12 @@ import dev.teogor.ceres.CeresBuildType
 import dev.teogor.ceres.Version
 
 plugins {
-  id("ceres.android.application")
-  id("ceres.android.application.compose")
-  id("ceres.android.application.flavors")
-  id("ceres.android.application.jacoco")
-  id("ceres.android.application.firebase")
-  id("ceres.android.hilt")
+  id("dev.teogor.ceres.android.application")
+  id("dev.teogor.ceres.android.application.compose")
+  id("dev.teogor.ceres.android.application.flavors")
+  id("dev.teogor.ceres.android.application.jacoco")
+  id("dev.teogor.ceres.android.application.firebase")
+  id("dev.teogor.ceres.android.hilt")
   id("kotlinx-serialization")
   id("jacoco")
 }

@@ -18,7 +18,7 @@ import dev.teogor.ceres.gradle.plugins.CeresLibraryExtension
 import dev.teogor.ceres.gradle.plugins.setModuleCoordinates
 
 plugins {
-  id("ceres.module")
+  id("dev.teogor.ceres.module")
 }
 
 ceresModule {
