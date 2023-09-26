@@ -72,8 +72,7 @@ class ConnectivityManagerNetworkMonitor @Inject constructor(
     awaitClose {
       connectivityManager?.unregisterNetworkCallback(callback)
     }
-  }
-    .conflate()
+  }.conflate()
 
   @Suppress("DEPRECATION")
   private fun ConnectivityManager?.isCurrentlyConnected() = when (this) {

@@ -18,6 +18,7 @@ package dev.teogor.ceres.framework.core.app
 
 import android.app.Activity
 import androidx.activity.compose.BackHandler
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Box
@@ -73,6 +74,8 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavOptions
 import dev.teogor.ceres.core.network.NetworkMonitor
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
+import dev.teogor.ceres.framework.core.compositions.LocalNetworkConnectivity
+import dev.teogor.ceres.framework.core.compositions.NetworkConnectivity
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.lib.common.BottomSheetState
 import dev.teogor.ceres.navigation.core.lib.common.LocalBottomSheetVM
@@ -138,14 +141,22 @@ fun CeresApp(
   // todo VMs
   val bottomSheetVM: BottomSheetState = viewModel()
   val toolbarState: ToolbarState = viewModel()
+  val networkConnectivity = NetworkConnectivity()
 
   CompositionLocalProvider(
     LocalBottomSheetVM provides bottomSheetVM,
     LocalToolbarState provides toolbarState,
+    LocalNetworkConnectivity provides networkConnectivity,
   ) {
     CeresBackground(
       modifier = Modifier.fillMaxSize(),
     ) {
+      val isOffline by appState.isOffline.collectAsStateWithLifecycle()
+
+      LaunchedEffect(isOffline) {
+        networkConnectivity.isOffline = isOffline
+      }
+
       val menuSheetState = rememberModalBottomSheetState(Hidden)
       val bottomSheetOffset = remember { mutableFloatStateOf(0f) }
       val scope = rememberCoroutineScope()

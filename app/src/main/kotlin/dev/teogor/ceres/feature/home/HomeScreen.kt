@@ -36,6 +36,7 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.setScreenInfo
+import dev.teogor.ceres.framework.core.compositions.LocalNetworkConnectivity
 import dev.teogor.ceres.framework.core.screen.floatingButton
 import dev.teogor.ceres.framework.core.screen.isStatusBarVisible
 import dev.teogor.ceres.framework.core.screen.isVisible
@@ -113,10 +114,13 @@ internal fun HomeRoute(
     context as? Activity
   }
 
+  val networkConnectivity = LocalNetworkConnectivity.current
+
   if (canRequestAds) {
     HomeScreen(
       activity,
       homeVM,
+      isOffline = networkConnectivity.isOffline,
     )
   } else {
     ConsentManager.loadAndShowConsentFormIfRequired()
@@ -127,6 +131,7 @@ internal fun HomeRoute(
 private fun HomeScreen(
   activity: Activity?,
   homeVM: HomeViewModel,
+  isOffline: Boolean,
 ) = ColumnLayout(
   hasScrollbarBackground = false,
   screenName = HomeScreenConfig,
@@ -177,30 +182,32 @@ private fun HomeScreen(
 
   customView {
     val adId = DemoAdUnitIds.NATIVE
-    val nativeAdBeta by remember {
+    val nativeAd by remember {
       homeVM.nativeAd
     }
-    val nativeAdConfig = nativeAdConfig()
+    if(!isOffline) {
+      val nativeAdConfig = nativeAdConfig()
 
-    NativeAd(
-      modifier = Modifier
-        .padding(horizontal = 10.dp)
-        .background(
-          color = MaterialTheme.colorScheme.primaryContainer,
-          shape = RoundedCornerShape(20.dp),
-        )
-        .padding(horizontal = 6.dp, vertical = 10.dp),
-      nativeAdConfig = nativeAdConfig,
-      adContent = {
-        NativeAdUi(nativeAdConfig)
-      },
-      nativeAd = nativeAdBeta,
-      config = AdLoaderConfig(adId),
-      refreshIntervalMillis = 30000L,
-      onAdLoaded = {
-        homeVM.setNativeAd(it)
-      }
-    )
+      NativeAd(
+        modifier = Modifier
+          .padding(horizontal = 10.dp)
+          .background(
+            color = MaterialTheme.colorScheme.primaryContainer,
+            shape = RoundedCornerShape(20.dp),
+          )
+          .padding(horizontal = 6.dp, vertical = 10.dp),
+        nativeAdConfig = nativeAdConfig,
+        adContent = {
+          NativeAdUi(nativeAdConfig)
+        },
+        nativeAd = nativeAd,
+        config = AdLoaderConfig(adId),
+        refreshIntervalMillis = 30000L,
+        onAdLoaded = {
+          homeVM.setNativeAd(it)
+        }
+      )
+    }
   }
 }
 

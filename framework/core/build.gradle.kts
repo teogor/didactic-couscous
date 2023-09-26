@@ -47,7 +47,7 @@ dependencies {
   api(project(":firebase:crashlytics"))
 
   implementation(libs.androidx.activity.compose)
-
+  implementation(libs.androidx.lifecycle.runtimeCompose)
   implementation(libs.androidx.core.splashscreen)
 
   implementation(libs.accompanist.systemuicontroller)
