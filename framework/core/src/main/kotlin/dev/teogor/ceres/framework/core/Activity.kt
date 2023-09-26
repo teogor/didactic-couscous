@@ -104,7 +104,6 @@ open class Activity : ComponentActivity() {
     handleSplashScreen(splashScreen)
 
     setContent {
-      // todo systemUiController
       val darkTheme = isSystemInDarkTheme()
 
       val ceresPreferences = remember {
