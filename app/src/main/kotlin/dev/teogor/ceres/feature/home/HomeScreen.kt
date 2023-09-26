@@ -196,7 +196,7 @@ private fun HomeScreen(
       },
       nativeAd = nativeAdBeta,
       config = AdLoaderConfig(adId),
-      refreshIntervalMillis = 2500L,
+      refreshIntervalMillis = 30000L,
       onAdLoaded = {
         homeVM.setNativeAd(it)
       }
