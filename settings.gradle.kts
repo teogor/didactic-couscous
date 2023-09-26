@@ -1,5 +1,5 @@
 pluginManagement {
-    includeBuild("plugin")
+    includeBuild("plugin/")
     repositories {
         google()
         mavenCentral()
