@@ -20,12 +20,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,9 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
 import androidx.metrics.performance.JankStats
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.teogor.ceres.core.network.NetworkMonitor
 import dev.teogor.ceres.data.compose.rememberPreference
 import dev.teogor.ceres.data.datastore.defaults.AppTheme
@@ -52,7 +53,6 @@ import dev.teogor.ceres.navigation.core.NavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
 import dev.teogor.ceres.ui.foundation.config.FeedbackConfig
-import dev.teogor.ceres.ui.foundation.window.WindowPreferencesManager
 import dev.teogor.ceres.ui.theme.core.Theme
 import javax.inject.Inject
 
@@ -97,15 +97,14 @@ open class Activity : ComponentActivity() {
     super.onCreate(savedInstanceState)
 
     // Turn off the decor fitting system windows, which allows us to handle insets,
-    // including IME animations
-    WindowPreferencesManager().applyEdgeToEdgePreference(window)
-    WindowCompat.setDecorFitsSystemWindows(window, false)
+    // including IME animations, and go edge-to-edge
+    // This also sets up the initial system bar style based on the platform theme
+    enableEdgeToEdge()
 
     handleSplashScreen(splashScreen)
 
     setContent {
       // todo systemUiController
-      val systemUiController = rememberSystemUiController()
       val darkTheme = isSystemInDarkTheme()
 
       val ceresPreferences = remember {
@@ -173,7 +172,19 @@ open class Activity : ComponentActivity() {
       }
 
       // Update the dark content of the system bars to match the theme
-      systemUiController.systemBarsDarkContentEnabled = !darkThemeActivated
+      DisposableEffect(darkTheme) {
+        enableEdgeToEdge(
+          statusBarStyle = SystemBarStyle.auto(
+            android.graphics.Color.TRANSPARENT,
+            android.graphics.Color.TRANSPARENT,
+          ) { darkTheme },
+          navigationBarStyle = SystemBarStyle.auto(
+            lightScrim,
+            darkScrim,
+          ) { darkTheme },
+        )
+        onDispose {}
+      }
 
       Theme(
         darkTheme = darkThemeActivated,
@@ -257,3 +268,15 @@ open class Activity : ComponentActivity() {
     lazyStats.get().isTrackingEnabled = false
   }
 }
+
+/**
+ * The default light scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=35-38;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val lightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+
+/**
+ * The default dark scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=40-44;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)

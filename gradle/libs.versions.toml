@@ -2,10 +2,9 @@
 apiValidator = "0.13.2"
 aboutLibraries = "10.8.3"
 accompanist = "0.33.1-alpha"
-activityCompose = "1.7.2"
 androidDesugarJdkLibs = "2.0.3"
 androidGradlePlugin = "8.1.1"
-androidxActivity = "1.7.2"
+androidxActivity = "1.8.0-rc01"
 androidxAppCompat = "1.6.1"
 androidxBrowser = "1.6.0"
 androidxComposeBom = "2023.09.01"
@@ -70,9 +69,7 @@ vanniktechMavenPlugin = "0.25.3"
 
 [libraries]
 about-libraries-core = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "aboutLibraries" }
-accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
 accompanist-testharness = { group = "com.google.accompanist", name = "accompanist-testharness", version.ref = "accompanist" }
-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
