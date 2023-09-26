@@ -27,6 +27,7 @@ import androidx.compose.ui.viewinterop.AndroidViewBinding
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import dev.teogor.ceres.monetisation.admob.databinding.AdmobNativeBinding
+import dev.teogor.ceres.monetisation.admob.formats.AdEvent
 
 @Composable
 fun NativeAd(
@@ -34,10 +35,26 @@ fun NativeAd(
   nativeAdConfig: NativeAdConfig,
   adContent: @Composable () -> Unit,
   nativeAd: NativeAd?,
+  config: AdLoaderConfig = AdLoaderConfig(""),
+  refreshIntervalMillis: Long = 30000L,
+  onAdEvent: (AdEvent) -> Unit = {},
+  onAdLoaded: (NativeAd) -> Unit = {},
 ) {
   var adView by remember {
     mutableStateOf<NativeAdView?>(null)
   }
+
+  val adLoader = rememberAdLoader(
+    config = config,
+    onAdEvent = onAdEvent,
+    onNativeAd = onAdLoaded,
+  )
+
+  RefreshableNativeAd(
+    adId = config.adId,
+    adLoader = adLoader,
+    refreshIntervalMillis = refreshIntervalMillis,
+  )
 
   AndroidViewBinding(
     factory = AdmobNativeBinding::inflate,

@@ -48,12 +48,10 @@ import dev.teogor.ceres.monetisation.admob.formats.nativead.AdLoaderConfig
 import dev.teogor.ceres.monetisation.admob.formats.nativead.NativeAd
 import dev.teogor.ceres.monetisation.admob.formats.nativead.NativeAdConfig
 import dev.teogor.ceres.monetisation.admob.formats.nativead.NativeAdUi
-import dev.teogor.ceres.monetisation.admob.formats.nativead.RefreshableNativeAd
 import dev.teogor.ceres.monetisation.admob.formats.nativead.createBodyView
 import dev.teogor.ceres.monetisation.admob.formats.nativead.createCallToActionView
 import dev.teogor.ceres.monetisation.admob.formats.nativead.createHeadlineView
 import dev.teogor.ceres.monetisation.admob.formats.nativead.createIconView
-import dev.teogor.ceres.monetisation.admob.formats.nativead.rememberAdLoader
 import dev.teogor.ceres.monetisation.messaging.ConsentManager
 import dev.teogor.ceres.monetisation.messaging.ConsentResult
 import dev.teogor.ceres.screen.builder.compose.ColumnLayout
@@ -179,23 +177,11 @@ private fun HomeScreen(
 
   customView {
     val adId = DemoAdUnitIds.NATIVE
-
     val nativeAdBeta by remember {
       homeVM.nativeAd
     }
-    val adLoader = rememberAdLoader(
-      config = AdLoaderConfig(adId),
-      onAdEvent = { event ->
-      },
-    ) {
-      homeVM.setNativeAd(it)
-    }
-    RefreshableNativeAd(
-      adId = adId,
-      adLoader = adLoader,
-      refreshIntervalMillis = 30000L,
-    )
     val nativeAdConfig = nativeAdConfig()
+
     NativeAd(
       modifier = Modifier
         .padding(horizontal = 10.dp)
@@ -209,6 +195,11 @@ private fun HomeScreen(
         NativeAdUi(nativeAdConfig)
       },
       nativeAd = nativeAdBeta,
+      config = AdLoaderConfig(adId),
+      refreshIntervalMillis = 2500L,
+      onAdLoaded = {
+        homeVM.setNativeAd(it)
+      }
     )
   }
 }

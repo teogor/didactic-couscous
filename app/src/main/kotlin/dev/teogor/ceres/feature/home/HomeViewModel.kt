@@ -26,10 +26,6 @@ import dev.teogor.ceres.ads.HomeRewardedAd
 import dev.teogor.ceres.ads.HomeRewardedInterstitialAd
 import javax.inject.Inject
 
-object HomeAds {
-  var nativeAd: NativeAd? = null
-}
-
 @HiltViewModel
 class HomeViewModel @Inject constructor(
   val homeInterstitialAd: HomeInterstitialAd,
@@ -38,12 +34,11 @@ class HomeViewModel @Inject constructor(
   val homeBannerAd: HomeBannerAd,
 ) : ViewModel() {
 
-  var nativeAd = mutableStateOf(HomeAds.nativeAd)
+  var nativeAd = mutableStateOf<NativeAd?>(null)
     private set
 
   fun setNativeAd(ad: NativeAd) {
     nativeAd.value = ad
-    HomeAds.nativeAd = ad
   }
 
 }
