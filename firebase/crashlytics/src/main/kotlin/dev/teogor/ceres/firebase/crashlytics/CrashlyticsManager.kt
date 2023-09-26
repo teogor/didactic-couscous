@@ -97,7 +97,7 @@ private fun Builder.displayMetrics(context: Context) {
 }
 
 private fun Builder.theme(context: Context) {
-  // todo
+  //todo
   // val ceresPreferences = ceresPreferences(context)
   // putString("theme_seed", ceresPreferences.themeSeed)
   // putString("theme_app_variant", ceresPreferences.appTheme.toString())
