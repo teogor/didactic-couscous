@@ -22,14 +22,13 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.kotlin
 
 class AndroidFeatureConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
     with(target) {
       pluginManager.apply {
-        apply("ceres.android.library")
-        apply("ceres.android.hilt")
+        apply("dev.teogor.ceres.android.library")
+        apply("dev.teogor.ceres.android.hilt")
       }
       extensions.configure<LibraryExtension> {
         defaultConfig {

@@ -22,7 +22,7 @@ class CeresModulePlugin : Plugin<Project> {
 
         if (!isBomModule) {
           subprojects {
-            pluginManager.apply("ceres.library.publish")
+            pluginManager.apply("dev.teogor.ceres.library.publish")
             val libraryPublish = project.extensions.getByType(CeresLibraryExtension::class.java)
 
             val moduleName = this.name
@@ -33,7 +33,7 @@ class CeresModulePlugin : Plugin<Project> {
             }
           }
         } else {
-          pluginManager.apply("ceres.library.publish")
+          pluginManager.apply("dev.teogor.ceres.library.publish")
           val libraryPublish = project.extensions.getByType(CeresLibraryExtension::class.java)
 
           libraryPublish.apply {
