@@ -45,3 +45,5 @@ google-services.json
 !/.idea/icon.png
 !/.idea/icon_dark.png
 
+/docs/dokka/
+
