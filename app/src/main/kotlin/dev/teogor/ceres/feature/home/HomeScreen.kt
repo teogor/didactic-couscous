@@ -23,9 +23,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +32,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.android.gms.ads.nativead.NativeAd
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import dev.teogor.ceres.framework.core.app.BaseActions
@@ -183,15 +180,15 @@ private fun HomeScreen(
   customView {
     val adId = DemoAdUnitIds.NATIVE
 
-    var nativeAd by remember {
-      mutableStateOf<NativeAd?>(null)
+    val nativeAdBeta by remember {
+      homeVM.nativeAd
     }
     val adLoader = rememberAdLoader(
       config = AdLoaderConfig(adId),
       onAdEvent = { event ->
       },
     ) {
-      nativeAd = it
+      homeVM.setNativeAd(it)
     }
     RefreshableNativeAd(
       adId = adId,
@@ -211,7 +208,7 @@ private fun HomeScreen(
       adContent = {
         NativeAdUi(nativeAdConfig)
       },
-      nativeAd = nativeAd,
+      nativeAd = nativeAdBeta,
     )
   }
 }

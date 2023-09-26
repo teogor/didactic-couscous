@@ -16,7 +16,9 @@
 
 package dev.teogor.ceres.feature.home
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.ads.nativead.NativeAd
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.teogor.ceres.ads.HomeBannerAd
 import dev.teogor.ceres.ads.HomeInterstitialAd
@@ -24,10 +26,24 @@ import dev.teogor.ceres.ads.HomeRewardedAd
 import dev.teogor.ceres.ads.HomeRewardedInterstitialAd
 import javax.inject.Inject
 
+object HomeAds {
+  var nativeAd: NativeAd? = null
+}
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
   val homeInterstitialAd: HomeInterstitialAd,
   val homeRewardedInterstitialAd: HomeRewardedInterstitialAd,
   val homeRewardedAd: HomeRewardedAd,
   val homeBannerAd: HomeBannerAd,
-) : ViewModel()
+) : ViewModel() {
+
+  var nativeAd = mutableStateOf(HomeAds.nativeAd)
+    private set
+
+  fun setNativeAd(ad: NativeAd) {
+    nativeAd.value = ad
+    HomeAds.nativeAd = ad
+  }
+
+}
