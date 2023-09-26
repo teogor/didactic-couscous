@@ -96,6 +96,9 @@ dependencies {
   implementation(project(":screen:builder"))
   implementation(project(":screen:core"))
 
+  // default screens
+  implementation(project(":screen:ui"))
+
   // theme config
   implementation(project(":ui:theme"))
 

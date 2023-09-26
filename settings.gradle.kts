@@ -65,6 +65,7 @@ include(":framework:ui")
 // Screen
 include(":screen:core")
 include(":screen:builder")
+include(":screen:ui")
 
 // Monetisation
 include(":monetisation:admob")

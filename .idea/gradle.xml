@@ -62,6 +62,7 @@
             <option value="$PROJECT_DIR$/screen" />
             <option value="$PROJECT_DIR$/screen/builder" />
             <option value="$PROJECT_DIR$/screen/core" />
+            <option value="$PROJECT_DIR$/screen/ui" />
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui/compose" />
             <option value="$PROJECT_DIR$/ui/designsystem" />

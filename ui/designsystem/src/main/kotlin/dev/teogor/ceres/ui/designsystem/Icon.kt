@@ -18,15 +18,20 @@ package dev.teogor.ceres.ui.designsystem
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
+import dev.teogor.ceres.ui.foundation.clickable
 
 @Composable
 fun RotatableIcon(
@@ -48,4 +53,32 @@ fun RotatableIcon(
     modifier = modifier.rotate(rotationState.value),
     tint = tint,
   )
+}
+
+@Composable
+fun TrailingErrorIcon(
+  modifier: Modifier = Modifier,
+  imageVector: ImageVector,
+  iconTint: Color,
+  contentDescription: String,
+  rule: () -> Boolean,
+  onClick: () -> Unit,
+) {
+  val show = remember(rule()) {
+    rule()
+  }
+  if (show) {
+    Box(
+      modifier = modifier
+        .clickable { onClick() }
+        .padding(4.dp),
+      contentAlignment = Alignment.Center,
+    ) {
+      Icon(
+        imageVector = imageVector,
+        contentDescription = contentDescription,
+        tint = iconTint,
+      )
+    }
+  }
 }
