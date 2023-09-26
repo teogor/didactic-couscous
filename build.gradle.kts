@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
+
 buildscript {
   repositories {
     google()
@@ -20,6 +22,7 @@ plugins {
 
   alias(libs.plugins.dokka)
   alias(libs.plugins.spotless)
+  alias(libs.plugins.apiValidator)
 
   id("dev.teogor.ceres.docs")
 }
@@ -27,9 +30,7 @@ plugins {
 val ktlintVersion = "0.50.0"
 
 subprojects {
-  apply(plugin = "org.jetbrains.dokka")
   apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
-
   configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
       target("**/*.kt")
@@ -80,3 +81,72 @@ subprojects {
     }
   }
 }
+
+tasks.dokkaHtmlMultiModule.configure {
+  outputDirectory.set(rootDir.resolve("docs/dokka"))
+}
+
+val excludeModules = listOf(
+  "app",
+  "buildSrc",
+)
+subprojects {
+  if (excludeModules.contains(this@subprojects.name)) {
+    return@subprojects
+  }
+  apply(plugin = "org.jetbrains.dokka")
+
+  tasks.withType<DokkaTaskPartial>().configureEach {
+    dokkaSourceSets {
+      configureEach {
+        suppressInheritedMembers.set(true)
+
+        // includes.from("Module.md")
+        moduleName.set(this@subprojects.name)
+
+        // Used for linking to JDK documentation
+        jdkVersion.set(11)
+
+        // Disable linking to online kotlin-stdlib documentation
+        noStdlibLink.set(false)
+
+        // Disable linking to online JDK documentation
+        noJdkLink.set(false)
+
+        // Disable linking to online Android documentation (only applicable for Android projects)
+        noAndroidSdkLink.set(false)
+
+        // Include generated files in documentation
+        // By default Dokka will omit all files in folder named generated that is a child of buildDir
+        suppressGeneratedFiles.set(false)
+
+        // Do not output deprecated members. Applies globally, can be overridden by packageOptions
+        skipDeprecated.set(false)
+
+        // Do not create index pages for empty packages
+        skipEmptyPackages.set(false)
+
+        reportUndocumented.set(true) // Report undocumented members
+      }
+    }
+  }
+}
+
+apiValidation {
+  /**
+   * Packages that are excluded from public API dumps even if they
+   * contain public API.
+   */
+  ignoredPackages.add("androidx.databinding")
+
+  /**
+   * Sub-projects that are excluded from API validation
+   */
+  ignoredProjects.addAll(listOf("app", "module-unity"))
+
+  /**
+   * Flag to programmatically disable compatibility validator
+   */
+  validationDisabled = false
+}
+
