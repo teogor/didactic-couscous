@@ -19,7 +19,6 @@ import dev.teogor.ceres.Version
 plugins {
   id("dev.teogor.ceres.android.application")
   id("dev.teogor.ceres.android.application.compose")
-  id("dev.teogor.ceres.android.application.flavors")
   id("dev.teogor.ceres.android.application.jacoco")
   id("dev.teogor.ceres.android.application.firebase")
   id("dev.teogor.ceres.android.hilt")
