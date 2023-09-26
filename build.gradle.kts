@@ -142,7 +142,7 @@ apiValidation {
   /**
    * Sub-projects that are excluded from API validation
    */
-  ignoredProjects.addAll(listOf("app", "module-unity"))
+  ignoredProjects.addAll(listOf("app"))
 
   /**
    * Flag to programmatically disable compatibility validator
