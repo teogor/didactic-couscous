@@ -128,7 +128,6 @@ private fun LookAndFeelLayout(
 ) = LazyColumnLayout(
   screenName = LookAndFeelScreenRoute,
 ) {
-
   header {
     "Appearance"
   }

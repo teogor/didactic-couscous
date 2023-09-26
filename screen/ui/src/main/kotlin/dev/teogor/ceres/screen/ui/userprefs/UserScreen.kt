@@ -119,10 +119,7 @@ internal fun UserPrefRoute(
 fun UserPrefScreen(
   name: String,
   onNameEdit: (String) -> Unit,
-) = ColumnLayoutBase(
-
-)
-{
+) = ColumnLayoutBase() {
   OutlinedTextField(
     value = name,
     onValueChange = { onNameEdit(it) },
@@ -170,5 +167,3 @@ fun UserPrefScreen(
     textAlign = TextAlign.Center,
   )
 }
-
-

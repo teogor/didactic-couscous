@@ -18,17 +18,12 @@ package dev.teogor.ceres.feature.home
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.nativead.NativeAd
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.teogor.ceres.ads.HomeBannerAd
 import dev.teogor.ceres.ads.HomeInterstitialAd
 import dev.teogor.ceres.ads.HomeRewardedAd
 import dev.teogor.ceres.ads.HomeRewardedInterstitialAd
-import dev.teogor.ceres.core.network.NetworkMonitor
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,5 +40,4 @@ class HomeViewModel @Inject constructor(
   fun setNativeAd(ad: NativeAd) {
     nativeAd.value = ad
   }
-
 }

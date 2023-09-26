@@ -160,21 +160,21 @@ private fun HomeScreen(
   // }
 
   simpleView(
-    title = "Show Interstitial" + if(isOffline) " (Off)" else "",
+    title = "Show Interstitial" + if (isOffline) " (Off)" else "",
     clickable = {
       homeVM.homeInterstitialAd.show()
     },
   )
 
   simpleView(
-    title = "Show Rewarded Interstitial" + if(isOffline) " (Off)" else "",
+    title = "Show Rewarded Interstitial" + if (isOffline) " (Off)" else "",
     clickable = {
       homeVM.homeRewardedInterstitialAd.show()
     },
   )
 
   simpleView(
-    title = "Show Rewarded" + if(isOffline) " (Off)" else "",
+    title = "Show Rewarded" + if (isOffline) " (Off)" else "",
     clickable = {
       homeVM.homeRewardedAd.show()
     },
@@ -185,7 +185,7 @@ private fun HomeScreen(
     val nativeAd by remember {
       homeVM.nativeAd
     }
-    if(!isOffline) {
+    if (!isOffline) {
       val nativeAdConfig = nativeAdConfig()
 
       NativeAd(
@@ -205,7 +205,7 @@ private fun HomeScreen(
         refreshIntervalMillis = 30000L,
         onAdLoaded = {
           homeVM.setNativeAd(it)
-        }
+        },
       )
     }
   }

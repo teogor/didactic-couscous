@@ -18,10 +18,10 @@ package dev.teogor.ceres.screen.ui.about
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
-import dev.teogor.ceres.screen.ui.about.libraries.AboutLibrariesRoute
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.screenNav
+import dev.teogor.ceres.screen.ui.about.libraries.AboutLibrariesRoute
 
 fun NavGraphBuilder.aboutGraphNav(
   baseActions: BaseActions,

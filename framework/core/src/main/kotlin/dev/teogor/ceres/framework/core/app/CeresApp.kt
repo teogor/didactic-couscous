@@ -18,7 +18,6 @@ package dev.teogor.ceres.framework.core.app
 
 import android.app.Activity
 import androidx.activity.compose.BackHandler
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Box
@@ -67,6 +66,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination
