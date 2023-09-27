@@ -163,12 +163,12 @@ private fun LookAndFeelLayout(
     subtitle = "Try another look",
     icon = Icons.Default.Style,
   ) {
-    val options = listOf("Auto", "Light", "Dark","Auto", "Light", "Dark","Auto", "Light", "Dark","Auto", "Light", "Dark","Auto", "Light", "Dark")
+    val options =
+      listOf("Auto", "Light", "Dark", "Auto", "Light", "Dark", "Auto", "Light", "Dark", "Auto", "Light", "Dark", "Auto", "Light", "Dark")
     segmentedButtons(
       options = options,
       selectedOption = 2,
       onOptionSelected = { option ->
-
       },
     )
   }

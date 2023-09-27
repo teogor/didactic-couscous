@@ -34,8 +34,8 @@ import dev.teogor.ceres.ui.theme.MaterialTheme
   message = "Use HeaderView(title) instead",
   replaceWith = ReplaceWith(
     expression = "HeaderView(title)",
-    imports = ["dev.teogor.ceres.screen.builder.compose.HeaderView"]
-  )
+    imports = ["dev.teogor.ceres.screen.builder.compose.HeaderView"],
+  ),
 )
 @Composable
 fun HeaderView(

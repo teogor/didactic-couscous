@@ -62,13 +62,13 @@ import androidx.core.text.HtmlCompat
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.entity.Library
 import com.mikepenz.aboutlibraries.util.withContext
+import dev.teogor.ceres.screen.core.layout.LazyColumnLayoutBase
+import dev.teogor.ceres.screen.core.scope.ScreenListScope
 import dev.teogor.ceres.screen.ui.about.aboutLibrariesNavigationRoute
 import dev.teogor.ceres.screen.ui.about.libraries.util.StableLibrary
 import dev.teogor.ceres.screen.ui.about.libraries.util.author
 import dev.teogor.ceres.screen.ui.about.libraries.util.htmlReadyLicenseContent
 import dev.teogor.ceres.screen.ui.about.libraries.util.stable
-import dev.teogor.ceres.screen.core.layout.LazyColumnLayoutBase
-import dev.teogor.ceres.screen.core.scope.ScreenListScope
 import dev.teogor.ceres.ui.compose.ToolbarBackground
 import dev.teogor.ceres.ui.designsystem.AlertDialog
 import dev.teogor.ceres.ui.designsystem.Button

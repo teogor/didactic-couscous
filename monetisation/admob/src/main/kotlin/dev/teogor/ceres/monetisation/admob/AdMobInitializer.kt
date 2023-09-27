@@ -29,7 +29,6 @@ import java.security.NoSuchAlgorithmException
 
 object AdMobInitializer {
 
-
   private var connectivityManager: ConnectivityManagerNetworkMonitor? = null
 
   @SuppressLint("HardwareIds")

@@ -480,6 +480,53 @@ fun Surface(
 @Composable
 @NonRestartableComposable
 fun Surface(
+  onClick: () -> Unit,
+  modifier: Modifier = Modifier,
+  afterModifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  shape: Shape = RectangleShape,
+  color: Color = MaterialTheme.colorScheme.surface,
+  contentColor: Color = contentColorFor(color),
+  tonalElevation: Dp = 0.dp,
+  shadowElevation: Dp = 0.dp,
+  border: BorderStroke? = null,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  content: @Composable () -> Unit,
+) {
+  val absoluteElevation = LocalAbsoluteTonalElevation.current + tonalElevation
+  CompositionLocalProvider(
+    LocalContentColor provides contentColor,
+    LocalAbsoluteTonalElevation provides absoluteElevation,
+  ) {
+    Box(
+      modifier = modifier
+        .minimumInteractiveComponentSize()
+        .surface(
+          shape = shape,
+          backgroundColor = surfaceColorAtElevation(
+            color = color,
+            elevation = absoluteElevation,
+          ),
+          border = border,
+          shadowElevation = shadowElevation,
+        )
+        .clickable(
+          interactionSource = interactionSource,
+          indication = rememberRipple(),
+          enabled = enabled,
+          onClick = onClick,
+        )
+        .then(afterModifier),
+      propagateMinConstraints = true,
+    ) {
+      content()
+    }
+  }
+}
+
+@Composable
+@NonRestartableComposable
+fun Surface(
   modifier: Modifier = Modifier,
   afterModifier: Modifier = Modifier,
   shape: Shape = RectangleShape,

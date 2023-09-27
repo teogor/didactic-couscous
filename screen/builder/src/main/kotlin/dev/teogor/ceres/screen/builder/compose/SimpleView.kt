@@ -140,7 +140,6 @@ fun SimpleView(
   }
 }
 
-
 @Composable
 fun SimpleView(
   title: String,

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2023 teogor (Teodor Grigor)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 @file:SuppressLint("ObsoleteSdkInt")
 
 package dev.teogor.ceres.ui.foundation
@@ -25,7 +41,7 @@ private fun getImpl() = Impl ?: if (Build.VERSION.SDK_INT >= Build.VERSION_CODES
   VibratorBase()
 }.also { Impl = it }
 
-fun Context.getVibrator() : Vibrator {
+fun Context.getVibrator(): Vibrator {
   return getImpl().getVibrator(context = this)
 }
 
@@ -134,5 +150,5 @@ enum class HapticEffect(val value: Int) {
   EFFECT_CLICK(0),
   EFFECT_DOUBLE_CLICK(1),
   EFFECT_HEAVY_CLICK(5),
-  EFFECT_TICK(2);
+  EFFECT_TICK(2),
 }

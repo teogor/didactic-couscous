@@ -16,10 +16,16 @@
 
 package dev.teogor.ceres.screen.ui.about
 
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.DomainVerification
 import androidx.compose.material.icons.filled.Info
@@ -28,6 +34,7 @@ import androidx.compose.material.icons.filled.PermDeviceInformation
 import androidx.compose.material.icons.filled.Source
 import androidx.compose.material.icons.filled.Verified
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.teogor.ceres.core.runtime.AppMetadataManager
@@ -40,10 +47,33 @@ import dev.teogor.ceres.screen.builder.compose.addExtraPadding
 import dev.teogor.ceres.screen.builder.horizontalPadding
 import dev.teogor.ceres.screen.builder.verticalPadding
 import dev.teogor.ceres.screen.core.scope.ScreenListScope
+import dev.teogor.ceres.screen.ui.components.HeaderSurface
 import dev.teogor.ceres.ui.designsystem.Surface
 import dev.teogor.ceres.ui.designsystem.Text
+import dev.teogor.ceres.ui.foundation.graphics.Icon
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+
+fun ScreenListScope.aboutOpenAppInfo() = item {
+  val context = LocalContext.current
+  val openSettingsLauncher = rememberLauncherForActivityResult(
+    contract = ActivityResultContracts.StartActivityForResult(),
+  ) { }
+
+  HeaderSurface(
+    title = "App Info",
+    icon = Icon.ImageVectorIcon(
+      Icons.AutoMirrored.Default.OpenInNew,
+    ),
+    clickable = {
+      val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+      val packageName = context.packageName
+      val uri = Uri.fromParts("package", packageName, null)
+      intent.data = uri
+      openSettingsLauncher.launch(intent)
+    },
+  )
+}
 
 fun ScreenListScope.aboutHeaderVersion() = item {
   HeaderView(

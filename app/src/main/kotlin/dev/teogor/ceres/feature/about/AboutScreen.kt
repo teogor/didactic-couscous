@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.teogor.ceres.framework.core.app.BaseActions
-import dev.teogor.ceres.framework.core.app.navigateTo
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.screen.floatingButton
 import dev.teogor.ceres.framework.core.screen.isStatusBarVisible
@@ -34,7 +33,6 @@ import dev.teogor.ceres.framework.core.screen.showNavBar
 import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
-import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
 import dev.teogor.ceres.screen.builder.compose.SimpleView
 import dev.teogor.ceres.screen.core.layout.LazyColumnLayoutBase
@@ -50,6 +48,7 @@ import dev.teogor.ceres.screen.ui.about.aboutHeaderLicenses
 import dev.teogor.ceres.screen.ui.about.aboutHeaderSecurityPatch
 import dev.teogor.ceres.screen.ui.about.aboutHeaderVersion
 import dev.teogor.ceres.screen.ui.about.aboutMadeIn
+import dev.teogor.ceres.screen.ui.about.aboutOpenAppInfo
 import dev.teogor.ceres.screen.ui.about.aboutOpenSourceLicenses
 
 @Composable
@@ -82,19 +81,14 @@ internal fun AboutRoute(
     }
   }
 
-  AboutLayout(
-    navigateTo = { destination ->
-      baseActions.navigateTo(destination)
-    },
-  )
+  AboutLayout()
 }
 
 @Composable
-private fun AboutLayout(
-  navigateTo: (ScreenRoute) -> Unit,
-) = LazyColumnLayoutBase(
+private fun AboutLayout() = LazyColumnLayoutBase(
   screenName = AboutScreenRoute.toScreenName(),
 ) {
+  aboutOpenAppInfo()
 
   aboutHeaderVersion()
 
