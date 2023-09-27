@@ -30,6 +30,7 @@ import androidx.compose.material.icons.filled.Verified
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.teogor.ceres.core.runtime.AppMetadataManager
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.navigateTo
@@ -43,10 +44,10 @@ import dev.teogor.ceres.framework.core.screen.showSettingsButton
 import dev.teogor.ceres.framework.core.screen.toolbarTitle
 import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.ScreenRoute
-import dev.teogor.ceres.screen.builder.compose.LazyColumnLayout
-import dev.teogor.ceres.screen.builder.customView
-import dev.teogor.ceres.screen.builder.header
-import dev.teogor.ceres.screen.builder.simpleView
+import dev.teogor.ceres.navigation.core.utilities.toScreenName
+import dev.teogor.ceres.screen.builder.compose.HeaderView
+import dev.teogor.ceres.screen.builder.compose.SimpleView
+import dev.teogor.ceres.screen.core.layout.LazyColumnLayoutBase
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.theme.MaterialTheme
 import java.time.format.DateTimeFormatter
@@ -92,88 +93,109 @@ internal fun AboutRoute(
 @Composable
 private fun AboutLayout(
   navigateTo: (ScreenRoute) -> Unit,
-) = LazyColumnLayout(
-  screenName = AboutScreenRoute,
+) = LazyColumnLayoutBase(
+  screenName = AboutScreenRoute.toScreenName(),
 ) {
-  header {
-    "Version Info"
+  item {
+    HeaderView(
+      title = "Version Info",
+    )
   }
 
-  simpleView(
-    title = "App version",
-    subtitle = "${AppMetadataManager.versionName}",
-    icon = Icons.Default.Info,
-  )
-
-  simpleView(
-    title = "Ceres Framework version",
-    subtitle = "${AppMetadataManager.ceresFrameworkVersion}",
-    icon = Icons.Default.PermDeviceInformation,
-  ) {
-    customView {
-      Text(
-        text = "This app is powered by the Ceres Framework, created by developer Teodor Grigor.",
-        color = MaterialTheme.colorScheme.success,
-      )
-    }
+  item {
+    SimpleView(
+      title = "App version",
+      subtitle = AppMetadataManager.versionName,
+      icon = Icons.Default.Info,
+    )
   }
 
-  simpleView(
-    title = "Build date",
-    subtitle = "${
-      AppMetadataManager.buildDateTime.format(
+  item {
+    SimpleView(
+      title = "Ceres Framework version",
+      subtitle = AppMetadataManager.ceresFrameworkVersion,
+      icon = Icons.Default.PermDeviceInformation,
+    )
+    Text(
+      text = "This app is powered by the Ceres Framework, created by developer Teodor Grigor.",
+      color = MaterialTheme.colorScheme.success,
+      fontSize = 10.sp,
+      lineHeight = 12.sp,
+    )
+  }
+
+  item {
+    SimpleView(
+      title = "Build date",
+      subtitle = AppMetadataManager.buildDateTime.format(
         DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM),
-      )
-    }",
-    icon = Icons.Default.DateRange,
-  )
-
-  header {
-    "About Us"
+      ),
+      icon = Icons.Default.DateRange,
+    )
   }
 
-  simpleView(
-    title = "Company",
-    subtitle = "ZeoOwl",
-    icon = Icons.Default.Business,
-  )
-
-  simpleView(
-    title = "Made in",
-    subtitle = "Brasov, Romania",
-    icon = Icons.Default.LocationOn,
-  )
-
-  header {
-    "Security Patch"
+  item {
+    HeaderView(
+      title = "About Us",
+    )
   }
 
-  simpleView(
-    title = "Build hash",
-    subtitle = "${AppMetadataManager.gitHash}",
-    icon = Icons.Default.DomainVerification,
-  )
-
-  simpleView(
-    title = "APK hash",
-    subtitle = "${AppMetadataManager.apkHash}",
-    icon = Icons.Default.Verified,
-  )
-
-  header {
-    "Licenses"
+  item {
+    SimpleView(
+      title = "Company",
+      subtitle = "ZeoOwl",
+      icon = Icons.Default.Business,
+    )
   }
 
-  simpleView(
-    title = "Open-source licenses",
-    subtitle = "License details for open-source software",
-    icon = Icons.Default.Source,
-    clickable = {
-      navigateTo(AboutLibrariesScreenRoute)
-    },
-  )
+  item {
+    SimpleView(
+      title = "Made in",
+      subtitle = "Brasov, Romania",
+      icon = Icons.Default.LocationOn,
+    )
+  }
 
-  customView {
+  item {
+    HeaderView(
+      title = "Security Patch",
+    )
+  }
+
+  item {
+    SimpleView(
+      title = "Build hash",
+      subtitle = AppMetadataManager.gitHash,
+      icon = Icons.Default.DomainVerification,
+    )
+  }
+
+  item {
+    SimpleView(
+      title = "APK hash",
+      subtitle = "${AppMetadataManager.apkHash}",
+      icon = Icons.Default.Verified,
+    )
+  }
+
+  item {
+    HeaderView(
+      title = "Licenses",
+    )
+  }
+
+  item {
+    SimpleView(
+      title = "Open-source licenses",
+      subtitle = "License details for open-source software",
+      icon = Icons.Default.Source,
+      clickable = {
+        navigateTo(AboutLibrariesScreenRoute)
+      },
+    )
+  }
+
+  item {
     Spacer(modifier = Modifier.height(100.dp))
   }
 }

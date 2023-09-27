@@ -30,10 +30,43 @@ import dev.teogor.ceres.screen.builder.topPadding
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
+@Deprecated(
+  message = "Use HeaderView(title) instead",
+  replaceWith = ReplaceWith(
+    expression = "HeaderView(title)",
+    imports = ["dev.teogor.ceres.screen.builder.compose.HeaderView"]
+  )
+)
 @Composable
 fun HeaderView(
   item: HeaderViewBuilder,
 ) = with(item) {
+  Column(
+    modifier = Modifier
+      .padding(
+        top = topPadding,
+      )
+      .padding(
+        horizontal = horizontalPadding,
+      )
+      .padding(
+        start = horizontalNoIconPadding,
+      ),
+  ) {
+    Text(
+      text = title,
+      fontSize = 13.sp,
+      fontWeight = FontWeight.Medium,
+      textAlign = TextAlign.Start,
+      color = MaterialTheme.colorScheme.secondary,
+    )
+  }
+}
+
+@Composable
+fun HeaderView(
+  title: String,
+) {
   Column(
     modifier = Modifier
       .padding(

@@ -21,8 +21,8 @@ import dev.teogor.ceres.ui.theme.tokens.ColorSchemeKeyTokens
 
 open class SimpleViewBuilder(
   internal val title: String,
-  internal val subtitle: String?,
-  internal val subtitleColor: ColorSchemeKeyTokens?,
-  internal val icon: ImageVector?,
-  internal val clickable: (() -> Unit)?,
+  internal val subtitle: String? = null,
+  internal val subtitleColor: ColorSchemeKeyTokens? = null,
+  internal val icon: ImageVector? = null,
+  internal val clickable: (() -> Unit)? = null,
 ) : ViewBuilder()

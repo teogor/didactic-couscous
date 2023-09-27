@@ -16,7 +16,6 @@
 
 package dev.teogor.ceres.feature.home
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -55,10 +53,12 @@ import dev.teogor.ceres.monetisation.admob.formats.nativead.createHeadlineView
 import dev.teogor.ceres.monetisation.admob.formats.nativead.createIconView
 import dev.teogor.ceres.monetisation.messaging.ConsentManager
 import dev.teogor.ceres.monetisation.messaging.ConsentResult
-import dev.teogor.ceres.screen.builder.compose.ColumnLayout
-import dev.teogor.ceres.screen.builder.customView
-import dev.teogor.ceres.screen.builder.header
-import dev.teogor.ceres.screen.builder.simpleView
+import dev.teogor.ceres.navigation.core.utilities.toScreenName
+import dev.teogor.ceres.screen.builder.compose.HeaderView
+import dev.teogor.ceres.screen.builder.compose.SimpleView
+import dev.teogor.ceres.screen.builder.model.HeaderViewBuilder
+import dev.teogor.ceres.screen.builder.model.SimpleViewBuilder
+import dev.teogor.ceres.screen.core.layout.ColumnLayoutBase
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
@@ -107,18 +107,10 @@ internal fun HomeRoute(
     }
   }
 
-  val context = LocalContext.current
-
-  // You can also get the current Activity, if needed
-  val activity = remember(context) {
-    context as? Activity
-  }
-
   val networkConnectivity = LocalNetworkConnectivity.current
 
   if (canRequestAds) {
     HomeScreen(
-      activity,
       homeVM,
       isOffline = networkConnectivity.isOffline,
     )
@@ -129,28 +121,25 @@ internal fun HomeRoute(
 
 @Composable
 private fun HomeScreen(
-  activity: Activity?,
   homeVM: HomeViewModel,
   isOffline: Boolean,
-) = ColumnLayout(
+) = ColumnLayoutBase(
   hasScrollbarBackground = false,
-  screenName = HomeScreenConfig,
+  screenName = HomeScreenConfig.toScreenName(),
 ) {
-  header {
-    "Ad Settings"
-  }
+  HeaderView(HeaderViewBuilder("Ad Settings"))
 
-  simpleView(
-    title = "Reset Advertising Choices",
-    subtitle = "Reset your advertising choices to manage your options.",
-    clickable = {
-      ConsentManager.resetConsent()
-    },
+  SimpleView(
+    SimpleViewBuilder(
+      title = "Reset Advertising Choices",
+      subtitle = "Reset your advertising choices to manage your options.",
+      clickable = {
+        ConsentManager.resetConsent()
+      },
+    ),
   )
 
-  header {
-    "Ads Demo"
-  }
+  HeaderView(HeaderViewBuilder("Ads Demo"))
 
   // customView {
   //   dev.teogor.ceres.monetisation.admob.beta.formats.ui.AdmobBanner(
@@ -159,55 +148,59 @@ private fun HomeScreen(
   //   )
   // }
 
-  simpleView(
-    title = "Show Interstitial" + if (isOffline) " (Off)" else "",
-    clickable = {
-      homeVM.homeInterstitialAd.show()
-    },
+  SimpleView(
+    SimpleViewBuilder(
+      title = "Show Interstitial" + if (isOffline) " (Off)" else "",
+      clickable = {
+        homeVM.homeInterstitialAd.show()
+      },
+    ),
   )
 
-  simpleView(
-    title = "Show Rewarded Interstitial" + if (isOffline) " (Off)" else "",
-    clickable = {
-      homeVM.homeRewardedInterstitialAd.show()
-    },
+  SimpleView(
+    SimpleViewBuilder(
+      title = "Show Rewarded Interstitial" + if (isOffline) " (Off)" else "",
+      clickable = {
+        homeVM.homeRewardedInterstitialAd.show()
+      },
+    ),
   )
 
-  simpleView(
-    title = "Show Rewarded" + if (isOffline) " (Off)" else "",
-    clickable = {
-      homeVM.homeRewardedAd.show()
-    },
+  SimpleView(
+    SimpleViewBuilder(
+      title = "Show Rewarded" + if (isOffline) " (Off)" else "",
+      clickable = {
+        homeVM.homeRewardedAd.show()
+      },
+    ),
   )
 
-  customView {
-    val adId = DemoAdUnitIds.NATIVE
-    val nativeAd by remember {
-      homeVM.nativeAd
-    }
-    if (!isOffline) {
-      val nativeAdConfig = nativeAdConfig()
+  val adId = DemoAdUnitIds.NATIVE
+  val nativeAd by remember {
+    homeVM.nativeAd
+  }
+  if (!isOffline) {
+    val nativeAdConfig = nativeAdConfig()
 
-      NativeAd(
-        modifier = Modifier
-          .padding(horizontal = 10.dp)
-          .background(
-            color = MaterialTheme.colorScheme.primaryContainer,
-            shape = RoundedCornerShape(20.dp),
-          )
-          .padding(horizontal = 6.dp, vertical = 10.dp),
-        nativeAdConfig = nativeAdConfig,
-        adContent = {
-          NativeAdUi(nativeAdConfig)
-        },
-        nativeAd = nativeAd,
-        config = AdLoaderConfig(adId),
-        refreshIntervalMillis = 30000L,
-        onAdLoaded = {
-          homeVM.setNativeAd(it)
-        },
-      )
-    }
+    NativeAd(
+      modifier = Modifier
+        .padding(horizontal = 10.dp)
+        .background(
+          color = MaterialTheme.colorScheme.primaryContainer,
+          shape = RoundedCornerShape(20.dp),
+        )
+        .padding(horizontal = 6.dp, vertical = 10.dp),
+      nativeAdConfig = nativeAdConfig,
+      adContent = {
+        NativeAdUi(nativeAdConfig)
+      },
+      nativeAd = nativeAd,
+      config = AdLoaderConfig(adId),
+      refreshIntervalMillis = 30000L,
+      onAdLoaded = {
+        homeVM.setNativeAd(it)
+      },
+    )
   }
 }
 

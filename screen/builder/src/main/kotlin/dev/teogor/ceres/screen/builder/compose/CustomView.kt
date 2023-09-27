@@ -19,6 +19,11 @@ package dev.teogor.ceres.screen.builder.compose
 import androidx.compose.runtime.Composable
 import dev.teogor.ceres.screen.builder.model.CustomViewBuilder
 
+@Deprecated(
+  message = "Use content() instead",
+  level = DeprecationLevel.WARNING,
+  replaceWith = ReplaceWith("content()"),
+)
 @Composable
 fun CustomView(
   item: CustomViewBuilder,

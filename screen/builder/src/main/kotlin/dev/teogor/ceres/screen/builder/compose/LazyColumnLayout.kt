@@ -23,6 +23,7 @@ import dev.teogor.ceres.screen.builder.model.ViewBuilder
 import dev.teogor.ceres.screen.builder.screenItems
 import dev.teogor.ceres.screen.core.layout.LazyColumnLayoutBase
 
+@Deprecated("to be replaced with ColumnLayoutBase")
 @Composable
 inline fun LazyColumnLayout(
   screenName: ScreenRoute,
