@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.screen.ui.about.libraries
+package dev.teogor.ceres.screen.ui.legacy.about.libraries
 
 import android.content.Context
 import android.widget.TextView
@@ -64,11 +64,11 @@ import com.mikepenz.aboutlibraries.entity.Library
 import com.mikepenz.aboutlibraries.util.withContext
 import dev.teogor.ceres.screen.core.layout.LazyColumnLayoutBase
 import dev.teogor.ceres.screen.core.scope.ScreenListScope
-import dev.teogor.ceres.screen.ui.about.aboutLibrariesNavigationRoute
-import dev.teogor.ceres.screen.ui.about.libraries.util.StableLibrary
-import dev.teogor.ceres.screen.ui.about.libraries.util.author
-import dev.teogor.ceres.screen.ui.about.libraries.util.htmlReadyLicenseContent
-import dev.teogor.ceres.screen.ui.about.libraries.util.stable
+import dev.teogor.ceres.screen.ui.legacy.about.aboutLibrariesNavigationRoute
+import dev.teogor.ceres.screen.ui.legacy.about.libraries.util.StableLibrary
+import dev.teogor.ceres.screen.ui.legacy.about.libraries.util.author
+import dev.teogor.ceres.screen.ui.legacy.about.libraries.util.htmlReadyLicenseContent
+import dev.teogor.ceres.screen.ui.legacy.about.libraries.util.stable
 import dev.teogor.ceres.ui.compose.ToolbarBackground
 import dev.teogor.ceres.ui.designsystem.AlertDialog
 import dev.teogor.ceres.ui.designsystem.Button
@@ -87,20 +87,20 @@ import kotlinx.coroutines.withContext
  */
 @Composable
 fun LibrariesContainer(
-  modifier: Modifier = Modifier,
-  contentPadding: PaddingValues = PaddingValues(0.dp),
-  librariesBlock: (Context) -> Libs = { context ->
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    librariesBlock: (Context) -> Libs = { context ->
     Libs.Builder().withContext(context).build()
   },
-  showAuthor: Boolean = true,
-  showVersion: Boolean = true,
-  showLicenseBadges: Boolean = true,
-  colors: LibraryColors = LibraryDefaults.libraryColors(),
-  padding: LibraryPadding = LibraryDefaults.libraryPadding(),
-  itemContentPadding: PaddingValues = LibraryDefaults.ContentPadding,
-  itemSpacing: Dp = LibraryDefaults.LibraryItemSpacing,
-  header: (LazyListScope.() -> Unit)? = null,
-  onLibraryClick: ((Library) -> Unit)? = null,
+    showAuthor: Boolean = true,
+    showVersion: Boolean = true,
+    showLicenseBadges: Boolean = true,
+    colors: LibraryColors = LibraryDefaults.libraryColors(),
+    padding: LibraryPadding = LibraryDefaults.libraryPadding(),
+    itemContentPadding: PaddingValues = LibraryDefaults.ContentPadding,
+    itemSpacing: Dp = LibraryDefaults.LibraryItemSpacing,
+    header: (LazyListScope.() -> Unit)? = null,
+    onLibraryClick: ((Library) -> Unit)? = null,
 ) {
   val context = LocalContext.current
   val uriHandler = LocalUriHandler.current
@@ -149,9 +149,9 @@ fun LibrariesContainer(
 
 @Composable
 fun LicenseDialog(
-  library: StableLibrary,
-  colors: LibraryColors = LibraryDefaults.libraryColors(),
-  onDismiss: () -> Unit,
+    library: StableLibrary,
+    colors: LibraryColors = LibraryDefaults.libraryColors(),
+    onDismiss: () -> Unit,
 ) {
   val scrollState = rememberScrollState()
   AlertDialog(
@@ -182,9 +182,9 @@ fun LicenseDialog(
 
 @Composable
 fun HtmlText(
-  html: String,
-  modifier: Modifier = Modifier,
-  color: Color = LibraryDefaults.libraryColors().contentColor,
+    html: String,
+    modifier: Modifier = Modifier,
+    color: Color = LibraryDefaults.libraryColors().contentColor,
 ) {
   AndroidView(
     modifier = modifier,
@@ -202,18 +202,18 @@ fun HtmlText(
  */
 @Composable
 fun Libraries(
-  libraries: ImmutableList<StableLibrary>,
-  modifier: Modifier = Modifier,
-  contentPadding: PaddingValues = PaddingValues(0.dp),
-  showAuthor: Boolean = true,
-  showVersion: Boolean = true,
-  showLicenseBadges: Boolean = true,
-  colors: LibraryColors = LibraryDefaults.libraryColors(),
-  padding: LibraryPadding = LibraryDefaults.libraryPadding(),
-  itemContentPadding: PaddingValues = LibraryDefaults.ContentPadding,
-  itemSpacing: Dp = LibraryDefaults.LibraryItemSpacing,
-  header: (LazyListScope.() -> Unit)? = null,
-  onLibraryClick: ((Library) -> Unit)? = null,
+    libraries: ImmutableList<StableLibrary>,
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    showAuthor: Boolean = true,
+    showVersion: Boolean = true,
+    showLicenseBadges: Boolean = true,
+    colors: LibraryColors = LibraryDefaults.libraryColors(),
+    padding: LibraryPadding = LibraryDefaults.libraryPadding(),
+    itemContentPadding: PaddingValues = LibraryDefaults.ContentPadding,
+    itemSpacing: Dp = LibraryDefaults.LibraryItemSpacing,
+    header: (LazyListScope.() -> Unit)? = null,
+    onLibraryClick: ((Library) -> Unit)? = null,
 ) {
   // todo locals for ceres local providers... view CompositionLocals.kt
   val uriHandler = LocalUriHandler.current
@@ -295,10 +295,10 @@ fun Libraries(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal inline fun AuthorTags(
-  libraries: ImmutableList<StableLibrary>,
-  selectedAuthorTag: String,
-  authorGroups: Set<Pair<String, List<String>>>,
-  crossinline onAuthorTagClick: (String) -> Unit,
+    libraries: ImmutableList<StableLibrary>,
+    selectedAuthorTag: String,
+    authorGroups: Set<Pair<String, List<String>>>,
+    crossinline onAuthorTagClick: (String) -> Unit,
 ) {
   val authorCounts = with(mutableMapOf<String, Int>()) {
     libraries.forEach { lib ->
@@ -370,14 +370,14 @@ internal inline fun AuthorTags(
 }
 
 internal inline fun ScreenListScope.libraryItems(
-  libraries: ImmutableList<StableLibrary>,
-  showAuthor: Boolean = true,
-  showVersion: Boolean = true,
-  showLicenseBadges: Boolean = true,
-  colors: LibraryColors,
-  padding: LibraryPadding,
-  itemContentPadding: PaddingValues = LibraryDefaults.ContentPadding,
-  crossinline onLibraryClick: ((Library) -> Unit),
+    libraries: ImmutableList<StableLibrary>,
+    showAuthor: Boolean = true,
+    showVersion: Boolean = true,
+    showLicenseBadges: Boolean = true,
+    colors: LibraryColors,
+    padding: LibraryPadding,
+    itemContentPadding: PaddingValues = LibraryDefaults.ContentPadding,
+    crossinline onLibraryClick: ((Library) -> Unit),
 ) {
   items(libraries) { library ->
     Library(
@@ -397,15 +397,15 @@ internal inline fun ScreenListScope.libraryItems(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun Library(
-  library: StableLibrary,
-  showAuthor: Boolean = true,
-  showVersion: Boolean = true,
-  showLicenseBadges: Boolean = true,
-  colors: LibraryColors = LibraryDefaults.libraryColors(),
-  padding: LibraryPadding = LibraryDefaults.libraryPadding(),
-  contentPadding: PaddingValues = LibraryDefaults.ContentPadding,
-  typography: Typography = MaterialTheme.typography,
-  onClick: () -> Unit,
+    library: StableLibrary,
+    showAuthor: Boolean = true,
+    showVersion: Boolean = true,
+    showLicenseBadges: Boolean = true,
+    colors: LibraryColors = LibraryDefaults.libraryColors(),
+    padding: LibraryPadding = LibraryDefaults.libraryPadding(),
+    contentPadding: PaddingValues = LibraryDefaults.ContentPadding,
+    typography: Typography = MaterialTheme.typography,
+    onClick: () -> Unit,
 ) {
   Column(
     modifier = Modifier
@@ -532,13 +532,13 @@ object LibraryDefaults {
    */
   @Composable
   fun libraryPadding(
-    namePadding: PaddingValues = PaddingValues(top = LibraryNamePaddingTop),
-    versionPadding: PaddingValues = PaddingValues(start = LibraryVersionPaddingStart),
-    badgePadding: PaddingValues = PaddingValues(
+      namePadding: PaddingValues = PaddingValues(top = LibraryNamePaddingTop),
+      versionPadding: PaddingValues = PaddingValues(start = LibraryVersionPaddingStart),
+      badgePadding: PaddingValues = PaddingValues(
       top = LibraryBadgePaddingTop,
       end = LibraryBadgePaddingEnd,
     ),
-    badgeContentPadding: PaddingValues = PaddingValues(0.dp),
+      badgeContentPadding: PaddingValues = PaddingValues(0.dp),
   ): LibraryPadding = DefaultLibraryPadding(
     namePadding = namePadding,
     versionPadding = versionPadding,

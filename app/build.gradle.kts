@@ -24,6 +24,9 @@ plugins {
   id("dev.teogor.ceres.android.hilt")
   id("kotlinx-serialization")
   id("jacoco")
+
+  // Feature :: About
+  alias(libs.plugins.about.libraries) apply true
 }
 
 android {
@@ -125,6 +128,11 @@ dependencies {
   implementation(libs.ui.graphics)
   implementation(libs.ui.tooling.preview)
   implementation(libs.androidx.compose.material3)
+
+  // Feature :: About
+  implementation(libs.about.libraries.core)
+  // used for toImmutableList
+  implementation(libs.kotlinx.collections)
 }
 
 // androidx.test is forcing JUnit, 4.12. This forces it to use 4.13

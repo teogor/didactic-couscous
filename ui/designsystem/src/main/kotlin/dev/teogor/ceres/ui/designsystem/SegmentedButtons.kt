@@ -1,24 +1,9 @@
-/*
- * Copyright 2023 teogor (Teodor Grigor)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package dev.teogor.ceres.screen.builder.compose
+package dev.teogor.ceres.ui.designsystem
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -37,13 +22,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.teogor.ceres.ui.designsystem.Text
-import dev.teogor.ceres.ui.designsystem.VerticalDivider
 import dev.teogor.ceres.ui.foundation.clickable
 import dev.teogor.ceres.ui.theme.MaterialTheme
 
 @Composable
-fun SegmentedButton(
+fun SegmentedButtons(
   options: List<String>,
   selectedOption: Int,
   onOptionSelected: (Int) -> Unit,
@@ -53,21 +36,22 @@ fun SegmentedButton(
   var selectedOptionRem by remember { mutableIntStateOf(selectedOption) }
 
   Row(
-    modifier = modifier
+    modifier = Modifier
       .horizontalScroll(rememberScrollState())
-      .padding(end = 20.dp)
+      .then(modifier)
       .border(
         width = 1.dp,
         color = backgroundOutline,
         shape = MaterialTheme.shapes.extraLarge,
       ),
+    horizontalArrangement = Arrangement.SpaceBetween,
   ) {
     options.forEachIndexed { index, option ->
       val cornerShape = when (index) {
-        0 -> MaterialTheme.shapes.extraLarge.copy(
+        0 -> if (options.size - 1 != 0) MaterialTheme.shapes.extraLarge.copy(
           topEnd = ZeroCornerSize,
           bottomEnd = ZeroCornerSize,
-        )
+        ) else MaterialTheme.shapes.extraLarge
 
         options.size - 1 -> MaterialTheme.shapes.extraLarge.copy(
           topStart = ZeroCornerSize,

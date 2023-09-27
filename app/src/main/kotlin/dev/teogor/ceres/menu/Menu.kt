@@ -35,6 +35,7 @@ import dev.teogor.ceres.framework.core.menu.menuTop
 import dev.teogor.ceres.framework.core.menu.menuUserData
 import dev.teogor.ceres.framework.core.menu.menuUserId
 import dev.teogor.ceres.framework.core.model.MenuConfig
+import dev.teogor.ceres.lib.about.AboutScreenRoute
 import dev.teogor.ceres.lib.settings.SettingsScreenRoute
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
@@ -111,6 +112,9 @@ fun MenuConfig.applyMenuConfig() = apply {
         menuItem(
           content = "About",
           icon = Icons.Outlined.Details,
+          clickable = {
+            AboutScreenRoute.navigateTo()
+          },
         )
 
         menuDivider()

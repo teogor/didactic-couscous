@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.screen.ui.about
+package dev.teogor.ceres.lib.about
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

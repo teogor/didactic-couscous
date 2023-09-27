@@ -19,6 +19,7 @@ package dev.teogor.ceres.navigation
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import dev.teogor.ceres.lib.about.aboutGraphNav
 import dev.teogor.ceres.feature.home.homeNavigationRoute
 import dev.teogor.ceres.feature.home.homeScreenNav
 import dev.teogor.ceres.framework.core.app.BaseActions
@@ -69,5 +70,7 @@ private fun NavHost(
     settingsScreenNav(baseActions)
 
     lookAndFeelScreenNav(baseActions)
+
+    aboutGraphNav(baseActions)
   }
 }

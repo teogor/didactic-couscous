@@ -39,6 +39,7 @@ import dev.teogor.ceres.screen.builder.horizontalPadding
 import dev.teogor.ceres.screen.builder.iconSize
 import dev.teogor.ceres.screen.builder.model.AdvancedViewBuilder
 import dev.teogor.ceres.screen.builder.verticalPadding
+import dev.teogor.ceres.ui.designsystem.SegmentedButtons
 import dev.teogor.ceres.ui.designsystem.Switch
 import dev.teogor.ceres.ui.designsystem.Text
 import dev.teogor.ceres.ui.foundation.clickable
@@ -144,8 +145,8 @@ fun AdvancedView(
       segmentedOptions?.let { segmentedOptions ->
         var selectedOption by remember { mutableIntStateOf(segmentedSelectedOption ?: -1) }
 
-        SegmentedButton(
-          modifier = Modifier.padding(top = 10.dp),
+        SegmentedButtons(
+          modifier = Modifier.padding(top = 10.dp, end = 20.dp),
           options = segmentedOptions,
           selectedOption = selectedOption,
           onOptionSelected = { option ->
