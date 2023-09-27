@@ -171,16 +171,16 @@ open class Activity : ComponentActivity() {
       }
 
       // Update the dark content of the system bars to match the theme
-      DisposableEffect(darkTheme) {
+      DisposableEffect(darkThemeActivated) {
         enableEdgeToEdge(
           statusBarStyle = SystemBarStyle.auto(
             android.graphics.Color.TRANSPARENT,
             android.graphics.Color.TRANSPARENT,
-          ) { darkTheme },
+          ) { darkThemeActivated },
           navigationBarStyle = SystemBarStyle.auto(
             lightScrim,
             darkScrim,
-          ) { darkTheme },
+          ) { darkThemeActivated },
         )
         onDispose {}
       }
