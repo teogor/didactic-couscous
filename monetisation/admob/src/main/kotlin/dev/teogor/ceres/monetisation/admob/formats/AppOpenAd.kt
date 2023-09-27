@@ -41,7 +41,6 @@ abstract class AppOpenAd : Ad() {
       context,
       id,
       request,
-      AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
       object : AppOpenAd.AppOpenAdLoadCallback() {
         /**
          * Called when an app open ad has loaded.
