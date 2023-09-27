@@ -27,3 +27,7 @@ android {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
+
+ceresLibrary {
+  name = "Ceres Backup UI"
+}

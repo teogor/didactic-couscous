@@ -25,5 +25,6 @@ android {
   }
 }
 
-dependencies {
+ceresLibrary {
+  name = "Ceres Data Database"
 }

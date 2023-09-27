@@ -29,3 +29,7 @@ android {
 dependencies {
   api(project(":screen:core"))
 }
+
+ceresLibrary {
+  name = "Ceres Screen Builder"
+}

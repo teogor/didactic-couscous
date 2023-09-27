@@ -29,3 +29,7 @@ android {
 dependencies {
   api(project(":core:startup"))
 }
+
+ceresLibrary {
+  name = "Ceres Core Runtime"
+}

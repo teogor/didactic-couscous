@@ -35,3 +35,7 @@ dependencies {
   implementation(libs.kotlinx.serialization.protobuf)
   implementation(libs.gson)
 }
+
+ceresLibrary {
+  name = "Ceres Backup Core"
+}

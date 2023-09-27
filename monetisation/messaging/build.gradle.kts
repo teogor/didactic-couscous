@@ -37,3 +37,7 @@ dependencies {
   implementation(libs.androidx.compose.runtime)
   implementation(libs.startup.runtime)
 }
+
+ceresLibrary {
+  name = "Ceres Monetisation Messaging"
+}

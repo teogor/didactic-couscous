@@ -44,3 +44,7 @@ dependencies {
   implementation(libs.androidx.compose.ui.viewbinding)
   implementation(libs.startup.runtime)
 }
+
+ceresLibrary {
+  name = "Ceres Monetisation AdMob"
+}

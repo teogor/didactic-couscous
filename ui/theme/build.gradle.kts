@@ -37,3 +37,7 @@ dependencies {
   api(libs.androidx.compose.ui.tooling.preview)
   api(libs.androidx.compose.ui.util)
 }
+
+ceresLibrary {
+  name = "Ceres UI Theme"
+}

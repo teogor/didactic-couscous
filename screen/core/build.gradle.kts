@@ -34,3 +34,7 @@ dependencies {
 
   api(libs.androidx.compose.foundation)
 }
+
+ceresLibrary {
+  name = "Ceres Screen Core"
+}

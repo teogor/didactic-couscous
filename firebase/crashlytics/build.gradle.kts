@@ -34,3 +34,7 @@ dependencies {
   implementation(libs.startup.runtime)
   implementation(libs.androidx.compose.runtime)
 }
+
+ceresLibrary {
+  name = "Ceres Firebase Crashlytics"
+}

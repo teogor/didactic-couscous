@@ -31,3 +31,7 @@ dependencies {
   api(libs.androidx.compose.material.iconsExtended)
   api(libs.google.material)
 }
+
+ceresLibrary {
+  name = "Ceres UI Icons"
+}

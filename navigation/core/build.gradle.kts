@@ -40,3 +40,7 @@ dependencies {
   // ** navigation-handler
   api(project(":ui:designsystem"))
 }
+
+ceresLibrary {
+  name = "Ceres Navigation Core"
+}

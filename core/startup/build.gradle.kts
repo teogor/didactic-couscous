@@ -29,3 +29,7 @@ android {
 dependencies {
   implementation(libs.startup.runtime)
 }
+
+ceresLibrary {
+  name = "Ceres Core Startup"
+}

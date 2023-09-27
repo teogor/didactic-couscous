@@ -32,3 +32,7 @@ dependencies {
 
   implementation(libs.androidx.compose.foundation)
 }
+
+ceresLibrary {
+  name = "Ceres Data Compose"
+}

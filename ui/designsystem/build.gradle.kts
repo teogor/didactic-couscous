@@ -43,3 +43,7 @@ dependencies {
   // Scrollbar
   implementation(libs.androidx.constraintlayout.compose)
 }
+
+ceresLibrary {
+  name = "Ceres UI Design-System"
+}

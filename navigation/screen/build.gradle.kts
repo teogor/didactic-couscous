@@ -28,5 +28,6 @@ android {
   }
 }
 
-dependencies {
+ceresLibrary {
+  name = "Ceres Navigation Screen"
 }

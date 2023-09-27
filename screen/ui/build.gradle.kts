@@ -45,3 +45,7 @@ dependencies {
   // used for toImmutableList
   implementation(libs.kotlinx.collections)
 }
+
+ceresLibrary {
+  name = "Ceres Screen UI"
+}

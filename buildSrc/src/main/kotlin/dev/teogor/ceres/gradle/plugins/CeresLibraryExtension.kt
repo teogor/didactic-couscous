@@ -6,17 +6,20 @@ open class CeresLibraryExtension {
   val groupId: String = "dev.teogor.ceres.beta.launch.test"
   var artifactId: String? = null
   var version: String? = null
+  var name: String? = null
 
   private fun MavenPom.info() {
     name.set(
-      if (artifactId != null) {
+      if (this@CeresLibraryExtension.name != null) {
+        this@CeresLibraryExtension.name
+      } else if (artifactId != null) {
         if (artifactId!!.startsWith("ceres-")) {
           artifactId
         } else {
           "ceres-$artifactId"
         }
       } else {
-        "Ceres"
+        groupId
       },
     )
     description.set(

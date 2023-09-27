@@ -56,3 +56,7 @@ dependencies {
   // required for JankStats
   implementation(libs.androidx.metrics)
 }
+
+ceresLibrary {
+  name = "Ceres Framework Core"
+}

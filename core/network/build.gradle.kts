@@ -29,3 +29,7 @@ android {
 dependencies {
   implementation(libs.kotlinx.coroutines.android)
 }
+
+ceresLibrary {
+  name = "Ceres Core Network"
+}

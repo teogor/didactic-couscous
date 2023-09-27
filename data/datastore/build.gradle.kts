@@ -59,3 +59,7 @@ dependencies {
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.gson)
 }
+
+ceresLibrary {
+  name = "Ceres Data Datastore"
+}

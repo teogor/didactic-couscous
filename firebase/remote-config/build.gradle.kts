@@ -27,5 +27,6 @@ android {
   }
 }
 
-dependencies {
+ceresLibrary {
+  name = "Ceres Firebase Remote-Config"
 }

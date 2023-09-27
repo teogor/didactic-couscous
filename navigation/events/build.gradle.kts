@@ -31,3 +31,7 @@ dependencies {
   api(project(":navigation:core"))
   api(project(":firebase:analytics"))
 }
+
+ceresLibrary {
+  name = "Ceres Navigation Events"
+}

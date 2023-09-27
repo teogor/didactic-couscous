@@ -48,3 +48,7 @@ dependencies {
 
   debugApi(libs.androidx.compose.ui.tooling)
 }
+
+ceresLibrary {
+  name = "Ceres UI Foundation"
+}

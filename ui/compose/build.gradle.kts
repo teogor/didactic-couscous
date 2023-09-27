@@ -32,3 +32,7 @@ dependencies {
   // Required for ViewModel
   implementation(libs.androidx.lifecycle.viewModelCompose)
 }
+
+ceresLibrary {
+  name = "Ceres UI Compose"
+}
