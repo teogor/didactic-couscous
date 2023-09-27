@@ -82,55 +82,73 @@ subprojects {
   }
 }
 
-tasks.dokkaHtmlMultiModule.configure {
-  outputDirectory.set(rootDir.resolve("docs/dokka"))
-}
 
-val excludeModules = listOf(
-  "app",
-  "buildSrc",
-)
-subprojects {
-  if (excludeModules.contains(this@subprojects.name)) {
-    return@subprojects
+fun Project.addDokka(
+  enabled: Boolean,
+) {
+  if(!enabled) {
+    return
   }
-  apply(plugin = "org.jetbrains.dokka")
+  tasks.dokkaHtmlMultiModule.configure {
+    println("rootDir=$rootDir.")
+    outputDirectory.set(rootDir.resolve("docs/dokka"))
+  }
 
-  tasks.withType<DokkaTaskPartial>().configureEach {
-    dokkaSourceSets {
-      configureEach {
-        suppressInheritedMembers.set(true)
+  subprojects {
+    val excludeModules = listOf(
+      ":app",
+    )
+    if (parent == rootProject) {
+      if(!excludeModules.contains(path)) {
+        println("applying dokka for ?? $path")
+        apply(plugin = "org.jetbrains.dokka")
+        subprojects {
+          println("applying dokka for submodule ?? $path")
+          apply(plugin = "org.jetbrains.dokka")
+        }
 
-        // includes.from("Module.md")
-        moduleName.set(this@subprojects.name)
+        tasks.withType<DokkaTaskPartial>().configureEach {
+          dokkaSourceSets {
+            configureEach {
+              outputDirectory.set(rootDir.resolve("docs/dokka/${this@subprojects.name}"))
 
-        // Used for linking to JDK documentation
-        jdkVersion.set(11)
+              suppressInheritedMembers.set(true)
 
-        // Disable linking to online kotlin-stdlib documentation
-        noStdlibLink.set(false)
+              // includes.from("Module.md")
+              moduleName.set(this@subprojects.name)
 
-        // Disable linking to online JDK documentation
-        noJdkLink.set(false)
+              // Used for linking to JDK documentation
+              jdkVersion.set(11)
 
-        // Disable linking to online Android documentation (only applicable for Android projects)
-        noAndroidSdkLink.set(false)
+              // Disable linking to online kotlin-stdlib documentation
+              noStdlibLink.set(false)
 
-        // Include generated files in documentation
-        // By default Dokka will omit all files in folder named generated that is a child of buildDir
-        suppressGeneratedFiles.set(false)
+              // Disable linking to online JDK documentation
+              noJdkLink.set(false)
 
-        // Do not output deprecated members. Applies globally, can be overridden by packageOptions
-        skipDeprecated.set(false)
+              // Disable linking to online Android documentation (only applicable for Android projects)
+              noAndroidSdkLink.set(false)
 
-        // Do not create index pages for empty packages
-        skipEmptyPackages.set(false)
+              // Include generated files in documentation
+              // By default Dokka will omit all files in folder named generated that is a child of buildDir
+              suppressGeneratedFiles.set(false)
 
-        reportUndocumented.set(true) // Report undocumented members
+              // Do not output deprecated members. Applies globally, can be overridden by packageOptions
+              skipDeprecated.set(false)
+
+              // Do not create index pages for empty packages
+              skipEmptyPackages.set(false)
+
+              reportUndocumented.set(true) // Report undocumented members
+            }
+          }
+        }
       }
     }
   }
 }
+
+addDokka(false)
 
 apiValidation {
   /**
