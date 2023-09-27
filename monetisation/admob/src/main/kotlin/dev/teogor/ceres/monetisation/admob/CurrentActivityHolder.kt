@@ -37,4 +37,7 @@ internal object CurrentActivityHolder {
 
   val canShowFullScreenAd: Boolean
     get() = activity !is AdActivity
+
+  val isOffline: Boolean
+    get() = activity !is AdActivity
 }

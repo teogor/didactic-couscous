@@ -31,6 +31,4 @@ class HomeRewardedAd @Inject constructor() : RewardedAd(
   override fun id() = DemoAdUnitIds.REWARDED
 
   override fun loadContinuously() = true
-
-  override fun isNetworkAvailable() = true
 }

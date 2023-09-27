@@ -21,6 +21,7 @@ import android.content.Context
 import android.provider.Settings
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
+import dev.teogor.ceres.core.network.ConnectivityManagerNetworkMonitor
 import dev.teogor.ceres.core.runtime.AppMetadataManager
 import java.io.UnsupportedEncodingException
 import java.security.MessageDigest
@@ -28,7 +29,32 @@ import java.security.NoSuchAlgorithmException
 
 object AdMobInitializer {
 
-  private fun MD5(md5: String): String? {
+
+  private var connectivityManager: ConnectivityManagerNetworkMonitor? = null
+
+  @SuppressLint("HardwareIds")
+  fun getHashedAdvertisingId(
+    context: Context,
+  ): String {
+    val androidId: String = Settings.Secure.getString(
+      context.contentResolver,
+      Settings.Secure.ANDROID_ID,
+    )
+    return md5(androidId)?.uppercase() ?: ""
+  }
+
+  fun initialize(context: Context) {
+    MobileAds.initialize(context) {
+      val configuration = RequestConfiguration.Builder().apply {
+        if (AppMetadataManager.isDebuggable) {
+          setTestDeviceIds(listOf(getHashedAdvertisingId(context)))
+        }
+      }.build()
+      MobileAds.setRequestConfiguration(configuration)
+    }
+  }
+
+  private fun md5(md5: String): String? {
     try {
       val md = MessageDigest.getInstance("MD5")
       val array = md.digest(md5.toByteArray(charset("UTF-8")))
@@ -41,27 +67,5 @@ object AdMobInitializer {
     } catch (_: UnsupportedEncodingException) {
     }
     return null
-  }
-
-  @SuppressLint("HardwareIds")
-  fun getHashedAdvertisingId(
-    context: Context,
-  ): String {
-    val androidId: String = Settings.Secure.getString(
-      context.contentResolver,
-      Settings.Secure.ANDROID_ID,
-    )
-    return MD5(androidId)?.uppercase() ?: ""
-  }
-
-  fun initialize(context: Context) {
-    MobileAds.initialize(context) {
-      val configuration = RequestConfiguration.Builder().apply {
-        if (AppMetadataManager.isDebuggable) {
-          setTestDeviceIds(listOf(getHashedAdvertisingId(context)))
-        }
-      }.build()
-      MobileAds.setRequestConfiguration(configuration)
-    }
   }
 }

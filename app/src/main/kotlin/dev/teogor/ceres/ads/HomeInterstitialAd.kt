@@ -31,6 +31,4 @@ class HomeInterstitialAd @Inject constructor() : InterstitialAd(
   override fun id() = DemoAdUnitIds.INTERSTITIAL
 
   override fun loadContinuously() = true
-
-  override fun isNetworkAvailable() = true
 }

@@ -31,6 +31,4 @@ class HomeRewardedInterstitialAd @Inject constructor() : RewardedInterstitialAd(
   override fun id() = DemoAdUnitIds.REWARDED_INTERSTITIAL
 
   override fun loadContinuously() = true
-
-  override fun isNetworkAvailable() = true
 }

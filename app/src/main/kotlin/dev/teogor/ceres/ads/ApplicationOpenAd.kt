@@ -26,6 +26,4 @@ class ApplicationOpenAd @Inject constructor() : AppOpenAd() {
   override fun id() = DemoAdUnitIds.APP_OPEN
 
   override fun loadContinuously() = true
-
-  override fun isNetworkAvailable() = true
 }

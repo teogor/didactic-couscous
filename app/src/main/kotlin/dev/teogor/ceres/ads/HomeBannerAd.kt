@@ -33,6 +33,4 @@ class HomeBannerAd @Inject constructor() : BannerAd() {
   override fun id() = DemoAdUnitIds.BANNER
 
   override fun loadContinuously() = false
-
-  override fun isNetworkAvailable() = true
 }

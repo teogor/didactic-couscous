@@ -73,6 +73,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavOptions
 import dev.teogor.ceres.core.network.NetworkMonitor
+import dev.teogor.ceres.core.network.NetworkMonitorGlobal
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
 import dev.teogor.ceres.framework.core.compositions.LocalNetworkConnectivity
 import dev.teogor.ceres.framework.core.compositions.NetworkConnectivity
@@ -154,6 +155,7 @@ fun CeresApp(
       val isOffline by appState.isOffline.collectAsStateWithLifecycle()
 
       LaunchedEffect(isOffline) {
+        NetworkMonitorGlobal.isOffline = isOffline
         networkConnectivity.isOffline = isOffline
       }
 
