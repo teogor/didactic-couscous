@@ -54,6 +54,13 @@ fun Modifier.clickable(
         (context.getSystemService(Context.AUDIO_SERVICE) as AudioManager)
           .playSoundEffect(effectType)
       }
+
+      if (!FeedbackConfig.disableVibrationFeedback) {
+        context.vibrate(
+          milliseconds = FeedbackConfig.vibrationFeedbackIntensity,
+          effect = HapticEffect.DEFAULT_AMPLITUDE,
+        )
+      }
     },
   )
 }
@@ -80,6 +87,13 @@ fun Modifier.clickable(
       if (!FeedbackConfig.disableAudioFeedback) {
         (context.getSystemService(Context.AUDIO_SERVICE) as AudioManager)
           .playSoundEffect(effectType)
+      }
+
+      if (!FeedbackConfig.disableVibrationFeedback) {
+        context.vibrate(
+          milliseconds = FeedbackConfig.vibrationFeedbackIntensity,
+          effect = HapticEffect.DEFAULT_AMPLITUDE,
+        )
       }
     },
   )

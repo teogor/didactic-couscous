@@ -30,6 +30,13 @@ fun (() -> Unit).withTouchFeedback(
       .playSoundEffect(effectType)
   }
 
+  if (!FeedbackConfig.disableVibrationFeedback) {
+    context.vibrate(
+      milliseconds = FeedbackConfig.vibrationFeedbackIntensity,
+      effect = HapticEffect.DEFAULT_AMPLITUDE,
+    )
+  }
+
   this()
 }
 
@@ -40,5 +47,12 @@ fun applyTouchFeedback(
   if (!FeedbackConfig.disableAudioFeedback) {
     (context.getSystemService(Context.AUDIO_SERVICE) as AudioManager)
       .playSoundEffect(effectType)
+  }
+
+  if (!FeedbackConfig.disableVibrationFeedback) {
+    context.vibrate(
+      milliseconds = FeedbackConfig.vibrationFeedbackIntensity,
+      effect = HapticEffect.DEFAULT_AMPLITUDE,
+    )
   }
 }

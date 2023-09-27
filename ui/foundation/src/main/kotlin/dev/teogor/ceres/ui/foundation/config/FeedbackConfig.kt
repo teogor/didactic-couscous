@@ -19,4 +19,5 @@ package dev.teogor.ceres.ui.foundation.config
 object FeedbackConfig {
   var disableAudioFeedback: Boolean = false
   var disableVibrationFeedback: Boolean = false
+  var vibrationFeedbackIntensity: Long = 50L
 }
