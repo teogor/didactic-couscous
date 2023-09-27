@@ -65,7 +65,7 @@ public abstract class dev/teogor/ceres/monetisation/admob/formats/Ad : dev/teogo
 	public fun getTag ()Ljava/lang/String;
 	public final fun isAdLoaded ()Z
 	protected final fun isLoading ()Z
-	public abstract fun isNetworkAvailable ()Z
+	public final fun isNetworkAvailable ()Z
 	public final fun isReady ()Z
 	protected final fun isShowing ()Z
 	public fun load ()Z

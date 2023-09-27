@@ -50,6 +50,15 @@ public final class dev/teogor/ceres/screen/builder/CategoryConfig : dev/teogor/c
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class dev/teogor/ceres/screen/builder/ScopeViewKt {
+	public static final fun getEndPadding ()F
+	public static final fun getHorizontalNoIconPadding ()F
+	public static final fun getHorizontalPadding ()F
+	public static final fun getIconSize ()F
+	public static final fun getTopPadding ()F
+	public static final fun getVerticalPadding ()F
+}
+
 public final class dev/teogor/ceres/screen/builder/SubcategoryConfig : dev/teogor/ceres/screen/builder/model/ViewBuilder {
 	public static final field $stable I
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;ZLandroidx/compose/ui/Modifier;)V
@@ -77,29 +86,37 @@ public final class dev/teogor/ceres/screen/builder/compose/AdvancedViewKt {
 	public static final fun AdvancedView (Ldev/teogor/ceres/screen/builder/model/AdvancedViewBuilder;Landroidx/compose/runtime/Composer;I)V
 }
 
-public final class dev/teogor/ceres/screen/builder/compose/ColumnLayoutKt {
-	public static final fun ColumnLayout (Ldev/teogor/ceres/navigation/core/ScreenRoute;ZZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
-}
-
 public final class dev/teogor/ceres/screen/builder/compose/CustomViewKt {
 	public static final fun CustomView (Ldev/teogor/ceres/screen/builder/model/CustomViewBuilder;Landroidx/compose/runtime/Composer;I)V
 }
 
 public final class dev/teogor/ceres/screen/builder/compose/HeaderViewKt {
 	public static final fun HeaderView (Ldev/teogor/ceres/screen/builder/model/HeaderViewBuilder;Landroidx/compose/runtime/Composer;I)V
+	public static final fun HeaderView (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)V
 }
 
 public final class dev/teogor/ceres/screen/builder/compose/LazyColumnLayoutKt {
 	public static final fun LazyColumnLayout (Ldev/teogor/ceres/navigation/core/ScreenRoute;ZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 }
 
-public final class dev/teogor/ceres/screen/builder/compose/SegmentedButtonKt {
-	public static final fun SegmentedButton (Ljava/util/List;ILkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
-}
-
 public final class dev/teogor/ceres/screen/builder/compose/SimpleViewKt {
 	public static final fun SimpleView (Ldev/teogor/ceres/screen/builder/model/SimpleViewBuilder;Landroidx/compose/runtime/Composer;I)V
+	public static final fun SimpleView (Ljava/lang/String;Ljava/lang/String;Ldev/teogor/ceres/ui/theme/tokens/ColorSchemeKeyTokens;Landroidx/compose/ui/graphics/vector/ImageVector;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 	public static final fun addExtraPadding (Z)F
+}
+
+public final class dev/teogor/ceres/screen/builder/compose/UiOptions {
+	public static final field $stable I
+	public static final field INSTANCE Ldev/teogor/ceres/screen/builder/compose/UiOptions;
+	public final fun getUiTypes ()Ldev/teogor/ceres/screen/builder/compose/UiTypes;
+}
+
+public final class dev/teogor/ceres/screen/builder/compose/UiTypes : java/lang/Enum {
+	public static final field Filled Ldev/teogor/ceres/screen/builder/compose/UiTypes;
+	public static final field Transparent Ldev/teogor/ceres/screen/builder/compose/UiTypes;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Ldev/teogor/ceres/screen/builder/compose/UiTypes;
+	public static fun values ()[Ldev/teogor/ceres/screen/builder/compose/UiTypes;
 }
 
 public final class dev/teogor/ceres/screen/builder/model/AdvancedViewBuilder : dev/teogor/ceres/screen/builder/model/SimpleViewBuilder {
@@ -123,6 +140,7 @@ public final class dev/teogor/ceres/screen/builder/model/HeaderViewBuilder : dev
 public class dev/teogor/ceres/screen/builder/model/SimpleViewBuilder : dev/teogor/ceres/screen/builder/model/ViewBuilder {
 	public static final field $stable I
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ldev/teogor/ceres/ui/theme/tokens/ColorSchemeKeyTokens;Landroidx/compose/ui/graphics/vector/ImageVector;Lkotlin/jvm/functions/Function0;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ldev/teogor/ceres/ui/theme/tokens/ColorSchemeKeyTokens;Landroidx/compose/ui/graphics/vector/ImageVector;Lkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
 
 public class dev/teogor/ceres/screen/builder/model/ViewBuilder {

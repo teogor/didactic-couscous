@@ -10,7 +10,7 @@ public final class dev/teogor/ceres/core/android/config/BuildConfig {
 
 public final class dev/teogor/ceres/core/runtime/AppMetadataManager {
 	public static final field INSTANCE Ldev/teogor/ceres/core/runtime/AppMetadataManager;
-	public final fun getApkHash ()Ljava/lang/String;
+	public final fun getApkSignature ()Ljava/lang/String;
 	public final fun getBuildDateTime ()Ljava/time/LocalDateTime;
 	public final fun getBuildType ()Ljava/lang/String;
 	public final fun getCeresFrameworkVersion ()Ljava/lang/String;
