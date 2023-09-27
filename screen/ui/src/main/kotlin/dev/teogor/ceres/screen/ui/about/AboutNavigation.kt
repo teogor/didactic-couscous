@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.lib.about
+package dev.teogor.ceres.screen.ui.about
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import dev.teogor.ceres.framework.core.app.BaseActions
-import dev.teogor.ceres.lib.about.libraries.AboutLibrariesRoute
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.navigation.core.screenNav
+import dev.teogor.ceres.screen.ui.about.libraries.AboutLibrariesRoute
 
 fun NavGraphBuilder.aboutGraphNav(
   baseActions: BaseActions,
+  aboutScreenNav: NavGraphBuilder.() -> Unit,
 ) {
-  aboutScreenNav(baseActions)
+  aboutScreenNav()
   aboutLibrariesScreenNav(baseActions)
 }
 
@@ -35,14 +36,6 @@ const val aboutNavigationRoute = "about_route"
 
 object AboutScreenRoute : ScreenRoute {
   override val route: String = aboutNavigationRoute
-}
-
-fun NavGraphBuilder.aboutScreenNav(
-  baseActions: BaseActions,
-) = aboutScreenNav {
-  AboutRoute(
-    baseActions = baseActions,
-  )
 }
 
 inline fun NavGraphBuilder.aboutScreenNav(

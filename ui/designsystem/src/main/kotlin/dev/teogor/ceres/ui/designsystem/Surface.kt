@@ -24,6 +24,8 @@ import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.ripple.rememberRipple
@@ -468,6 +470,54 @@ fun Surface(
           enabled = enabled,
           onValueChange = onCheckedChange,
         ),
+      propagateMinConstraints = true,
+    ) {
+      content()
+    }
+  }
+}
+
+@Composable
+@NonRestartableComposable
+fun Surface(
+  modifier: Modifier = Modifier,
+  afterModifier: Modifier = Modifier,
+  shape: Shape = RectangleShape,
+  color: Color = MaterialTheme.colorScheme.surface,
+  contentColor: Color = contentColorFor(color),
+  tonalElevation: Dp = 0.dp,
+  shadowElevation: Dp = 0.dp,
+  border: BorderStroke? = null,
+  content: @Composable () -> Unit,
+) {
+  val absoluteElevation = LocalAbsoluteTonalElevation.current + tonalElevation
+
+  CompositionLocalProvider(
+    LocalContentColor provides contentColor,
+    LocalAbsoluteTonalElevation provides absoluteElevation,
+  ) {
+    Box(
+      modifier = modifier
+        .fillMaxSize()
+        .surface(
+          shape = shape,
+          backgroundColor = surfaceColorAtElevation(
+            color = color,
+            elevation = absoluteElevation,
+          ),
+          border = border,
+          shadowElevation = shadowElevation,
+        )
+        .semantics(mergeDescendants = false) {
+          @Suppress("DEPRECATION")
+          isContainer = true
+        }
+        .pointerInput(Unit) {}
+        .padding(
+          horizontal = 10.dp,
+          vertical = 4.dp,
+        )
+        .then(afterModifier),
       propagateMinConstraints = true,
     ) {
       content()

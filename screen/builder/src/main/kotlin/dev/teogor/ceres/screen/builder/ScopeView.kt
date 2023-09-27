@@ -23,12 +23,12 @@ import dev.teogor.ceres.screen.builder.compose.HeaderView
 import dev.teogor.ceres.screen.builder.model.AdvancedViewBuilder
 import dev.teogor.ceres.screen.builder.model.HeaderViewBuilder
 
-internal val topPadding: Dp = 16.dp
-internal val endPadding: Dp = 20.dp
-internal val iconSize: Dp = 26.dp
-internal val horizontalPadding: Dp = 20.dp
-internal val horizontalNoIconPadding: Dp = iconSize + horizontalPadding
-internal val verticalPadding: Dp = 8.dp
+val topPadding: Dp = 16.dp
+val endPadding: Dp = 20.dp
+val iconSize: Dp = 26.dp
+val horizontalPadding: Dp = 20.dp
+val horizontalNoIconPadding: Dp = iconSize + horizontalPadding
+val verticalPadding: Dp = 8.dp
 
 internal fun BuilderListScope.headerItem(
   config: HeaderViewBuilder,

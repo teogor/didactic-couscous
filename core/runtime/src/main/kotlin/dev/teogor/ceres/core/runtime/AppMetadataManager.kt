@@ -87,7 +87,7 @@ object AppMetadataManager {
   val isDebuggable: Boolean
     get() = BuildConfig.DEBUG
 
-  val apkHash: String?
+  val apkSignature: String?
     get() {
       try {
         val packageInfo = packageInfo

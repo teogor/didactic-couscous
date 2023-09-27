@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.lib.about.libraries.util
+package dev.teogor.ceres.screen.ui.about.libraries.util
 
 import androidx.compose.runtime.Immutable
 import com.mikepenz.aboutlibraries.entity.Library

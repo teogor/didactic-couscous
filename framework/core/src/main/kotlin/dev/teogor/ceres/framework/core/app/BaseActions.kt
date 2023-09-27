@@ -29,6 +29,7 @@ data class BaseActions(
   val bottomSpace: Dp = 0.dp,
 )
 
+@Deprecated("use Navigation local provider - LocalNavigationParameters.current")
 fun BaseActions.navigateTo(
   screenRoute: ScreenRoute,
   navOptions: NavOptions = NavOptions.Builder()

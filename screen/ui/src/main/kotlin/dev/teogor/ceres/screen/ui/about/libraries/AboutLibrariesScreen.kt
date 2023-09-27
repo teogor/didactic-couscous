@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.teogor.ceres.lib.about.libraries
+package dev.teogor.ceres.screen.ui.about.libraries
 
 import androidx.compose.runtime.Composable
 import dev.teogor.ceres.framework.core.app.BaseActions

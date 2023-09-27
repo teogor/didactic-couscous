@@ -156,7 +156,7 @@ private fun AboutLayout(
 
   simpleView(
     title = "APK hash",
-    subtitle = "${AppMetadataManager.apkHash}",
+    subtitle = "${AppMetadataManager.apkSignature}",
     icon = Icons.Default.Verified,
   )
 
