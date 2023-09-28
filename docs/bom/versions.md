@@ -21,6 +21,7 @@ Below is a list of the latest versions of the BOM:
 | Version | Release Notes | Release Date |
 | ------- | ------------- | ------------ |
 | 1.0.0-alpha01 | [details 🔗](/docs/bom/1.0.0-alpha01/bom-version-1.0.0-alpha01.md) | 28 Sept 2023 |
+| 1.0.0-alpha01 | [changelog 🔗](/docs/bom/1.0.0-alpha01/bom-version-1.0.0-alpha01.md) | 28 Sept 2023 |
 | 1.0.0-alpha01 | [details](/docs/bom/1.0.0-alpha01/bom-version-1.0.0-alpha01.md) | 28 Sept 2023 |
 
 The BOM ensures that all libraries and components across your project are in sync, reducing compatibility issues
