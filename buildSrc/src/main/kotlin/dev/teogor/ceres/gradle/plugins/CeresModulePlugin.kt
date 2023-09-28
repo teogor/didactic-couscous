@@ -1,9 +1,9 @@
 package dev.teogor.ceres.gradle.plugins
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
 import java.io.File
 import java.nio.file.Files
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
 class CeresModulePlugin : Plugin<Project> {
   override fun apply(target: Project) {
@@ -115,11 +115,11 @@ class CeresModulePlugin : Plugin<Project> {
               - name: Check out code
                 uses: actions/checkout@v3.1.0
 
-              - name: Set up JDK 17
+              - name: Set up JDK 11
                 uses: actions/setup-java@v3.5.1
                 with:
                   distribution: 'zulu'
-                  java-version: 17
+                  java-version: 11
 
               - name: Grant Permission to Execute Gradle
                 run: chmod +x gradlew

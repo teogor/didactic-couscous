@@ -15,7 +15,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Didactic Couscous"
+rootProject.name = "Ceres"
 
 // App
 include(":app")
