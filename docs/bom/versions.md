@@ -1,4 +1,4 @@
-## BoM Versions
+## Ceres BoM (Bill of Materials)
 
 The BOM (Bill of Materials) is the central hub for managing library versions within the Ceres project.
 It enables you to effortlessly keep track of the latest versions of key components and dependencies.
@@ -11,6 +11,8 @@ dependencies {
   implementation(platform("dev.teogor.ceres:bom:1.0.0-alpha01"))
 }
 ```
+
+## BoM Versions (Bill of Materials)
 
 Below is a list of the latest versions of the BOM:
 
