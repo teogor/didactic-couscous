@@ -22,7 +22,6 @@ dependencies {
 }
 ```
 
-
 ## Latest SDK versions
 
 | Status | Service or Product | Gradle dependency | Latest version |
@@ -58,5 +57,8 @@ dependencies {
 | 🧪 | [Ceres UI Spectrum](/ui/spectrum) | dev.teogor.ceres:ui-spectrum  | 1.0.0-alpha01 |
 | 🧪 | [Ceres UI Theme](/ui/theme) | dev.teogor.ceres:ui-theme  | 1.0.0-alpha01 |
 
+### Explore Further
 
+For the latest updates, in-depth documentation, and a comprehensive overview of the Ceres ecosystem, visit the official [Ceres documentation](/docs/). It's your gateway to a wealth of resources and insights that will elevate your Ceres development journey.
 
+Stay informed, stay current, and embrace the full potential of Ceres.
