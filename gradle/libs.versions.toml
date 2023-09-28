@@ -31,6 +31,7 @@ androidxTracing = "1.1.0"
 androidxUiAutomator = "2.2.0"
 androidxWindowManager = "1.1.0"
 androidxWork = "2.8.1"
+buildConfig = "3.1.0"
 coil = "2.2.2"
 colorMath = "3.2.0"
 dokka = "1.8.20"
@@ -41,6 +42,7 @@ firebasePerfPlugin = "1.4.2"
 googleMaterial = "1.9.0"
 gmsPlugin = "4.4.0"
 gson = "2.10.1"
+gradlePublish = "1.1.0"
 hilt = "2.47"
 hiltExt = "1.0.0"
 jacoco = "0.8.7"
@@ -189,7 +191,9 @@ protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 about-libraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutLibraries" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-apiValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "apiValidator" }
+api-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "apiValidator" }
+gradle-publish = { id = "com.gradle.plugin-publish", version.ref = "gradlePublish" }
+build-config = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 vanniktech-maven = { id = "com.vanniktech.maven.publish", version.ref = "vanniktechMavenPlugin" }
 
 [bundles]

@@ -22,7 +22,7 @@ plugins {
 
   alias(libs.plugins.dokka)
   alias(libs.plugins.spotless)
-  alias(libs.plugins.apiValidator)
+  alias(libs.plugins.api.validator)
 
   id("dev.teogor.ceres.docs")
 }
