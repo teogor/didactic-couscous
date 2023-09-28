@@ -5,12 +5,8 @@ It enables you to effortlessly keep track of the latest versions of key componen
 
 ```kt
 dependencies {
-  // Import the BoM for the Ceres platform
+  // Import the BoM for the Ceres platform using latest version
   implementation(platform("dev.teogor.ceres:bom:1.0.0-alpha01"))
-
-  // Declare the dependencies for the desired Ceres products without specifying versions
-  // For example, declare the dependencies for Ceres Core Runtime and Ceres Core Network
-  implementation("dev.teogor.ceres:core-network")
 }
 ```
 
@@ -19,6 +15,10 @@ Below is a list of the latest versions of the BOM:
 | Version | Link | Release Date |
 | ------- | ---- | ------------ |
 | 1.0.0-alpha01 | [Info 🔗](/docs/bom/1.0.0-alpha01/bom-version-1.0.0-alpha01.md) | 28 Sept 2023 |
+
+| Version | Release Date |
+| ------- | ------------ |
+| [1.0.0-alpha01 🔗](/docs/bom/1.0.0-alpha01/bom-version-1.0.0-alpha01.md) | 28 Sept 2023 |
 
 The BOM ensures that all libraries and components across your project are in sync, reducing compatibility issues
 and simplifying the dependency management process.
