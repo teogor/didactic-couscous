@@ -15,17 +15,24 @@
  */
 
 import com.android.build.gradle.LibraryExtension
+import dev.teogor.ceres.GitHashValueSource
 import dev.teogor.ceres.configureAndroidBuildConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.of
 
 class AndroidLibraryConfigConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
     with(target) {
-      pluginManager.apply("com.android.library")
-      extensions.configure<LibraryExtension> {
-        configureAndroidBuildConfig(this)
+      afterEvaluate {
+        val gitHashProvider = providers.of(GitHashValueSource::class) {}
+        println("gitHashProvider=${gitHashProvider.get()}")
+
+        pluginManager.apply("com.android.library")
+        extensions.configure<LibraryExtension> {
+          configureAndroidBuildConfig(this)
+        }
       }
     }
   }

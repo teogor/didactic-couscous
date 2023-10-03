@@ -17,17 +17,17 @@
 package dev.teogor.ceres
 
 import com.android.build.api.dsl.CommonExtension
-import org.gradle.api.Project
-import org.gradle.api.provider.ValueSource
-import org.gradle.api.provider.ValueSourceParameters
-import org.gradle.kotlin.dsl.of
-import org.gradle.process.ExecOperations
 import java.io.ByteArrayOutputStream
 import java.nio.charset.Charset
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import javax.inject.Inject
+import org.gradle.api.Project
+import org.gradle.api.provider.ValueSource
+import org.gradle.api.provider.ValueSourceParameters
+import org.gradle.kotlin.dsl.of
+import org.gradle.process.ExecOperations
 
 abstract class GitHashValueSource : ValueSource<String, ValueSourceParameters.None> {
 
