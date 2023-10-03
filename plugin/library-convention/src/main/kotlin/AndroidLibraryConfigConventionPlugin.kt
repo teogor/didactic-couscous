@@ -26,9 +26,6 @@ class AndroidLibraryConfigConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
     with(target) {
       afterEvaluate {
-        val gitHashProvider = providers.of(GitHashValueSource::class) {}
-        println("gitHashProvider=${gitHashProvider.get()}")
-
         pluginManager.apply("com.android.library")
         extensions.configure<LibraryExtension> {
           configureAndroidBuildConfig(this)
