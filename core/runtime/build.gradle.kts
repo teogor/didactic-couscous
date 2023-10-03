@@ -17,12 +17,17 @@ plugins {
   id("dev.teogor.ceres.android.library")
   id("dev.teogor.ceres.android.library.jacoco")
   id("dev.teogor.ceres.android.library.config")
+  id("dev.teogor.ceres.build.info")
 }
 
 android {
   namespace = "dev.teogor.ceres.core.android.config"
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
+  }
+
+  sourceSets {
+    getByName("main").kotlin.srcDirs("build/generated/ceres/src/main/kotlin")
   }
 }
 

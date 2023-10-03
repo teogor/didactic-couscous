@@ -39,6 +39,7 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 dependencies {
+  implementation("com.squareup:kotlinpoet:1.14.2")
   compileOnly(libs.android.gradlePlugin)
   compileOnly(libs.firebase.crashlytics.gradle)
   compileOnly(libs.firebase.performance.gradle)
@@ -51,6 +52,14 @@ gradlePlugin {
   vcsUrl.set("https://github.com/teogor/ceres")
 
   plugins {
+    register("buildInfoPlugin") {
+      id = "dev.teogor.ceres.build.info"
+      implementationClass = "dev.teogor.ceres.plugin.BuildInfoPlugin"
+      displayName = "Android Compose Configuration Plugin | Ceres Plugin"
+      description = "Configures Android Compose-specific options for your Android application. Enhance your app's UI with the power of Jetpack Compose for modern Android development."
+      tags.set(listOf("ceres", "android", "integration", "performance", "development", "android-library", "kmp", "build-logic"))
+    }
+
     register("androidApplicationCompose") {
       id = "dev.teogor.ceres.android.application.compose"
       implementationClass = "AndroidApplicationComposeConventionPlugin"
