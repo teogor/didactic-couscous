@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.LibraryExtension
-import dev.teogor.ceres.configureAndroidBuildConfig
+import com.android.build.api.dsl.ApplicationExtension
+import dev.teogor.ceres.configureAndroidCompose
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.getByType
 
-class AndroidLibraryConfigConventionPlugin : Plugin<Project> {
+class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
     with(target) {
-      pluginManager.apply("com.android.library")
-      extensions.configure<LibraryExtension> {
-        configureAndroidBuildConfig(this)
-      }
+      pluginManager.apply("com.android.application")
+      val extension = extensions.getByType<ApplicationExtension>()
+      configureAndroidCompose(extension)
     }
   }
 }

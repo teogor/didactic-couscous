@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.LibraryExtension
-import dev.teogor.ceres.configureAndroidBuildConfig
+import com.android.build.api.variant.LibraryAndroidComponentsExtension
+import dev.teogor.ceres.configureJacoco
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.getByType
 
-class AndroidLibraryConfigConventionPlugin : Plugin<Project> {
+class AndroidLibraryJacocoConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
     with(target) {
-      pluginManager.apply("com.android.library")
-      extensions.configure<LibraryExtension> {
-        configureAndroidBuildConfig(this)
+      with(pluginManager) {
+        apply("org.gradle.jacoco")
+        apply("com.android.library")
       }
+      val extension = extensions.getByType<LibraryAndroidComponentsExtension>()
+      configureJacoco(extension)
     }
   }
 }

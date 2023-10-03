@@ -13,20 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+include(":plugin")
 
-import com.android.build.gradle.LibraryExtension
-import dev.teogor.ceres.configureAndroidBuildConfig
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
-
-class AndroidLibraryConfigConventionPlugin : Plugin<Project> {
-  override fun apply(target: Project) {
-    with(target) {
-      pluginManager.apply("com.android.library")
-      extensions.configure<LibraryExtension> {
-        configureAndroidBuildConfig(this)
-      }
+dependencyResolutionManagement {
+  repositories {
+    google()
+    mavenCentral()
+  }
+  versionCatalogs {
+    create("libs") {
+      from(files("${rootDir.parentFile}/gradle/libs.versions.toml"))
     }
   }
 }

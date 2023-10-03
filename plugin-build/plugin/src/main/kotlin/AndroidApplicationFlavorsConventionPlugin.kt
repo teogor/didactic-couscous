@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.LibraryExtension
-import dev.teogor.ceres.configureAndroidBuildConfig
+import com.android.build.api.dsl.ApplicationExtension
+import dev.teogor.ceres.configureFlavors
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
-class AndroidLibraryConfigConventionPlugin : Plugin<Project> {
+class AndroidApplicationFlavorsConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
     with(target) {
-      pluginManager.apply("com.android.library")
-      extensions.configure<LibraryExtension> {
-        configureAndroidBuildConfig(this)
+      extensions.configure<ApplicationExtension> {
+        configureFlavors(this)
       }
     }
   }

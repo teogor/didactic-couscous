@@ -14,18 +14,25 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.LibraryExtension
-import dev.teogor.ceres.configureAndroidBuildConfig
+import com.android.build.gradle.TestExtension
+import dev.teogor.ceres.configureGradleManagedDevices
+import dev.teogor.ceres.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
-class AndroidLibraryConfigConventionPlugin : Plugin<Project> {
+class AndroidTestConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
     with(target) {
-      pluginManager.apply("com.android.library")
-      extensions.configure<LibraryExtension> {
-        configureAndroidBuildConfig(this)
+      with(pluginManager) {
+        apply("com.android.test")
+        apply("org.jetbrains.kotlin.android")
+      }
+
+      extensions.configure<TestExtension> {
+        configureKotlinAndroid(this)
+        defaultConfig.targetSdk = 31
+        configureGradleManagedDevices(this)
       }
     }
   }

@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.LibraryExtension
-import dev.teogor.ceres.configureAndroidBuildConfig
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
+package dev.teogor.ceres
 
-class AndroidLibraryConfigConventionPlugin : Plugin<Project> {
-  override fun apply(target: Project) {
-    with(target) {
-      pluginManager.apply("com.android.library")
-      extensions.configure<LibraryExtension> {
-        configureAndroidBuildConfig(this)
-      }
-    }
-  }
+/**
+ * This is shared between :app and :benchmarks module to provide configurations type safety.
+ */
+@Suppress("unused")
+enum class CeresBuildType(
+  val applicationIdSuffix: String? = null,
+  val versionNameSuffix: String? = null,
+) {
+  DEBUG(".debug", "-debug"),
+  RELEASE,
+  BENCHMARK(".benchmark", "-benchmark"),
 }
