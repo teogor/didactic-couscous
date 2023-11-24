@@ -100,13 +100,11 @@ whenWindsPluginConfigured { winds ->
   mavenPublish.version?.let {
     version = it.toString()
   }
-  println("repoAtPath: $path canBePublished=${mavenPublish.canBePublished}")
   if (mavenPublish.canBePublished) {
     mavenPublishing {
       publishToMavenCentral(SonatypeHost.S01)
       signAllPublications()
 
-      println("rootProject::afterWindsPluginConfiguration ${mavenPublish.dependency}")
       @Suppress("UnstableApiUsage")
       pom {
         coordinates(
