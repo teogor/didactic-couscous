@@ -73,8 +73,8 @@ jobs:
       - name: Grant Permission to Execute Gradle
         run: chmod +x gradlew
 
-      - name: Build Project
-        run: ./gradlew --continue build
+#      - name: Build Project
+#        run: ./gradlew --continue build
 
       - name: Publish BOM
         env:
@@ -87,13 +87,13 @@ jobs:
             echo "BOM module is not being published because the 'bom' input is not set to true."
           fi
 
-      - name: Check if directory exists
-        run: |
-          if [[ -d "screen/ui/build/generated/querent/xmlResources" ]]; then
-            echo "Directory exists"
-          else
-            echo "Directory does not exist"
-          fi
+#      - name: Check if directory exists
+#        run: |
+#          if [[ -d "screen/ui/build/generated/querent/xmlResources" ]]; then
+#            echo "Directory exists"
+#          else
+#            echo "Directory does not exist"
+#          fi
 
       - name: Publish Specified Modules
         env:
