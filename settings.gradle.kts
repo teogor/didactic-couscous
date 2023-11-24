@@ -1,6 +1,5 @@
 pluginManagement {
     includeBuild("plugin/")
-    // includeBuild("E:\\Teogor\\dev\\.github\\winds")
     repositories {
         google()
         mavenCentral()
