@@ -95,7 +95,7 @@ winds {
   }
 }
 
-afterWindsPluginConfigurationBeta { winds ->
+whenWindsPluginConfigured { winds ->
   val mavenPublish: MavenPublish by winds
   mavenPublish.version?.let {
     version = it.toString()
@@ -120,18 +120,14 @@ afterWindsPluginConfigurationBeta { winds ->
   }
 }
 
-fun Project.afterWindsPluginConfigurationBeta(action: Project.(Winds) -> Unit) {
+fun Project.whenWindsPluginConfigured(action: Project.(Winds) -> Unit) {
   subprojects.toList()
     .filter { hasWindsPlugin() }
-    .onEach { project ->
-      project.plugins.withType<WindsPlugin> {
-        val winds: Winds by project.extensions
-        if (project.state.executed) {
-          project.action(winds)
-        } else {
-          project.afterEvaluate {
-            project.action(winds)
-          }
+    .forEach { project ->
+      project.afterEvaluate {
+        project.plugins.withType<WindsPlugin> {
+          val winds: Winds by project.extensions
+          action(winds)
         }
       }
     }
