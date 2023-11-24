@@ -8,7 +8,8 @@ import dev.teogor.winds.api.model.DependencyType
 import dev.teogor.winds.api.model.Developer
 import dev.teogor.winds.api.model.LicenseType
 import dev.teogor.winds.api.provider.Scm
-import dev.teogor.winds.gradle.utils.afterWindsPluginConfiguration
+import dev.teogor.winds.common.utils.hasWindsPlugin
+import dev.teogor.winds.gradle.WindsPlugin
 import dev.teogor.winds.gradle.utils.attachTo
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaPlugin
@@ -94,11 +95,12 @@ winds {
   }
 }
 
-afterWindsPluginConfiguration { winds ->
+afterWindsPluginConfigurationBeta { winds ->
   val mavenPublish: MavenPublish by winds
   mavenPublish.version?.let {
     version = it.toString()
   }
+  println("repoAtPath: $path canBePublished=${mavenPublish.canBePublished}")
   if (mavenPublish.canBePublished) {
     mavenPublishing {
       publishToMavenCentral(SonatypeHost.S01)
@@ -116,6 +118,23 @@ afterWindsPluginConfiguration { winds ->
       }
     }
   }
+}
+
+fun Project.afterWindsPluginConfigurationBeta(action: Project.(Winds) -> Unit) {
+  subprojects.toList()
+    .filter { hasWindsPlugin() }
+    .onEach { project ->
+      project.plugins.withType<WindsPlugin> {
+        val winds: Winds by project.extensions
+        if (project.state.executed) {
+          project.action(winds)
+        } else {
+          project.afterEvaluate {
+            project.action(winds)
+          }
+        }
+      }
+    }
 }
 
 data class TeogorDeveloper(
