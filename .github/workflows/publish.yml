@@ -78,43 +78,67 @@ jobs:
           BOM_PUBLISH: ${{ github.event.inputs.bom }}
         run: |
           if [[ $BOM_PUBLISH == true ]]; then
+            echo "Publishing BOM module..."
             ./gradlew :bom:publish --no-configuration-cache
+          else
+            echo "BOM module is not being published because the 'bom' input is not set to true."
           fi
 
       - name: Publish specified modules
         env:
-          UI_PUBLISH: ${{ github.event.inputs.ui }}
+          BACKUP_PUBLISH: ${{ github.event.inputs.backup }}
           CORE_PUBLISH: ${{ github.event.inputs.core }}
+          DATA_PUBLISH: ${{ github.event.inputs.data }}
+          FIREBASE_PUBLISH: ${{ github.event.inputs.firebase }}
+          FRAMEWORK_PUBLISH: ${{ github.event.inputs.framework }}
+          MONETISATION_PUBLISH: ${{ github.event.inputs.monetisation }}
+          NAVIGATION_PUBLISH: ${{ github.event.inputs.navigation }}
+          SCREEN_PUBLISH: ${{ github.event.inputs.screen }}
+          UI_PUBLISH: ${{ github.event.inputs.ui }}
         run: |
           modules_to_publish=""
 
-          if [[ $UI_PUBLISH == true ]]; then
-            modules_to_publish+="ui"
+          if [[ $BACKUP_PUBLISH == true ]]; then
+            modules_to_publish+="backup"
           fi
 
           if [[ $CORE_PUBLISH == true ]]; then
             modules_to_publish+="core"
           fi
 
+          if [[ $DATA_PUBLISH == true ]]; then
+            modules_to_publish+="data"
+          fi
+
+          if [[ $FIREBASE_PUBLISH == true ]]; then
+            modules_to_publish+="firebase"
+          fi
+
+          if [[ $FRAMEWORK_PUBLISH == true ]]; then
+            modules_to_publish+="framework"
+          fi
+
+          if [[ $MONETISATION_PUBLISH == true ]]; then
+           modules_to_publish+="monetisation"
+          fi
+
+          if [[ $NAVIGATION_PUBLISH == true ]]; then
+           modules_to_publish+="navigation"
+          fi
+
+          if [[ $SCREEN_PUBLISH == true ]]; then
+            modules_to_publish+="screen"
+          fi
+
+          if [[ $UI_PUBLISH == true ]]; then
+           modules_to_publish+="ui"
+          fi
+
           if [[ -z "$modules_to_publish" ]]; then
             echo "No modules specified for publishing."
           else
             for module in $modules_to_publish; do
-              echo "Publishing module: $module"
+              echo "Publishing $module module..."
               ./gradlew ":${module}:publish" --no-configuration-cache
             done
           fi
-
-      - name: Publish specified modules
-        env:
-          MODULES: ${{ github.event.inputs.modules }}
-        run: |
-          if [[ -z "$MODULES" ]]; then
-            echo "No modules specified for publishing. Please set the MODULES environment variable."
-            exit 1
-          fi
-
-          for module in $MODULES; do
-            echo "Publishing module: $module"
-            ./gradlew ":${module}:publish" --no-configuration-cache
-          done
