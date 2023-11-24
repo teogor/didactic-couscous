@@ -96,44 +96,44 @@ jobs:
           SCREEN_PUBLISH: ${{ github.event.inputs.screen }}
           UI_PUBLISH: ${{ github.event.inputs.ui }}
         run: |
-          modules_to_publish=""
+          modules_to_publish=()
 
           if [[ $BACKUP_PUBLISH == true ]]; then
-            modules_to_publish+="backup"
+            modules_to_publish+=("backup")
           fi
 
           if [[ $CORE_PUBLISH == true ]]; then
-            modules_to_publish+="core"
+            modules_to_publish+=("core")
           fi
 
           if [[ $DATA_PUBLISH == true ]]; then
-            modules_to_publish+="data"
+           modules_to_publish+=("data")
           fi
 
           if [[ $FIREBASE_PUBLISH == true ]]; then
-            modules_to_publish+="firebase"
+           modules_to_publish+=("firebase")
           fi
 
           if [[ $FRAMEWORK_PUBLISH == true ]]; then
-            modules_to_publish+="framework"
+           modules_to_publish+=("framework")
           fi
 
           if [[ $MONETISATION_PUBLISH == true ]]; then
-           modules_to_publish+="monetisation"
+            modules_to_publish+=("monetisation")
           fi
 
           if [[ $NAVIGATION_PUBLISH == true ]]; then
-           modules_to_publish+="navigation"
+           modules_to_publish+=("navigation")
           fi
 
           if [[ $SCREEN_PUBLISH == true ]]; then
-            modules_to_publish+="screen"
+            modules_to_publish+=("screen")
           fi
 
           if [[ $UI_PUBLISH == true ]]; then
-           modules_to_publish+="ui"
+           modules_to_publish+=("ui")
           fi
-
+  
           if [[ -z "$modules_to_publish" ]]; then
             echo "No modules specified for publishing."
           else
