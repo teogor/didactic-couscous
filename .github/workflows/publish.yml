@@ -4,16 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       bom:
-        description: 'Publish the BOM Module'
+        description: 'Publish BOM'
         required: false
         type: boolean
         default: true
       backup:
-        description: 'Publish the Backup Module'
+        description: 'Publish `Backup`'
         required: false
         type: boolean
       core:
-        description: 'Publish the Core Module'
+        description: 'Publish Core Module'
         required: false
         type: boolean
       data:
