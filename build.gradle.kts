@@ -103,6 +103,7 @@ afterWindsPluginConfiguration { winds ->
       publishToMavenCentral(SonatypeHost.S01)
       signAllPublications()
 
+      println("rootProject::afterWindsPluginConfiguration ${mavenPublish.dependency}")
       @Suppress("UnstableApiUsage")
       pom {
         coordinates(
