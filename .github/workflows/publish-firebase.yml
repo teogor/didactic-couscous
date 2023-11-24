@@ -33,4 +33,4 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew :firebase:publishFirebaseLibrariesToMavenCentral --no-configuration-cache
+          ./gradlew :firebase:publish --no-configuration-cache

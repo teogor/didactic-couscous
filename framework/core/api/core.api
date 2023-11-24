@@ -1,40 +1,37 @@
-public class dev/teogor/ceres/framework/core/Activity : androidx/activity/ComponentActivity {
+public class dev/teogor/ceres/framework/core/Activity : androidx/appcompat/app/AppCompatActivity {
 	public static final field $stable I
-	public field analyticsHelper Ldev/teogor/ceres/firebase/analytics/AnalyticsHelper;
 	public field crashlyticsHelper Ldev/teogor/ceres/firebase/crashlytics/CrashlyticsHelper;
 	public field lazyStats Ldagger/Lazy;
-	public field networkMonitor Ldev/teogor/ceres/core/network/NetworkMonitor;
+	public field networkMonitor Ldev/teogor/ceres/core/foundation/NetworkMonitorUtility;
 	public fun <init> ()V
 	public fun BuildNavGraph (Ldev/teogor/ceres/framework/core/model/NavGraphOptions;Landroidx/compose/runtime/Composer;I)V
 	public fun buildMenu (Ldev/teogor/ceres/framework/core/model/MenuConfig;Landroidx/compose/runtime/Composer;I)Ldev/teogor/ceres/framework/core/model/MenuConfig;
-	public final fun getAnalyticsHelper ()Ldev/teogor/ceres/firebase/analytics/AnalyticsHelper;
+	public fun compositionProviders (Landroidx/compose/runtime/Composer;I)Ljava/util/List;
 	public final fun getCrashlyticsHelper ()Ldev/teogor/ceres/firebase/crashlytics/CrashlyticsHelper;
 	public final fun getLazyStats ()Ldagger/Lazy;
-	public final fun getNetworkMonitor ()Ldev/teogor/ceres/core/network/NetworkMonitor;
-	public fun getTopLevelDestinations ()Ljava/util/List;
+	public fun getNavigationItems ()Ljava/util/List;
+	public final fun getNetworkMonitor ()Ldev/teogor/ceres/core/foundation/NetworkMonitorUtility;
 	public fun handleUriVariants (Landroid/net/Uri;)Ldev/teogor/ceres/navigation/core/ScreenRoute;
 	public final fun navigateTo (Ldev/teogor/ceres/navigation/core/ScreenRoute;)V
 	protected fun onCreate (Landroid/os/Bundle;)V
 	protected fun onNewIntent (Landroid/content/Intent;)V
 	protected fun onPause ()V
 	protected fun onResume ()V
-	public final fun setAnalyticsHelper (Ldev/teogor/ceres/firebase/analytics/AnalyticsHelper;)V
 	public final fun setCrashlyticsHelper (Ldev/teogor/ceres/firebase/crashlytics/CrashlyticsHelper;)V
 	public fun setKeepOnScreenCondition ()Z
 	public final fun setLazyStats (Ldagger/Lazy;)V
-	public final fun setNetworkMonitor (Ldev/teogor/ceres/core/network/NetworkMonitor;)V
+	public final fun setNetworkMonitor (Ldev/teogor/ceres/core/foundation/NetworkMonitorUtility;)V
 	public final fun showMenu (Z)V
 }
 
 public final class dev/teogor/ceres/framework/core/Activity_MembersInjector : dagger/MembersInjector {
-	public fun <init> (Ljavax/inject/Provider;Ljavax/inject/Provider;Ljavax/inject/Provider;Ljavax/inject/Provider;)V
-	public static fun create (Ljavax/inject/Provider;Ljavax/inject/Provider;Ljavax/inject/Provider;Ljavax/inject/Provider;)Ldagger/MembersInjector;
-	public static fun injectAnalyticsHelper (Ldev/teogor/ceres/framework/core/Activity;Ldev/teogor/ceres/firebase/analytics/AnalyticsHelper;)V
+	public fun <init> (Ljavax/inject/Provider;Ljavax/inject/Provider;Ljavax/inject/Provider;)V
+	public static fun create (Ljavax/inject/Provider;Ljavax/inject/Provider;Ljavax/inject/Provider;)Ldagger/MembersInjector;
 	public static fun injectCrashlyticsHelper (Ldev/teogor/ceres/framework/core/Activity;Ldev/teogor/ceres/firebase/crashlytics/CrashlyticsHelper;)V
 	public static fun injectLazyStats (Ldev/teogor/ceres/framework/core/Activity;Ldagger/Lazy;)V
 	public fun injectMembers (Ldev/teogor/ceres/framework/core/Activity;)V
 	public synthetic fun injectMembers (Ljava/lang/Object;)V
-	public static fun injectNetworkMonitor (Ldev/teogor/ceres/framework/core/Activity;Ldev/teogor/ceres/core/network/NetworkMonitor;)V
+	public static fun injectNetworkMonitor (Ldev/teogor/ceres/framework/core/Activity;Ldev/teogor/ceres/core/foundation/NetworkMonitorUtility;)V
 }
 
 public class dev/teogor/ceres/framework/core/Application : android/app/Application {
@@ -73,29 +70,29 @@ public final class dev/teogor/ceres/framework/core/app/BaseActionsKt {
 }
 
 public final class dev/teogor/ceres/framework/core/app/CeresAppKt {
-	public static final fun CeresApp (Landroidx/compose/material3/windowsizeclass/WindowSizeClass;Ldev/teogor/ceres/core/network/NetworkMonitor;Ljava/util/List;Ldev/teogor/ceres/framework/core/app/CeresAppState;Ldev/teogor/ceres/framework/core/app/BaseActions;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function6;Landroidx/compose/runtime/Composer;II)V
+	public static final fun CeresApp (Landroidx/compose/material3/windowsizeclass/WindowSizeClass;Ldev/teogor/ceres/core/foundation/NetworkMonitorUtility;Ljava/util/List;Ldev/teogor/ceres/framework/core/app/CeresAppState;Ldev/teogor/ceres/framework/core/app/BaseActions;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function6;Landroidx/compose/runtime/Composer;II)V
 	public static final fun calculateInnerPadding-DH4mp8Y (Landroidx/compose/foundation/layout/PaddingValues;Landroidx/compose/ui/unit/LayoutDirection;FFFFLandroidx/compose/runtime/Composer;II)Landroidx/compose/foundation/layout/PaddingValues;
 }
 
 public final class dev/teogor/ceres/framework/core/app/CeresAppState {
 	public static final field $stable I
-	public fun <init> (Landroidx/navigation/NavHostController;Lkotlinx/coroutines/CoroutineScope;Landroidx/compose/material3/windowsizeclass/WindowSizeClass;Ldev/teogor/ceres/framework/core/screen/ScreenInfo;Ldev/teogor/ceres/core/network/NetworkMonitor;Ljava/util/List;)V
+	public fun <init> (Landroidx/navigation/NavHostController;Lkotlinx/coroutines/CoroutineScope;Landroidx/compose/material3/windowsizeclass/WindowSizeClass;Ldev/teogor/ceres/framework/core/screen/ScreenInfo;Ldev/teogor/ceres/core/foundation/NetworkMonitorUtility;Ljava/util/List;)V
 	public final fun getCoroutineScope ()Lkotlinx/coroutines/CoroutineScope;
 	public final fun getCurrentDestination (Landroidx/compose/runtime/Composer;I)Landroidx/navigation/NavDestination;
 	public final fun getFloatingButtonView ()Ldev/teogor/ceres/framework/core/screen/FloatingButtonView;
 	public final fun getNavController ()Landroidx/navigation/NavHostController;
+	public final fun getNavigationItems ()Ljava/util/List;
 	public final fun getScreenInfo ()Ldev/teogor/ceres/framework/core/screen/ScreenInfo;
 	public final fun getShouldShowBottomBar ()Z
 	public final fun getShouldShowNavBar ()Z
 	public final fun getShouldShowNavRail ()Z
 	public final fun getSnackbarView ()Ldev/teogor/ceres/framework/core/screen/SnackbarView;
 	public final fun getToolbarTokens ()Ldev/teogor/ceres/framework/core/screen/ToolbarTokens;
-	public final fun getTopLevelDestinations ()Ljava/util/List;
 	public final fun getWindowSizeClass ()Landroidx/compose/material3/windowsizeclass/WindowSizeClass;
 	public final fun isNavigationBarVisible ()Z
 	public final fun isOffline ()Lkotlinx/coroutines/flow/StateFlow;
 	public final fun isStatusBarVisible ()Z
-	public final fun navigateToTopLevelDestination (Ldev/teogor/ceres/navigation/core/menu/TopLevelDestination;)V
+	public final fun navigateToNavigationItem (Ldev/teogor/ceres/navigation/core/models/NavigationItem;)V
 	public final fun setFloatingButtonView (Ldev/teogor/ceres/framework/core/screen/FloatingButtonView;)V
 	public final fun setNavigationBarVisible (Z)V
 	public final fun setShouldShowNavBar (Z)V
@@ -105,7 +102,7 @@ public final class dev/teogor/ceres/framework/core/app/CeresAppState {
 }
 
 public final class dev/teogor/ceres/framework/core/app/CeresAppStateKt {
-	public static final fun rememberCeresAppState (Landroidx/compose/material3/windowsizeclass/WindowSizeClass;Ldev/teogor/ceres/core/network/NetworkMonitor;Lkotlinx/coroutines/CoroutineScope;Landroidx/navigation/NavHostController;Ldev/teogor/ceres/framework/core/screen/ScreenInfo;Ljava/util/List;Landroidx/compose/runtime/Composer;II)Ldev/teogor/ceres/framework/core/app/CeresAppState;
+	public static final fun rememberCeresAppState (Landroidx/compose/material3/windowsizeclass/WindowSizeClass;Ldev/teogor/ceres/core/foundation/NetworkMonitorUtility;Lkotlinx/coroutines/CoroutineScope;Landroidx/navigation/NavHostController;Ldev/teogor/ceres/framework/core/screen/ScreenInfo;Ljava/util/List;Landroidx/compose/runtime/Composer;II)Ldev/teogor/ceres/framework/core/app/CeresAppState;
 }
 
 public final class dev/teogor/ceres/framework/core/app/ComposableSingletons$CeresAppKt {
@@ -113,17 +110,6 @@ public final class dev/teogor/ceres/framework/core/app/ComposableSingletons$Cere
 	public static field lambda-1 Lkotlin/jvm/functions/Function3;
 	public fun <init> ()V
 	public final fun getLambda-1$core_release ()Lkotlin/jvm/functions/Function3;
-}
-
-public final class dev/teogor/ceres/framework/core/compositions/NetworkConnectivity {
-	public static final field $stable I
-	public fun <init> ()V
-	public final fun isOffline ()Z
-	public final fun setOffline (Z)V
-}
-
-public final class dev/teogor/ceres/framework/core/compositions/NetworkConnectivityKt {
-	public static final fun getLocalNetworkConnectivity ()Landroidx/compose/runtime/ProvidableCompositionLocal;
 }
 
 public final class dev/teogor/ceres/framework/core/menu/ComposableSingletons$MenuKt {

@@ -18,6 +18,7 @@ plugins {
   id("dev.teogor.ceres.android.library.compose")
   id("dev.teogor.ceres.android.library.jacoco")
   id("dev.teogor.ceres.android.hilt")
+  alias(libs.plugins.winds)
 }
 
 android {
@@ -28,6 +29,9 @@ android {
 }
 
 dependencies {
+  api(project(mapOf("path" to ":core:analytics")))
+  api(project(mapOf("path" to ":data:datastore")))
+
   implementation(platform(libs.firebase.bom))
   implementation(libs.firebase.analytics)
 
@@ -35,6 +39,9 @@ dependencies {
   implementation(libs.startup.runtime)
 }
 
-ceresLibrary {
-  name = "Ceres Firebase Analytics"
+winds {
+  mavenPublish {
+    displayName = "Analytics"
+    name = "analytics"
+  }
 }

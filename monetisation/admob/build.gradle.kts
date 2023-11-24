@@ -18,6 +18,7 @@ plugins {
   id("dev.teogor.ceres.android.library.compose")
   id("dev.teogor.ceres.android.library.jacoco")
   id("dev.teogor.ceres.android.hilt")
+  alias(libs.plugins.winds)
 }
 
 android {
@@ -35,8 +36,12 @@ dependencies {
 
   implementation("io.github.farimarwat:admobnative-compose:1.2")
 
+  implementation(libs.androidx.lifecycle.process)
+
+  api(project(":monetisation:ads"))
+  implementation(project(":core:register"))
   implementation(project(":core:runtime"))
-  implementation(project(":core:network"))
+  implementation(project(":core:foundation"))
   implementation(project(":ui:designsystem"))
 
   implementation(libs.androidx.compose.foundation)
@@ -45,6 +50,9 @@ dependencies {
   implementation(libs.startup.runtime)
 }
 
-ceresLibrary {
-  name = "Ceres Monetisation AdMob"
+winds {
+  mavenPublish {
+    displayName = "AdMob"
+    name = "admob"
+  }
 }

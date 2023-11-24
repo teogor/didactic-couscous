@@ -18,6 +18,7 @@ plugins {
   id("dev.teogor.ceres.android.library.compose")
   id("dev.teogor.ceres.android.library.jacoco")
   id("kotlinx-serialization")
+  alias(libs.plugins.winds)
 }
 
 android {
@@ -32,12 +33,15 @@ dependencies {
 
   // needed for theme manager
   implementation(libs.androidx.core.splashscreen)
-
+  api(libs.androidx.appcompat)
   api(libs.androidx.compose.material3)
   api(libs.androidx.compose.ui.tooling.preview)
   api(libs.androidx.compose.ui.util)
 }
 
-ceresLibrary {
-  name = "Ceres UI Theme"
+winds {
+  mavenPublish {
+    displayName = "Theme"
+    name = "theme"
+  }
 }

@@ -73,15 +73,15 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavOptions
 import dev.teogor.ceres.core.foundation.FoundationGlobal
-import dev.teogor.ceres.core.network.NetworkMonitor
+import dev.teogor.ceres.core.foundation.NetworkMonitor
+import dev.teogor.ceres.core.foundation.NetworkMonitorUtility
+import dev.teogor.ceres.core.foundation.compositions.LocalNetworkMonitor
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
-import dev.teogor.ceres.framework.core.compositions.LocalNetworkConnectivity
-import dev.teogor.ceres.framework.core.compositions.NetworkConnectivity
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.lib.common.BottomSheetState
 import dev.teogor.ceres.navigation.core.lib.common.LocalBottomSheetVM
 import dev.teogor.ceres.navigation.core.lib.common.rememberNavigationModules
-import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
+import dev.teogor.ceres.navigation.core.models.NavigationItem
 import dev.teogor.ceres.ui.compose.LocalToolbarState
 import dev.teogor.ceres.ui.compose.ToolbarState
 import dev.teogor.ceres.ui.designsystem.CeresBackground
@@ -116,12 +116,12 @@ import kotlinx.coroutines.launch
 @Composable
 fun CeresApp(
   windowSizeClass: WindowSizeClass,
-  networkMonitor: NetworkMonitor,
-  topLevelDestinations: List<TopLevelDestination> = listOf(),
+  networkMonitor: NetworkMonitorUtility,
+  navigationItems: List<NavigationItem> = listOf(),
   appState: CeresAppState = rememberCeresAppState(
     networkMonitor = networkMonitor,
     windowSizeClass = windowSizeClass,
-    topLevelDestinations = topLevelDestinations,
+    navigationItems = navigationItems,
   ),
   baseActions: BaseActions = remember {
     BaseActions(appState)
@@ -142,12 +142,12 @@ fun CeresApp(
   // todo VMs
   val bottomSheetVM: BottomSheetState = viewModel()
   val toolbarState: ToolbarState = viewModel()
-  val networkConnectivity = NetworkConnectivity()
+  val networkMonitor = NetworkMonitor()
 
   CompositionLocalProvider(
     LocalBottomSheetVM provides bottomSheetVM,
     LocalToolbarState provides toolbarState,
-    LocalNetworkConnectivity provides networkConnectivity,
+    LocalNetworkMonitor provides networkMonitor,
   ) {
     CeresBackground(
       modifier = Modifier.fillMaxSize(),
@@ -156,7 +156,7 @@ fun CeresApp(
 
       LaunchedEffect(isOffline) {
         FoundationGlobal.networkMonitor.isOffline = isOffline
-        networkConnectivity.isOffline = isOffline
+        networkMonitor.isOffline = isOffline
       }
 
       val menuSheetState = rememberModalBottomSheetState(Hidden)
@@ -272,7 +272,7 @@ fun CeresApp(
               }
             },
             bottomBar = {
-              if (topLevelDestinations.isNotEmpty()) {
+              if (navigationItems.isNotEmpty()) {
                 val bottomBarVisible = rememberSaveable(
                   bottomSheetVisible.value,
                   appState.shouldShowBottomBar,
@@ -282,8 +282,8 @@ fun CeresApp(
                 }
                 if (bottomBarVisible) {
                   CeresBottomBar(
-                    destinations = appState.topLevelDestinations,
-                    onNavigateToDestination = appState::navigateToTopLevelDestination,
+                    destinations = appState.navigationItems,
+                    onNavigateToDestination = appState::navigateToNavigationItem,
                     currentDestination = appState.currentDestination,
                     modifier = Modifier.testTag("CeresBottomBar"),
                   )
@@ -352,11 +352,11 @@ fun CeresApp(
             },
           ) { padding ->
             val innerPadding = padding.calculateInnerPadding()
-            if (topLevelDestinations.isNotEmpty()) {
+            if (navigationItems.isNotEmpty()) {
               if (!navigationModules.bottomNav.isVisible() && appState.shouldShowNavRail && appState.shouldShowNavBar) {
                 CeresNavRail(
-                  destinations = appState.topLevelDestinations,
-                  onNavigateToDestination = appState::navigateToTopLevelDestination,
+                  destinations = appState.navigationItems,
+                  onNavigateToDestination = appState::navigateToNavigationItem,
                   currentDestination = appState.currentDestination,
                   modifier = Modifier
                     .testTag("CeresNavRail")
@@ -466,14 +466,14 @@ fun PaddingValues.calculateInnerPadding(
 
 @Composable
 private fun CeresNavRail(
-  destinations: List<TopLevelDestination>,
-  onNavigateToDestination: (TopLevelDestination) -> Unit,
+  destinations: List<NavigationItem>,
+  onNavigateToDestination: (NavigationItem) -> Unit,
   currentDestination: NavDestination?,
   modifier: Modifier = Modifier,
 ) {
   CeresNavigationRail(modifier = modifier) {
     destinations.forEach { destination ->
-      val selected = currentDestination.isTopLevelDestinationInHierarchy(destination)
+      val selected = currentDestination.isNavigationItemInHierarchy(destination)
       CeresNavigationRailItem(
         selected = selected,
         onClick = { onNavigateToDestination(destination) },
@@ -495,7 +495,7 @@ private fun CeresNavRail(
             )
           }
         },
-        label = { Text(destination.iconText) },
+        label = { Text(destination.titleText) },
       )
     }
   }
@@ -503,8 +503,8 @@ private fun CeresNavRail(
 
 @Composable
 private fun CeresBottomBar(
-  destinations: List<TopLevelDestination>,
-  onNavigateToDestination: (TopLevelDestination) -> Unit,
+  destinations: List<NavigationItem>,
+  onNavigateToDestination: (NavigationItem) -> Unit,
   currentDestination: NavDestination?,
   modifier: Modifier = Modifier,
 ) {
@@ -512,7 +512,7 @@ private fun CeresBottomBar(
     modifier = modifier,
   ) {
     destinations.forEach { destination ->
-      val selected = currentDestination.isTopLevelDestinationInHierarchy(destination)
+      val selected = currentDestination.isNavigationItemInHierarchy(destination)
       CeresNavigationBarItem(
         selected = selected,
         onClick = { onNavigateToDestination(destination) }.withTouchFeedback(LocalContext.current),
@@ -541,7 +541,7 @@ private fun CeresBottomBar(
   }
 }
 
-private fun NavDestination?.isTopLevelDestinationInHierarchy(destination: TopLevelDestination) =
+private fun NavDestination?.isNavigationItemInHierarchy(destination: NavigationItem) =
   this?.hierarchy?.any {
-    destination.screenRoute?.let { it1 -> it.route?.contains(it1.route, true) } ?: false
+    destination.screenRoute.let { it1 -> it.route?.contains(it1.route, true) } ?: false
   } ?: false

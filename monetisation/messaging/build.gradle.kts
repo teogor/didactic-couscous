@@ -18,6 +18,7 @@ plugins {
   id("dev.teogor.ceres.android.library.compose")
   id("dev.teogor.ceres.android.library.jacoco")
   id("dev.teogor.ceres.android.hilt")
+  alias(libs.plugins.winds)
 }
 
 android {
@@ -30,6 +31,7 @@ android {
 dependencies {
   api("com.google.android.ump:user-messaging-platform:2.1.0")
 
+  api(project(":core:register"))
   api(project(":core:runtime"))
   api(project(":core:startup"))
   api(project(":monetisation:admob"))
@@ -38,6 +40,9 @@ dependencies {
   implementation(libs.startup.runtime)
 }
 
-ceresLibrary {
-  name = "Ceres Monetisation Messaging"
+winds {
+  mavenPublish {
+    displayName = "Messaging"
+    name = "messaging"
+  }
 }

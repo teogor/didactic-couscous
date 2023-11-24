@@ -30,10 +30,10 @@ import dev.teogor.ceres.framework.core.screen.toolbarTokens
 import dev.teogor.ceres.navigation.core.utilities.toScreenName
 import dev.teogor.ceres.screen.core.layout.LazyColumnLayoutBase
 import dev.teogor.ceres.screen.ui.settings.SettingsScreenRoute
-import dev.teogor.ceres.screen.ui.settings.settingsBackup
-import dev.teogor.ceres.screen.ui.settings.settingsHeaderSystem
+import dev.teogor.ceres.screen.ui.settings.settingsHeaderDataPrivacy
 import dev.teogor.ceres.screen.ui.settings.settingsHeaderUI
 import dev.teogor.ceres.screen.ui.settings.settingsLookAndFeel
+import dev.teogor.ceres.screen.ui.settings.settingsPrivacyOptions
 
 @Composable
 internal fun SettingsRoute(
@@ -76,7 +76,11 @@ private fun SettingsLayout() = LazyColumnLayoutBase(
 
   settingsLookAndFeel()
 
-  settingsBackup()
+  // settingsBackup()
 
-  settingsHeaderSystem()
+  // settingsHeaderSystem()
+
+  settingsHeaderDataPrivacy()
+
+  settingsPrivacyOptions()
 }

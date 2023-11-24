@@ -19,15 +19,19 @@ plugins {
   id("dev.teogor.ceres.android.library.jacoco")
   id("dev.teogor.ceres.android.hilt")
   id("kotlinx-serialization")
+  alias(libs.plugins.winds)
 }
 
 android {
-  namespace = "dev.teogor.ceres"
+  namespace = "dev.teogor.ceres.navigation.common"
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
 }
 
-ceresLibrary {
-  name = "Ceres Navigation Common"
+winds {
+  mavenPublish {
+    displayName = "Common"
+    name = "common"
+  }
 }

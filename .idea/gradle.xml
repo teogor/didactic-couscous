@@ -12,10 +12,18 @@
                   <project path="$PROJECT_DIR$/buildSrc" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/plugin-build" name="plugin-build">
+              <build path="$PROJECT_DIR$/plugin" name="plugin">
                 <projects>
-                  <project path="$PROJECT_DIR$/plugin-build" />
-                  <project path="$PROJECT_DIR$/plugin-build/plugin" />
+                  <project path="$PROJECT_DIR$/plugin" />
+                  <project path="$PROJECT_DIR$/plugin/library-convention" />
+                </projects>
+              </build>
+              <build path="$PROJECT_DIR$/../winds" name="winds">
+                <projects>
+                  <project path="$PROJECT_DIR$/../winds" />
+                  <project path="$PROJECT_DIR$/../winds/api" />
+                  <project path="$PROJECT_DIR$/../winds/common" />
+                  <project path="$PROJECT_DIR$/../winds/gradle-plugin" />
                 </projects>
               </build>
             </builds>
@@ -33,9 +41,12 @@
             <option value="$PROJECT_DIR$/bom" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/analytics" />
+            <option value="$PROJECT_DIR$/core/common" />
             <option value="$PROJECT_DIR$/core/foundation" />
             <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/core/notifications" />
+            <option value="$PROJECT_DIR$/core/register" />
             <option value="$PROJECT_DIR$/core/runtime" />
             <option value="$PROJECT_DIR$/core/startup" />
             <option value="$PROJECT_DIR$/data" />
@@ -51,6 +62,7 @@
             <option value="$PROJECT_DIR$/framework/ui" />
             <option value="$PROJECT_DIR$/monetisation" />
             <option value="$PROJECT_DIR$/monetisation/admob" />
+            <option value="$PROJECT_DIR$/monetisation/ads" />
             <option value="$PROJECT_DIR$/monetisation/messaging" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/navigation/common" />
@@ -58,8 +70,8 @@
             <option value="$PROJECT_DIR$/navigation/events" />
             <option value="$PROJECT_DIR$/navigation/screen" />
             <option value="$PROJECT_DIR$/navigation/ui" />
-            <option value="$PROJECT_DIR$/plugin-build" />
-            <option value="$PROJECT_DIR$/plugin-build/plugin" />
+            <option value="$PROJECT_DIR$/plugin" />
+            <option value="$PROJECT_DIR$/plugin/library-convention" />
             <option value="$PROJECT_DIR$/screen" />
             <option value="$PROJECT_DIR$/screen/builder" />
             <option value="$PROJECT_DIR$/screen/core" />
@@ -71,6 +83,10 @@
             <option value="$PROJECT_DIR$/ui/icons" />
             <option value="$PROJECT_DIR$/ui/spectrum" />
             <option value="$PROJECT_DIR$/ui/theme" />
+            <option value="$PROJECT_DIR$/../winds" />
+            <option value="$PROJECT_DIR$/../winds/api" />
+            <option value="$PROJECT_DIR$/../winds/common" />
+            <option value="$PROJECT_DIR$/../winds/gradle-plugin" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

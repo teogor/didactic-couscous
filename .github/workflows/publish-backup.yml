@@ -33,4 +33,4 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew :backup:publishBackupLibrariesToMavenCentral --no-configuration-cache
+          ./gradlew :backup:publish --no-configuration-cache

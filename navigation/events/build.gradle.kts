@@ -13,11 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import dev.teogor.winds.gradle.utils.copyVersion
+
 // todo refactor and place inside somewhere and make use of local composition
 plugins {
   id("dev.teogor.ceres.android.library")
   id("dev.teogor.ceres.android.library.compose")
   id("dev.teogor.ceres.android.library.jacoco")
+  alias(libs.plugins.winds)
 }
 
 android {
@@ -28,10 +32,15 @@ android {
 }
 
 dependencies {
-  api(project(":navigation:core"))
-  api(project(":firebase:analytics"))
 }
 
-ceresLibrary {
-  name = "Ceres Navigation Events"
+winds {
+  mavenPublish {
+    displayName = "Events"
+    name = "events"
+
+    version = copyVersion {
+      setIsDeprecated()
+    }
+  }
 }

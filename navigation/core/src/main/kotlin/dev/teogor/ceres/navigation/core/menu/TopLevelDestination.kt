@@ -19,10 +19,17 @@ package dev.teogor.ceres.navigation.core.menu
 import dev.teogor.ceres.navigation.core.ScreenRoute
 import dev.teogor.ceres.ui.foundation.graphics.Icon
 
+@Deprecated(
+  "Use NavigationItem instead",
+  ReplaceWith(
+    "NavigationItem",
+    "dev.teogor.ceres.navigation.core.models.NavigationItem",
+  ),
+)
 open class TopLevelDestination(
   val selectedIcon: Icon,
   val unselectedIcon: Icon,
-  val iconText: String,
   val titleText: String,
-  val screenRoute: ScreenRoute? = null,
+  val iconText: String = titleText,
+  val screenRoute: ScreenRoute,
 )

@@ -33,4 +33,4 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew :monetisation:publishMonetisationLibrariesToMavenCentral --no-configuration-cache
+          ./gradlew :monetisation:publish --no-configuration-cache

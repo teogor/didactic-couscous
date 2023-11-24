@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Business
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dev.teogor.ceres.build.BuildProfile
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.screen.floatingButton
@@ -50,6 +51,7 @@ import dev.teogor.ceres.screen.ui.about.aboutHeaderVersion
 import dev.teogor.ceres.screen.ui.about.aboutMadeIn
 import dev.teogor.ceres.screen.ui.about.aboutOpenAppInfo
 import dev.teogor.ceres.screen.ui.about.aboutOpenSourceLicenses
+import dev.teogor.ceres.screen.ui.res.Resources
 
 @Composable
 internal fun AboutRoute(
@@ -96,13 +98,17 @@ private fun AboutLayout() = LazyColumnLayoutBase(
 
   aboutCeresFramework()
 
-  aboutBuildDate()
+  // BuildConfigBet
+
+  aboutBuildDate(
+    BuildProfile.buildLocalDateTime,
+  )
 
   aboutHeaderAboutUs()
 
   developerInfo()
 
-  aboutMadeIn()
+  aboutMadeIn("Brasov, Romania")
 
   aboutHeaderSecurityPatch()
 
@@ -121,7 +127,7 @@ private fun AboutLayout() = LazyColumnLayoutBase(
 
 private fun ScreenListScope.developerInfo() = item {
   SimpleView(
-    title = "Developer",
+    title = Resources.Developer,
     subtitle = "Teodor Grigor",
     icon = Icons.Default.Business,
   )

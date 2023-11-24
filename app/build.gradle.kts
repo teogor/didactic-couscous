@@ -15,6 +15,9 @@
  */
 import dev.teogor.ceres.CeresBuildType
 import dev.teogor.ceres.Version
+import dev.teogor.xenoglot.Country
+import dev.teogor.xenoglot.Language
+import dev.teogor.xenoglot.territorialize
 
 plugins {
   id("dev.teogor.ceres.android.application")
@@ -22,11 +25,42 @@ plugins {
   id("dev.teogor.ceres.android.application.jacoco")
   id("dev.teogor.ceres.android.application.firebase")
   id("dev.teogor.ceres.android.hilt")
+  id("dev.teogor.ceres.android.room")
   id("kotlinx-serialization")
   id("jacoco")
 
+  alias(libs.plugins.querent)
+
   // Feature :: About
   alias(libs.plugins.about.libraries) apply true
+}
+
+querent {
+  buildFeatures {
+    buildProfile = true
+    xmlResources = true
+    languagesSchema = true
+  }
+
+  languagesSchemaOptions {
+    unqualifiedResLocale = Language.English territorialize Country.UnitedStates
+    addSupportedLanguages {
+      +(Language.Romanian territorialize Country.Romania)
+      +(Language.English territorialize Country.UnitedKingdom)
+      +(Language.Korean territorialize Country.SouthKorea)
+      +(Language.Dutch territorialize Country.Netherlands)
+      +(Language.German territorialize Country.Germany)
+      +(Language.Chinese territorialize Country.China)
+      +Language.Japanese
+      +Language.Spanish
+      +Language.Hindi
+      +Language.Arabic
+    }
+  }
+}
+
+roomOptions {
+  enableSchemaProvider = true
 }
 
 android {
@@ -51,7 +85,7 @@ android {
     debug {
       applicationIdSuffix = CeresBuildType.DEBUG.applicationIdSuffix
 
-      resValue("string", "app_name", "Ceres (Debug)")
+      resValue("string", "app_name", "❉ Ceres")
     }
     val release by getting {
       isMinifyEnabled = true
@@ -99,6 +133,7 @@ dependencies {
   implementation(project(":screen:core"))
 
   // default screens
+  // TODO split into locale and ui
   implementation(project(":screen:ui"))
 
   // theme config

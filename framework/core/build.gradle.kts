@@ -19,6 +19,7 @@ plugins {
   id("dev.teogor.ceres.android.library.jacoco")
   id("dev.teogor.ceres.android.hilt")
   id("kotlinx-serialization")
+  alias(libs.plugins.winds)
 }
 
 android {
@@ -29,9 +30,10 @@ android {
 }
 
 dependencies {
+  api(project(":core:common"))
   api(project(":core:foundation"))
-  api(project(":core:network"))
   api(project(":core:runtime"))
+  api(project(":core:register"))
 
   api(project(":data:compose"))
   // required for theme config only
@@ -47,6 +49,8 @@ dependencies {
   api(project(":firebase:analytics"))
   api(project(":firebase:crashlytics"))
 
+  api(project(":monetisation:ads"))
+
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.lifecycle.runtimeCompose)
   implementation(libs.androidx.core.splashscreen)
@@ -58,6 +62,9 @@ dependencies {
   implementation(libs.androidx.metrics)
 }
 
-ceresLibrary {
-  name = "Ceres Framework Core"
+winds {
+  mavenPublish {
+    displayName = "Core"
+    name = "core"
+  }
 }

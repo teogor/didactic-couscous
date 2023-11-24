@@ -22,6 +22,8 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.appopen.AppOpenAd
 import dev.teogor.ceres.monetisation.admob.CurrentActivityHolder
+import java.util.Date
+import java.util.concurrent.TimeUnit
 
 abstract class AppOpenAd : Ad() {
 
@@ -51,7 +53,7 @@ abstract class AppOpenAd : Ad() {
           log("onAdLoaded.")
           AdCache.cacheAd(
             adId = id,
-            ad = CacheAdModel.AppOpen(ad),
+            ad = CachedAd.AppOpen(ad, Date().time),
           )
           onListener(AdEvent.AdLoaded)
         }
@@ -89,7 +91,14 @@ abstract class AppOpenAd : Ad() {
       load()
       return
     }
-    val appOpenAd = (ad as CacheAdModel.AppOpen).ad
+
+    val appOpenAd = (ad as CachedAd.AppOpen).ad
+
+    if (!wasLoadTimeLessThanNHoursAgo(ad.loadTime, 4)) {
+      reloadExpiredAd()
+      return
+    }
+
     if (isShowing) {
       log("The app open ad is already showing.")
       return
@@ -137,5 +146,14 @@ abstract class AppOpenAd : Ad() {
     }
     appOpenAd.setImmersiveMode(true)
     CurrentActivityHolder.activity?.let { appOpenAd.show(it) }
+  }
+
+  private fun wasLoadTimeLessThanNHoursAgo(
+    adLoadTime: Long,
+    hoursThreshold: Long,
+  ): Boolean {
+    val dateDifference: Long = Date().time - adLoadTime
+    val numMillisecondsPerHour: Long = TimeUnit.HOURS.toMillis(1)
+    return dateDifference < numMillisecondsPerHour * hoursThreshold
   }
 }

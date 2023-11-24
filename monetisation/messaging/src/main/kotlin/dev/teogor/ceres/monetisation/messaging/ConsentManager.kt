@@ -25,14 +25,21 @@ import com.google.android.ump.ConsentDebugSettings
 import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
-import dev.teogor.ceres.core.runtime.AppMetadataManager
+import dev.teogor.ceres.core.register.BuildProfiler
+import dev.teogor.ceres.core.register.LocalBuildProfiler
+import dev.teogor.ceres.monetisation.admob.AdMob
 import dev.teogor.ceres.monetisation.admob.AdMobInitializer
-import dev.teogor.ceres.monetisation.admob.AdMobInitializer.getHashedAdvertisingId
+import dev.teogor.ceres.monetisation.admob.getHashedAdvertisingId
+import dev.teogor.ceres.monetisation.ads.AdsControl
+import dev.teogor.ceres.monetisation.ads.AdsControlProvider
+import dev.teogor.ceres.monetisation.ads.ExperimentalAdsControlApi
+import dev.teogor.ceres.monetisation.ads.model.ConsentStatus
+import dev.teogor.ceres.monetisation.messaging.utils.toConsentRequirementStatus
 import java.lang.ref.WeakReference
 import java.util.concurrent.atomic.AtomicBoolean
 
 object ConsentManager {
-  internal lateinit var consentInformation: ConsentInformation
+  private lateinit var consentInformation: ConsentInformation
   private var weakActivity: WeakReference<Activity>? = null
 
   private val TAG = "ConsentManager"
@@ -50,11 +57,38 @@ object ConsentManager {
       }
     }
 
+  private val isConsentFormShown = AtomicBoolean(false)
+
+  private fun showConsentForm() {
+    isConsentFormShown.set(true)
+  }
+
+  private fun onConsentFormDismissedOrFailed() {
+    isConsentFormShown.set(false)
+  }
+
+  private fun isConsentFormAlreadyShown(): Boolean {
+    return isConsentFormShown.get()
+  }
+
+  @OptIn(ExperimentalAdsControlApi::class)
+  private val adsControl: AdsControl
+    get() = AdsControlProvider.adsControl
+
+  @OptIn(ExperimentalAdsControlApi::class)
   fun loadAndShowConsentFormIfRequired() {
+    if (isConsentFormAlreadyShown()) {
+      return
+    }
     activity?.let {
+      showConsentForm()
+      adsControl.consentStatus.value = ConsentStatus.CONSENT_FORM_DISPLAYED
       UserMessagingPlatform.loadAndShowConsentFormIfRequired(
         it,
       ) { formError ->
+        onConsentFormDismissedOrFailed()
+        adsControl.canRequestAds.value = consentInformation.canRequestAds()
+        adsControl.consentStatus.value = ConsentStatus.CONSENT_FORM_DISMISSED
         state.value = ConsentResult.ConsentFormDismissed(
           canRequestAds = consentInformation.canRequestAds(),
           requirementStatus = consentInformation.privacyOptionsRequirementStatus,
@@ -64,23 +98,29 @@ object ConsentManager {
     }
   }
 
+  @OptIn(ExperimentalAdsControlApi::class)
   fun resetConsent() {
     if (!::consentInformation.isInitialized) {
       return
     }
+    adsControl.consentStatus.value = ConsentStatus.CONSENT_FORM_RESET
     consentInformation.reset()
     activity?.let { activity ->
       initialiseConsentForm(activity)
     }
   }
 
+  internal val buildProfiler: BuildProfiler
+    get() = LocalBuildProfiler.current
+
+  @OptIn(ExperimentalAdsControlApi::class)
   fun initialiseConsentForm(
     activity: Activity,
   ) {
     consentInformation = UserMessagingPlatform.getConsentInformation(activity)
 
     val debugSettings = ConsentDebugSettings.Builder(activity).apply {
-      if (AppMetadataManager.isDebuggable) {
+      if (buildProfiler.isDebuggable) {
         addTestDeviceHashedId(getHashedAdvertisingId(activity))
         setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
       }
@@ -97,6 +137,7 @@ object ConsentManager {
       params,
       { onConsentInfoUpdateSuccess(activity) },
       { requestConsentError ->
+        adsControl.consentStatus.value = ConsentStatus.CONSENT_FORM_ERROR
         Log.w(
           TAG,
           String.format("%s: %s", requestConsentError.errorCode, requestConsentError.message),
@@ -107,18 +148,28 @@ object ConsentManager {
     // Check if you can initialize the Google Mobile Ads SDK in parallel
     // while checking for new consent information. Consent obtained in
     // the previous session can be used to request ads.
+    adsControl.canRequestAds.value = consentInformation.canRequestAds()
     if (consentInformation.canRequestAds()) {
       initializeMobileAdsSdk(activity)
+
+      attemptToReloadAppOpenAd()
     }
   }
 
+  @OptIn(ExperimentalAdsControlApi::class)
   private fun onConsentInfoUpdateSuccess(
     activity: Activity,
   ) {
+    adsControl.consentRequirementStatus.value = consentInformation
+      .privacyOptionsRequirementStatus
+      .toConsentRequirementStatus()
+    adsControl.canRequestAds.value = consentInformation.canRequestAds()
+
     if (!consentInformation.isConsentFormAvailable) {
       // Consent has been gathered or not required
       if (consentInformation.canRequestAds()) {
         initializeMobileAdsSdk(activity)
+        attemptToReloadAppOpenAd()
       }
 
       state.value = ConsentResult.ConsentFormAcquired(
@@ -127,6 +178,7 @@ object ConsentManager {
         formAvailable = false,
       )
     } else {
+      adsControl.consentStatus.value = ConsentStatus.CONSENT_FORM_ACQUIRED
       state.value = ConsentResult.ConsentFormAcquired(
         canRequestAds = consentInformation.canRequestAds(),
         requirementStatus = consentInformation.privacyOptionsRequirementStatus,
@@ -143,5 +195,13 @@ object ConsentManager {
 
     // Initialize the Google Mobile Ads SDK.
     AdMobInitializer.initialize(context)
+  }
+
+  private fun attemptToReloadAppOpenAd() {
+    AdMob.getAppOpenAd()?.let { appOpenAd ->
+      if (!appOpenAd.isAdLoaded()) {
+        appOpenAd.load()
+      }
+    }
   }
 }

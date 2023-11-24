@@ -136,3 +136,11 @@ fun Modifier.sideClickable(
     }
   }
 }
+
+fun Modifier.applyIf(condition: Boolean, block: Modifier.() -> Modifier): Modifier {
+  return if (condition) {
+    this.then(block())
+  } else {
+    this
+  }
+}

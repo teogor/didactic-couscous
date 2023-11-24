@@ -19,24 +19,90 @@ package dev.teogor.ceres.core.runtime
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.util.Base64
 import dev.teogor.ceres.core.android.config.BuildConfig
 import dev.teogor.ceres.core.foundation.packageManagerUtils
 import dev.teogor.ceres.core.startup.ApplicationContextProvider
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.ZoneOffset
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
+@Deprecated("use BuildProfiler")
 object AppMetadataManager {
   val packageName: String
     get() = ApplicationContextProvider.context.packageName
 
+  val packageManager: PackageManager
+    get() = ApplicationContextProvider.context.packageManagerUtils().packageManager
+
+  val packageInfo: PackageInfo
+    get() = ApplicationContextProvider.context.packageManagerUtils().packageInfo
+
+  val apkSignature: String
+    get() {
+      val signatures = ApplicationContextProvider.context.packageManagerUtils().packageSignatures
+      val signature = signatures.apkContentsSigners[0]
+      val signatureBytes = signature.toByteArray()
+      return Base64.encodeToString(signatureBytes, Base64.NO_WRAP)
+    }
+
+  // region Deprecated API
+  @Deprecated("use LocalBuildProfiler.current.versionName")
+  val versionName: String
+    get() = ApplicationContextProvider.context.packageManagerUtils().versionName
+
+  @Deprecated("use LocalBuildProfiler.current.versionCode")
+  val versionCode: Long
+    get() = ApplicationContextProvider.context.packageManagerUtils().versionCode
+
+  @Deprecated("use LocalBuildProfiler.current.systemZoneOffset")
+  val zoneOffset: ZoneOffset
+    get() = ZoneId.systemDefault().rules.getOffset(LocalDateTime.now())
+
+  @Deprecated("use LocalBuildProfiler.current.buildLocalDateTime")
+  val buildDateTime: LocalDateTime
+    get() = LocalDateTime.ofEpochSecond(
+      BuildConfig.BUILD_DATE_TIME.toLong(),
+      0,
+      zoneOffset,
+    )
+
+  @Deprecated("use LocalBuildProfiler.current.isDebuggable")
+  val isDebuggable: Boolean
+    get() = packageInfo.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+
+  @Deprecated("not actual value")
+  val buildType: String
+    get() = BuildConfig.BUILD_TYPE
+
+  // todo BuildConfig.FLAVOR
+  @Deprecated("not actual value")
+  val flavor: String
+    get() = "demo"
+
+  @Deprecated("use LocalBuildProfiler.current.gitCommitHash")
+  val gitHash: String
+    get() = BuildConfig.GIT_HASH
+
+  @Deprecated("use LocalBuildProfiler.current.ceresBomVersion")
+  val ceresFrameworkVersion: String
+    get() = BuildConfig.CERES_FRAMEWORK_VERSION
+
+  @Deprecated("use LocalBuildProfiler.current.isDebuggable")
+  val debug = isDebuggable
+
+  @Deprecated(
+    message = "This property is deprecated. Please use packageName property instead.",
+    replaceWith = ReplaceWith("packageName"),
+  )
   val sanitizedPackageName: String
     get() {
       var sanitizedPackageName = when (flavor) {
         "demo" -> packageName.removeSuffix(".demo")
         else -> packageName
       }
-      sanitizedPackageName = if (debug) {
+      sanitizedPackageName = if (isDebuggable) {
         sanitizedPackageName.removeSuffix(".debug")
       } else {
         sanitizedPackageName
@@ -47,41 +113,5 @@ object AppMetadataManager {
       }
       return sanitizedPackageName
     }
-
-  val packageManager: PackageManager
-    get() = ApplicationContextProvider.context.packageManagerUtils().packageManager
-
-  val packageInfo: PackageInfo
-    get() = ApplicationContextProvider.context.packageManagerUtils().packageInfo
-
-  val versionName: String
-    get() = ApplicationContextProvider.context.packageManagerUtils().versionName
-
-  val versionCode: Long
-    get() = ApplicationContextProvider.context.packageManagerUtils().versionCode
-
-  val zoneOffset = ZoneId.systemDefault().rules.getOffset(LocalDateTime.now())
-  val buildDateTime = LocalDateTime.ofEpochSecond(
-    BuildConfig.BUILD_DATE_TIME.toLong(),
-    0,
-    zoneOffset,
-  )
-
-  val buildType = BuildConfig.BUILD_TYPE
-  val flavor = "demo" // todo BuildConfig.FLAVOR
-  val debug = BuildConfig.DEBUG
-  val gitHash = BuildConfig.GIT_HASH
-  val ceresFrameworkVersion = BuildConfig.CERES_FRAMEWORK_VERSION
-
-  val isDebuggable: Boolean
-    get() = 0 != ApplicationContextProvider.context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
-
-  val apkSignature: String
-    get() {
-      val packageSignatures = ApplicationContextProvider.context.packageManagerUtils().packageSignatures
-      val signatures = packageSignatures.apkContentsSigners.joinToString(", ") { signature ->
-        signature.toCharsString()
-      }
-      return signatures
-    }
+  // endregion
 }

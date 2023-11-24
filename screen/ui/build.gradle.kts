@@ -17,6 +17,14 @@ plugins {
   id("dev.teogor.ceres.android.library")
   id("dev.teogor.ceres.android.library.compose")
   id("dev.teogor.ceres.android.library.jacoco")
+  alias(libs.plugins.querent)
+  alias(libs.plugins.winds)
+}
+
+querent {
+  buildFeatures {
+    xmlResources = true
+  }
 }
 
 android {
@@ -27,6 +35,7 @@ android {
 }
 
 dependencies {
+  api(project(":core:register"))
   api(project(":core:runtime"))
   api(project(":framework:core"))
   api(project(":ui:designsystem"))
@@ -35,14 +44,25 @@ dependencies {
   api(project(":screen:builder"))
   api(project(":navigation:events"))
 
+  // Xenoglot BoM
+  api(platform(libs.xenoglot.bom))
+  // Xenoglot Libraries
+  api(libs.xenoglot.android)
+
   api(libs.androidx.compose.foundation)
 
   // Feature :: About
   implementation(libs.about.libraries.core)
   // used for toImmutableList
   implementation(libs.kotlinx.collections)
+
+  // TODO move to :core:$module
+  implementation(libs.accompanist.permissions)
 }
 
-ceresLibrary {
-  name = "Ceres Screen UI"
+winds {
+  mavenPublish {
+    displayName = "UI"
+    name = "ui"
+  }
 }

@@ -33,4 +33,4 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew :navigation:publishNavigationLibrariesToMavenCentral --no-configuration-cache
+          ./gradlew :navigation:publish --no-configuration-cache

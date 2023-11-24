@@ -20,10 +20,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,30 +39,33 @@ import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.metrics.performance.JankStats
+import dev.teogor.ceres.core.foundation.DefaultResources
+import dev.teogor.ceres.core.foundation.NetworkMonitorUtility
 import dev.teogor.ceres.core.foundation.audioManagerUtils
 import dev.teogor.ceres.core.foundation.compositions.LocalAudioManager
 import dev.teogor.ceres.core.foundation.compositions.LocalMediaPlayer
+import dev.teogor.ceres.core.foundation.compositions.LocalResources
 import dev.teogor.ceres.core.foundation.mediaPlayerUtils
-import dev.teogor.ceres.core.network.NetworkMonitor
 import dev.teogor.ceres.data.compose.rememberPreference
 import dev.teogor.ceres.data.datastore.defaults.AppTheme
 import dev.teogor.ceres.data.datastore.defaults.ceresPreferences
-import dev.teogor.ceres.firebase.analytics.AnalyticsHelper
-import dev.teogor.ceres.firebase.analytics.LocalAnalyticsHelper
 import dev.teogor.ceres.firebase.crashlytics.CrashlyticsHelper
 import dev.teogor.ceres.firebase.crashlytics.LocalCrashlyticsHelper
 import dev.teogor.ceres.framework.core.app.CeresApp
 import dev.teogor.ceres.framework.core.model.MenuConfig
 import dev.teogor.ceres.framework.core.model.NavGraphOptions
+import dev.teogor.ceres.monetisation.ads.AdsControlProvider
+import dev.teogor.ceres.monetisation.ads.ExperimentalAdsControlApi
+import dev.teogor.ceres.monetisation.ads.LocalAdsControl
 import dev.teogor.ceres.navigation.core.LocalNavigationParameters
 import dev.teogor.ceres.navigation.core.NavigationParameters
 import dev.teogor.ceres.navigation.core.ScreenRoute
-import dev.teogor.ceres.navigation.core.menu.TopLevelDestination
+import dev.teogor.ceres.navigation.core.models.NavigationItem
 import dev.teogor.ceres.ui.foundation.config.FeedbackConfig
 import dev.teogor.ceres.ui.theme.core.Theme
 import javax.inject.Inject
 
-open class Activity : ComponentActivity() {
+open class Activity : AppCompatActivity() {
 
   private var navigationParameters by mutableStateOf(NavigationParameters())
 
@@ -69,7 +73,7 @@ open class Activity : ComponentActivity() {
    * API
    */
   @Inject
-  lateinit var networkMonitor: NetworkMonitor
+  lateinit var networkMonitor: NetworkMonitorUtility
 
   /**
    * Lazily inject [JankStats], which is used to track jank throughout the app.
@@ -78,12 +82,9 @@ open class Activity : ComponentActivity() {
   lateinit var lazyStats: dagger.Lazy<JankStats>
 
   @Inject
-  lateinit var analyticsHelper: AnalyticsHelper
-
-  @Inject
   lateinit var crashlyticsHelper: CrashlyticsHelper
 
-  open val topLevelDestinations: List<TopLevelDestination> = emptyList()
+  open val navigationItems: List<NavigationItem> = emptyList()
 
   open fun handleUriVariants(uri: Uri): ScreenRoute? = null
 
@@ -96,7 +97,7 @@ open class Activity : ComponentActivity() {
   /**
    *
    */
-  @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+  @OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalAdsControlApi::class)
   override fun onCreate(savedInstanceState: Bundle?) {
     val splashScreen = installSplashScreen()
     super.onCreate(savedInstanceState)
@@ -111,6 +112,8 @@ open class Activity : ComponentActivity() {
     val context = this as Context
     val audioManagerUtils = context.audioManagerUtils()
     val mediaPlayerUtils = context.mediaPlayerUtils()
+    val resources = DefaultResources(resources)
+    val adsControl = AdsControlProvider.adsControl
 
     setContent {
       val darkTheme = isSystemInDarkTheme()
@@ -202,12 +205,18 @@ open class Activity : ComponentActivity() {
       ) {
         CompositionLocalProvider(
           LocalNavigationParameters provides navigationParameters,
-          LocalAnalyticsHelper provides analyticsHelper,
+          // LocalAnalyticsHelper provides analyticsHelper,
           LocalCrashlyticsHelper provides crashlyticsHelper,
 
           // Ceres Core Foundation - Composition Provider
           LocalAudioManager provides audioManagerUtils,
           LocalMediaPlayer provides mediaPlayerUtils,
+          LocalResources provides resources,
+
+          // Ceres Monetization
+          LocalAdsControl provides adsControl,
+
+          *compositionProviders().toTypedArray(),
         ) {
           val menuConfig = MenuConfig().apply { buildMenu() }
           val menuConfigHeader =
@@ -218,7 +227,7 @@ open class Activity : ComponentActivity() {
           CeresApp(
             windowSizeClass = calculateWindowSizeClass(this),
             networkMonitor = networkMonitor,
-            topLevelDestinations = topLevelDestinations,
+            navigationItems = navigationItems,
             menuSheetContent = menuConfigContent,
             headerContent = menuConfigHeader,
           ) { windowSizeClass, ceresAppState, baseActions, padding ->
@@ -236,6 +245,14 @@ open class Activity : ComponentActivity() {
     handleIntent(intent)
   }
 
+  /**
+   * Provides a list of [ProvidedValue] instances that can be used to initialize CompositionLocal values.
+   *
+   * @return A list of [ProvidedValue] instances.
+   */
+  @Composable
+  open fun compositionProviders(): List<ProvidedValue<*>> = emptyList()
+
   private fun handleSplashScreen(splashScreen: SplashScreen) {
     // Keep the splash screen on-screen until the UI state is loaded. This condition is
     // evaluated each time the app needs to be redrawn so it should be fast to avoid blocking
@@ -247,7 +264,7 @@ open class Activity : ComponentActivity() {
 
   open fun setKeepOnScreenCondition(): Boolean = false
 
-  override fun onNewIntent(intent: Intent) {
+  override fun onNewIntent(intent: Intent?) {
     super.onNewIntent(intent)
     handleIntent(intent)
   }

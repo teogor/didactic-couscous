@@ -18,21 +18,17 @@ package dev.teogor.ceres
 
 import com.android.build.api.dsl.CommonExtension
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.nio.charset.Charset
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import javax.inject.Inject
-import org.gradle.api.DefaultTask
 import org.gradle.api.Project
+import org.gradle.api.artifacts.ConfigurationContainer
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.provider.ValueSource
 import org.gradle.api.provider.ValueSourceParameters
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.OutputDirectory
-import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.of
-import org.gradle.kotlin.dsl.register
 import org.gradle.process.ExecOperations
 
 abstract class GitHashValueSource : ValueSource<String, ValueSourceParameters.None> {
@@ -62,34 +58,11 @@ abstract class GitHashValueSource : ValueSource<String, ValueSourceParameters.No
   }
 }
 
-object GitValue {
-  var value: String? = null
-}
-
-open class GenerateGitHashClassTask : DefaultTask() {
-
-  @get:Input
-  var gitHash: String? = null
-
-  @get:OutputDirectory
-  val outputDir: File = project.file("src/main/generated")
-
-  @TaskAction
-  fun generateGitHashClass() {
-    outputDir.mkdirs()
-
-    val gitHashClassFile = File(outputDir, "GitHash.kt")
-    gitHashClassFile.writeText(
-      """
-            package your.package.name
-
-            object GitHash {
-                val value: String = "${gitHash ?: "N/A"}"
-            }
-            """.trimIndent(),
-    )
-  }
-}
+internal fun ConfigurationContainer.findSpecificDependency(
+  group: String,
+  name: String,
+): Dependency? = flatMap { it.dependencies }
+  .firstOrNull { it.group == group && it.name == name }
 
 
 /**
@@ -108,11 +81,14 @@ internal fun Project.configureAndroidBuildConfig(
   val gitHashProvider = providers.of(GitHashValueSource::class) {}
 
   afterEvaluate {
-    GitValue.value = gitHashProvider.get()
-  }
+    val specificDependency = configurations.findSpecificDependency("dev.teogor.ceres", "bom")
 
-  tasks.register<GenerateGitHashClassTask>("generateGitHashClass") {
-    gitHash = gitHashProvider.get()
+    val version = specificDependency?.version
+    if (version != null) {
+      println("[CeresBomVersion] Version of dev.teogor.ceres:bom: $version")
+    } else {
+      println("[CeresBomVersion] Dependency dev.teogor.ceres:bom not found or has no version.")
+    }
   }
 
   // Enable BuildConfig generation
@@ -133,7 +109,7 @@ internal fun Project.configureAndroidBuildConfig(
       buildConfigField(
         type = "String",
         name = "GIT_HASH",
-        value = "\"${GitValue.value}\"",
+        value = "\"${gitHashProvider.get()}\"",
       )
 
       // Add a field for BUILD_HASH in BuildConfig

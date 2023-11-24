@@ -33,4 +33,4 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew :ui:publishUiLibrariesToMavenCentral --no-configuration-cache
+          ./gradlew :ui:publish --no-configuration-cache

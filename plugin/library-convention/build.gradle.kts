@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("UnstableApiUsage")
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -23,7 +25,7 @@ plugins {
 }
 
 group = "dev.teogor.ceres.plugin"
-version = "1.0.0-alpha01"
+version = "1.0.0-alpha04"
 
 java {
   // Up to Java 11 APIs are available through desugaring
@@ -39,15 +41,15 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 dependencies {
-  compileOnly(libs.android.gradlePlugin)
+  compileOnly(libs.gradle.plugin.android)
+  compileOnly(libs.gradle.plugin.kotlin)
+  compileOnly(libs.gradle.plugin.ksp)
   compileOnly(libs.firebase.crashlytics.gradle)
   compileOnly(libs.firebase.performance.gradle)
-  compileOnly(libs.kotlin.gradlePlugin)
-  compileOnly(libs.ksp.gradlePlugin)
 }
 
 gradlePlugin {
-  website.set("https://github.com/teogor/ceres")
+  website.set("https://source.teogor.dev/ceres")
   vcsUrl.set("https://github.com/teogor/ceres")
 
   plugins {
@@ -161,6 +163,14 @@ gradlePlugin {
       displayName = "Documentation Builder Plugin"
       description = "Builds project documentation and reports for your project."
       tags.set(listOf("documentation", "report", "build-logic"))
+    }
+
+    register("kotlinLibrary") {
+      id = "dev.teogor.ceres.kotlin.library"
+      implementationClass = "KotlinLibraryConventionPlugin"
+      displayName = "Kotlin Library Convention"
+      description = "Streamline Kotlin Library Development with a Standardized Convention"
+      tags.set(listOf("kotlin", "convention", "build-logic", "library"))
     }
   }
 }
