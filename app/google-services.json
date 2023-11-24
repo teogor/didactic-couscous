@@ -36,9 +36,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:435151198079:android:7c2374ad765ae8583c6c4a",
+        "mobilesdk_app_id": "1:435151198079:android:6319e04bf49ab9213c6c4a",
         "android_client_info": {
-          "package_name": "dev.teogor.ceres.benchmark"
+          "package_name": "dev.teogor.ceres.debug"
         }
       },
       "oauth_client": [
@@ -65,9 +65,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:435151198079:android:6319e04bf49ab9213c6c4a",
+        "mobilesdk_app_id": "1:435151198079:android:7213222ffce704333c6c4a",
         "android_client_info": {
-          "package_name": "dev.teogor.ceres.debug"
+          "package_name": "dev.teogor.ceres.benchmark"
         }
       },
       "oauth_client": [
