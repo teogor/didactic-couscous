@@ -249,6 +249,8 @@ subprojects {
       val mavenPublish: MavenPublish by winds
       apply<DokkaPlugin>()
       tasks.withType<DokkaMultiModuleTask>().configureEach {
+        failOnWarning.set(false)
+        suppressInheritedMembers.set(true)
         moduleName.set(mavenPublish.name)
         moduleVersion.set(mavenPublish.version.toString())
         val paths = project.path.split(":")
