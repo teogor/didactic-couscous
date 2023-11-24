@@ -33,4 +33,13 @@ jobs:
 
       - name: Publish to MavenCentral
         run: |
-          ./gradlew :core:publishCeresCoreLibraries --no-configuration-cache
+          ./gradlew :bom:publish --no-configuration-cache
+          ./gradlew :backup:publish --no-configuration-cache
+          ./gradlew :core:publish --no-configuration-cache
+          ./gradlew :data:publish --no-configuration-cache
+          ./gradlew :firebase:publish --no-configuration-cache
+          ./gradlew :framework:publish --no-configuration-cache
+          ./gradlew :monetisation:publish --no-configuration-cache
+          ./gradlew :navigation:publish --no-configuration-cache
+          ./gradlew :screen:publish --no-configuration-cache
+          ./gradlew :ui:publish --no-configuration-cache
