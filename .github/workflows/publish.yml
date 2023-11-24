@@ -74,7 +74,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Project
-        run: ./gradlew build
+        run: ./gradlew --continue build
 
       - name: Publish BOM
         env:
