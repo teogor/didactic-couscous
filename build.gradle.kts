@@ -64,6 +64,7 @@ winds {
 
     groupId = "dev.teogor.ceres"
     url = "https://source.teogor.dev/ceres"
+    artifactIdElements = 2
 
     inceptionYear = 2022
 
