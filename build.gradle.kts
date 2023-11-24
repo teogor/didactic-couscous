@@ -86,7 +86,7 @@ winds {
 
     excludeModules {
       listOf(
-        ":app",
+        // ":app",
       )
     }
 
@@ -161,7 +161,7 @@ val ktlintVersion = "0.50.0"
 
 val excludedProjects = listOf(
   project.name,
-  "app",
+  // "app",
 )
 
 // Spotless

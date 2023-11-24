@@ -18,7 +18,7 @@ dependencyResolutionManagement {
 rootProject.name = "Ceres"
 
 // App
-include(":app")
+// include(":app")
 
 // BoM
 include(":bom")
