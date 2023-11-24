@@ -3,10 +3,46 @@ name: Publish
 on:
   workflow_dispatch:
     inputs:
-      modules:
-        description: 'Modules to publish'
+      bom:
+        description: 'Publish the BOM Module'
         required: true
-        type: string
+        type: boolean
+      backup:
+        description: 'Publish the Backup Module'
+        required: false
+        type: boolean
+      core:
+        description: 'Publish the Core Module'
+        required: false
+        type: boolean
+      data:
+        description: 'Publish the Data Module'
+        required: false
+        type: boolean
+      firebase:
+        description: 'Publish the Firebase Module'
+        required: false
+        type: boolean
+      framework:
+        description: 'Publish the Framework Module'
+        required: false
+        type: boolean
+      monetisation:
+        description: 'Publish the Monetisation Module'
+        required: false
+        type: boolean
+      navigation:
+        description: 'Publish the Navigation Module'
+        required: false
+        type: boolean
+      screen:
+        description: 'Publish the Screen Module'
+        required: false
+        type: boolean
+      ui:
+        description: 'Publish the UI Module'
+        required: false
+        type: boolean
 
 jobs:
   publish:
@@ -37,7 +73,36 @@ jobs:
         run: chmod +x gradlew
 
       - name: Publish BOM
-        run: ./gradlew :bom:publish --no-configuration-cache
+        env:
+          BOM_PUBLISH: ${{ github.event.inputs.bom }}
+        run: |
+          if [[ $BOM_PUBLISH == true ]]; then
+            ./gradlew :bom:publish --no-configuration-cache
+          fi
+
+      - name: Publish specified modules
+        env:
+          UI_PUBLISH: ${{ github.event.inputs.ui }}
+          CORE_PUBLISH: ${{ github.event.inputs.core }}
+        run: |
+          modules_to_publish=""
+
+          if [[ $UI_PUBLISH == true ]]; then
+            modules_to_publish+="ui"
+          fi
+
+          if [[ $CORE_PUBLISH == true ]]; then
+            modules_to_publish+="core"
+          fi
+
+          if [[ -z "$modules_to_publish" ]]; then
+            echo "No modules specified for publishing."
+          else
+            for module in $modules_to_publish; do
+              echo "Publishing module: $module"
+              ./gradlew ":${module}:publish" --no-configuration-cache
+            done
+          fi
 
       - name: Publish specified modules
         env:
