@@ -31,15 +31,14 @@ jobs:
       - name: Grant Permission to Execute Gradle
         run: chmod +x gradlew
 
-      - name: Publish to MavenCentral
+      - name: Publish specified modules
         run: |
-          ./gradlew :bom:publish --no-configuration-cache
-          ./gradlew :backup:publish --no-configuration-cache
-          ./gradlew :core:publish --no-configuration-cache
-          ./gradlew :data:publish --no-configuration-cache
-          ./gradlew :firebase:publish --no-configuration-cache
-          ./gradlew :framework:publish --no-configuration-cache
-          ./gradlew :monetisation:publish --no-configuration-cache
-          ./gradlew :navigation:publish --no-configuration-cache
-          ./gradlew :screen:publish --no-configuration-cache
-          ./gradlew :ui:publish --no-configuration-cache
+          if [[ -z "$MODULES" ]]; then
+            echo "No modules specified for publishing. Please set the MODULES environment variable."
+            exit 1
+          fi
+
+          for module in $MODULES; do
+            echo "Publishing module: $module"
+            ./gradlew ":${module}:publish" --no-configuration-cache
+          done
