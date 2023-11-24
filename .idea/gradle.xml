@@ -18,14 +18,6 @@
                   <project path="$PROJECT_DIR$/plugin/library-convention" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/../winds" name="winds">
-                <projects>
-                  <project path="$PROJECT_DIR$/../winds" />
-                  <project path="$PROJECT_DIR$/../winds/api" />
-                  <project path="$PROJECT_DIR$/../winds/common" />
-                  <project path="$PROJECT_DIR$/../winds/gradle-plugin" />
-                </projects>
-              </build>
             </builds>
           </compositeBuild>
         </compositeConfiguration>
@@ -83,10 +75,6 @@
             <option value="$PROJECT_DIR$/ui/icons" />
             <option value="$PROJECT_DIR$/ui/spectrum" />
             <option value="$PROJECT_DIR$/ui/theme" />
-            <option value="$PROJECT_DIR$/../winds" />
-            <option value="$PROJECT_DIR$/../winds/api" />
-            <option value="$PROJECT_DIR$/../winds/common" />
-            <option value="$PROJECT_DIR$/../winds/gradle-plugin" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
