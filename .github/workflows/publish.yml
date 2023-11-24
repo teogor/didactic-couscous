@@ -133,11 +133,11 @@ jobs:
           if [[ $UI_PUBLISH == true ]]; then
            modules_to_publish+=("ui")
           fi
-  
+
           if [[ -z "$modules_to_publish" ]]; then
             echo "No modules specified for publishing."
           else
-            for module in $modules_to_publish; do
+            for module in "${modules_to_publish[@]}"; do
               echo "Publishing $module module..."
               ./gradlew ":${module}:publish" --no-configuration-cache
             done
