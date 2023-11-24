@@ -4,44 +4,44 @@ on:
   workflow_dispatch:
     inputs:
       bom:
-        description: 'Publish BOM'
+        description: Publish BOM
         required: false
         type: boolean
         default: true
       backup:
-        description: 'Publish `Backup`'
+        description: Publish Backup Module
         required: false
         type: boolean
       core:
-        description: 'Publish Core Module'
+        description: Publish Core Module
         required: false
         type: boolean
       data:
-        description: Publish 'Data' Module
+        description: Publish Data Module
         required: false
         type: boolean
       firebase:
-        description: 'Publish the Firebase Module'
+        description: Publish Firebase Module
         required: false
         type: boolean
       framework:
-        description: 'Publish the Framework Module'
+        description: Publish Framework Module
         required: false
         type: boolean
       monetisation:
-        description: 'Publish the Monetisation Module'
+        description: Publish Monetisation Module
         required: false
         type: boolean
       navigation:
-        description: 'Publish the Navigation Module'
+        description: Publish Navigation Module
         required: false
         type: boolean
       screen:
-        description: 'Publish the Screen Module'
+        description: Publish Screen Module
         required: false
         type: boolean
       ui:
-        description: 'Publish the UI Module'
+        description: Publish UI Module
         required: false
         type: boolean
 
@@ -67,7 +67,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3.5.1
         with:
-          distribution: 'zulu'
+          distribution: zulu
           java-version: 17
 
       - name: Grant Permission to Execute Gradle
