@@ -36,7 +36,12 @@ jobs:
       - name: Grant Permission to Execute Gradle
         run: chmod +x gradlew
 
+      - name: Publish BOM
+        run: ./gradlew :bom:publish --no-configuration-cache
+
       - name: Publish specified modules
+        env:
+          MODULES: ${{ github.event.inputs.modules }}
         run: |
           if [[ -z "$MODULES" ]]; then
             echo "No modules specified for publishing. Please set the MODULES environment variable."
