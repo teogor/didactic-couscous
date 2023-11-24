@@ -5,8 +5,9 @@ on:
     inputs:
       bom:
         description: 'Publish the BOM Module'
-        required: true
+        required: false
         type: boolean
+        default: true
       backup:
         description: 'Publish the Backup Module'
         required: false
