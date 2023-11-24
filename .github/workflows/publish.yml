@@ -84,7 +84,7 @@ jobs:
             echo "BOM module is not being published because the 'bom' input is not set to true."
           fi
 
-      - name: Publish specified modules
+      - name: Publish Specified Modules
         env:
           BACKUP_PUBLISH: ${{ github.event.inputs.backup }}
           CORE_PUBLISH: ${{ github.event.inputs.core }}
