@@ -120,14 +120,30 @@ whenWindsPluginConfigured { winds ->
   }
 }
 
+/**
+ * Executes the provided action when the Winds plugin is configured for any descendant project.
+ *
+ * @param action the action to execute for each project with the Winds plugin configured
+ *
+ * **How to Use:**
+ *
+ * ```kotlin
+ * project.onWindsPluginConfigured { winds ->
+ *   // Execute the action for each project with the Winds plugin configured
+ *   winds.doSomethingUseful()
+ * }
+ * ```
+ */
 fun Project.whenWindsPluginConfigured(action: Project.(Winds) -> Unit) {
   subprojects.toList()
     .filter { hasWindsPlugin() }
     .forEach { project ->
       project.afterEvaluate {
         project.plugins.withType<WindsPlugin> {
-          val winds: Winds by project.extensions
-          action(winds)
+          project.afterEvaluate {
+            val winds: Winds by project.extensions
+            project.action(winds)
+          }
         }
       }
     }
