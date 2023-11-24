@@ -35,6 +35,7 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import dev.teogor.ceres.R
 import dev.teogor.ceres.core.foundation.extensions.createMediaPlayer
+import dev.teogor.ceres.core.runtime.AppMetadataManager
 import dev.teogor.ceres.framework.core.app.BaseActions
 import dev.teogor.ceres.framework.core.app.setScreenInfo
 import dev.teogor.ceres.framework.core.compositions.LocalNetworkConnectivity
@@ -138,6 +139,16 @@ private fun HomeScreen(
   hasScrollbarBackground = false,
   screenName = HomeScreenConfig.toScreenName(),
 ) {
+  HeaderView(title = "System Info")
+
+  SimpleView(
+    title = "Is Debuggable",
+    subtitle = "${AppMetadataManager.isDebuggable}",
+    clickable = {
+      ConsentManager.resetConsent()
+    },
+  )
+
   HeaderView(title = "Ad Settings")
 
   SimpleView(

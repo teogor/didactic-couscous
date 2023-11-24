@@ -8,12 +8,18 @@
       <module name="build-logic.maven-publish" target="11" />
       <module name="build-logic.maven-publish.main" target="11" />
       <module name="build-logic.maven-publish.test" target="11" />
+      <module name="Didactic_Couscous.buildSrc" target="11" />
+      <module name="Didactic_Couscous.buildSrc.main" target="11" />
+      <module name="Didactic_Couscous.buildSrc.test" target="11" />
       <module name="plugin.application-convention" target="11" />
       <module name="plugin.application-convention.main" target="11" />
       <module name="plugin.application-convention.test" target="11" />
       <module name="plugin.ceres-library" target="11" />
       <module name="plugin.ceres-library.main" target="11" />
       <module name="plugin.ceres-library.test" target="11" />
+      <module name="plugin.library-convention" target="11" />
+      <module name="plugin.library-convention.main" target="11" />
+      <module name="plugin.library-convention.test" target="11" />
       <module name="plugin.maven-publish" target="11" />
       <module name="plugin.maven-publish.main" target="11" />
       <module name="plugin.maven-publish.test" target="11" />

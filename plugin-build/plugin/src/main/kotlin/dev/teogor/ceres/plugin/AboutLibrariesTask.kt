@@ -11,16 +11,15 @@ import org.slf4j.LoggerFactory
 @CacheableTask
 abstract class AboutLibrariesTask : BaseAboutLibrariesTask() {
   @Input
-  val outputFileName = "CeresInfo.kt"
+  val packageName = "dev.teogor.ceres.plugin.info"
 
   @Internal
-  var resultDirectory: File = project.file("${project.buildDir}/generated/ceres/src/main/kotlin/dev/teogor/ceres/plugin/info/")
-    set(value) {
-      field = value
-      combinedLibrariesOutputFile = File(resultDirectory, outputFileName)
-    }
+  var resultDirectory: File = project.file("${project.buildDir}/generated/ceres/src/main/kotlin/")
 
-  private var combinedLibrariesOutputFile = File(resultDirectory, outputFileName)
+  @Internal
+  val outputFilePath: File = project.file(
+    "${resultDirectory}/${packageName.replace(".", "/")}/",
+  )
 
   @TaskAction
   fun action() {
@@ -32,9 +31,8 @@ abstract class AboutLibrariesTask : BaseAboutLibrariesTask() {
       githubBranchName = "main",
     ).gatherDependencies()
 
-    LOGGER.debug("combinedLibrariesOutputFile={}", combinedLibrariesOutputFile)
     // write to disk
-    result.writeToDisk(combinedLibrariesOutputFile)
+    result.writeToDisk(outputFilePath)
   }
 
   companion object {

@@ -1,6 +1,5 @@
 package dev.teogor.ceres.plugin
 
-import dev.teogor.ceres.plugin.util.safeProp
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.register
@@ -21,15 +20,6 @@ class BuildInfoPlugin : Plugin<Project> {
       project.tasks.register<AboutLibrariesTask>("exportBuildInfo") {
         description = "Writes the relevant meta data for the BuildInfo plugin to display dependencies"
         group = "dev.teogor.ceres"
-        variant = project.safeProp("aboutLibraries.exportVariant") ?: project.safeProp("exportVariant")
-        resultDirectory = project.file(
-          project.safeProp("aboutLibraries.exportPath") ?: project.safeProp("exportPath")
-          ?: "${project.buildDir}/generated/ceres/"
-        )
-      }
-
-      project.tasks.register<GenerateConfigFileTask>("generateConfigFile") {
-
       }
     }
   }

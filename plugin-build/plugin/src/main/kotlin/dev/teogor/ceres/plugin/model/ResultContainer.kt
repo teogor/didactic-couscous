@@ -51,8 +51,7 @@ fun ResultContainer.writeToDisk(
     .build()
 
   val outputPath = outputFile.absolutePath
-  println(ceresInfoFile.body)
-  ceresInfoFile.writeTo(File(outputPath))
+  ceresInfoFile.writeTo(outputFile)
 }
 
 private fun metadataType(metadata: MetaData): TypeSpec {

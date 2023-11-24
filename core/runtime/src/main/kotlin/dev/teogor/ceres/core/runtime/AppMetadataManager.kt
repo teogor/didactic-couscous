@@ -16,15 +16,12 @@
 
 package dev.teogor.ceres.core.runtime
 
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.util.Base64
 import dev.teogor.ceres.core.android.config.BuildConfig
 import dev.teogor.ceres.core.foundation.packageManagerUtils
 import dev.teogor.ceres.core.startup.ApplicationContextProvider
-import java.io.File
-import java.io.FileInputStream
-import java.security.MessageDigest
 import java.time.LocalDateTime
 import java.time.ZoneId
 
@@ -77,29 +74,14 @@ object AppMetadataManager {
   val ceresFrameworkVersion = BuildConfig.CERES_FRAMEWORK_VERSION
 
   val isDebuggable: Boolean
-    get() = BuildConfig.DEBUG
+    get() = 0 != ApplicationContextProvider.context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
 
-  val apkSignature: String?
+  val apkSignature: String
     get() {
-      try {
-        val packageInfo = packageInfo
-        val sourceDir =
-          packageInfo.applicationInfo.sourceDir
-
-        val file = File(sourceDir)
-        val md = MessageDigest.getInstance("SHA-256")
-        val fis = FileInputStream(file)
-        val buffer = ByteArray(8192)
-        var read: Int
-        while (fis.read(buffer).also { read = it } != -1) {
-          md.update(buffer, 0, read)
-        }
-        fis.close()
-        val hashBytes = md.digest()
-        return Base64.encodeToString(hashBytes, Base64.NO_WRAP)
-      } catch (e: Exception) {
-        e.printStackTrace()
+      val packageSignatures = ApplicationContextProvider.context.packageManagerUtils().packageSignatures
+      val signatures = packageSignatures.apkContentsSigners.joinToString(", ") { signature ->
+        signature.toCharsString()
       }
-      return null
+      return signatures
     }
 }

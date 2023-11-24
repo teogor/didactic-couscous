@@ -12,10 +12,10 @@
                   <project path="$PROJECT_DIR$/buildSrc" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/plugin" name="plugin">
+              <build path="$PROJECT_DIR$/plugin-build" name="plugin-build">
                 <projects>
-                  <project path="$PROJECT_DIR$/plugin" />
-                  <project path="$PROJECT_DIR$/plugin/library-convention" />
+                  <project path="$PROJECT_DIR$/plugin-build" />
+                  <project path="$PROJECT_DIR$/plugin-build/plugin" />
                 </projects>
               </build>
             </builds>
@@ -58,8 +58,8 @@
             <option value="$PROJECT_DIR$/navigation/events" />
             <option value="$PROJECT_DIR$/navigation/screen" />
             <option value="$PROJECT_DIR$/navigation/ui" />
-            <option value="$PROJECT_DIR$/plugin" />
-            <option value="$PROJECT_DIR$/plugin/library-convention" />
+            <option value="$PROJECT_DIR$/plugin-build" />
+            <option value="$PROJECT_DIR$/plugin-build/plugin" />
             <option value="$PROJECT_DIR$/screen" />
             <option value="$PROJECT_DIR$/screen/builder" />
             <option value="$PROJECT_DIR$/screen/core" />
