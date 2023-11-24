@@ -87,6 +87,14 @@ jobs:
             echo "BOM module is not being published because the 'bom' input is not set to true."
           fi
 
+      - name: Check if directory exists
+        run: |
+          if [[ -d "screen/ui/build/generated/querent/xmlResources" ]]; then
+            echo "Directory exists"
+          else
+            echo "Directory does not exist"
+          fi
+
       - name: Publish Specified Modules
         env:
           BACKUP_PUBLISH: ${{ github.event.inputs.backup }}
