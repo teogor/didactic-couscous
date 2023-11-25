@@ -82,7 +82,7 @@ jobs:
         run: |
           if [[ $BOM_PUBLISH == true ]]; then
             echo "Publishing BOM module..."
-            ./gradlew :bom:publish
+            ./gradlew :bom:publish --no-configuration-cache
           else
             echo "BOM module is not being published because the 'bom' input is not set to true."
           fi
@@ -150,6 +150,6 @@ jobs:
           else
             for module in "${modules_to_publish[@]}"; do
               echo "Publishing $module module..."
-              ./gradlew ":${module}:publish"
+              ./gradlew ":${module}:publish" --no-configuration-cache
             done
           fi
