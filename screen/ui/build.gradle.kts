@@ -32,6 +32,13 @@ android {
   defaultConfig {
     consumerProguardFiles("consumer-proguard-rules.pro")
   }
+
+  sourceSets {
+    named("main") {
+      kotlin.srcDirs("build/generated/querent/debug/kotlin")
+      kotlin.srcDirs("build/generated/querent/release/kotlin")
+    }
+  }
 }
 
 dependencies {
