@@ -1,178 +1,176 @@
 package dev.teogor.ceres.screen.ui.res
 
-import kotlin.Int
+val AboutId: Int by ResourceKey.ABOUT
 
-public val AboutId: Int by ResourceKey.ABOUT
+val AboutUsId: Int by ResourceKey.ABOUT_US
 
-public val AboutUsId: Int by ResourceKey.ABOUT_US
+val AndId: Int by ResourceKey.AND
 
-public val AndId: Int by ResourceKey.AND
+val ApkSignatureId: Int by ResourceKey.APK_SIGNATURE
 
-public val ApkSignatureId: Int by ResourceKey.APK_SIGNATURE
+val AppInfoId: Int by ResourceKey.APP_INFO
 
-public val AppInfoId: Int by ResourceKey.APP_INFO
+val AppLicenseId: Int by ResourceKey.APP_LICENSE
 
-public val AppLicenseId: Int by ResourceKey.APP_LICENSE
+val AppVersionId: Int by ResourceKey.APP_VERSION
 
-public val AppVersionId: Int by ResourceKey.APP_VERSION
+val BackupAndRestoreId: Int by ResourceKey.BACKUP_AND_RESTORE
 
-public val BackupAndRestoreId: Int by ResourceKey.BACKUP_AND_RESTORE
+val BuildDateId: Int by ResourceKey.BUILD_DATE
 
-public val BuildDateId: Int by ResourceKey.BUILD_DATE
+val BuildHashId: Int by ResourceKey.BUILD_HASH
 
-public val BuildHashId: Int by ResourceKey.BUILD_HASH
+val BuiltWithCeresId: Int by ResourceKey.BUILT_WITH_CERES
 
-public val BuiltWithCeresId: Int by ResourceKey.BUILT_WITH_CERES
+val BusinessId: Int by ResourceKey.BUSINESS
 
-public val BusinessId: Int by ResourceKey.BUSINESS
+val CancelId: Int by ResourceKey.CANCEL
 
-public val CancelId: Int by ResourceKey.CANCEL
+val CeresFrameworkVersionId: Int by ResourceKey.CERES_FRAMEWORK_VERSION
 
-public val CeresFrameworkVersionId: Int by ResourceKey.CERES_FRAMEWORK_VERSION
+val CompanyId: Int by ResourceKey.COMPANY
 
-public val CompanyId: Int by ResourceKey.COMPANY
+val CopyrightAllRightsReservedId: Int by ResourceKey.COPYRIGHT_ALL_RIGHTS_RESERVED
 
-public val CopyrightAllRightsReservedId: Int by ResourceKey.COPYRIGHT_ALL_RIGHTS_RESERVED
+val CopyrightPolicyId: Int by ResourceKey.COPYRIGHT_POLICY
 
-public val CopyrightPolicyId: Int by ResourceKey.COPYRIGHT_POLICY
+val CorporationId: Int by ResourceKey.CORPORATION
 
-public val CorporationId: Int by ResourceKey.CORPORATION
+val DataAndPrivacyId: Int by ResourceKey.DATA_AND_PRIVACY
 
-public val DataAndPrivacyId: Int by ResourceKey.DATA_AND_PRIVACY
+val DesignAndColorOptionsId: Int by ResourceKey.DESIGN_AND_COLOR_OPTIONS
 
-public val DesignAndColorOptionsId: Int by ResourceKey.DESIGN_AND_COLOR_OPTIONS
+val DeveloperId: Int by ResourceKey.DEVELOPER
 
-public val DeveloperId: Int by ResourceKey.DEVELOPER
+val EnterpriseId: Int by ResourceKey.ENTERPRISE
 
-public val EnterpriseId: Int by ResourceKey.ENTERPRISE
+val FeedbackId: Int by ResourceKey.FEEDBACK
 
-public val FeedbackId: Int by ResourceKey.FEEDBACK
+val FullBackupOfYourAppId: Int by ResourceKey.FULL_BACKUP_OF_YOUR_APP
 
-public val FullBackupOfYourAppId: Int by ResourceKey.FULL_BACKUP_OF_YOUR_APP
+val HelpAndFeedbackId: Int by ResourceKey.HELP_AND_FEEDBACK
 
-public val HelpAndFeedbackId: Int by ResourceKey.HELP_AND_FEEDBACK
+val IdId: Int by ResourceKey.ID
 
-public val IdId: Int by ResourceKey.ID
+val LanguageId: Int by ResourceKey.LANGUAGE
 
-public val LanguageId: Int by ResourceKey.LANGUAGE
+val LegalAgreementsHeaderId: Int by ResourceKey.LEGAL_AGREEMENTS_HEADER
 
-public val LegalAgreementsHeaderId: Int by ResourceKey.LEGAL_AGREEMENTS_HEADER
+val LicenseDetailsForOpenSourceSoftwareId: Int by
+ResourceKey.LICENSE_DETAILS_FOR_OPEN_SOURCE_SOFTWARE
 
-public val LicenseDetailsForOpenSourceSoftwareId: Int by
-    ResourceKey.LICENSE_DETAILS_FOR_OPEN_SOURCE_SOFTWARE
+val LicensedUnderId: Int by ResourceKey.LICENSED_UNDER
 
-public val LicensedUnderId: Int by ResourceKey.LICENSED_UNDER
+val LicensesId: Int by ResourceKey.LICENSES
 
-public val LicensesId: Int by ResourceKey.LICENSES
+val LookAndFeelId: Int by ResourceKey.LOOK_AND_FEEL
 
-public val LookAndFeelId: Int by ResourceKey.LOOK_AND_FEEL
+val LookAndFeelAppColorThemeId: Int by ResourceKey.LOOK_AND_FEEL_APP_COLOR_THEME
 
-public val LookAndFeelAppColorThemeId: Int by ResourceKey.LOOK_AND_FEEL_APP_COLOR_THEME
+val LookAndFeelAppColorThemeSubtitleId: Int by
+ResourceKey.LOOK_AND_FEEL_APP_COLOR_THEME_SUBTITLE
 
-public val LookAndFeelAppColorThemeSubtitleId: Int by
-    ResourceKey.LOOK_AND_FEEL_APP_COLOR_THEME_SUBTITLE
+val LookAndFeelAppThemeId: Int by ResourceKey.LOOK_AND_FEEL_APP_THEME
 
-public val LookAndFeelAppThemeId: Int by ResourceKey.LOOK_AND_FEEL_APP_THEME
+val LookAndFeelAppThemeSubtitleId: Int by ResourceKey.LOOK_AND_FEEL_APP_THEME_SUBTITLE
 
-public val LookAndFeelAppThemeSubtitleId: Int by ResourceKey.LOOK_AND_FEEL_APP_THEME_SUBTITLE
+val LookAndFeelDynamicThemingId: Int by ResourceKey.LOOK_AND_FEEL_DYNAMIC_THEMING
 
-public val LookAndFeelDynamicThemingId: Int by ResourceKey.LOOK_AND_FEEL_DYNAMIC_THEMING
+val LookAndFeelDynamicThemingSubtitleId: Int by
+ResourceKey.LOOK_AND_FEEL_DYNAMIC_THEMING_SUBTITLE
 
-public val LookAndFeelDynamicThemingSubtitleId: Int by
-    ResourceKey.LOOK_AND_FEEL_DYNAMIC_THEMING_SUBTITLE
+val LookAndFeelHeaderAppearanceId: Int by ResourceKey.LOOK_AND_FEEL_HEADER_APPEARANCE
 
-public val LookAndFeelHeaderAppearanceId: Int by ResourceKey.LOOK_AND_FEEL_HEADER_APPEARANCE
+val LookAndFeelJustBlackId: Int by ResourceKey.LOOK_AND_FEEL_JUST_BLACK
 
-public val LookAndFeelJustBlackId: Int by ResourceKey.LOOK_AND_FEEL_JUST_BLACK
+val LookAndFeelJustBlackSubtitleId: Int by ResourceKey.LOOK_AND_FEEL_JUST_BLACK_SUBTITLE
 
-public val LookAndFeelJustBlackSubtitleId: Int by ResourceKey.LOOK_AND_FEEL_JUST_BLACK_SUBTITLE
+val LookAndFeelSoundFeedbackId: Int by ResourceKey.LOOK_AND_FEEL_SOUND_FEEDBACK
 
-public val LookAndFeelSoundFeedbackId: Int by ResourceKey.LOOK_AND_FEEL_SOUND_FEEDBACK
+val LookAndFeelSoundFeedbackSubtitleId: Int by
+ResourceKey.LOOK_AND_FEEL_SOUND_FEEDBACK_SUBTITLE
 
-public val LookAndFeelSoundFeedbackSubtitleId: Int by
-    ResourceKey.LOOK_AND_FEEL_SOUND_FEEDBACK_SUBTITLE
+val LookAndFeelVibrationFeedbackId: Int by ResourceKey.LOOK_AND_FEEL_VIBRATION_FEEDBACK
 
-public val LookAndFeelVibrationFeedbackId: Int by ResourceKey.LOOK_AND_FEEL_VIBRATION_FEEDBACK
+val LookAndFeelVibrationFeedbackSubtitleId: Int by
+ResourceKey.LOOK_AND_FEEL_VIBRATION_FEEDBACK_SUBTITLE
 
-public val LookAndFeelVibrationFeedbackSubtitleId: Int by
-    ResourceKey.LOOK_AND_FEEL_VIBRATION_FEEDBACK_SUBTITLE
+val MadeInId: Int by ResourceKey.MADE_IN
 
-public val MadeInId: Int by ResourceKey.MADE_IN
+val ManageYourDataAndPrivacyPreferencesId: Int by
+ResourceKey.MANAGE_YOUR_DATA_AND_PRIVACY_PREFERENCES
 
-public val ManageYourDataAndPrivacyPreferencesId: Int by
-    ResourceKey.MANAGE_YOUR_DATA_AND_PRIVACY_PREFERENCES
+val OpenSourceLicensesId: Int by ResourceKey.OPEN_SOURCE_LICENSES
 
-public val OpenSourceLicensesId: Int by ResourceKey.OPEN_SOURCE_LICENSES
+val OrganizationId: Int by ResourceKey.ORGANIZATION
 
-public val OrganizationId: Int by ResourceKey.ORGANIZATION
+val PrivacyOptionsId: Int by ResourceKey.PRIVACY_OPTIONS
 
-public val PrivacyOptionsId: Int by ResourceKey.PRIVACY_OPTIONS
+val PrivacyPolicyId: Int by ResourceKey.PRIVACY_POLICY
 
-public val PrivacyPolicyId: Int by ResourceKey.PRIVACY_POLICY
+val RefundPolicyId: Int by ResourceKey.REFUND_POLICY
 
-public val RefundPolicyId: Int by ResourceKey.REFUND_POLICY
+val ResetId: Int by ResourceKey.RESET
 
-public val ResetId: Int by ResourceKey.RESET
+val ResetAdsConsentId: Int by ResourceKey.RESET_ADS_CONSENT
 
-public val ResetAdsConsentId: Int by ResourceKey.RESET_ADS_CONSENT
+val ResetAdsConsentDialogTextId: Int by ResourceKey.RESET_ADS_CONSENT_DIALOG_TEXT
 
-public val ResetAdsConsentDialogTextId: Int by ResourceKey.RESET_ADS_CONSENT_DIALOG_TEXT
+val ResetAdsConsentDialogTitleId: Int by ResourceKey.RESET_ADS_CONSENT_DIALOG_TITLE
 
-public val ResetAdsConsentDialogTitleId: Int by ResourceKey.RESET_ADS_CONSENT_DIALOG_TITLE
+val ResetAdsConsentSubtitleId: Int by ResourceKey.RESET_ADS_CONSENT_SUBTITLE
 
-public val ResetAdsConsentSubtitleId: Int by ResourceKey.RESET_ADS_CONSENT_SUBTITLE
+val ResetOnboardingId: Int by ResourceKey.RESET_ONBOARDING
 
-public val ResetOnboardingId: Int by ResourceKey.RESET_ONBOARDING
+val ResetOnboardingDialogCancelButtonId: Int by
+ResourceKey.RESET_ONBOARDING_DIALOG_CANCEL_BUTTON
 
-public val ResetOnboardingDialogCancelButtonId: Int by
-    ResourceKey.RESET_ONBOARDING_DIALOG_CANCEL_BUTTON
+val ResetOnboardingDialogDeleteUserStoredContentId: Int by
+ResourceKey.RESET_ONBOARDING_DIALOG_DELETE_USER_STORED_CONTENT
 
-public val ResetOnboardingDialogDeleteUserStoredContentId: Int by
-    ResourceKey.RESET_ONBOARDING_DIALOG_DELETE_USER_STORED_CONTENT
+val ResetOnboardingDialogRestartButtonId: Int by
+ResourceKey.RESET_ONBOARDING_DIALOG_RESTART_BUTTON
 
-public val ResetOnboardingDialogRestartButtonId: Int by
-    ResourceKey.RESET_ONBOARDING_DIALOG_RESTART_BUTTON
+val ResetOnboardingDialogTextId: Int by ResourceKey.RESET_ONBOARDING_DIALOG_TEXT
 
-public val ResetOnboardingDialogTextId: Int by ResourceKey.RESET_ONBOARDING_DIALOG_TEXT
+val ResetOnboardingDialogTitleId: Int by ResourceKey.RESET_ONBOARDING_DIALOG_TITLE
 
-public val ResetOnboardingDialogTitleId: Int by ResourceKey.RESET_ONBOARDING_DIALOG_TITLE
+val ResetOnboardingSubtitleId: Int by ResourceKey.RESET_ONBOARDING_SUBTITLE
 
-public val ResetOnboardingSubtitleId: Int by ResourceKey.RESET_ONBOARDING_SUBTITLE
+val RestartId: Int by ResourceKey.RESTART
 
-public val RestartId: Int by ResourceKey.RESTART
+val ReviewOurCopyrightPolicyId: Int by ResourceKey.REVIEW_OUR_COPYRIGHT_POLICY
 
-public val ReviewOurCopyrightPolicyId: Int by ResourceKey.REVIEW_OUR_COPYRIGHT_POLICY
+val ReviewOurPrivacyPolicyId: Int by ResourceKey.REVIEW_OUR_PRIVACY_POLICY
 
-public val ReviewOurPrivacyPolicyId: Int by ResourceKey.REVIEW_OUR_PRIVACY_POLICY
+val ReviewOurRefundPolicyId: Int by ResourceKey.REVIEW_OUR_REFUND_POLICY
 
-public val ReviewOurRefundPolicyId: Int by ResourceKey.REVIEW_OUR_REFUND_POLICY
+val ReviewOurTermsOfServiceId: Int by ResourceKey.REVIEW_OUR_TERMS_OF_SERVICE
 
-public val ReviewOurTermsOfServiceId: Int by ResourceKey.REVIEW_OUR_TERMS_OF_SERVICE
+val SecurityPatchId: Int by ResourceKey.SECURITY_PATCH
 
-public val SecurityPatchId: Int by ResourceKey.SECURITY_PATCH
+val SettingsId: Int by ResourceKey.SETTINGS
 
-public val SettingsId: Int by ResourceKey.SETTINGS
+val ShowLessId: Int by ResourceKey.SHOW_LESS
 
-public val ShowLessId: Int by ResourceKey.SHOW_LESS
+val ShowMoreId: Int by ResourceKey.SHOW_MORE
 
-public val ShowMoreId: Int by ResourceKey.SHOW_MORE
+val SystemId: Int by ResourceKey.SYSTEM
 
-public val SystemId: Int by ResourceKey.SYSTEM
+val TermsOfServiceId: Int by ResourceKey.TERMS_OF_SERVICE
 
-public val TermsOfServiceId: Int by ResourceKey.TERMS_OF_SERVICE
+val ThisActionCannotBeUndoneId: Int by ResourceKey.THIS_ACTION_CANNOT_BE_UNDONE
 
-public val ThisActionCannotBeUndoneId: Int by ResourceKey.THIS_ACTION_CANNOT_BE_UNDONE
+val UiId: Int by ResourceKey.UI
 
-public val UiId: Int by ResourceKey.UI
+val UserIdId: Int by ResourceKey.USER_ID
 
-public val UserIdId: Int by ResourceKey.USER_ID
+val UserIdSubtitleId: Int by ResourceKey.USER_ID_SUBTITLE
 
-public val UserIdSubtitleId: Int by ResourceKey.USER_ID_SUBTITLE
+val VersionInfoId: Int by ResourceKey.VERSION_INFO
 
-public val VersionInfoId: Int by ResourceKey.VERSION_INFO
+val AppThemeId: Int by ResourceKey.APP_THEME
 
-public val AppThemeId: Int by ResourceKey.APP_THEME
+val JustBlackId: Int by ResourceKey.JUST_BLACK
 
-public val JustBlackId: Int by ResourceKey.JUST_BLACK
-
-public val LicensesArrayId: Int by ResourceKey.LICENSES_ARRAY
+val LicensesArrayId: Int by ResourceKey.LICENSES_ARRAY

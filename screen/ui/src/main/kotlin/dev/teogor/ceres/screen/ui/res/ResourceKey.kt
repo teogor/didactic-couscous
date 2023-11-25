@@ -5,13 +5,11 @@ import dev.teogor.ceres.core.foundation.compositions.quantityStringResource
 import dev.teogor.ceres.core.foundation.compositions.stringArrayResource
 import dev.teogor.ceres.core.foundation.compositions.stringResource
 import dev.teogor.ceres.screen.ui.R
-import kotlin.Any
-import kotlin.Int
 import kotlin.reflect.KProperty
 
-public enum class ResourceKey(
-  public val id: Int,
-  public val type: ResourceType,
+enum class ResourceKey(
+  val id: Int,
+  val type: ResourceType,
 ) {
   ABOUT(R.string.about, ResourceType.String),
   ABOUT_US(R.string.about_us, ResourceType.String),
@@ -43,33 +41,47 @@ public enum class ResourceKey(
   JUST_BLACK(R.array.just_black, ResourceType.Array),
   LANGUAGE(R.string.language, ResourceType.String),
   LEGAL_AGREEMENTS_HEADER(R.string.legal_agreements_header, ResourceType.String),
-  LICENSE_DETAILS_FOR_OPEN_SOURCE_SOFTWARE(R.string.license_details_for_open_source_software,
-      ResourceType.String),
+  LICENSE_DETAILS_FOR_OPEN_SOURCE_SOFTWARE(
+    R.string.license_details_for_open_source_software,
+    ResourceType.String,
+  ),
   LICENSED_UNDER(R.string.licensed_under, ResourceType.String),
   LICENSES(R.string.licenses, ResourceType.String),
   LICENSES_ARRAY(R.array.licenses_array, ResourceType.Array),
   LOOK_AND_FEEL(R.string.look_and_feel, ResourceType.String),
   LOOK_AND_FEEL_APP_COLOR_THEME(R.string.look_and_feel_app_color_theme, ResourceType.String),
-  LOOK_AND_FEEL_APP_COLOR_THEME_SUBTITLE(R.string.look_and_feel_app_color_theme_subtitle,
-      ResourceType.String),
+  LOOK_AND_FEEL_APP_COLOR_THEME_SUBTITLE(
+    R.string.look_and_feel_app_color_theme_subtitle,
+    ResourceType.String,
+  ),
   LOOK_AND_FEEL_APP_THEME(R.string.look_and_feel_app_theme, ResourceType.String),
   LOOK_AND_FEEL_APP_THEME_SUBTITLE(R.string.look_and_feel_app_theme_subtitle, ResourceType.String),
   LOOK_AND_FEEL_DYNAMIC_THEMING(R.string.look_and_feel_dynamic_theming, ResourceType.String),
-  LOOK_AND_FEEL_DYNAMIC_THEMING_SUBTITLE(R.string.look_and_feel_dynamic_theming_subtitle,
-      ResourceType.String),
+  LOOK_AND_FEEL_DYNAMIC_THEMING_SUBTITLE(
+    R.string.look_and_feel_dynamic_theming_subtitle,
+    ResourceType.String,
+  ),
   LOOK_AND_FEEL_HEADER_APPEARANCE(R.string.look_and_feel_header_appearance, ResourceType.String),
   LOOK_AND_FEEL_JUST_BLACK(R.string.look_and_feel_just_black, ResourceType.String),
-  LOOK_AND_FEEL_JUST_BLACK_SUBTITLE(R.string.look_and_feel_just_black_subtitle,
-      ResourceType.String),
+  LOOK_AND_FEEL_JUST_BLACK_SUBTITLE(
+    R.string.look_and_feel_just_black_subtitle,
+    ResourceType.String,
+  ),
   LOOK_AND_FEEL_SOUND_FEEDBACK(R.string.look_and_feel_sound_feedback, ResourceType.String),
-  LOOK_AND_FEEL_SOUND_FEEDBACK_SUBTITLE(R.string.look_and_feel_sound_feedback_subtitle,
-      ResourceType.String),
+  LOOK_AND_FEEL_SOUND_FEEDBACK_SUBTITLE(
+    R.string.look_and_feel_sound_feedback_subtitle,
+    ResourceType.String,
+  ),
   LOOK_AND_FEEL_VIBRATION_FEEDBACK(R.string.look_and_feel_vibration_feedback, ResourceType.String),
-  LOOK_AND_FEEL_VIBRATION_FEEDBACK_SUBTITLE(R.string.look_and_feel_vibration_feedback_subtitle,
-      ResourceType.String),
+  LOOK_AND_FEEL_VIBRATION_FEEDBACK_SUBTITLE(
+    R.string.look_and_feel_vibration_feedback_subtitle,
+    ResourceType.String,
+  ),
   MADE_IN(R.string.made_in, ResourceType.String),
-  MANAGE_YOUR_DATA_AND_PRIVACY_PREFERENCES(R.string.manage_your_data_and_privacy_preferences,
-      ResourceType.String),
+  MANAGE_YOUR_DATA_AND_PRIVACY_PREFERENCES(
+    R.string.manage_your_data_and_privacy_preferences,
+    ResourceType.String,
+  ),
   OPEN_SOURCE_LICENSES(R.string.open_source_licenses, ResourceType.String),
   ORGANIZATION(R.string.organization, ResourceType.String),
   PRIVACY_OPTIONS(R.string.privacy_options, ResourceType.String),
@@ -81,12 +93,18 @@ public enum class ResourceKey(
   RESET_ADS_CONSENT_DIALOG_TITLE(R.string.reset_ads_consent_dialog_title, ResourceType.String),
   RESET_ADS_CONSENT_SUBTITLE(R.string.reset_ads_consent_subtitle, ResourceType.String),
   RESET_ONBOARDING(R.string.reset_onboarding, ResourceType.String),
-  RESET_ONBOARDING_DIALOG_CANCEL_BUTTON(R.string.reset_onboarding_dialog_cancel_button,
-      ResourceType.String),
-  RESET_ONBOARDING_DIALOG_DELETE_USER_STORED_CONTENT(R.string.reset_onboarding_dialog_delete_user_stored_content,
-      ResourceType.String),
-  RESET_ONBOARDING_DIALOG_RESTART_BUTTON(R.string.reset_onboarding_dialog_restart_button,
-      ResourceType.String),
+  RESET_ONBOARDING_DIALOG_CANCEL_BUTTON(
+    R.string.reset_onboarding_dialog_cancel_button,
+    ResourceType.String,
+  ),
+  RESET_ONBOARDING_DIALOG_DELETE_USER_STORED_CONTENT(
+    R.string.reset_onboarding_dialog_delete_user_stored_content,
+    ResourceType.String,
+  ),
+  RESET_ONBOARDING_DIALOG_RESTART_BUTTON(
+    R.string.reset_onboarding_dialog_restart_button,
+    ResourceType.String,
+  ),
   RESET_ONBOARDING_DIALOG_TEXT(R.string.reset_onboarding_dialog_text, ResourceType.String),
   RESET_ONBOARDING_DIALOG_TITLE(R.string.reset_onboarding_dialog_title, ResourceType.String),
   RESET_ONBOARDING_SUBTITLE(R.string.reset_onboarding_subtitle, ResourceType.String),
@@ -109,12 +127,12 @@ public enum class ResourceKey(
   ;
 }
 
-public operator fun ResourceKey.getValue(thisObj: Any?, `property`: KProperty<*>): Int = id
+operator fun ResourceKey.getValue(thisObj: Any?, `property`: KProperty<*>): Int = id
 
 @Composable
-public inline fun <reified Type> ResourceKey.asResource(quantity: Int = 0, vararg args: Any): Type =
-    when (type) {
-  ResourceType.Array -> stringArrayResource(id) as Type
-  ResourceType.Plurals -> quantityStringResource(id, quantity, *args) as Type
-  ResourceType.String -> stringResource(id, *args) as Type
-}
+inline fun <reified Type> ResourceKey.asResource(quantity: Int = 0, vararg args: Any): Type =
+  when (type) {
+    ResourceType.Array -> stringArrayResource(id) as Type
+    ResourceType.Plurals -> quantityStringResource(id, quantity, *args) as Type
+    ResourceType.String -> stringResource(id, *args) as Type
+  }
