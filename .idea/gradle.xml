@@ -7,11 +7,6 @@
         <compositeConfiguration>
           <compositeBuild compositeDefinitionSource="SCRIPT">
             <builds>
-              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
-                <projects>
-                  <project path="$PROJECT_DIR$/buildSrc" />
-                </projects>
-              </build>
               <build path="$PROJECT_DIR$/plugin" name="plugin">
                 <projects>
                   <project path="$PROJECT_DIR$/plugin" />
@@ -26,11 +21,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/backup" />
             <option value="$PROJECT_DIR$/backup/core" />
             <option value="$PROJECT_DIR$/backup/ui" />
             <option value="$PROJECT_DIR$/bom" />
-            <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/analytics" />
             <option value="$PROJECT_DIR$/core/common" />
